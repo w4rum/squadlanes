@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Squad Lanes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- Map resources -->
+    <script src="node_modules/lodash/lodash.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Left Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Squad Lanes</div>
+        <div class="list-group list-group-flush" id="sidebar-items">
+            <script>
+                const maps = [
+                    "Albasrah_RAAS_v1",
+                    "Belaya_RAAS_v1",
+                    "Belaya_RAAS_v2",
+                    "Belaya_RAAS_v3",
+                    "Chora_RAAS_v1",
+                    "Chora_RAAS_v2",
+                    "Fools_Road_RAAS_v1",
+                    "Fools_Road_RAAS_v2",
+                    "Fools_Road_RAAS_v3",
+                    "Gorodok_RAAS_v1",
+                    "Gorodok_RAAS_v2",
+                    "Gorodok_RAAS_v3",
+                    "Gorodok_RAAS_v4",
+                    "Gorodok_RAAS_v5",
+                    "Kamdesh_RAAS_v1",
+                    "Kamdesh_RAAS_v2",
+                    "Kamdesh_RAAS_v3",
+                    "Kamdesh_RAAS_v4",
+                    "Kohat_RAAS_v1",
+                    "Kohat_RAAS_v2",
+                    "Kohat_RAAS_v3",
+                    "Kohat_RAAS_v4",
+                    "Kokan_Valley_RAAS_v1",
+                    "Kokan_Valley_RAAS_v2",
+                    "Lashkar_Valley_RAAS_v1",
+                    "Logar_Valley_RAAS_v1",
+                    "Mestia_RAAS_v1",
+                    "Mutaha_RAAS_v1",
+                    "Narva_RAAS_v1",
+                    "Skorpo_RAAS_v1",
+                    "Skorpo_RAAS_v2",
+                    "Skorpo_RAAS_v3",
+                    "Skorpo_RAAS_v4",
+                    "Sumari_RAAS_v1",
+                    "Sumari_RAAS_v2",
+                    "Tallil_Outskirts_RAAS_v1",
+                    "Tallil_Outskirts_RAAS_v2",
+                    "Tallil_Outskirts_RAAS_v3",
+                    "Tallil_Outskirts_RAAS_v4",
+                    "Yehorivka_RAAS_v1",
+                    "Yehorivka_RAAS_v2",
+                    "Yehorivka_RAAS_v3",
+                    "Yehorivka_RAAS_v4",
+                    "Yehorivka_RAAS_v5",
+                ];
+                let innerHtml = "";
+                maps.forEach(m =>
+                    innerHtml += `<a href="#" class="list-group-item list-group-item-action bg-light" onclick="changeMap('${m}.json')">${m}</a>`)
+                document.getElementById("sidebar-items").innerHTML = innerHtml;
+                document.addEventListener('DOMContentLoaded', function() {
+                    changeMap("Narva_RAAS_v1.json");
+                }, false);
+            </script>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <div id="map"></div>
+        <div id="map-control">
+        </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="bg-light border-left" id="sidebar-wrapper-right">
+        <div class="list-group list-group-flush" id="sidebar-content-right">
+            This is a work-in-progress.
+            <p></p>
+            <b>Legend:</b>
+            <p>
+                <span style="background: rgb(102,202,193)">&nbsp&nbsp&nbsp&nbsp</span> - Confirmed<br />
+                <span style="background: rgb(102,202,127);">&nbsp&nbsp&nbsp&nbsp</span> - Mandatory (only CP in cluster)<br />
+                <span style="background: rgb(203,143,87);">&nbsp&nbsp&nbsp&nbsp</span> - Possible, Active<br />
+                <span style="background: rgb(203,87,87);">&nbsp&nbsp&nbsp&nbsp</span> - Possible, Inactive<br />
+                <span style="background: rgb(145,145,145)">&nbsp&nbsp&nbsp&nbsp</span> - Impossible<br />
+            </p>
+            Capture points and RAAS lanes are automatically extracted from Squad maps.
+            Unfortunately, naming inconsistencies in the map elements and a lack of information on Unreal Engine 4's
+            serialized object format require some manual fixes on the automatically extracted data.
+            Some map layers displayed here might be incorrect.
+            <p></p>
+            If you want to explore or contribute to this project, feel free to check out our repository on GitHub:
+            <a href="https://github.com/w4rum/squadlanes">w4rum/squadlanes</a>
+            <p></p>
+            Known Issues:
+            <ul>
+                <li>Some capture point names don't exactly match their in-game equivalent, e.g., "Mine Entrance 8" vs.
+                    "Mine Entrance".</li>
+                <li>Some capture points belong to too many / too few / the wrong lanes.</li>
+                <li>Some capture points are placed at an incorrect depth.</li>
+            </ul>
+            <p></p>
+            If you spot any specific errors, please head over to our GitHub repository and open an issue!
+            That helps us get an overview.
+            <p></p>
+        </div>
+    </div>
+
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Map resources -->
+<script src="js/map.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/templates/simple-sidebar)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+#wrapper {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#sidebar-wrapper {
+    height: 100vh;
+    margin-left: -15rem;
+    overflow-y: scroll;
+    min-width: 14rem;
+}
+
+#sidebar-wrapper-right {
+    height: 100vh;
+    margin-right: -15rem;
+    overflow-y: hide;
+}
+
+#sidebar-content-right {
+    padding-top: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: justify;
+    min-width: 25rem;
+}
+
+.sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+.list-group {
+    width: 15rem;
+}
+
+.list-group-item {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    display: flex;
+    align-items: center;
+    height: 1.75rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+    height: 100vh;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #sidebar-wrapper-right {
+        margin-right: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.cpTooltip::before {
+    border-top-color: transparent !important;
+}
+
+.cpTooltip {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: 0 0 0 transparent !important;
+    font-weight: bold;
+    text-shadow: -1px 1px 0 white,
+    1px 1px 0 white,
+    1px -1px 0 white,
+    -1px -1px 0 white;
+    text-align: center;
+    line-height: 10px;
+}
+
+.cpTooltipDepth {
+    padding-top: 20px;
+    font-size: 25px;
+    font-family: "Impact", sans-serif;
+}
+
+.cpTooltipLanes {
+    padding-top: 23px;
+    font-size: 15px;
+}
