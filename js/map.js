@@ -188,20 +188,22 @@ function changeMap(map_name) {
         possibleLanes = new Set();
         cpLines = new Set();
 
-        const baseBounds = [[bounds[1][1], bounds[1][0]], [bounds[0][1], bounds[0][0]]];
+        const baseBounds = [[bounds[0][1], bounds[0][0]], [bounds[1][1], bounds[1][0]]];
         const width = Math.abs(bounds[0][0] - bounds[1][0]);
-        const height = Math.abs(bounds[0][1] = bounds[1][1]);
+        const height = Math.abs(bounds[0][1] - bounds[1][1]);
 
-        const TILE_SIZE = 256;
+        const up_left_x = Math.min(bounds[0][0], bounds[1][0]);
+        const up_left_y = Math.min(bounds[0][1], bounds[1][1]);
         const crs = L.extend({}, L.CRS.Simple, {
-            // tiles at zoom 0 are base_format.width / 2 squared
-            transformation: new L.Transformation(TILE_SIZE / width, 0, TILE_SIZE / width, 0),
+            // Move origin to upper left corner of map
+            // need to do this because TileLayer always puts the left-upper corner on the origin
+            transformation: new L.Transformation(1, -up_left_x, 1, -up_left_y),
         });
 
         map = L.map('map', {
             crs: crs,
-            minZoom: -999999,
-            maxZoom: 999999,
+            minZoom: -10,
+            maxZoom: -7,
             zoomSnap: 0.1,
             zoomDelta: 1.0,
             dragging: true,
@@ -224,9 +226,35 @@ function changeMap(map_name) {
 
 
         simple_map_name = map_name.substring(0, map_name.indexOf("_RAAS_"));
-        L.imageOverlay(`img/maps/${simple_map_name}.jpg`, baseBounds, {
+        CustomTileLayer = L.TileLayer.extend({
+            /*
+            getTileUrl: function(coords) {
+
+                z = coords.z;
+                console.log(coords);
+                return "no";
+            }
+
+             */
+        });
+
+        // scale tiles to match map width and height
+        // Our TileLayer stretches 4096*64 units by default (at zoom 0)
+        // we just apply the scaling factor to the tile size to make it display correctly
+        // TODO: this has someting to do with zoomOffset, explain that
+        const tileSize = [256 * width/(4096*64*2), 256 * height/(4096*64*2)];
+        new CustomTileLayer(`map-resources/tiles/${simple_map_name}/{z}/{x}/{y}.png`, {
+            tms: false,
+            minZoom: -10,
+            maxZoom: -7,
+            zoomOffset: 11,
+            tileSize: L.point(tileSize),
             pane: 'background',
+            bounds: baseBounds,
         }).addTo(map);
+        //L.imageOverlay(`map-resources/full-size/${simple_map_name}.jpg`, baseBounds, {
+        //    pane: 'background',
+        //}).addTo(map);
 
         // extract capture points from JSON data
         for (const depth in laneGraph) {
@@ -324,6 +352,7 @@ function changeMap(map_name) {
             const lat = ev.latlng.lat;
             const lng = ev.latlng.lng;
             console.log(`Pos: ${lat} / ${lng}`);
+            console.log(baseBounds);
         });
          */
 

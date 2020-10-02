@@ -7,3 +7,4 @@ venv
 *.log
 extract.exe
 package-lock.json
+map-resources/tiles
