@@ -1,13 +1,25 @@
-import json
 import os
 import re
 import struct
 import subprocess
 import sys
-from typing import Tuple, List
+from dataclasses import dataclass
+from typing import Tuple
+
+import yaml
 
 
-def add_tuples(*tuples: List[Tuple]):
+@dataclass()
+class CapturePoint:
+    sdk_name: str
+    full_sdk_filename: str
+    lane: str
+    depth: int
+    x: float
+    y: float
+
+
+def add_tuples(*tuples: Tuple):
     s = []
     for elements in zip(*tuples):
         cur_sum = 0
@@ -29,6 +41,113 @@ def is_cluster_name(name):
            and not name.endswith("_C")
 
 
+def camel_case_to_spaced_title(name):
+    name = re.sub('(.)([A-Z][a-z]+)', r'\1 \2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1 \2', name)
+
+
+def components(layer_dir):
+    return os.listdir(layer_dir)
+
+
+def capture_points(layer_dir):
+    _, _, layer_name = layer_dir.rpartition("/")[0].rpartition("/")
+
+    for entry in components(layer_dir):
+        entry_dir = f"{layer_dir}/{entry}"
+        if not os.path.isdir(entry_dir):
+            continue
+
+        cur_renames = None
+        for cur_map in RENAMES.keys():
+            if layer_name.startswith(cur_map):
+                cur_renames = RENAMES[cur_map]
+                break
+
+        if entry.endswith(".BP_CaptureZone_C"):
+            continue
+
+        # get depth, lane, and name
+        if cur_renames is not None \
+                and entry in cur_renames:
+            renamed_entry = cur_renames[entry]
+        else:
+            renamed_entry = entry
+        match = re.match(r"(0[0-9]|100)([CNESWRGBY]?)-(.*)", renamed_entry)
+        if match is None:
+            continue
+
+        depth, lane, name = match.group(1, 2, 3)
+        depth = int(depth)
+
+        # ignore cluster points
+        if is_cluster_name(name):
+            continue
+
+        # get root coordinates
+        for comp in components(layer_dir):
+            if not is_root_node_name(comp):
+                continue
+
+            with open(f"{layer_dir}/{comp}/RootComponent.SceneComponent",
+                      "rb") as f:
+                f.seek(OFFSET_CP_ROOT)
+                x, y, _ = struct.unpack("<fff", f.read(12))
+                root_pos = (x, y)
+
+        # get position of cluster point (unless it's main)
+        if depth in [0, 100]:
+            cluster_pos_relative = (0.0, 0.0)
+        else:
+            # get cluster name
+            cluster_name = None
+            c = components(layer_dir)
+            for n in components(layer_dir):
+                if entry == "06E-Peredove" and n.startswith("06E"):
+                    print(0)
+                if not is_cluster_name(n):
+                    continue
+                if not n.startswith(f"0{depth}{lane}"):
+                    continue
+                cluster_name = n
+                break
+            if cluster_name is None:
+                print(f"[WARN] {layer_dir}/{entry} has no cluster")
+                cluster_pos_relative = (0.0, 0.0)
+            else:
+                with open(f"{layer_dir}/{cluster_name}/"
+                          f"DefaultSceneRoot.SceneComponent", "rb") as f:
+                    f.seek(OFFSET_CP_OTHER)
+                    x, y, _ = struct.unpack("<fff", f.read(12))
+                    cluster_pos_relative = (x, y)
+
+        # get position of this capture point
+        with open(f"{layer_dir}/{entry}/"
+                  f"DefaultSceneRoot.SceneComponent", "rb") as f:
+            f.seek(OFFSET_CP_OTHER)
+            x, y, _ = struct.unpack("<fff", f.read(12))
+            cur_pos_relative = (x, y)
+        x, y = add_tuples(root_pos, cluster_pos_relative, cur_pos_relative)
+
+        yield CapturePoint(sdk_name=name, full_sdk_filename=entry, lane=lane, depth=depth, x=x, y=y)
+
+
+def proper_lane_name(lane_name):
+    return {
+        "": NO_LANE,
+        "C": "Central",
+        "E": "East",
+        "W": "West",
+        "N": "North",
+        "S": "South",
+        "R": "Red",
+        "G": "Green",
+        "B": "Blue",
+        "Y": "Yellow",
+    }[lane_name]
+
+
+NO_LANE = ""
 OFFSET_CP_ROOT = 0x31
 OFFSET_CP_OTHER = 0x4E
 OFFSET_CORNER = 0x31
@@ -43,99 +162,54 @@ RENAMES = {
 
 
 def get_lanes(layer_dir: str):
-    _, _, layer_name = layer_dir.rpartition("/")[0].rpartition("/")
-    cur_renames = None
-    for cur_map in RENAMES.keys():
-        if layer_name.startswith(cur_map):
-            cur_renames = RENAMES[cur_map]
-            break
-
-    components = os.listdir(layer_dir)
-
-    # get root coordinates
-    for entry in components:
-        if not is_root_node_name(entry):
-            continue
-        with open(f"{layer_dir}/{entry}/RootComponent.SceneComponent",
-                  "rb") as f:
-            f.seek(OFFSET_CP_ROOT)
-            root_pos = struct.unpack("<fff", f.read(12))
-
-    # collect capture points
+    # collect all lane names
     lane_graph = {}
-    for entry in components:
-        entry_dir = f"{layer_dir}/{entry}"
-        if not os.path.isdir(entry_dir):
-            continue
+    for cp in capture_points(layer_dir):
+        if cp.lane != NO_LANE and cp.lane not in lane_graph:
+            lane_graph[cp.lane] = {}
+    # if the map only has lane-less CPs, create a single lane called Central
+    if len(lane_graph) == 0:
+        lane_graph["C"] = {}
 
-        # get depth, lane, and name
-        if cur_renames is not None \
-                and entry in cur_renames:
-            renamed_entry = cur_renames[entry]
+    for cp in capture_points(layer_dir):
+        if cp.lane == NO_LANE:
+            affected_lanes = lane_graph.keys()
         else:
-            renamed_entry = entry
-        match = re.match(r"(0[0-9]|100)([CNESW]?)-(.*)", renamed_entry)
-        if match is None:
-            continue
+            affected_lanes = [cp.lane]
 
-        depth, lane, name = match.group(1, 2, 3)
-        depth = int(depth)
+        for lane in affected_lanes:
+            if cp.depth not in lane_graph[lane]:
+                lane_graph[lane][cp.depth] = {}
+            lane_graph[lane][cp.depth][cp.sdk_name] = {
+                "display_name": camel_case_to_spaced_title(cp.sdk_name),
+                "x": cp.x,
+                "y": cp.y,
+            }
 
-        # ignore cluster points
-        if is_cluster_name(name):
-            continue
-
-        # add to lane graph
-        if depth not in lane_graph:
-            lane_graph[depth] = {}
-        if lane not in lane_graph[depth]:
-            lane_graph[depth][lane] = []
-
-        # get position of cluster point (unless it's main)
-        print(entry)
-        if depth not in [0, 100]:
-            # get cluster name
-            cluster_name = None
-            for n in components:
-                if not is_cluster_name(n):
-                    continue
-                if not n.startswith(f"0{depth}{lane}"):
-                    continue
-                cluster_name = n
-                break
-            if cluster_name is None:
-                print(f"[WARN] {layer_name}/{entry} has no cluster")
-                cluster_pos_relative = (0, 0, 0)
-            else:
-                with open(f"{layer_dir}/{cluster_name}/"
-                          f"DefaultSceneRoot.SceneComponent", "rb") as f:
-                    f.seek(OFFSET_CP_OTHER)
-                    cluster_pos_relative = struct.unpack("<fff", f.read(12))
-        else:
-            cluster_pos_relative = (0, 0, 0)
-
-        # get position of this capture point
-        with open(f"{layer_dir}/{entry}/"
-                  f"DefaultSceneRoot.SceneComponent", "rb") as f:
-            f.seek(OFFSET_CP_OTHER)
-            cur_pos_relative = struct.unpack("<fff", f.read(12))
-        pos = add_tuples(root_pos, cluster_pos_relative, cur_pos_relative)
-
-        lane_graph[depth][lane].append({
-            "name": name,
-            "pos": pos
-        })
     # correct depth of far main
-    main = lane_graph[100]
-    del lane_graph[100]
-    highest_depth = max(lane_graph.keys())
-    lane_graph[highest_depth + 1] = main
+    for lane in lane_graph:
+        if 100 not in lane_graph[lane]:
+            continue
+        main = lane_graph[lane][100]
+        del lane_graph[lane][100]
+        highest_depth = max(lane_graph[lane].keys())
+        lane_graph[lane][highest_depth + 1] = main
+
+    # rename lanes
+    for lane in list(lane_graph.keys()):
+        lane_data = lane_graph[lane]
+        del lane_graph[lane]
+        lane_graph[proper_lane_name(lane)] = lane_data
+
     return lane_graph
 
 
 map_dir = "/mnt/win/Program Files/Epic Games/SquadEditor/Squad/Content/Maps"
 os.makedirs("extracts", exist_ok=True)
 os.makedirs("raas-lanes", exist_ok=True)
+
+maps = {}
+
 for map_name in os.listdir(map_dir):
     if not os.path.isdir(f"{map_dir}/{map_name}") \
             or "EntryMap" in map_name \
@@ -181,10 +255,29 @@ for map_name in os.listdir(map_dir):
                     sys.exit(1)
                 with open(f"{layer_dir}/{entry}/{comp_file}", "rb") as f:
                     f.seek(OFFSET_CORNER)
-                    bounds.append(struct.unpack("<fff", f.read(12)))
+                    x, y, _ = struct.unpack("<fff", f.read(12))
+                    bounds.append((x, y))
 
-        with open(f"raas-lanes/{layer}.json", "w") as f:
-            json.dump({
-                "bounds": bounds,
-                "lane_graph": lane_graph,
-            }, f, sort_keys=True, indent=4)
+        layer_data = {
+            "background": {
+                "corners": [
+                    {"x": p[0], "y": p[1]}
+                    for p in bounds
+                ],
+                "x_stretch_factor": 1.0,
+                "y_stretch_factor": 1.0,
+            },
+            "lanes": lane_graph,
+        }
+
+        map_simple_name, _, map_layer_name = layer.rpartition("_RAAS_")
+        map_layer_name = "RAAS " + map_layer_name
+        if map_simple_name not in maps:
+            maps[map_simple_name] = {}
+        maps[map_simple_name][map_layer_name] = layer_data
+
+        # with open(f"raas-lanes/{layer}.json", "w") as f:
+        #    json.dump(layer_data, f, sort_keys=True, indent=4)
+
+with open(f"raas-data.yaml", "w") as f:
+    f.write(yaml.dump(maps, sort_keys=True, indent=4))

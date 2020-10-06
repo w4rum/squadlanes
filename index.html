@@ -86,7 +86,8 @@
                     innerHtml += `<a href="#" class="list-group-item list-group-item-action bg-light" onclick="changeMap('${m}.json')">${m}</a>`)
                 document.getElementById("sidebar-items").innerHTML = innerHtml;
                 document.addEventListener('DOMContentLoaded', function() {
-                    changeMap("Narva_RAAS_v1.json");
+                    loadRaasData("raas-data.yaml",
+                        () => changeMap("Narva_RAAS_v1.json"));
                 }, false);
             </script>
         </div>
@@ -104,6 +105,23 @@
     <!-- Right Sidebar -->
     <div class="bg-light border-left" id="sidebar-wrapper-right">
         <div class="list-group list-group-flush" id="sidebar-content-right">
+            <button id="raas-file-button">Load custom RAAS data...</button>
+            <input type="file" id="raas-file-selector" style="display: none" />
+            <script>
+                const button = document.getElementById("raas-file-button");
+                const selector = document.getElementById("raas-file-selector");
+                button.addEventListener('click', ev => {
+                    selector.click();
+                });
+                selector.addEventListener('change', ev => {
+                    const reader = new FileReader();
+                    reader.addEventListener('loadend', () => {
+                        loadRaasDataFromString(reader.result)
+                    });
+                    reader.readAsText(selector.files[0]);
+                })
+
+            </script>
             This is a work-in-progress.
             <p></p>
             <b>Legend:</b>
@@ -145,7 +163,9 @@
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Map resources -->
-<script src="js/map.js"></script>
+<script type="text/javascript" src="js/yaml.js"></script>
+<script type="text/javascript" src="js/queue.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
 
 </body>
 
