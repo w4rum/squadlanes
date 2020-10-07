@@ -73,7 +73,7 @@ def capture_points(layer_dir):
             renamed_entry = cur_renames[entry]
         else:
             renamed_entry = entry
-        match = re.match(r"(0[0-9]|100)([CNESWRGBY]?)-(.*)", renamed_entry)
+        match = re.match(r"(0[0-9]|100)([CNESW]|Red|Yellow|Green|Blue)?-(.*)", renamed_entry)
         if match is None:
             continue
 
@@ -112,7 +112,7 @@ def capture_points(layer_dir):
                 cluster_name = n
                 break
             if cluster_name is None:
-                print(f"[WARN] {layer_dir}/{entry} has no cluster")
+                #print(f"[WARN] {layer_dir}/{entry} has no cluster")
                 cluster_pos_relative = (0.0, 0.0)
             else:
                 with open(f"{layer_dir}/{cluster_name}/"
@@ -134,20 +134,18 @@ def capture_points(layer_dir):
 
 def proper_lane_name(lane_name):
     return {
-        "": NO_LANE,
         "C": "Central",
         "E": "East",
         "W": "West",
         "N": "North",
         "S": "South",
-        "R": "Red",
-        "G": "Green",
-        "B": "Blue",
-        "Y": "Yellow",
+        "Red": "Red",
+        "Green": "Green",
+        "Blue": "Blue",
+        "Yellow": "Yellow",
     }[lane_name]
 
 
-NO_LANE = ""
 OFFSET_CP_ROOT = 0x31
 OFFSET_CP_OTHER = 0x4E
 OFFSET_CORNER = 0x31
@@ -165,14 +163,14 @@ def get_lanes(layer_dir: str):
     # collect all lane names
     lane_graph = {}
     for cp in capture_points(layer_dir):
-        if cp.lane != NO_LANE and cp.lane not in lane_graph:
+        if cp.lane is not None and cp.lane not in lane_graph:
             lane_graph[cp.lane] = {}
     # if the map only has lane-less CPs, create a single lane called Central
     if len(lane_graph) == 0:
         lane_graph["C"] = {}
 
     for cp in capture_points(layer_dir):
-        if cp.lane == NO_LANE:
+        if cp.lane is None:
             affected_lanes = lane_graph.keys()
         else:
             affected_lanes = [cp.lane]
@@ -258,6 +256,33 @@ for map_name in os.listdir(map_dir):
                     x, y, _ = struct.unpack("<fff", f.read(12))
                     bounds.append((x, y))
 
+        # extract minimap
+        with open(f"extracts/{layer}/NameTable.txt", "r") as f:
+            nametable = f.readlines()
+        minimap_filename = None
+        for name in nametable:
+            match = re.match(f"[0-9]+ = \"/Game/Maps/{map_name}/Minimap/(.*inimap.*)\"", name)
+            if match is None:
+                continue
+            minimap_filename = match.group(1)
+            if os.path.isfile(f"map-resources/full-size/{minimap_filename}.tga"):
+                break
+            subprocess.call(["./umodel",
+                             "-export",
+                             f"{map_dir}/{map_name}/Minimap/{minimap_filename}.uasset",
+                             "-out=./extracts"
+                             ])
+            subprocess.call(["mv",
+                             f"extracts/Maps/{map_name}/Minimap/{minimap_filename}.tga",
+                             f"map-resources/full-size/"
+                             ])
+            subprocess.call(["rm",
+                             "-r",
+                             f"extracts/Maps/",
+                             ])
+            break
+
+
         layer_data = {
             "background": {
                 "corners": [
@@ -266,6 +291,7 @@ for map_name in os.listdir(map_dir):
                 ],
                 "x_stretch_factor": 1.0,
                 "y_stretch_factor": 1.0,
+                "minimap_filename": minimap_filename,
             },
             "lanes": lane_graph,
         }
@@ -279,5 +305,5 @@ for map_name in os.listdir(map_dir):
         # with open(f"raas-lanes/{layer}.json", "w") as f:
         #    json.dump(layer_data, f, sort_keys=True, indent=4)
 
-with open(f"raas-data.yaml", "w") as f:
+with open(f"raas-data-auto.yaml", "w") as f:
     f.write(yaml.dump(maps, sort_keys=True, indent=4))

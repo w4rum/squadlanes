@@ -6,6 +6,7 @@ Albasrah:
                 y: 160000.0
             -   x: -160000.0
                 y: -160000.0
+            minimap_filename: albasrah_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -209,6 +210,7 @@ Belaya:
                 y: 182500.0
             -   x: 195000.0
                 y: -208000.0
+            minimap_filename: Belaya_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -419,6 +421,7 @@ Belaya:
                 y: -208000.0
             -   x: -195400.0
                 y: 182500.0
+            minimap_filename: Belaya_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -489,6 +492,7 @@ Belaya:
                 y: -208000.0
             -   x: -195400.0
                 y: 182500.0
+            minimap_filename: Belaya_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -568,6 +572,7 @@ Chora:
                 y: -266400.0
             -   x: 159990.0
                 y: 140000.0
+            minimap_filename: Chora_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -793,6 +798,7 @@ Chora:
                 y: -266400.0
             -   x: 159990.0
                 y: 140000.0
+            minimap_filename: Chora_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -852,7 +858,7 @@ Chora:
                         display_name: MEA Main
                         x: -127241.625
                         y: -77822.625
-Fools_Road:
+Fools Road:
     RAAS v1:
         background:
             corners:
@@ -860,6 +866,7 @@ Fools_Road:
                 y: -132576.921875
             -   x: 44805.078125
                 y: 44805.078125
+            minimap_filename: Fools_Road_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1014,6 +1021,7 @@ Fools_Road:
                 y: -132576.921875
             -   x: 44805.078125
                 y: 44805.078125
+            minimap_filename: Fools_Road_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1088,6 +1096,7 @@ Fools_Road:
                 y: -132576.921875
             -   x: 44805.078125
                 y: 44805.078125
+            minimap_filename: Fools_Road_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1164,6 +1173,7 @@ Gorodok:
                 y: -207000.0
             -   x: -207000.0
                 y: 227000.0
+            minimap_filename: gorodok_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1432,6 +1442,7 @@ Gorodok:
                 y: -207000.0
             -   x: -207000.0
                 y: 227000.0
+            minimap_filename: gorodok_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1567,6 +1578,7 @@ Gorodok:
                 y: -207000.0
             -   x: -207000.0
                 y: 227000.0
+            minimap_filename: Gorodok_Minimap_RAAS_v3
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1641,6 +1653,7 @@ Gorodok:
                 y: -133585.484375
             -   x: -182472.5
                 y: 126427.0546875
+            minimap_filename: Gorodok_Minimap_RAAS_v4
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1699,6 +1712,7 @@ Gorodok:
                 y: -207000.0
             -   x: -207000.0
                 y: 227000.0
+            minimap_filename: gorodok_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1784,6 +1798,7 @@ Kamdesh:
                 y: 201600.0
             -   x: -201600.0
                 y: -201600.0
+            minimap_filename: Kamdesh_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -1815,10 +1830,6 @@ Kamdesh:
                         display_name: Paprok
                         x: -18200.671875
                         y: -42970.75
-                    StorageBunker:
-                        display_name: Storage Bunker
-                        x: 106870.171875
-                        y: -50358.24609375
                 3:
                     Capo:
                         display_name: Capo
@@ -1960,10 +1971,6 @@ Kamdesh:
                         display_name: Parun
                         x: -74220.4296875
                         y: -48267.375
-                    StorageBunker:
-                        display_name: Storage Bunker
-                        x: 106870.171875
-                        y: -50358.24609375
                 3:
                     Sao:
                         display_name: Sao
@@ -2020,6 +2027,7 @@ Kamdesh:
                 y: 201600.0
             -   x: -201600.0
                 y: -201600.0
+            minimap_filename: Kamdesh_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2124,6 +2132,7 @@ Kamdesh:
                 y: 201600.0
             -   x: -201600.0
                 y: -201600.0
+            minimap_filename: Kamdesh_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2228,6 +2237,7 @@ Kamdesh:
                 y: 201600.0
             -   x: -201600.0
                 y: -201600.0
+            minimap_filename: Kamdesh_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2303,6 +2313,7 @@ Kohat:
                 y: 231700.0
             -   x: -230000.0
                 y: -230000.0
+            minimap_filename: kohat_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2532,20 +2543,281 @@ Kohat:
     RAAS v2:
         background:
             corners:
-            -   x: 231700.0
-                y: 231700.0
-            -   x: -230000.0
-                y: -230000.0
+                -   x: 231700.0
+                    y: 231700.0
+                -   x: -230000.0
+                    y: -230000.0
+            minimap_filename: kohat_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
-            Central:
+            Green:
                 0:
                     GBMain:
                         display_name: GB Main
                         x: -150131.5625
                         y: -72437.53125
                 1:
+                    SarozaiHighlands:
+                        display_name: Sarozai Highlands
+                        x: -155369.9375
+                        y: 24732.134765625
+                    ToghSarai:
+                        display_name: Togh Sarai
+                        x: -136218.015625
+                        y: 72423.4375
+                    WestToghSarai:
+                        display_name: West Togh Sarai
+                        x: -182558.515625
+                        y: 56079.171875
+                2:
+                    Bahadur:
+                        display_name: Bahadur
+                        x: -80522.03125
+                        y: 43631.265625
+                    Darbond:
+                        display_name: Darbond
+                        x: -50549.484375
+                        y: 63883.1875
+                    MohdZai:
+                        display_name: Mohd Zai
+                        x: -20967.703125
+                        y: 53054.47265625
+                3:
+                    AmbarBandaBridge:
+                        display_name: Ambar Banda Bridge
+                        x: 42318.796875
+                        y: 68235.171875
+                    JouzaraProper:
+                        display_name: Jouzara Proper
+                        x: 82931.734375
+                        y: 60837.4609375
+                    KhadizaiRadioTower:
+                        display_name: Khadizai Radio Tower
+                        x: 30928.1796875
+                        y: 12618.3466796875
+                    LowerJouzara:
+                        display_name: Lower Jouzara
+                        x: 67114.4921875
+                        y: 67770.578125
+                4:
+                    LowerThirah:
+                        display_name: Lower Thirah
+                        x: 39459.640625
+                        y: -35805.17578125
+                    UpperThirah:
+                        display_name: Upper Thirah
+                        x: 26030.5234375
+                        y: -58672.171875
+                5:
+                    FOBConnolly:
+                        display_name: FOB Connolly
+                        x: 148416.9375
+                        y: -176.9794921875
+                    UpperNasrat:
+                        display_name: Upper Nasrat
+                        x: 100784.0625
+                        y: -42558.1640625
+                    UpperSheikhan:
+                        display_name: Upper Sheikhan
+                        x: 145142.0
+                        y: -41545.1953125
+                6:
+                    HanguAgriculture:
+                        display_name: Hangu Agriculture
+                        x: 61309.953125
+                        y: 118476.6328125
+                    HanguBridge:
+                        display_name: Hangu Bridge
+                        x: 102828.9921875
+                        y: 106968.9609375
+                    HanguOrchards:
+                        display_name: Hangu Orchards
+                        x: 132398.25
+                        y: 60257.1328125
+                    HanguPitch:
+                        display_name: Hangu Pitch
+                        x: 88109.6796875
+                        y: 111034.5390625
+                7:
+                    RUSMain:
+                        display_name: RUS Main
+                        x: -2354.966796875
+                        y: 177177.53125
+            Red:
+                0:
+                    GBMain:
+                        display_name: GB Main
+                        x: -150131.5625
+                        y: -72437.53125
+                1:
+                    LowerSarozai:
+                        display_name: Lower Sarozai
+                        x: -173186.0625
+                        y: -2723.345703125
+                    SarozaiHighlands:
+                        display_name: Sarozai Highlands
+                        x: -155369.9375
+                        y: 24732.134765625
+                    UpperSarozai:
+                        display_name: Upper Sarozai
+                        x: -161795.5
+                        y: -18402.87109375
+                2:
+                    Bahadur:
+                        display_name: Bahadur
+                        x: -80522.0234375
+                        y: 43631.265625
+                    BahadurOutskirts:
+                        display_name: Bahadur Outskirts
+                        x: -102363.5390625
+                        y: 14489.00390625
+                    MalakAbad:
+                        display_name: Malak Abad
+                        x: -14871.703125
+                        y: 5647.00390625
+                    SyedAbad:
+                        display_name: Syed Abad
+                        x: -6900.671875
+                        y: 32280.39453125
+                3:
+                    AliAbad:
+                        display_name: Ali Abad
+                        x: -2860.359375
+                        y: -21707.16796875
+                    ChakarKot:
+                        display_name: Chakar Kot
+                        x: -15984.8515625
+                        y: -56841.28125
+                    LowerThirah:
+                        display_name: Lower Thirah
+                        x: 39459.64453125
+                        y: -35805.17578125
+                4:
+                    CentralNasrat:
+                        display_name: Central Nasrat
+                        x: 91627.4296875
+                        y: -12049.85546875
+                    UpperNasrat:
+                        display_name: Upper Nasrat
+                        x: 100784.0625
+                        y: -42558.1640625
+                5:
+                    HanguOrchards:
+                        display_name: Hangu Orchards
+                        x: 132398.25
+                        y: 60257.1328125
+                    JouzaraHill:
+                        display_name: Jouzara Hill
+                        x: 101286.046875
+                        y: 45418.2734375
+                    JouzaraProper:
+                        display_name: Jouzara Proper
+                        x: 82931.734375
+                        y: 60837.4609375
+                6:
+                    HanguAgriculture:
+                        display_name: Hangu Agriculture
+                        x: 61309.94921875
+                        y: 118476.6328125
+                    HanguPitch:
+                        display_name: Hangu Pitch
+                        x: 88109.6796875
+                        y: 111034.5390625
+                    HanguProper:
+                        display_name: Hangu Proper
+                        x: 113739.46875
+                        y: 89697.8515625
+                    LakayPass:
+                        display_name: Lakay Pass
+                        x: 26753.6953125
+                        y: 104323.578125
+                7:
+                    RUSMain:
+                        display_name: RUS Main
+                        x: -2354.966796875
+                        y: 177177.53125
+            Yellow:
+                0:
+                    GBMain:
+                        display_name: GB Main
+                        x: -150131.5625
+                        y: -72437.53125
+                1:
+                    BahadurOutskirts:
+                        display_name: Bahadur Outskirts
+                        x: -102363.5234375
+                        y: 14489.00390625
+                    SarozaiHighlands:
+                        display_name: Sarozai Highlands
+                        x: -155369.9375
+                        y: 24732.134765625
+                    ToghSarai:
+                        display_name: Togh Sarai
+                        x: -136218.015625
+                        y: 72423.4375
+                2:
+                    Bahadur:
+                        display_name: Bahadur
+                        x: -80522.03125
+                        y: 43631.265625
+                    Darbond:
+                        display_name: Darbond
+                        x: -50549.484375
+                        y: 63883.1875
+                    LowerMohdZai:
+                        display_name: Lower Mohd Zai
+                        x: -16723.375
+                        y: 69932.203125
+                3:
+                    AliAbad:
+                        display_name: Ali Abad
+                        x: 5541.71875
+                        y: -10811.873046875
+                    KhadizaiRadioTower:
+                        display_name: Khadizai Radio Tower
+                        x: 30928.1796875
+                        y: 12618.3466796875
+                    MalakAbad:
+                        display_name: Malak Abad
+                        x: -14871.703125
+                        y: 5647.00390625
+                4:
+                    ThirahCompound:
+                        display_name: Thirah Compound
+                        x: 62945.53125
+                        y: -56030.625
+                    ThirahHighlands:
+                        display_name: Thirah Highlands
+                        x: 32162.3671875
+                        y: -93668.3203125
+                    UpperThirah:
+                        display_name: Upper Thirah
+                        x: 26030.5234375
+                        y: -58672.171875
+                5:
+                    FOBConnolly:
+                        display_name: FOB Connolly
+                        x: 148416.9375
+                        y: -176.9794921875
+                    LowerNasrat:
+                        display_name: Lower Nasrat
+                        x: 93699.734375
+                        y: 14429.0478515625
+                6:
+                    HanguBridge:
+                        display_name: Hangu Bridge
+                        x: 102828.9921875
+                        y: 106968.9609375
+                    HanguPitch:
+                        display_name: Hangu Pitch
+                        x: 88109.6796875
+                        y: 111034.5390625
+                    HanguProper:
+                        display_name: Hangu Proper
+                        x: 113739.46875
+                        y: 89697.8515625
+                7:
                     RUSMain:
                         display_name: RUS Main
                         x: -2354.966796875
@@ -2553,20 +2825,226 @@ Kohat:
     RAAS v3:
         background:
             corners:
-            -   x: 231700.0
-                y: 231700.0
-            -   x: -230000.0
-                y: -230000.0
+                -   x: 231700.0
+                    y: 231700.0
+                -   x: -230000.0
+                    y: -230000.0
+            minimap_filename: kohat_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
-            Central:
+            Blue:
                 0:
                     RUSMain:
                         display_name: RUS Main
                         x: 155183.953125
                         y: -470.513671875
                 1:
+                    HanguBridge:
+                        display_name: Hangu Bridge
+                        x: 102828.9921875
+                        y: 106968.9609375
+                    HanguOrchards:
+                        display_name: Hangu Orchards
+                        x: 132398.25
+                        y: 60257.1328125
+                    HanguProper:
+                        display_name: Hangu Proper
+                        x: 113739.46875
+                        y: 89697.8515625
+                    JouzaraHill:
+                        display_name: Jouzara Hill
+                        x: 101286.046875
+                        y: 45418.2734375
+                2:
+                    HanguAgriculture:
+                        display_name: Hangu Agriculture
+                        x: 61309.953125
+                        y: 118476.6328125
+                    HanguPitch:
+                        display_name: Hangu Pitch
+                        x: 82213.515625
+                        y: 110542.0390625
+                    LakayPass:
+                        display_name: Lakay Pass
+                        x: 26753.6953125
+                        y: 104323.578125
+                    LowerJouzara:
+                        display_name: Lower Jouzara
+                        x: 67114.4921875
+                        y: 67770.578125
+                3:
+                    AmbarBandaBridge:
+                        display_name: Ambar Banda Bridge
+                        x: 42318.796875
+                        y: 68235.171875
+                    UpperAmbarBanda:
+                        display_name: Upper Ambar Banda
+                        x: 41607.921875
+                        y: 48041.41796875
+                4:
+                    Darbond:
+                        display_name: Darbond
+                        x: -50549.484375
+                        y: 63883.1875
+                    DarbondHill:
+                        display_name: Darbond Hill
+                        x: -45271.1875
+                        y: 51838.6015625
+                    LowerMohdZai:
+                        display_name: Lower Mohd Zai
+                        x: -18691.640625
+                        y: 69068.3671875
+                5:
+                    Bahadur:
+                        display_name: Bahadur
+                        x: -80522.015625
+                        y: 43631.265625
+                    BahadurHill:
+                        display_name: Bahadur Hill
+                        x: -84616.78125
+                        y: 30153.3046875
+                6:
+                    MEAMain:
+                        display_name: MEA Main
+                        x: -138692.0625
+                        y: 72479.703125
+            Red:
+                0:
+                    RUSMain:
+                        display_name: RUS Main
+                        x: 155183.953125
+                        y: -470.513671875
+                1:
+                    CentralNasrat:
+                        display_name: Central Nasrat
+                        x: 91627.4296875
+                        y: -12049.85546875
+                    LowerNasrat:
+                        display_name: Lower Nasrat
+                        x: 93699.734375
+                        y: 14429.046875
+                2:
+                    KhadizaiRadioTower:
+                        display_name: Khadizai Radio Tower
+                        x: 30928.1796875
+                        y: 12618.34765625
+                    LowerKhadizai:
+                        display_name: Lower Khadizai
+                        x: 64536.6796875
+                        y: 20056.671875
+                    UpperKhadizai:
+                        display_name: Upper Khadizai
+                        x: 51822.89453125
+                        y: 513.7578125
+                3:
+                    AmbarBandaBridge:
+                        display_name: Ambar Banda Bridge
+                        x: 42318.796875
+                        y: 68235.171875
+                    UpperAmbarBanda:
+                        display_name: Upper Ambar Banda
+                        x: 41607.921875
+                        y: 48041.4140625
+                    LakayPass:
+                        display_name: Lakay Pass
+                        x: 26753.6953125
+                        y: 104323.578125
+                4:
+                    DarbondHill:
+                        display_name: Darbond Hill
+                        x: -45271.1953125
+                        y: 51838.6015625
+                    MalakAbad:
+                        display_name: Malak Abad
+                        x: -14871.703125
+                        y: 5647.00390625
+                    MohdZai:
+                        display_name: Mohd Zai
+                        x: -20967.703125
+                        y: 53054.46875
+                    SyedAbad:
+                        display_name: Syed Abad
+                        x: -6900.671875
+                        y: 32280.39453125
+                5:
+                    Bahadur:
+                        display_name: Bahadur
+                        x: -80522.0078125
+                        y: 43631.265625
+                    BahadurHill:
+                        display_name: Bahadur Hill
+                        x: -84616.7890625
+                        y: 30153.3046875
+                6:
+                    MEAMain:
+                        display_name: MEA Main
+                        x: -138692.0625
+                        y: 72479.703125
+            Yellow:
+                0:
+                    RUSMain:
+                        display_name: RUS Main
+                        x: 155183.953125
+                        y: -470.513671875
+                1:
+                    CentralNasrat:
+                        display_name: Central Nasrat
+                        x: 91627.4296875
+                        y: -12049.85546875
+                    UpperNasrat:
+                        display_name: Upper Nasrat
+                        x: 100784.0625
+                        y: -42558.1640625
+                2:
+                    ChakarKot:
+                        display_name: Chakar Kot
+                        x: -15984.859375
+                        y: -56841.28125
+                    UpperThirah:
+                        display_name: Upper Thirah
+                        x: 26030.5234375
+                        y: -58672.171875
+                3:
+                    DarbondHill:
+                        display_name: Darbond Hill
+                        x: -45271.1875
+                        y: 51838.6015625
+                    MalakAbad_9:
+                        display_name: Malak Abad_9
+                        x: -14871.703125
+                        y: 5647.00390625
+                    MohdZai:
+                        display_name: Mohd Zai
+                        x: -20967.703125
+                        y: 53054.46875
+                    SyedAbad:
+                        display_name: Syed Abad
+                        x: -6900.671875
+                        y: 32280.39453125
+                4:
+                    LodiKhel:
+                        display_name: Lodi Khel (West)
+                        x: -145772.84375
+                        y: -65959.1640625
+                    LodiKhel2:
+                        display_name: Lodi Khel (East)
+                        x: -116156.71875
+                        y: -67236.9609375
+                    SuniKhel:
+                        display_name: Suni Khel
+                        x: -90381.875
+                        y: -77184.359375
+                5:
+                    LowerSarozai:
+                        display_name: Lower Sarozai
+                        x: -173186.03125
+                        y: -2723.345703125
+                    UpperSarozai:
+                        display_name: Upper Sarozai
+                        x: -161795.46875
+                        y: -18402.87109375
+                6:
                     MEAMain:
                         display_name: MEA Main
                         x: -138692.0625
@@ -2578,6 +3056,7 @@ Kohat:
                 y: 231700.0
             -   x: -230000.0
                 y: -230000.0
+            minimap_filename: kohat_minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2672,7 +3151,7 @@ Kohat:
                         display_name: RUS Main
                         x: -149743.84375
                         y: 108104.71875
-Kokan_Valley:
+Kokan Valley:
     RAAS v1:
         background:
             corners:
@@ -2680,6 +3159,7 @@ Kokan_Valley:
                 y: -107566.75
             -   x: 142013.671875
                 y: 142013.671875
+            minimap_filename: T_Kokan_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2759,6 +3239,7 @@ Kokan_Valley:
                 y: -107566.75
             -   x: 142013.671875
                 y: 142013.671875
+            minimap_filename: T_Kokan_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -2822,7 +3303,7 @@ Kokan_Valley:
                         display_name: MEA Main
                         x: 46330.0
                         y: -89535.0
-Lashkar_Valley:
+Lashkar Valley:
     RAAS v1:
         background:
             corners:
@@ -2830,6 +3311,7 @@ Lashkar_Valley:
                 y: -216700.0
             -   x: 216700.0
                 y: 216700.0
+            minimap_filename: T_Lashkar_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -3101,7 +3583,7 @@ Lashkar_Valley:
                         display_name: MEA Main
                         x: 149281.984375
                         y: -157351.65625
-Logar_Valley:
+Logar Valley:
     RAAS v1:
         background:
             corners:
@@ -3109,6 +3591,7 @@ Logar_Valley:
                 y: -113238.7578125
             -   x: 87978.328125
                 y: 62921.7109375
+            minimap_filename: Logar_Valley_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -3265,6 +3748,7 @@ Mestia:
                 y: 130000.0
             -   x: -120000.0
                 y: -110000.0
+            minimap_filename: T_Mestia_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -3332,6 +3816,7 @@ Mutaha:
                 y: -114000.0
             -   x: -93500.0
                 y: 161500.0
+            minimap_filename: Mutaha_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -3411,6 +3896,7 @@ Narva:
                 y: -140207.4375
             -   x: -138970.6875
                 y: 139792.515625
+            minimap_filename: Narva_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -3488,8 +3974,8 @@ Narva:
                         display_name: Kanda Court
                         x: 22122.359375
                         y: 17777.765625
-                    KanepiRd:
-                        display_name: Kanepi Rd
+                    KanepiRoadNorth:
+                        display_name: Kanepi Road / North
                         x: -6130.671875
                         y: 37951.9140625
                     TrainInspection:
@@ -3668,8 +4154,8 @@ Narva:
                         display_name: Foundry
                         x: -26686.55859375
                         y: 34921.87109375
-                    KanepiNorth:
-                        display_name: Kanepi North
+                    KanepiRoadNorth:
+                        display_name: Kanepi Road / North
                         x: -6145.10546875
                         y: 37953.3828125
                     KanepiSouth:
@@ -3706,6 +4192,7 @@ Skorpo:
                 y: -380000.0
             -   x: 380000.0
                 y: 380000.0
+            minimap_filename: Skorpo_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -3884,6 +4371,7 @@ Skorpo:
                 y: -220000.0
             -   x: 340000.0
                 y: 250000.0
+            minimap_filename: Skorpo_Minimap_RAAS_v2
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4117,6 +4605,7 @@ Skorpo:
                 y: -380000.0
             -   x: 380000.0
                 y: 380000.0
+            minimap_filename: Skorpo_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4378,10 +4867,11 @@ Skorpo:
                 y: -380000.0
             -   x: 380000.0
                 y: 380000.0
+            minimap_filename: Skorpo_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
-            North:
+            South:
                 0:
                     USAMain:
                         display_name: USA Main
@@ -4449,7 +4939,7 @@ Skorpo:
                         display_name: RUS Main
                         x: 244053.84375
                         y: -110653.328125
-            South:
+            North:
                 0:
                     USAMain:
                         display_name: USA Main
@@ -4533,6 +5023,7 @@ Sumari:
                 y: 85297.234375
             -   x: -63973.92578125
                 y: -44728.078125
+            minimap_filename: Sumari_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4628,6 +5119,7 @@ Sumari:
                 y: 85297.234375
             -   x: -63973.92578125
                 y: -44728.078125
+            minimap_filename: Sumari_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4716,7 +5208,7 @@ Sumari:
                         display_name: MEA Main
                         x: 51092.23046875
                         y: 34784.33203125
-Tallil_Outskirts:
+Tallil Outskirts:
     RAAS v1:
         background:
             corners:
@@ -4724,6 +5216,7 @@ Tallil_Outskirts:
                 y: 234000.0
             -   x: -234000.015625
                 y: -234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4770,11 +5263,11 @@ Tallil_Outskirts:
                         y: -21101.99609375
                 4:
                     AbandonedSovietBaseE:
-                        display_name: Abandoned Soviet Base E
+                        display_name: Abandoned Soviet Base (East)
                         x: 25864.64453125
                         y: 19612.703125
                     AbandonedSovietBaseW:
-                        display_name: Abandoned Soviet Base W
+                        display_name: Abandoned Soviet Base (West)
                         x: 13235.09375
                         y: 10424.75
                     GasTown:
@@ -4807,6 +5300,7 @@ Tallil_Outskirts:
                 y: 234000.0
             -   x: -234000.015625
                 y: -234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4861,11 +5355,11 @@ Tallil_Outskirts:
                         y: -20778.076171875
                 4:
                     AbandonedSovietBaseE_10:
-                        display_name: Abandoned Soviet Base E
+                        display_name: Abandoned Soviet Base (East)
                         x: 25176.265625
                         y: 18844.9921875
                     AbandonedSovietBaseW_5:
-                        display_name: Abandoned Soviet Base W
+                        display_name: Abandoned Soviet Base (West)
                         x: 13235.09375
                         y: 10861.19921875
                     GasTown_2:
@@ -4906,6 +5400,7 @@ Tallil_Outskirts:
                 y: 234000.0
             -   x: -234000.015625
                 y: -234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -4941,20 +5436,20 @@ Tallil_Outskirts:
                         y: -136555.40625
                 5:
                     WestAl-Khidhir1:
-                        display_name: West Al- Khidhir1
+                        display_name: West Al- Khidhir (North)
                         x: 78858.28125
                         y: -65866.328125
                     WestAl-Khidhir2:
-                        display_name: West Al- Khidhir2
+                        display_name: West Al- Khidhir (South)
                         x: 85456.9921875
                         y: -56564.6875
                 6:
                     EastAl-Khidhir1:
-                        display_name: East Al- Khidhir1
+                        display_name: East Al- Khidhir (North)
                         x: 114908.953125
                         y: -58899.34375
                     EastAl-Khidhir2:
-                        display_name: East Al- Khidhir2
+                        display_name: East Al- Khidhir (South)
                         x: 115835.0859375
                         y: -48842.27734375
                 7:
@@ -4974,6 +5469,7 @@ Tallil_Outskirts:
                 y: 234000.0
             -   x: -234000.015625
                 y: -234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -5020,11 +5516,11 @@ Tallil_Outskirts:
                         y: -21101.99609375
                 4:
                     AbandonedSovietBaseE:
-                        display_name: Abandoned Soviet Base E
+                        display_name: Abandoned Soviet Base (East)
                         x: 25864.64453125
                         y: 19612.703125
                     AbandonedSovietBaseW:
-                        display_name: Abandoned Soviet Base W
+                        display_name: Abandoned Soviet Base (West)
                         x: 13235.09375
                         y: 10424.75
                     GasTown:
@@ -5058,6 +5554,7 @@ Yehorivka:
                 y: 280000.0
             -   x: -280000.0
                 y: -280000.0
+            minimap_filename: Yehorivka_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -5093,7 +5590,7 @@ Yehorivka:
                         display_name: Yeho Airfield
                         x: 8599.4375
                         y: 113502.4375
-                4:
+                3:
                     BogCamp:
                         display_name: Bog Camp
                         x: 48439.609375
@@ -5110,7 +5607,7 @@ Yehorivka:
                         display_name: Zenos Homestead
                         x: 32855.21875
                         y: 22636.9375
-                5:
+                4:
                     LowerPetrivka:
                         display_name: Lower Petrivka
                         x: 19265.34375
@@ -5123,7 +5620,7 @@ Yehorivka:
                         display_name: Upper Petrivka
                         x: 17057.8125
                         y: -90578.90625
-                6:
+                5:
                     Kropy:
                         display_name: Kropy
                         x: -86407.9375
@@ -5136,7 +5633,7 @@ Yehorivka:
                         display_name: West Petrivka
                         x: -20081.671875
                         y: -71669.75
-                7:
+                6:
                     Zolota:
                         display_name: Zolota
                         x: -74663.046875
@@ -5145,7 +5642,7 @@ Yehorivka:
                         display_name: Zolota Hillside
                         x: -99950.6171875
                         y: -143448.03125
-                8:
+                7:
                     RUSMain:
                         display_name: RUS Main
                         x: -190926.59375
@@ -5182,7 +5679,7 @@ Yehorivka:
                         display_name: Yeho Airfield
                         x: 8599.4375
                         y: 113502.4375
-                4:
+                3:
                     EastStepne:
                         display_name: East Stepne
                         x: 122072.53125
@@ -5203,7 +5700,7 @@ Yehorivka:
                         display_name: West Stepne
                         x: 95170.53125
                         y: -35304.078125
-                5:
+                4:
                     LowerPetrivka:
                         display_name: Lower Petrivka
                         x: 19374.3125
@@ -5220,7 +5717,7 @@ Yehorivka:
                         display_name: Yevhinivka
                         x: 75191.0625
                         y: -58292.125
-                6:
+                5:
                     Ivanivka:
                         display_name: Ivanivka
                         x: 58638.125
@@ -5229,7 +5726,7 @@ Yehorivka:
                         display_name: Peredove
                         x: 129776.125
                         y: -153030.4375
-                7:
+                6:
                     Zolota:
                         display_name: Zolota
                         x: -74663.046875
@@ -5238,7 +5735,7 @@ Yehorivka:
                         display_name: Zolota Hillside
                         x: -99950.6171875
                         y: -143448.03125
-                8:
+                7:
                     RUSMain:
                         display_name: RUS Main
                         x: -190926.59375
@@ -5352,6 +5849,7 @@ Yehorivka:
                 y: 280000.0
             -   x: -280000.0
                 y: -280000.0
+            minimap_filename: Yehorivka_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -5430,6 +5928,7 @@ Yehorivka:
                 y: 280000.0
             -   x: -280000.0
                 y: -280000.0
+            minimap_filename: Yehorivka_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -5724,6 +6223,7 @@ Yehorivka:
                 y: 280000.0
             -   x: -280000.0
                 y: -280000.0
+            minimap_filename: Yehorivka_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
@@ -5774,11 +6274,11 @@ Yehorivka:
                         x: -38610.34375
                         y: -74369.0859375
                     WestPetrivka1:
-                        display_name: West Petrivka1
+                        display_name: West Petrivka (North)
                         x: -19741.34375
                         y: -75843.59375
                     WestPetrivka2:
-                        display_name: West Petrivka2
+                        display_name: West Petrivka (South)
                         x: -20902.34375
                         y: -67771.90625
                 5:
@@ -5802,6 +6302,7 @@ Yehorivka:
                 y: 280000.0
             -   x: -280000.0
                 y: -280000.0
+            minimap_filename: Yehorivka_Minimap
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:

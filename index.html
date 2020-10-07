@@ -36,58 +36,58 @@
         <div class="list-group list-group-flush" id="sidebar-items">
             <script>
                 const maps = [
-                    "Albasrah_RAAS_v1",
-                    "Belaya_RAAS_v1",
-                    "Belaya_RAAS_v2",
-                    "Belaya_RAAS_v3",
-                    "Chora_RAAS_v1",
-                    "Chora_RAAS_v2",
-                    "Fools_Road_RAAS_v1",
-                    "Fools_Road_RAAS_v2",
-                    "Fools_Road_RAAS_v3",
-                    "Gorodok_RAAS_v1",
-                    "Gorodok_RAAS_v2",
-                    "Gorodok_RAAS_v3",
-                    "Gorodok_RAAS_v4",
-                    "Gorodok_RAAS_v5",
-                    "Kamdesh_RAAS_v1",
-                    "Kamdesh_RAAS_v2",
-                    "Kamdesh_RAAS_v3",
-                    "Kamdesh_RAAS_v4",
-                    "Kohat_RAAS_v1",
-                    "Kohat_RAAS_v2",
-                    "Kohat_RAAS_v3",
-                    "Kohat_RAAS_v4",
-                    "Kokan_Valley_RAAS_v1",
-                    "Kokan_Valley_RAAS_v2",
-                    "Lashkar_Valley_RAAS_v1",
-                    "Logar_Valley_RAAS_v1",
-                    "Mestia_RAAS_v1",
-                    "Mutaha_RAAS_v1",
-                    "Narva_RAAS_v1",
-                    "Skorpo_RAAS_v1",
-                    "Skorpo_RAAS_v2",
-                    "Skorpo_RAAS_v3",
-                    "Skorpo_RAAS_v4",
-                    "Sumari_RAAS_v1",
-                    "Sumari_RAAS_v2",
-                    "Tallil_Outskirts_RAAS_v1",
-                    "Tallil_Outskirts_RAAS_v2",
-                    "Tallil_Outskirts_RAAS_v3",
-                    "Tallil_Outskirts_RAAS_v4",
-                    "Yehorivka_RAAS_v1",
-                    "Yehorivka_RAAS_v2",
-                    "Yehorivka_RAAS_v3",
-                    "Yehorivka_RAAS_v4",
-                    "Yehorivka_RAAS_v5",
+                    "Albasrah RAAS v1",
+                    "Belaya RAAS v1",
+                    "Belaya RAAS v2",
+                    "Belaya RAAS v3",
+                    "Chora RAAS v1",
+                    "Chora RAAS v2",
+                    "Fools Road RAAS v1",
+                    "Fools Road RAAS v2",
+                    "Fools Road RAAS v3",
+                    "Gorodok RAAS v1",
+                    "Gorodok RAAS v2",
+                    "Gorodok RAAS v3",
+                    "Gorodok RAAS v4",
+                    "Gorodok RAAS v5",
+                    "Kamdesh RAAS v1",
+                    "Kamdesh RAAS v2",
+                    "Kamdesh RAAS v3",
+                    "Kamdesh RAAS v4",
+                    "Kohat RAAS v1",
+                    "Kohat RAAS v2",
+                    "Kohat RAAS v3",
+                    "Kohat RAAS v4",
+                    "Kokan Valley RAAS v1",
+                    "Kokan Valley RAAS v2",
+                    "Lashkar Valley RAAS v1",
+                    "Logar Valley RAAS v1",
+                    "Mestia RAAS v1",
+                    "Mutaha RAAS v1",
+                    "Narva RAAS v1",
+                    "Skorpo RAAS v1",
+                    "Skorpo RAAS v2",
+                    "Skorpo RAAS v3",
+                    "Skorpo RAAS v4",
+                    "Sumari RAAS v1",
+                    "Sumari RAAS v2",
+                    "Tallil Outskirts RAAS v1",
+                    "Tallil Outskirts RAAS v2",
+                    "Tallil Outskirts RAAS v3",
+                    "Tallil Outskirts RAAS v4",
+                    "Yehorivka RAAS v1",
+                    "Yehorivka RAAS v2",
+                    "Yehorivka RAAS v3",
+                    "Yehorivka RAAS v4",
+                    "Yehorivka RAAS v5",
                 ];
                 let innerHtml = "";
                 maps.forEach(m =>
-                    innerHtml += `<a href="#" class="list-group-item list-group-item-action bg-light" onclick="changeMap('${m}.json')">${m}</a>`)
+                    innerHtml += `<a href="#" class="list-group-item list-group-item-action bg-light" onclick="changeMap('${m}')">${m}</a>`)
                 document.getElementById("sidebar-items").innerHTML = innerHtml;
                 document.addEventListener('DOMContentLoaded', function() {
                     loadRaasData("raas-data.yaml",
-                        () => changeMap("Narva_RAAS_v1.json"));
+                        () => changeMap("Kohat RAAS v2"));
                 }, false);
             </script>
         </div>
@@ -126,31 +126,49 @@
             <p></p>
             <b>Legend:</b>
             <p>
-                <span style="background: rgb(102,202,193)">&nbsp&nbsp&nbsp&nbsp</span> - Confirmed<br />
-                <span style="background: rgb(102,202,127);">&nbsp&nbsp&nbsp&nbsp</span> - Mandatory (only CP in cluster)<br />
-                <span style="background: rgb(203,143,87);">&nbsp&nbsp&nbsp&nbsp</span> - Possible, Active<br />
-                <span style="background: rgb(203,87,87);">&nbsp&nbsp&nbsp&nbsp</span> - Possible, Inactive<br />
-                <span style="background: rgb(145,145,145)">&nbsp&nbsp&nbsp&nbsp</span> - Impossible<br />
+                <span style="background: rgb(186,0,255)">&nbsp&nbsp&nbsp&nbsp</span> - Mid Point<br />
+                <span style="background: rgb(0,55,255);">&nbsp&nbsp&nbsp&nbsp</span> - Frontline Defense Point<br />
+                <span style="background: rgb(47,182,255);">&nbsp&nbsp&nbsp&nbsp</span>
+                <span style="background: rgb(145,245,220);">&nbsp&nbsp&nbsp&nbsp</span>
+                <span style="background: rgb(161,250,186);">&nbsp&nbsp&nbsp&nbsp</span>
+                - Backline Defense Points<br />
+                <span style="background: rgb(255,0,0);">&nbsp&nbsp&nbsp&nbsp</span> - Frontline Offense Point<br />
+                <span style="background: rgb(255,162,92);">&nbsp&nbsp&nbsp&nbsp</span>
+                <span style="background: rgb(252,227,108);">&nbsp&nbsp&nbsp&nbsp</span>
+                <span style="background: rgb(253,246,203);">&nbsp&nbsp&nbsp&nbsp</span>
+                - Backline Offense Points<br />
+                <span style="background: rgb(176,255,148);">&nbsp&nbsp&nbsp&nbsp</span> - Possible Next Point (Clickable)<br />
+                <span style="background: rgb(0,255,13)">&nbsp&nbsp&nbsp&nbsp</span> - Confirmed Point<br />
             </p>
-            Capture points and RAAS lanes are automatically extracted from Squad maps.
-            Unfortunately, naming inconsistencies in the map elements and a lack of information on Unreal Engine 4's
-            serialized object format require some manual fixes on the automatically extracted data.
-            Some map layers displayed here might be incorrect.
-            <p></p>
-            If you want to explore or contribute to this project, feel free to check out our repository on GitHub:
-            <a href="https://github.com/w4rum/squadlanes">w4rum/squadlanes</a>
-            <p></p>
-            Known Issues:
-            <ul>
-                <li>Some capture point names don't exactly match their in-game equivalent, e.g., "Mine Entrance 8" vs.
-                    "Mine Entrance".</li>
-                <li>Some capture points belong to too many / too few / the wrong lanes.</li>
-                <li>Some capture points are placed at an incorrect depth.</li>
-            </ul>
-            <p></p>
+            <p>
+                <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/dQw4w9WgXcQ?autoplay=1">
+                    How the fuck do I use this?</a>
+            </p>
+            <p>
+            If you want to explore or contribute to this project, feel free to check out the code in
+            <a href="https://github.com/w4rum/squadlanes">our repository on GitHub</a> and
+            <a href="https://docs.google.com/spreadsheets/d/1_ccHOyTscGn0GLxXOnRTky8BnuDJTM9HIRwB5tSP4UU/edit#gid=1089081412">
+            our spreadsheet</a> with all the RAAS data.
+            If you want to build something on top of what we've done here, you can always find the latest RAAS data
+            that we use on this website <a href="raas-data.yaml">here</a>.
+            </p>
+            <p>
             If you spot any specific errors, please head over to our GitHub repository and open an issue!
             That helps us get an overview.
-            <p></p>
+            </p>
+            <p>
+            This project was made possible by the contributions of the following individuals:
+            <ul>
+                <li>
+                    Tim | w4rum: UI design, implementation of the website and scripts for automatic extraction of
+                    capture point information
+                </li>
+                <li>
+                    Captain, Angatar, RacialConfusion: UI design and countless hours of research into RAAS lanes and
+                    manual refinement of the data used here.
+                </li>
+            </ul>
+            </p>
         </div>
     </div>
 

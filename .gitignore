@@ -7,4 +7,7 @@ venv
 *.log
 extract.exe
 package-lock.json
-map-resources/tiles
+map-resources/*
+!map-resources/Makefile
+umodel
+raas-data-auto.yaml

@@ -91,6 +91,24 @@
     -1px -1px 0 white;
     text-align: center;
     line-height: 10px;
+    resize: none;
+}
+
+.cpTooltip.mouseover {
+    text-shadow: -1px 1px 0 black,
+    1px 1px 0 black,
+    1px -1px 0 black,
+    -1px -1px 0 black;
+    color: white;
+
+}
+
+.cpTooltipName {
+    font-size: 12px;
+}
+
+.mouseover .cpTooltipName {
+    font-size: 15px;
 }
 
 .cpTooltipDepth {
@@ -101,5 +119,9 @@
 
 .cpTooltipLanes {
     padding-top: 23px;
+    font-size: 12px;
+}
+
+.mouseover .cpTooltipLanes {
     font-size: 15px;
 }

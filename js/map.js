@@ -13,7 +13,7 @@ const CP_CONFIRMED = 1
 const CP_IMPOSSIBLE = 2
 
 const CLR_CONFIRMED = "rgb(0,255,13)";
-const CLR_ACTIVE = "rgb(203,143,87)";
+const CLR_ACTIVE = "rgb(176,255,148)";
 const CLR_MID_POINT = "rgb(186,0,255)";
 const CLR_DEF_POINT = "rgb(0,55,255)";
 const CLR_DEF_OTHER = [
@@ -249,12 +249,13 @@ class CapturePoint {
             default:
         }
 
-        /*
         if (this.active()) {
-            return CLR_ACTIVE;
+            return {
+                color: CLR_ACTIVE,
+                number: this.distanceToOwnBase(),
+            };
         }
 
-         */
 
         let cur_prio = Number.MIN_SAFE_INTEGER;
         let cur_info = null;
@@ -319,7 +320,6 @@ class CapturePoint {
                 };
                 continue;
             }
-            console.error(`Unknown color: ${this.name} @ depth ${dist} / ${laneLengths[lane]}`);
         }
         return cur_info;
     }
@@ -485,7 +485,7 @@ function redrawCpLines() {
 function loadRaasDataFromString(yamlString) {
     raasData = YAML.parse(yamlString);
     console.log(raasData);
-    changeMap("Narva_RAAS_v1.json")
+    changeMap("Narva RAAS v1")
     console.log("CHANGE");
 }
 
@@ -509,11 +509,13 @@ function changeMap(map_name) {
     allLanes = new Set();
     laneLengths = {};
 
-    const simple_map_name = map_name.substring(0, map_name.indexOf("_RAAS_"));
-    const layer_name = "RAAS " + map_name.substring(map_name.indexOf("_RAAS_") + 6, map_name.indexOf(".json"));
+    const simple_map_name = map_name.substring(0, map_name.indexOf(" RAAS"));
+    const layer_name = map_name.substring(map_name.indexOf(" RAAS") + 1);
     const layer_data = raasData[simple_map_name][layer_name];
 
     const bounds = layer_data["background"]["corners"]
+    const x_stretch = layer_data["background"]["x_stretch_factor"]
+    const y_stretch = layer_data["background"]["y_stretch_factor"]
     const laneGraph = layer_data["lanes"]
 
     const baseBounds = [[bounds[0]["y"], bounds[0]["x"]], [bounds[1]["y"], bounds[1]["x"]]];
@@ -525,7 +527,7 @@ function changeMap(map_name) {
     const crs = L.extend({}, L.CRS.Simple, {
         // Move origin to upper left corner of map
         // need to do this because TileLayer always puts the left-upper corner on the origin
-        transformation: new L.Transformation(1, -up_left_x, 1, -up_left_y),
+        transformation: new L.Transformation(x_stretch, -up_left_x, y_stretch, -up_left_y),
     });
 
     map = L.map('map', {
@@ -558,7 +560,8 @@ function changeMap(map_name) {
     // we just apply the scaling factor to the tile size to make it display correctly
     // TODO: this has someting to do with zoomOffset, explain that
     const tileSize = [256 * width / (4096 * 64 * 2), 256 * height / (4096 * 64 * 2)];
-    new L.TileLayer(`map-resources/tiles/${simple_map_name}/{z}/{x}/{y}.png`, {
+    let map_image_name = layer_data["background"]["minimap_filename"];
+    new L.TileLayer(`map-resources/tiles/${map_image_name}/{z}/{x}/{y}.png`, {
         tms: false,
         minZoom: -10,
         maxZoom: -7,
@@ -640,6 +643,24 @@ function changeMap(map_name) {
             cp.onClick()
         });
         circleMarker.addTo(map);
+        circleMarker.on('mouseover', ev => {
+            const tt = circleMarker.getTooltip();
+            if (tt !== undefined) {
+                // this will probably break at some point
+                L.DomUtil.addClass(tt._container, 'mouseover');
+            }
+            // re-open tooltip to make sure text is still centered
+            circleMarker.closeTooltip();
+            circleMarker.openTooltip();
+        })
+        circleMarker.on('mouseout', ev => {
+            const tt = circleMarker.getTooltip();
+            if (tt !== undefined) {
+                L.DomUtil.removeClass(tt._container, 'mouseover');
+            }
+            circleMarker.closeTooltip();
+            circleMarker.openTooltip();
+        })
     })
 
     redrawCpInfo();
