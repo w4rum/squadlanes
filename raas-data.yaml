@@ -12,12 +12,12 @@ Albasrah:
             Central:
                 0:
                     MILMain_25:
-                        display_name: MIL Main_25
+                        display_name: MIL Main
                         x: -66407.2890625
                         y: -69195.1796875
                 1:
                     GuesthouseSoC:
-                        display_name: Guesthouse So C
+                        display_name: Guesthouse SoC
                         x: -39640.25390625
                         y: 13454.5390625
                     NorthVCPRuins:
@@ -74,13 +74,13 @@ Albasrah:
                         y: 72813.6328125
                 6:
                     INSMain_67:
-                        display_name: INS Main_67
+                        display_name: INS Main
                         x: 58351.09375
                         y: 113565.8203125
             East:
                 0:
                     MILMain_25:
-                        display_name: MIL Main_25
+                        display_name: MIL Main
                         x: -66407.2890625
                         y: -69195.1796875
                 1:
@@ -142,13 +142,13 @@ Albasrah:
                         y: 76333.828125
                 6:
                     INSMain_67:
-                        display_name: INS Main_67
+                        display_name: INS Main
                         x: 58351.09375
                         y: 113565.8203125
             West:
                 0:
                     MILMain_25:
-                        display_name: MIL Main_25
+                        display_name: MIL Main
                         x: -66407.2890625
                         y: -69195.1796875
                 1:
@@ -198,7 +198,7 @@ Albasrah:
                         y: 108072.5703125
                 6:
                     INSMain_67:
-                        display_name: INS Main_67
+                        display_name: INS Main
                         x: 58351.09375
                         y: 113565.8203125
 Belaya:
@@ -430,7 +430,7 @@ Belaya:
                         y: -148652.859375
                 1:
                     LumberYard_371:
-                        display_name: Lumber Yard_371
+                        display_name: Lumber Yard
                         x: 84967.4375
                         y: -100431.59375
                     TireFactory:
@@ -439,7 +439,7 @@ Belaya:
                         y: -138681.640625
                 2:
                     CoalMine_441:
-                        display_name: Coal Mine_441
+                        display_name: Coal Mine
                         x: 83894.703125
                         y: -32503.6953125
                     TrainTunnel:
@@ -479,7 +479,7 @@ Belaya:
                         y: 104671.015625
                 6:
                     MILMain_485:
-                        display_name: MIL Main_485
+                        display_name: MIL Main
                         x: -134528.9609375
                         y: 114715.421875
     RAAS v3:
@@ -495,7 +495,7 @@ Belaya:
             Central:
                 0:
                     GBMain_615:
-                        display_name: GB Main_615
+                        display_name: GB Main
                         x: 92731.375
                         y: -150747.5546875
                 1:
@@ -526,7 +526,7 @@ Belaya:
                         x: 31088.5625
                         y: 3097.8671875
                     Nikola_1008:
-                        display_name: Nikola_1008
+                        display_name: Nikola
                         x: -27442.515625
                         y: -3754.234375
                     TrainTunnel:
@@ -534,12 +534,8 @@ Belaya:
                         x: -51683.640625
                         y: -68748.1796875
                 4:
-                    Babenki:
-                        display_name: Babenki
-                        x: 32244.703125
-                        y: 127118.8203125
                     KrasnyKut_1030:
-                        display_name: Krasny Kut_1030
+                        display_name: Krasny Kut
                         x: -46635.21875
                         y: 67608.5625
                     Kulushevo:
@@ -552,12 +548,16 @@ Belaya:
                         y: 63544.390625
                 5:
                     Aniva_1052:
-                        display_name: Aniva_1052
+                        display_name: Aniva
                         x: -10744.59375
                         y: 134623.75
+                    Babenki:
+                        display_name: Babenki
+                        x: 32244.703125
+                        y: 127118.8203125
                 6:
                     MILMain_659:
-                        display_name: MIL Main_659
+                        display_name: MIL Main
                         x: -135755.78125
                         y: 114630.3671875
 Chora:
@@ -661,7 +661,7 @@ Chora:
                         y: -86402.0
                 2:
                     HempFarm_20:
-                        display_name: Hemp Farm_20
+                        display_name: Hemp Farm
                         x: -32978.0
                         y: -93857.0
                     HempProcessor:
@@ -730,7 +730,7 @@ Chora:
                         y: -86443.0
                 2:
                     LavenderEstate_15:
-                        display_name: Lavender Estate_15
+                        display_name: Lavender Estate
                         x: -28127.0
                         y: -67450.0
                     NaanMerchant:
@@ -760,11 +760,11 @@ Chora:
                         x: -91012.25
                         y: -25465.265625
                     LowerOrchard2:
-                        display_name: Lower Orchard2
+                        display_name: Lower Orchard 2
                         x: -69280.4140625
                         y: -28161.634765625
                     LowerOrchard3:
-                        display_name: Lower Orchard3
+                        display_name: Lower Orchard 3
                         x: -61951.15234375
                         y: -21618.87109375
                 5:
@@ -808,7 +808,7 @@ Chora:
                         x: 3061.0234375
                         y: -86363.421875
                     Mosque_3375:
-                        display_name: Mosque_3375
+                        display_name: Mosque
                         x: 15931.6015625
                         y: -85604.40625
                 2:
@@ -817,12 +817,12 @@ Chora:
                         x: -21406.78125
                         y: -113108.7109375
                     InsurgentCheckpoint_3380:
-                        display_name: Insurgent Checkpoint_3380
+                        display_name: Insurgent Checkpoint
                         x: -3208.0
                         y: -112865.0
                 3:
                     HempFarm_3385:
-                        display_name: Hemp Farm_3385
+                        display_name: Hemp Farm
                         x: -33144.0
                         y: -93474.0
                     LavenderEstate:
@@ -866,7 +866,7 @@ Fools_Road:
             Central:
                 0:
                     GBMain_4062:
-                        display_name: GB Main_4062
+                        display_name: GB Main
                         x: -87566.078125
                         y: 14580.328125
                 1:
@@ -876,7 +876,7 @@ Fools_Road:
                         y: -14341.57421875
                 2:
                     MineEntrance_8:
-                        display_name: Mine Entrance_8
+                        display_name: Mine Entrance
                         x: -33808.0
                         y: -16000.0
                     OPFortress:
@@ -910,7 +910,7 @@ Fools_Road:
             East:
                 0:
                     GBMain_4062:
-                        display_name: GB Main_4062
+                        display_name: GB Main
                         x: -87566.078125
                         y: 14580.328125
                 1:
@@ -958,7 +958,7 @@ Fools_Road:
             West:
                 0:
                     GBMain_4062:
-                        display_name: GB Main_4062
+                        display_name: GB Main
                         x: -87566.078125
                         y: 14580.328125
                 1:
@@ -1020,7 +1020,7 @@ Fools_Road:
             Central:
                 0:
                     GBMain_4062:
-                        display_name: GB Main_4062
+                        display_name: GB Main
                         x: 28446.73828125
                         y: 38972.4609375
                 1:
@@ -1126,7 +1126,7 @@ Fools_Road:
                         y: -78904.140625
                 4:
                     FOBPapanov_2739:
-                        display_name: FOB Papanov_2739
+                        display_name: FOB Papanov
                         x: 10935.78515625
                         y: -117486.6328125
                     Verto:
@@ -1443,7 +1443,7 @@ Gorodok:
                         y: 174235.3125
                 1:
                     Desna_345:
-                        display_name: Desna_345
+                        display_name: Desna
                         x: -67254.2890625
                         y: 121348.0
                     P115Intersection:
@@ -1485,7 +1485,7 @@ Gorodok:
                         x: 104360.453125
                         y: 102929.46875
                     IndustrialPark_837:
-                        display_name: Industrial Park_837
+                        display_name: Industrial Park
                         x: 133479.75
                         y: 111957.75
                 4:
@@ -1552,7 +1552,7 @@ Gorodok:
                         x: 73849.2265625
                         y: -93265.8046875
                     Farmstead_1015:
-                        display_name: Farmstead_1015
+                        display_name: Farmstead
                         x: 78111.0390625
                         y: -146229.28125
                 7:
@@ -1710,7 +1710,7 @@ Gorodok:
                         y: 153780.359375
                 1:
                     Desna_345:
-                        display_name: Desna_345
+                        display_name: Desna
                         x: -67254.2890625
                         y: 121347.984375
                     Outpost:
@@ -1732,7 +1732,7 @@ Gorodok:
                         x: 65445.015625
                         y: 82528.046875
                     IndustrialPark_837:
-                        display_name: Industrial Park_837
+                        display_name: Industrial Park
                         x: 131772.046875
                         y: 112321.671875
                 4:
@@ -1759,7 +1759,7 @@ Gorodok:
                         y: -102606.28125
                 6:
                     ShippingYard_2315:
-                        display_name: Shipping Yard_2315
+                        display_name: Shipping Yard
                         x: -25055.515625
                         y: -141823.375
                     YardApartments:
@@ -2026,7 +2026,7 @@ Kamdesh:
             Central:
                 0:
                     GBMain_375:
-                        display_name: GB Main_375
+                        display_name: GB Main
                         x: 35087.5625
                         y: -123330.1875
                 1:
@@ -2035,7 +2035,7 @@ Kamdesh:
                         x: -115502.1875
                         y: -114380.1875
                     Manyal_291:
-                        display_name: Manyal_291
+                        display_name: Manyal
                         x: 19499.2421875
                         y: -67754.21875
                     Matal:
@@ -2139,7 +2139,7 @@ Kamdesh:
                         x: -115502.1875
                         y: -114380.1875
                     Manyal_291:
-                        display_name: Manyal_291
+                        display_name: Manyal
                         x: 19499.2421875
                         y: -67754.21875
                     Matal:
@@ -2234,7 +2234,7 @@ Kamdesh:
             Central:
                 0:
                     GBMain_375:
-                        display_name: GB Main_375
+                        display_name: GB Main
                         x: -72018.9765625
                         y: -95680.015625
                 1:
@@ -2584,7 +2584,7 @@ Kohat:
             Central:
                 0:
                     GBMain_873:
-                        display_name: GB Main_873
+                        display_name: GB Main
                         x: 155179.8671875
                         y: -1069.2421875
                 1:
@@ -2596,15 +2596,15 @@ Kohat:
                         display_name: Lower Jouzara
                         x: 66771.828125
                         y: 67013.7109375
+                    Hangu:
+                        display_name: Hangu
+                        x: 113416.734375
+                        y: 88725.1640625
                 2:
                     AmbarBandaBridge:
                         display_name: Ambar Banda Bridge
                         x: 45066.734375
                         y: 66549.046875
-                    Hangu:
-                        display_name: Hangu
-                        x: 113416.734375
-                        y: 88725.1640625
                     UpperAmbarBanda:
                         display_name: Upper Ambar Banda
                         x: 40107.71875
@@ -2638,7 +2638,7 @@ Kohat:
                         y: 28683.8125
                 6:
                     BahadurProper_754:
-                        display_name: Bahadur Proper_754
+                        display_name: Bahadur Proper
                         x: -81411.953125
                         y: 43186.796875
                     Darbond:
@@ -2795,10 +2795,6 @@ Kokan_Valley:
                         display_name: Market
                         x: -19823.3359375
                         y: -34841.88671875
-                    Ruins:
-                        display_name: Ruins
-                        x: -37378.125
-                        y: -57166.37109375
                     TempestEstate:
                         display_name: Tempest Estate
                         x: -26053.24609375
@@ -2808,6 +2804,10 @@ Kokan_Valley:
                         display_name: Depot
                         x: -52908.5546875
                         y: -46022.0
+                    Ruins:
+                        display_name: Ruins
+                        x: -37378.125
+                        y: -57166.37109375
                 5:
                     Nexus:
                         display_name: Nexus
@@ -3343,7 +3343,7 @@ Mutaha:
                         y: -105397.1875
                 1:
                     NorthMarket:
-                        display_name: North Market
+                        display_name: Roadblock
                         x: -15021.951171875
                         y: -36723.64453125
                     ZatarCompound:
@@ -3550,6 +3550,10 @@ Narva:
                         display_name: Old Barracks
                         x: -7822.8046875
                         y: -73763.78125
+                    TextileFactory:
+                        display_name: Textile Factory
+                        x: -6465.314453125
+                        y: -51950.6484375
                 3:
                     DogParkApartments:
                         display_name: Dog Park Apartments
@@ -3593,10 +3597,6 @@ Narva:
                         display_name: Power Plant
                         x: 45297.3125
                         y: 57687.6875
-                    PowerPlant_1:
-                        display_name: Power Plant_1
-                        x: 77043.015625
-                        y: 25230.21875
                     TuruApartments:
                         display_name: Turu Apartments
                         x: 50065.984375
@@ -3689,6 +3689,10 @@ Narva:
                         display_name: Orchard
                         x: 10158.57421875
                         y: 59177.203125
+                    PowerPlant:
+                        display_name: Power Plant
+                        x: 45297.3125
+                        y: 57687.6875
                 6:
                     RUSMain:
                         display_name: RUS Main
@@ -4159,7 +4163,7 @@ Skorpo:
                         y: 45217.7109375
                 4:
                     Storhaug_4:
-                        display_name: Storhaug_4
+                        display_name: Storhaug
                         x: -73096.765625
                         y: 43001.25
                     Tereberg:
@@ -4320,7 +4324,7 @@ Skorpo:
                         x: -72984.46875
                         y: -21915.80078125
                     Storhaug_5:
-                        display_name: Storhaug_5
+                        display_name: Storhaug
                         x: -73008.515625
                         y: 42733.9453125
                 4:
@@ -4548,7 +4552,7 @@ Sumari:
                         x: -30972.0
                         y: 28761.0
                     WomensMosque:
-                        display_name: Womens Mosque
+                        display_name: Women's Mosque
                         x: -41568.0
                         y: 31975.0
                 2:
@@ -4574,7 +4578,7 @@ Sumari:
                         x: -4523.0
                         y: 5415.0
                     al-ZawahiriCompound:
-                        display_name: al- Zawahiri Compound
+                        display_name: al-Zawahiri Compound
                         x: -15460.376953125
                         y: 18475.6015625
                 4:
@@ -4643,7 +4647,7 @@ Sumari:
                         x: -30972.0
                         y: 28761.0
                     WomensMosque:
-                        display_name: Womens Mosque
+                        display_name: Women's Mosque
                         x: -41568.0
                         y: 31975.0
                 2:
@@ -4669,7 +4673,7 @@ Sumari:
                         x: -4523.0
                         y: 5415.0
                     al-ZawahiriCompound:
-                        display_name: al- Zawahiri Compound
+                        display_name: al-Zawahiri Compound
                         x: -15460.376953125
                         y: 18475.6015625
                 4:
@@ -4691,7 +4695,7 @@ Sumari:
                         y: 34537.0
                 5:
                     Bakery_0:
-                        display_name: Bakery_0
+                        display_name: Bakery
                         x: 19983.083984375
                         y: 34361.71875
                     School:
@@ -4748,7 +4752,7 @@ Tallil_Outskirts:
                         x: 43936.390625
                         y: 151053.71875
                     UpperAliAirBase_108:
-                        display_name: Upper Ali Air Base_108
+                        display_name: Upper Ali Air Base
                         x: -60329.2421875
                         y: 82675.5
                 3:
@@ -4827,24 +4831,24 @@ Tallil_Outskirts:
                         y: 157197.234375
                 2:
                     CentralAliAirBase_3:
-                        display_name: Central Ali Air Base_3
+                        display_name: Central Ali Air Base
                         x: -47526.2578125
                         y: 104208.7890625
                     LowerAliAirBase_4:
-                        display_name: Lower Ali Air Base_4
+                        display_name: Lower Ali Air Base
                         x: -27216.423828125
                         y: 102349.4609375
                     MahattUr_7:
-                        display_name: Mahatt Ur_7
+                        display_name: Mahatt Ur
                         x: 41675.390625
                         y: 151600.953125
                     UpperAliAirBase_11:
-                        display_name: Upper Ali Air Base_11
+                        display_name: Upper Ali Air Base
                         x: -60329.2421875
                         y: 83640.2890625
                 3:
                     AbandonedServiceHangars_6:
-                        display_name: Abandoned Service Hangars_6
+                        display_name: Abandoned Service Hangars
                         x: -11346.873046875
                         y: -1367.080078125
                     IraqiHangarsA:
@@ -4857,24 +4861,24 @@ Tallil_Outskirts:
                         y: -20778.076171875
                 4:
                     AbandonedSovietBaseE_10:
-                        display_name: Abandoned Soviet Base E_10
+                        display_name: Abandoned Soviet Base E
                         x: 25176.265625
                         y: 18844.9921875
                     AbandonedSovietBaseW_5:
-                        display_name: Abandoned Soviet Base W_5
+                        display_name: Abandoned Soviet Base W
                         x: 13235.09375
                         y: 10861.19921875
                     GasTown_2:
-                        display_name: Gas Town_2
+                        display_name: Gas Town
                         x: 107354.14453125
                         y: 77420.765625
                 5:
                     EastAl-Khidhir_8:
-                        display_name: East Al- Khidhir_8
+                        display_name: East Al- Khidhir
                         x: 115612.0625
                         y: -58540.5078125
                     WestAl-Khidhir_9:
-                        display_name: West Al- Khidhir_9
+                        display_name: West Al- Khidhir
                         x: 79824.5625
                         y: -62784.140625
                 6:
@@ -4998,7 +5002,7 @@ Tallil_Outskirts:
                         x: 43936.390625
                         y: 151053.71875
                     UpperAliAirBase_108:
-                        display_name: Upper Ali Air Base_108
+                        display_name: Upper Ali Air Base
                         x: -60329.2421875
                         y: 82675.5
                 3:
@@ -5738,11 +5742,11 @@ Yehorivka:
                         display_name: Stepne Gas Station
                         x: 106461.4609375
                         y: -9809.15625
-                2:
                     WestStepne:
                         display_name: West Stepne
                         x: 97884.71875
                         y: -18574.9765625
+                2:
                     YevhinivkaLower:
                         display_name: Yevhinivka Lower
                         x: 75796.375
@@ -5836,7 +5840,7 @@ Yehorivka:
                         y: 6245.671875
                 4:
                     LowerPetrivka_491:
-                        display_name: Lower Petrivka_491
+                        display_name: Lower Petrivka
                         x: 19497.34375
                         y: -55553.0625
                     WestPetrivka:

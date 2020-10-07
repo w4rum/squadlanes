@@ -66,8 +66,9 @@ class Path {
 }
 
 class CapturePoint {
-    constructor(name, pos) {
+    constructor(name, displayName, pos) {
         this.name = name;
+        this.displayName = displayName;
         this.pos = pos;
         this.laneDepths = {};
         this.neighbours = {};
@@ -149,12 +150,8 @@ class CapturePoint {
         return shortestDist;
     }
 
-    distanceToNearestBase() {
-        if (ownMain === cpBluforMain) {
-            return Math.min(this.distanceFrom(cpBluforMain), cpOpforMain.distanceFrom(this));
-        } else {
-            return Math.min(cpBluforMain.distanceFrom(this), this.distanceFrom(cpOpforMain));
-        }
+    distanceToOwnBase() {
+        return this.distanceFrom(ownMain);
     }
 
     equal(cpOther) {
@@ -222,17 +219,34 @@ class CapturePoint {
 
     }
 
-    color() {
-        // check confirmed and impossible first since they take priority
+    labelInfo() {
+        if (this === cpBluforMain || this === cpOpforMain) {
+            // only use actual distance if a main base has been selected
+            if (ownMain === cpBluforMain || ownMain === cpOpforMain) {
+                return {
+                    color: CLR_MAIN_BASE,
+                    number: this.distanceToOwnBase(),
+                };
+            } else {
+                return {
+                    color: CLR_MAIN_BASE,
+                    number: "&nbsp",
+                };
+            }
+
+        }
         switch (this.status()) {
             case CP_CONFIRMED:
-                return CLR_CONFIRMED;
+                return {
+                    color: CLR_CONFIRMED,
+                    number: this.distanceToOwnBase(),
+                };
             case CP_IMPOSSIBLE:
-                return CLR_IMPOSSIBLE;
+                return {
+                    color: CLR_IMPOSSIBLE,
+                    number: "&nbsp",
+                };
             default:
-        }
-        if (this === cpBluforMain || this === cpOpforMain) {
-            return CLR_MAIN_BASE;
         }
 
         /*
@@ -243,7 +257,7 @@ class CapturePoint {
          */
 
         let cur_prio = Number.MIN_SAFE_INTEGER;
-        let cur_clr = null;
+        let cur_info = null;
         for (const lane in this.laneDepths) {
             if (!possibleLanes().has(lane)) {
                 continue;
@@ -257,42 +271,57 @@ class CapturePoint {
                 console.log();
             }
             const def_depth = Math.floor(laneLengths[lane] / 2);
-            let off_depth = Math.ceil(laneLengths[lane] / 2);
+            let off_depth = def_depth + 1;
             // only check for mid-points on lanes with uneven capture points
             if (laneLengths[lane] % 2 === 1) {
                 const mid_depth = off_depth;
                 off_depth += 1;
                 if (dist === mid_depth && cur_prio < CLR_PRIORITY.MID_POINT) {
                     cur_prio = CLR_PRIORITY.MID_POINT;
-                    cur_clr = CLR_MID_POINT;
+                    cur_info = {
+                        color: CLR_MID_POINT,
+                        number: dist,
+                    };
                     continue;
                 }
             }
             if (dist === def_depth && cur_prio < CLR_PRIORITY.DEF_POINT) {
                 cur_prio = CLR_PRIORITY.DEF_POINT;
-                cur_clr = CLR_DEF_POINT;
+                cur_info = {
+                    color: CLR_DEF_POINT,
+                    number: dist,
+                };
                 continue;
             }
             if (dist === off_depth && cur_prio < CLR_PRIORITY.OFF_POINT) {
                 cur_prio = CLR_PRIORITY.OFF_POINT;
-                cur_clr = CLR_OFF_POINT;
+                cur_info = {
+                    color: CLR_OFF_POINT,
+                    number: dist,
+                };
                 continue;
             }
             if (dist < def_depth && cur_prio < CLR_PRIORITY.OTHER) {
                 const offset = def_depth - dist;
                 cur_prio = CLR_PRIORITY.OTHER - offset;
-                cur_clr = CLR_DEF_OTHER[offset - 1];
+                cur_info = {
+                    color: CLR_DEF_OTHER[offset - 1],
+                    number: dist,
+                };
                 continue;
             }
             if (dist > off_depth && cur_prio < CLR_PRIORITY.OTHER) {
                 const offset = dist - off_depth;
                 cur_prio = CLR_PRIORITY.OTHER - offset;
-                cur_clr = CLR_OFF_OTHER[offset - 1];
+                cur_info = {
+                    color: CLR_OFF_OTHER[offset - 1],
+                    number: dist,
+                };
                 continue;
             }
             console.error(`Unknown color: ${this.name} @ depth ${dist} / ${laneLengths[lane]}`);
         }
-        return cur_clr;
+        return cur_info;
     }
 
     onClick() {
@@ -325,8 +354,6 @@ class CapturePoint {
         if (s !== CP_CONFIRMED) {
             // confirm CP
             lastConfirmedPoint().follower = this;
-            // remove other lanes
-            //possibleLanes = intersection(possibleLanes, cpLaneSet);
         } else {
             // un-confirm CP
             let cur = ownMain;
@@ -338,19 +365,6 @@ class CapturePoint {
                 cur = cur.follower;
             }
 
-            // rebuild possible lanes
-            /*
-            possibleLanes = new Set();
-            // add all lanes
-            // TODO: don't need to iterate over all CPs to find all existing lanes
-            capturePoints.forEach(cp => possibleLanes = union(possibleLanes, new Set(Object.keys(cp.laneDepths))));
-            // intersect with confirmed points
-            capturePoints.forEach(cp => {
-                if (cp.status() === CP_CONFIRMED) {
-                    possibleLanes = intersection(possibleLanes, new Set(Object.keys(cp.laneDepths)));
-                }
-            });
-             */
         }
         // re-check possibility of all cps and re-color them
         redrawCpInfo();
@@ -411,37 +425,43 @@ function lastConfirmedPoint() {
 function redrawCpInfo() {
     capturePoints.forEach(cp => {
         // Try each lane. Only display lanes which can lead to this CP with the current confirmation line
-        let lanes = new Set();
+        let lanes = [];
         for (const lane in cp.laneDepths) {
-            if (cp.pathFromSingleLane(ownMain, lane) !== null) {
-                lanes.add(lane);
+            const path = cp.pathFromSingleLane(ownMain, lane);
+            if (path !== null) {
+                lanes.push(`${path.length}${lane[0]}`);
             }
         }
 
-        // only display starting letter of lane
-        let laneTooltip = [...lanes].map(l => l[0]);
-        if (laneTooltip.length === allLanes.size || laneTooltip.length === 0) {
-            laneTooltip = "&nbsp";
-        }
+        const labelInfo = cp.labelInfo();
         cp.circleMarker.closeTooltip().unbindTooltip();
-        let distance = cp.distanceToNearestBase();
-        if (cp.status() === CP_IMPOSSIBLE) {
-            distance = "&nbsp";
-        }
-        cp.circleMarker.bindTooltip(
-            `<div class="cpTooltipName">${_.startCase(cp.name).replaceAll(" ", "<br />")}</div>` +
-            `<div class="cpTooltipDepth">${distance}</div>` +
-            `<div class="cpTooltipLanes">${laneTooltip}</div>`, {
-                permanent: true,
-                direction: 'top',
+        if (cp.status() === CP_IMPOSSIBLE && cp !== cpOpforMain && cp !== cpBluforMain) {
+            cp.circleMarker.setStyle({
+                opacity: 0.0,
+                interactive: false,
+                fill: false,
+            });
+        } else {
+            cp.circleMarker.bindTooltip(
+                `<div class="cpTooltipName">${cp.displayName}</div>` +
+                `<div class="cpTooltipDepth">${labelInfo.number}</div>` +
+                `<div class="cpTooltipLanes">${lanes}</div>`, {
+                    permanent: true,
+                    direction: 'top',
+                    opacity: 1.0,
+                    className: 'cpTooltip',
+                    pane: 'cpTooltip',
+                    offset: [0, 50],
+                }).openTooltip();
+            cp.circleMarker.setStyle({
+                color: labelInfo.color,
                 opacity: 1.0,
-                className: 'cpTooltip',
-                pane: 'cpTooltip',
-                offset: [0, 50],
-            }).openTooltip();
-        cp.circleMarker.setStyle({color: cp.color()});
-        cp.circleMarker.redraw();
+                interactive: true,
+                fill: true,
+            });
 
+        }
+        cp.circleMarker.redraw();
     });
 }
 
@@ -533,25 +553,12 @@ function changeMap(map_name) {
     map.getPane('background').style.zIndex = 0;
 
 
-    // TODO: remove
-    CustomTileLayer = L.TileLayer.extend({
-        /*
-        getTileUrl: function(coords) {
-
-            z = coords.z;
-            console.log(coords);
-            return "no";
-        }
-
-         */
-    });
-
     // scale tiles to match map width and height
     // Our TileLayer stretches 4096*64 units by default (at zoom 0)
     // we just apply the scaling factor to the tile size to make it display correctly
     // TODO: this has someting to do with zoomOffset, explain that
     const tileSize = [256 * width / (4096 * 64 * 2), 256 * height / (4096 * 64 * 2)];
-    new CustomTileLayer(`map-resources/tiles/${simple_map_name}/{z}/{x}/{y}.png`, {
+    new L.TileLayer(`map-resources/tiles/${simple_map_name}/{z}/{x}/{y}.png`, {
         tms: false,
         minZoom: -10,
         maxZoom: -7,
@@ -560,9 +567,6 @@ function changeMap(map_name) {
         pane: 'background',
         bounds: baseBounds,
     }).addTo(map);
-    //L.imageOverlay(`map-resources/full-size/${simple_map_name}.jpg`, baseBounds, {
-    //    pane: 'background',
-    //}).addTo(map);
 
     // extract capture points from YAML data
     // this is also the set of vertices
@@ -572,6 +576,7 @@ function changeMap(map_name) {
                 depth = parseInt(depth);
                 cpRaw = laneGraph[lane][depth][sdk_name];
                 cp = new CapturePoint(
+                    sdk_name,
                     cpRaw["display_name"],
                     [cpRaw["y"], cpRaw["x"]]
                 );
@@ -621,13 +626,12 @@ function changeMap(map_name) {
         })
     })
 
-    ownMain = cpBluforMain;
+    ownMain = new CapturePoint("dummy main", "dummy main", [0.0, 0.0]);
 
     // create markers for capture points
     capturePoints.forEach(cp => {
         const circleMarker = L.circleMarker(cp.pos, {
             radius: 20,
-            color: cp.color(),
             pane: 'cp',
         });
         circleMarker.cp = cp;
@@ -642,6 +646,7 @@ function changeMap(map_name) {
     redrawCpLines();
 
     /*
+    // Debug
     map.addEventListener('mousemove', function (ev) {
         const lat = ev.latlng.lat;
         const lng = ev.latlng.lng;
