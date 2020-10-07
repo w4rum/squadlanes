@@ -18,6 +18,8 @@ TODO: Explain how to deploy this and work on it.
   "Squad's main website".
   We hope our usage here is fine.
   If it is not, please send a DM to [w4rum](https://github.com/w4rum/).
+- [Leaflet](https://github.com/Leaflet/Leaflet). Released under
+  [BSD 2-Clause "Simplified" License](https://github.com/Leaflet/Leaflet/blob/master/LICENSE).
 - Bootstrap and the "Simple Sidebar" component:\
     Copyright 2013-2020 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/gh-pages/LICENSE) license.
 - Although neither the source nor the executable is shipped with this repository, this project relies on Konstantin

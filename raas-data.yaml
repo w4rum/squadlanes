@@ -66,7 +66,7 @@ Albasrah:
                         y: 56535.609375
                 5:
                     IslandSuburbs:
-                        display_name: Island Suburbs
+                        display_name: Island Suburbs / Island North Suburb
                         x: 64305.21875
                         y: 65436.1640625
                     SouthSuburbs:
@@ -86,7 +86,7 @@ Albasrah:
                         y: -69195.1796875
                 1:
                     Hwy6Compound:
-                        display_name: Hwy6 Compound
+                        display_name: Hwy 6 Compound
                         x: 38345.109375
                         y: -58875.984375
                     NorthVCPRuins:
@@ -134,9 +134,9 @@ Albasrah:
                         y: 55580.6171875
                 5:
                     IslandNorthSuburb:
-                        display_name: Island North Suburb
+                        display_name: Island Suburbs / Island North Suburb
                         x: 64305.21875
-                        y: 65436.1640625
+                        y: 65436.164062
                     IslandSouthSuburb:
                         display_name: Island South Suburb
                         x: 64305.21875
@@ -245,8 +245,8 @@ Belaya:
                         y: -7004.921875
                     NikolaEast:
                         display_name: Nikola East
-                        x: -78521.10546875
-                        y: -39722.7734375
+                        x: -17178.523438
+                        y: 2669.871094
                     NikolaWest:
                         display_name: Nikola West
                         x: -30121.451171875
@@ -317,8 +317,8 @@ Belaya:
                         y: 2930.03515625
                     NikolaEast:
                         display_name: Nikola East
-                        x: -78521.10546875
-                        y: -39722.7734375
+                        x: -17178.523438
+                        y: 2669.871094
                 4:
                     CoalMine:
                         display_name: Coal Mine
@@ -379,10 +379,6 @@ Belaya:
                         display_name: Industrial Yard
                         x: -110389.609375
                         y: -18415.578125
-                    NikolaEast:
-                        display_name: Nikola East
-                        x: -78521.10546875
-                        y: -39722.7734375
                     NikolaWest:
                         display_name: Nikola West
                         x: -30121.451171875
@@ -684,7 +680,7 @@ Chora:
                         y: -90672.8046875
                 4:
                     AbdulsFarm:
-                        display_name: Abduls Farm
+                        display_name: Abdul's Farm
                         x: -115073.81640625
                         y: -67752.4609375
                     CentralOrchard:
@@ -761,15 +757,15 @@ Chora:
                         y: -43967.0859375
                 4:
                     LowerOrchard:
-                        display_name: Lower Orchard
+                        display_name: Lower Orchard (West)
                         x: -91012.25
                         y: -25465.265625
                     LowerOrchard2:
-                        display_name: Lower Orchard 2
+                        display_name: Lower Orchard (North)
                         x: -69280.4140625
                         y: -28161.634765625
                     LowerOrchard3:
-                        display_name: Lower Orchard 3
+                        display_name: Lower Orchard (East)
                         x: -61951.15234375
                         y: -21618.87109375
                 5:
@@ -878,7 +874,7 @@ Fools Road:
                         y: 14580.328125
                 1:
                     Hill24:
-                        display_name: Hill24
+                        display_name: Hill 24
                         x: -87168.8359375
                         y: -14341.57421875
                 2:
@@ -922,12 +918,12 @@ Fools Road:
                         y: 14580.328125
                 1:
                     Hill24:
-                        display_name: Hill24
+                        display_name: Hill 24
                         x: -87168.8359375
                         y: -14341.57421875
                 2:
                     Hill13:
-                        display_name: Hill13
+                        display_name: Hill 13
                         x: -14221.0
                         y: -33883.99609375
                     MineEntrance:
@@ -940,12 +936,12 @@ Fools Road:
                         x: 30064.0
                         y: -12951.0
                     Hill11:
-                        display_name: Hill11
+                        display_name: Hill 11
                         x: 21611.0
                         y: -33328.0
                 4:
                     Hill123:
-                        display_name: Hill123
+                        display_name: Hill 123
                         x: 24785.0859375
                         y: -68137.93359375
                     Ruins:
@@ -970,7 +966,7 @@ Fools Road:
                         y: 14580.328125
                 1:
                     Hill24:
-                        display_name: Hill24
+                        display_name: Hill 24
                         x: -87168.8359375
                         y: -14341.57421875
                 2:
@@ -988,7 +984,7 @@ Fools Road:
                         x: -99173.421875
                         y: -99763.69921875
                     LoggersHomestead:
-                        display_name: Loggers Homestead
+                        display_name: Logger's Homestead
                         x: -72538.0
                         y: -81427.99609375
                     TaxiHomestead:
@@ -1037,12 +1033,12 @@ Fools Road:
                         x: 32838.111328125
                         y: -12901.1484375
                     Hill11:
-                        display_name: Hill11
+                        display_name: Hill 11
                         x: 24185.236328125
                         y: -33401.05078125
                 2:
                     Hill13:
-                        display_name: Hill13
+                        display_name: Hill 13
                         x: -13760.544921875
                         y: -35601.26953125
                     MineEntrance:
@@ -1064,7 +1060,7 @@ Fools Road:
                         y: -79594.80078125
                 4:
                     Hill24:
-                        display_name: Hill24
+                        display_name: Hill 24
                         x: -87271.185546875
                         y: -10499.28515625
                     LoggingSite:
@@ -1117,11 +1113,11 @@ Fools Road:
                         y: -29136.5078125
                 2:
                     Homestead1:
-                        display_name: Homestead1
+                        display_name: Homestead (East)
                         x: -72686.357421875
                         y: -81871.28125
                     Homestead2:
-                        display_name: Homestead2
+                        display_name: Homestead (West)
                         x: -86478.216796875
                         y: -82772.890625
                 3:
@@ -1144,7 +1140,7 @@ Fools Road:
                         y: -88820.34375
                 5:
                     Hill123:
-                        display_name: Hill123
+                        display_name: Hill 123
                         x: 24198.09375
                         y: -62504.7265625
                     HilltopHomestead:
@@ -1157,7 +1153,7 @@ Fools Road:
                         x: 33839.1015625
                         y: -10003.046875
                     Hill11:
-                        display_name: Hill11
+                        display_name: Hill 11
                         x: 23454.12109375
                         y: -28683.2421875
                 7:
@@ -1194,7 +1190,7 @@ Gorodok:
                         y: 74285.90625
                 2:
                     IgorsHomestead:
-                        display_name: Igors Homestead
+                        display_name: Igor's Homestead
                         x: -30789.8203125
                         y: 75571.0625
                     TrainBridge:
@@ -1211,11 +1207,11 @@ Gorodok:
                         y: 51590.734375
                 3:
                     NivaUpper1:
-                        display_name: Niva Upper1
+                        display_name: Niva Upper (South)
                         x: -26577.9453125
                         y: 21978.796875
                     NivaUpper2:
-                        display_name: Niva Upper2
+                        display_name: Niva Upper (North)
                         x: -29473.7578125
                         y: 13205.921875
                     RiverFortification:
@@ -1232,11 +1228,11 @@ Gorodok:
                         x: 31489.046875
                         y: 20776.328125
                     NivaLower1:
-                        display_name: Niva Lower1
+                        display_name: Niva Lower (North)
                         x: 907.21875
                         y: 11803.265625
                     NivaLower2:
-                        display_name: Niva Lower2
+                        display_name: Niva Lower (South)
                         x: 10831.25
                         y: 20179.90625
                 5:
@@ -1284,7 +1280,7 @@ Gorodok:
                         y: 74285.90625
                 2:
                     IgorsHomestead:
-                        display_name: Igors Homestead
+                        display_name: Igor's Homestead
                         x: -30789.8203125
                         y: 75571.0625
                     SoloninkiLower:
@@ -1301,7 +1297,7 @@ Gorodok:
                         x: 62648.203125
                         y: 81787.4375
                     PavlovsFarm:
-                        display_name: Pavlovs Farm
+                        display_name: Pavlov's Farm
                         x: 42999.453125
                         y: 142541.65625
                     SoloninkiRuins:
@@ -1332,7 +1328,7 @@ Gorodok:
                         y: 17138.65625
                 6:
                     ButchersHouse:
-                        display_name: Butchers House
+                        display_name: Butcher's House
                         x: 120411.546875
                         y: -17195.34375
                     NivaRadioTower:
@@ -1370,7 +1366,7 @@ Gorodok:
                         y: 74285.90625
                 2:
                     BoarHuntersClub:
-                        display_name: Boar Hunters Club
+                        display_name: Boar Hunter's Club
                         x: -118077.265625
                         y: -10424.9453125
                     WesternSpyFarm:
@@ -1379,7 +1375,7 @@ Gorodok:
                         y: 36729.171875
                 3:
                     Hill57:
-                        display_name: Hill57
+                        display_name: Hill 57
                         x: -155572.40625
                         y: -74370.09375
                     MatreninoHills:
@@ -1418,7 +1414,7 @@ Gorodok:
                         x: 72247.875
                         y: -94599.4609375
                     MechanicsHomestead:
-                        display_name: Mechanics Homestead
+                        display_name: Mechanic's Homestead
                         x: 16785.42578125
                         y: -117201.8125
                     TractorCo-op:
@@ -1467,7 +1463,7 @@ Gorodok:
                         y: 74285.90625
                 2:
                     PavlovsFarm:
-                        display_name: Pavlovs Farm
+                        display_name: Pavlov's Farm
                         x: 42999.453125
                         y: 142541.65625
                     SoloninkiLower:
@@ -1505,11 +1501,11 @@ Gorodok:
                         x: -42894.2578125
                         y: -9048.703125
                     NivaLower:
-                        display_name: Niva Lower
+                        display_name: Niva Lower (North)
                         x: 907.21875
                         y: 11803.265625
                     NivaLower2:
-                        display_name: Niva Lower2
+                        display_name: Niva Lower (South)
                         x: 10831.25
                         y: 20179.90625
                     NivaRadioTower:
@@ -1517,11 +1513,11 @@ Gorodok:
                         x: 40975.140625
                         y: -4935.9375
                     NivaUpper1:
-                        display_name: Niva Upper1
+                        display_name: Niva Upper (South)
                         x: -24791.46875
                         y: 21942.453125
                     NivaUpper2:
-                        display_name: Niva Upper2
+                        display_name: Niva Upper (North)
                         x: -29473.7578125
                         y: 13205.921875
                     TrainBridge:
@@ -1590,7 +1586,7 @@ Gorodok:
                         y: 189030.65625
                 1:
                     PavlovsFarm:
-                        display_name: Pavlovs Farm
+                        display_name: Pavlov's Farm
                         x: 42999.453125
                         y: 142541.65625
                     SoloninkiLower:
@@ -1621,7 +1617,7 @@ Gorodok:
                         y: 53861.0
                 4:
                     ButchersHouse:
-                        display_name: Butchers House
+                        display_name: Butcher's House
                         x: 120635.265625
                         y: -16535.046875
                     Hamlet:
@@ -1697,7 +1693,7 @@ Gorodok:
                         y: 37787.85546875
                 5:
                     BoarHuntersClub:
-                        display_name: Boar Hunters Club
+                        display_name: Boar Hunter's Club
                         x: -118209.921875
                         y: -10429.7119140625
                 6:
@@ -1733,7 +1729,7 @@ Gorodok:
                         y: 73838.109375
                 2:
                     PavlovsFarm:
-                        display_name: Pavlovs Farm
+                        display_name: Pavlov's Farm
                         x: 42999.453125
                         y: 142541.640625
                     SoloninkiLower:
@@ -1977,7 +1973,7 @@ Kamdesh:
                         x: -93765.15625
                         y: 12279.1015625
                     SmugglersDen:
-                        display_name: Smugglers Den
+                        display_name: Smuggler's Den
                         x: -51321.4375
                         y: -12649.4453125
                     Urmul:
@@ -1995,7 +1991,7 @@ Kamdesh:
                         y: 43349.08203125
                 5:
                     CarpentersGuild:
-                        display_name: Carpenters Guild
+                        display_name: Carpenters' Guild
                         x: -85761.234375
                         y: 87649.8125
                     Larnaw:
@@ -2096,7 +2092,7 @@ Kamdesh:
                         y: 12279.1015625
                 6:
                     CarpentersGuild:
-                        display_name: Carpenters Guild
+                        display_name: Carpenters' Guild
                         x: -85761.234375
                         y: 87649.8125
                     Darin:
@@ -2201,7 +2197,7 @@ Kamdesh:
                         y: 12279.1015625
                 6:
                     CarpentersGuild:
-                        display_name: Carpenters Guild
+                        display_name: Carpenters' Guild
                         x: -85761.234375
                         y: 87649.8125
                     Darin:
@@ -2266,7 +2262,7 @@ Kamdesh:
                         x: -17416.640625
                         y: -43309.953125
                     SmugglersDen:
-                        display_name: Smugglers Den
+                        display_name: Smuggler's Den
                         x: -50284.8515625
                         y: -12820.44140625
                 3:
@@ -3011,7 +3007,7 @@ Kohat:
                         x: -45271.1875
                         y: 51838.6015625
                     MalakAbad_9:
-                        display_name: Malak Abad_9
+                        display_name: Malak Abad
                         x: -14871.703125
                         y: 5647.00390625
                     MohdZai:
@@ -3456,11 +3452,11 @@ Lashkar Valley:
                         x: 144056.125
                         y: -71977.265625
                     KanjuUpper1:
-                        display_name: Kanju Upper1
+                        display_name: Kanju Upper (West)
                         x: 145300.984375
                         y: -55559.15625
                     KanjuUpper2:
-                        display_name: Kanju Upper2
+                        display_name: Kanju Upper (East)
                         x: 155616.640625
                         y: -62103.1796875
                     Kunar:
@@ -3616,29 +3612,29 @@ Logar Valley:
                         y: -45048.0
                 2:
                     UpperDistrict1:
-                        display_name: Upper District1
+                        display_name: Upper District 1
                         x: -16948.0
                         y: -32436.0
                     UpperDistrict2:
-                        display_name: Upper District2
+                        display_name: Upper District 2
                         x: -2354.0
                         y: -30579.0
                 3:
                     CentralDistrict1:
-                        display_name: Central District1
+                        display_name: Central District 1
                         x: -7442.0
                         y: -20820.0
                     CentralDistrict2:
-                        display_name: Central District2
+                        display_name: Central District 2
                         x: -7524.0
                         y: -12106.0
                 4:
                     LowerDistrict1:
-                        display_name: Lower District1
+                        display_name: Lower District 1
                         x: -16009.0
                         y: -332.0
                     LowerDistrict2:
-                        display_name: Lower District2
+                        display_name: Lower District 2
                         x: -4400.0
                         y: -2832.0
                 5:
@@ -3676,7 +3672,7 @@ Logar Valley:
                         x: -19707.8984375
                         y: 8674.8203125
                     MuhammadsCompound:
-                        display_name: Muhammads Compound
+                        display_name: Muhammad's Compound
                         x: -30912.26953125
                         y: 17060.83203125
                     StripMall:
@@ -3694,20 +3690,20 @@ Logar Valley:
                         y: 3661.6015625
                 4:
                     CentralDistrict1:
-                        display_name: Central District1
+                        display_name: Central District 1
                         x: -7442.0
                         y: -20820.0
                     CentralDistrict2:
-                        display_name: Central District2
+                        display_name: Central District 2
                         x: -7524.0
                         y: -12106.0
                 5:
                     UpperDCCompound1:
-                        display_name: Upper DC Compound1
+                        display_name: Upper DC Compound 1
                         x: 2334.2109375
                         y: -32653.0234375
                     UpperDCCompound2:
-                        display_name: Upper DC Compound2
+                        display_name: Upper DC Compound 2
                         x: -3644.8603515625
                         y: -33771.6484375
                     UpperSlums:
@@ -3715,27 +3711,28 @@ Logar Valley:
                         x: -12630.9267578125
                         y: -32915.59375
                 6:
-                    Farm:
-                        display_name: Farm
-                        x: 10198.02734375
-                        y: -49019.8046875
-                    GovernorsEstate:
-                        display_name: Governors Estate
-                        x: 26293.703125
-                        y: -50125.515625
                     Homestead:
                         display_name: Homestead
                         x: 19278.626953125
                         y: -56376.14453125
-                    MaterialStorage:
-                        display_name: Material Storage
-                        x: 15341.0703125
-                        y: -59554.25
                     Residence:
                         display_name: Residence
                         x: 34742.31640625
                         y: -43974.0078125
                 7:
+                    Farm:
+                        display_name: Farm
+                        x: 53438.027344
+                        y: -42580.804688
+                    GovernorsEstate:
+                        display_name: Governor's Estate
+                        x: 69533.703125
+                        y: -43686.515625
+                    MaterialStorage:
+                        display_name: Material Storage
+                        x: 58581.070312
+                        y: -53115.25
+                8:
                     MEAMain:
                         display_name: MEA Main
                         x: 59797.234375
@@ -4204,7 +4201,7 @@ Skorpo:
                         y: 12086.0859375
                 1:
                     Hwy48LiaBeach:
-                        display_name: Hwy48 Lia Beach
+                        display_name: Hwy 48 Lia Beach
                         x: -156750.0
                         y: -8760.01953125
                 2:
@@ -4218,7 +4215,7 @@ Skorpo:
                         y: -24421.25
                 3:
                     CaptainsFarm:
-                        display_name: Captains Farm
+                        display_name: Captain's Farm
                         x: 67086.125
                         y: 25479.546875
                     ElkLower:
@@ -4286,7 +4283,7 @@ Skorpo:
                         y: 12086.0859375
                 1:
                     Hwy48LiaBeach:
-                        display_name: Hwy48 Lia Beach
+                        display_name: Hwy 48 Lia Beach
                         x: -156750.0
                         y: -8760.01953125
                 2:
@@ -4309,7 +4306,7 @@ Skorpo:
                         y: 36312.671875
                 4:
                     CaptainsFarm:
-                        display_name: Captains Farm
+                        display_name: Captain's Farm
                         x: 67086.140625
                         y: 25479.5546875
                     Doenhaug:
@@ -4470,7 +4467,7 @@ Skorpo:
                         display_name: Steinsletta
                         x: -26160.984375
                         y: 9320.86328125
-                    SteinslettaFootHills:
+                    SteinslettaFootHills2:
                         display_name: Steinsletta Foot Hills
                         x: -73088.265625
                         y: 41719.84375
@@ -4511,8 +4508,8 @@ Skorpo:
                         y: 56959.9765625
                     Kjerlandgarden:
                         display_name: Kjerlandgarden
-                        x: 205335.9375
-                        y: 48122.3671875
+                        x: 205111.28125
+                        y: 47931.5859375
                 6:
                     RUSMain:
                         display_name: RUS Main
@@ -4582,7 +4579,7 @@ Skorpo:
                         x: 188376.4375
                         y: 66755.9765625
                     KJERLANDSGARDEN:
-                        display_name: KJERLANDSGARDEN
+                        display_name: Kjerlandgarden
                         x: 205111.28125
                         y: 47931.5859375
                     RINDE:
@@ -4625,7 +4622,7 @@ Skorpo:
                         x: 94184.9375
                         y: -1332.2890625
                     Svingen_1:
-                        display_name: Svingen_1
+                        display_name: Svingen
                         x: 137475.9375
                         y: 20563.3671875
                 2:
@@ -4661,7 +4658,7 @@ Skorpo:
                         y: 26217.44921875
                 5:
                     Bringedalslia:
-                        display_name: Bringedalslia
+                        display_name: Bringedalslia (North)
                         x: -156910.59375
                         y: 60702.3671875
                     Ljosrnyr:
@@ -4670,7 +4667,7 @@ Skorpo:
                         y: 22422.3671875
                 6:
                     Bringedal:
-                        display_name: Bringedal
+                        display_name: Bringedal / Bringedalslia (South)
                         x: -190808.71875
                         y: 80426.1875
                     Heroysund:
@@ -4682,7 +4679,7 @@ Skorpo:
                         display_name: MIL Main
                         x: -281548.234375
                         y: 159236.0
-            North:
+            South:
                 0:
                     USAMain:
                         display_name: USA Main
@@ -4729,11 +4726,11 @@ Skorpo:
                         y: 104010.828125
                 4:
                     Stordalen:
-                        display_name: Stordalen
+                        display_name: Stordalen (North)
                         x: -68730.21875
                         y: 78100.75
                     Stordalen_3:
-                        display_name: Stordalen_3
+                        display_name: Stordalen (South)
                         x: -75517.375
                         y: 112388.40625
                 5:
@@ -4742,18 +4739,18 @@ Skorpo:
                         x: -117240.984375
                         y: 112160.859375
                     SteinslettaFootHills:
-                        display_name: Steinsletta Foot Hills
+                        display_name: Steinsletta Foot Hills (West)
                         x: -135368.265625
                         y: 72009.84375
                     SteinslettaFootHills_2:
-                        display_name: Steinsletta Foot Hills_2
+                        display_name: Steinsletta Foot Hills (East)
                         x: -99328.265625
                         y: 76529.84375
                 6:
                     Bringedal:
-                        display_name: Bringedal
-                        x: -196418.953125
-                        y: 122344.5
+                        display_name: Bringedal / Bringedalslia (South)
+                        x: -190808.71875
+                        y: 80426.1875
                     Heroysundstunnelen:
                         display_name: Heroysundstunnelen
                         x: -186923.859375
@@ -4767,7 +4764,7 @@ Skorpo:
                         display_name: MIL Main
                         x: -281548.234375
                         y: 159236.0
-            South:
+            North:
                 0:
                     USAMain:
                         display_name: USA Main
@@ -4800,8 +4797,8 @@ Skorpo:
                         x: 8845.44140625
                         y: 54703.57421875
                 3:
-                    Beltedals:
-                        display_name: Beltedals
+                    Beltedals_East:
+                        display_name: Beltedals (East)
                         x: -111678.515625
                         y: 15393.9453125
                     BornsetShipyardEast:
@@ -4814,13 +4811,13 @@ Skorpo:
                         y: -21915.80078125
                     Storhaug_5:
                         display_name: Storhaug
-                        x: -73008.515625
-                        y: 42733.9453125
+                        x: -73096.765625
+                        y: 43001.25
                 4:
-                    Beltedals:
-                        display_name: Beltedals
+                    Beltedals_West:
+                        display_name: Beltedals (West)
                         x: -147804.53125
-                        y: 19055.6328125
+                        y: 19055.632812
                     Ljosrnyr:
                         display_name: Ljosrnyr
                         x: -167521.9375
@@ -4831,13 +4828,13 @@ Skorpo:
                         y: -24165.359375
                 5:
                     Bringedalslia:
-                        display_name: Bringedalslia
+                        display_name: Bringedalslia (North)
                         x: -177507.703125
                         y: 48088.6953125
                     Bringedalslia_1:
-                        display_name: Bringedalslia_1
-                        x: -190870.328125
-                        y: 80435.96875
+                        display_name: Bringedal / Bringedalslia (South)
+                        x: -190808.71875
+                        y: 80426.1875
                     Heroysundsvegen:
                         display_name: Heroysundsvegen
                         x: -219225.140625
@@ -4849,12 +4846,12 @@ Skorpo:
                         y: 61769.4453125
                     Heroysund:
                         display_name: Heroysund
-                        x: -241245.125
-                        y: 61500.1171875
+                        x: -241692.875
+                        y: 85508.71875
                     Heroysund_0:
-                        display_name: Heroysund_0
-                        x: -241605.125
-                        y: 85410.1171875
+                        display_name: Heroysund
+                        x: -241692.875
+                        y: 85508.71875
                 7:
                     MILMain:
                         display_name: MIL Main
@@ -4900,7 +4897,7 @@ Skorpo:
                         x: -121515.046875
                         y: 42200.66015625
                     sTORDALEN:
-                        display_name: s TORDALEN
+                        display_name: Stordalen (West)
                         x: -93058.640625
                         y: 94841.2734375
                 3:
@@ -4909,7 +4906,7 @@ Skorpo:
                         x: -4443.296875
                         y: 145422.125
                     Stordalen:
-                        display_name: Stordalen
+                        display_name: Stordalen (East)
                         x: -23917.328125
                         y: 104010.828125
                     WaterStorage:
@@ -4973,7 +4970,7 @@ Skorpo:
                         y: 54533.78125
                 3:
                     Captainsfarm:
-                        display_name: Captainsfarm
+                        display_name: Captain's Farm
                         x: 65145.3671875
                         y: 23458.2890625
                     Radiotower:
@@ -5276,11 +5273,11 @@ Tallil Outskirts:
                         y: 77420.765625
                 5:
                     EastAl-Khidhir:
-                        display_name: East Al- Khidhir
+                        display_name: East Al-Khidhir
                         x: 113183.125
                         y: -59706.0625
                     WestAl-Khidhir:
-                        display_name: West Al- Khidhir
+                        display_name: West Al-Khidhir
                         x: 81024.65625
                         y: -59940.40625
                 6:
@@ -5368,11 +5365,11 @@ Tallil Outskirts:
                         y: 77420.765625
                 5:
                     EastAl-Khidhir_8:
-                        display_name: East Al- Khidhir
+                        display_name: East Al-Khidhir
                         x: 115612.0625
                         y: -58540.5078125
                     WestAl-Khidhir_9:
-                        display_name: West Al- Khidhir
+                        display_name: West Al-Khidhir
                         x: 79824.5625
                         y: -62784.140625
                 6:
@@ -5436,20 +5433,20 @@ Tallil Outskirts:
                         y: -136555.40625
                 5:
                     WestAl-Khidhir1:
-                        display_name: West Al- Khidhir (North)
+                        display_name: West Al-Khidhir (North)
                         x: 78858.28125
                         y: -65866.328125
                     WestAl-Khidhir2:
-                        display_name: West Al- Khidhir (South)
+                        display_name: West Al-Khidhir (South)
                         x: 85456.9921875
                         y: -56564.6875
                 6:
                     EastAl-Khidhir1:
-                        display_name: East Al- Khidhir (North)
+                        display_name: East Al-Khidhir (North)
                         x: 114908.953125
                         y: -58899.34375
                     EastAl-Khidhir2:
-                        display_name: East Al- Khidhir (South)
+                        display_name: East Al-Khidhir (South)
                         x: 115835.0859375
                         y: -48842.27734375
                 7:
@@ -5529,11 +5526,11 @@ Tallil Outskirts:
                         y: 77420.765625
                 5:
                     EastAl-Khidhir:
-                        display_name: East Al- Khidhir
+                        display_name: East Al-Khidhir
                         x: 113183.125
                         y: -59706.0625
                     WestAl-Khidhir:
-                        display_name: West Al- Khidhir
+                        display_name: West Al-Khidhir
                         x: 81024.65625
                         y: -59940.40625
                 6:
@@ -5583,14 +5580,23 @@ Yehorivka:
                         x: 19902.9140625
                         y: 110179.8125
                     AirfieldTrenches:
-                        display_name: Airfield Trenches
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                     YehoAirfield:
-                        display_name: Yeho Airfield
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                 3:
+                    EastNovo:
+                        display_name: East Novo
+                        x: 28876.3125
+                        y: 61403.4375
+                    WestNovo:
+                        display_name: West Novo
+                        x: -1892.46875
+                        y: 60305.921875
+                4:
                     BogCamp:
                         display_name: Bog Camp
                         x: 48439.609375
@@ -5604,10 +5610,10 @@ Yehorivka:
                         x: 3897.625
                         y: 23720.546875
                     ZenosHomestead:
-                        display_name: Zenos Homestead
+                        display_name: Zeno's Homestead
                         x: 32855.21875
                         y: 22636.9375
-                4:
+                5:
                     LowerPetrivka:
                         display_name: Lower Petrivka
                         x: 19265.34375
@@ -5620,20 +5626,20 @@ Yehorivka:
                         display_name: Upper Petrivka
                         x: 17057.8125
                         y: -90578.90625
-                5:
+                6:
                     Kropy:
                         display_name: Kropy
                         x: -86407.9375
                         y: -88267.0
                     NomadsHomestead:
-                        display_name: Nomads Homestead
+                        display_name: Nomad's Homestead
                         x: -38868.5
                         y: -75620.5
                     WestPetrivka:
                         display_name: West Petrivka
                         x: -20081.671875
                         y: -71669.75
-                6:
+                7:
                     Zolota:
                         display_name: Zolota
                         x: -74663.046875
@@ -5642,7 +5648,7 @@ Yehorivka:
                         display_name: Zolota Hillside
                         x: -99950.6171875
                         y: -143448.03125
-                7:
+                8:
                     RUSMain:
                         display_name: RUS Main
                         x: -190926.59375
@@ -5672,14 +5678,23 @@ Yehorivka:
                         x: 19902.9140625
                         y: 110179.8125
                     AirfieldTrenches:
-                        display_name: Airfield Trenches
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                     YehoAirfield:
-                        display_name: Yeho Airfield
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                 3:
+                    EastNovo:
+                        display_name: East Novo
+                        x: 28876.3125
+                        y: 61403.4375
+                    WestNovo:
+                        display_name: West Novo
+                        x: -1892.46875
+                        y: 60305.921875
+                4:
                     EastStepne:
                         display_name: East Stepne
                         x: 122072.53125
@@ -5700,7 +5715,7 @@ Yehorivka:
                         display_name: West Stepne
                         x: 95170.53125
                         y: -35304.078125
-                4:
+                5:
                     LowerPetrivka:
                         display_name: Lower Petrivka
                         x: 19374.3125
@@ -5717,7 +5732,7 @@ Yehorivka:
                         display_name: Yevhinivka
                         x: 75191.0625
                         y: -58292.125
-                5:
+                6:
                     Ivanivka:
                         display_name: Ivanivka
                         x: 58638.125
@@ -5726,7 +5741,7 @@ Yehorivka:
                         display_name: Peredove
                         x: 129776.125
                         y: -153030.4375
-                6:
+                7:
                     Zolota:
                         display_name: Zolota
                         x: -74663.046875
@@ -5735,7 +5750,7 @@ Yehorivka:
                         display_name: Zolota Hillside
                         x: -99950.6171875
                         y: -143448.03125
-                7:
+                8:
                     RUSMain:
                         display_name: RUS Main
                         x: -190926.59375
@@ -5765,11 +5780,11 @@ Yehorivka:
                         x: 19902.9140625
                         y: 110179.8125
                     AirfieldTrenches:
-                        display_name: Airfield Trenches
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                     YehoAirfield:
-                        display_name: Yeho Airfield
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                 3:
@@ -5813,7 +5828,7 @@ Yehorivka:
                         x: -86407.921875
                         y: -88266.9921875
                     NomadsHomestead:
-                        display_name: Nomads Homestead
+                        display_name: Nomad's Homestead
                         x: -38868.5
                         y: -75620.5
                     PetrivkaCo-op:
@@ -5957,13 +5972,22 @@ Yehorivka:
                         x: 19902.9140625
                         y: 110179.8125
                     AirfieldTrenches:
-                        display_name: Airfield Trenches
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                     YehoAirfield:
-                        display_name: Yeho Airfield
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
+                3:
+                    EastNovo:
+                        display_name: East Novo
+                        x: 28876.3125
+                        y: 61403.4375
+                    WestNovo:
+                        display_name: West Novo
+                        x: -1892.46875
+                        y: 60305.921875
                 4:
                     BogCamp:
                         display_name: Bog Camp
@@ -5978,7 +6002,7 @@ Yehorivka:
                         x: 3897.625
                         y: 23720.546875
                     ZenosHomestead:
-                        display_name: Zenos Homestead
+                        display_name: Zeno's Homestead
                         x: 32855.21875
                         y: 22636.9375
                 5:
@@ -6000,7 +6024,7 @@ Yehorivka:
                         x: -86407.9375
                         y: -88267.0
                     NomadsHomestead:
-                        display_name: Nomads Homestead
+                        display_name: Nomad's Homestead
                         x: -38868.5
                         y: -75620.5
                     WestPetrivka:
@@ -6046,13 +6070,22 @@ Yehorivka:
                         x: 19902.9140625
                         y: 110179.8125
                     AirfieldTrenches:
-                        display_name: Airfield Trenches
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                     YehoAirfield:
-                        display_name: Yeho Airfield
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
+                3:
+                    EastNovo:
+                        display_name: East Novo
+                        x: 28876.3125
+                        y: 61403.4375
+                    WestNovo:
+                        display_name: West Novo
+                        x: -1892.46875
+                        y: 60305.921875
                 4:
                     EastStepne:
                         display_name: East Stepne
@@ -6139,11 +6172,11 @@ Yehorivka:
                         x: 19902.9140625
                         y: 110179.8125
                     AirfieldTrenches:
-                        display_name: Airfield Trenches
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                     YehoAirfield:
-                        display_name: Yeho Airfield
+                        display_name: Yeho Airfield / Airfield Trenches
                         x: 8599.4375
                         y: 113502.4375
                 3:
@@ -6187,7 +6220,7 @@ Yehorivka:
                         x: -86407.921875
                         y: -88266.9921875
                     NomadsHomestead:
-                        display_name: Nomads Homestead
+                        display_name: Nomad's Homestead
                         x: -38868.5
                         y: -75620.5
                     PetrivkaCo-op:
@@ -6265,7 +6298,7 @@ Yehorivka:
                         x: 18661.03125
                         y: -54785.1875
                     PetrivkaCoop:
-                        display_name: Petrivka Coop
+                        display_name: Petrivka Co-op
                         x: -8999.09375
                         y: -49107.31640625
                 4:
