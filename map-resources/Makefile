@@ -1,5 +1,4 @@
 TILES_DIR=tiles
-INPUT_PSD=einteilung_komplett_v4.psd
 
 default: docker-prep $(patsubst full-size/%.tga, $(TILES_DIR)/%, $(wildcard full-size/*.tga))
 
