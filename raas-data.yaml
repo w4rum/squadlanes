@@ -854,6 +854,325 @@ Chora:
                         display_name: MEA Main
                         x: -127241.625
                         y: -77822.625
+Fallujah:
+    RAAS v2:
+        background:
+            corners:
+                -   x: 169000.0
+                    y: 146000.0
+                -   x: -131500.0
+                    y: -154500.0
+            minimap_filename: T_Fallujah_Minimap
+            x_stretch_factor: 1.0
+            y_stretch_factor: 1.0
+        lanes:
+            Central:
+                0:
+                    GBMain:
+                        display_name: GB Main
+                        x: 22936.40625
+                        y: -127262.3125
+                1:
+                    AskariSlums:
+                        display_name: Askari Slums
+                        x: 74768.7734375
+                        y: -65355.5625
+                    CementPlant:
+                        display_name: Cement Plant
+                        x: 30364.3828125
+                        y: -73358.09375
+                2:
+                    Bazaar:
+                        display_name: Bazaar
+                        x: 33410.34375
+                        y: -14251.0625
+                    Mosque:
+                        display_name: Mosque
+                        x: 35641.890625
+                        y: -29241.3828125
+                    Muallimin:
+                        display_name: Muallimin
+                        x: 1606.9970703125
+                        y: -49685.33984375
+                    RefugeeCamp:
+                        display_name: Refugee Camp
+                        x: -25583.28125
+                        y: -68347.3125
+                3:
+                    CommercialDistrictNorth:
+                        display_name: Commercial District North
+                        x: 6415.94140625
+                        y: -24826.47265625
+                    CommercialHotelBlock:
+                        display_name: Commercial Hotel Block
+                        x: 11760.390625
+                        y: -13562.435546875
+                    CommericialDistrictSouth:
+                        display_name: Commericial District South
+                        x: 4843.18359375
+                        y: -12608.33984375
+                    CrossRoadsCentral:
+                        display_name: Cross Roads Central
+                        x: -26352.87890625
+                        y: -4977.92578125
+                    CrossRoadsNorth:
+                        display_name: Cross Roads North
+                        x: -32056.509765625
+                        y: -7638.75390625
+                    CrossRoadsSouth:
+                        display_name: Cross Roads South
+                        x: -19516.15234375
+                        y: -1797.46875
+                    PoliceStation:
+                        display_name: Police Station
+                        x: -22732.59765625
+                        y: -34670.765625
+                4:
+                    GreenZone:
+                        display_name: Green Zone
+                        x: 11188.123046875
+                        y: 22101.447265625
+                    Risala:
+                        display_name: Risala
+                        x: -24573.673828125
+                        y: 25477.08984375
+                5:
+                    Al-Khadra:
+                        display_name: Al- Khadra
+                        x: -9532.072265625
+                        y: 67288.0
+                    CommunicationsTowers:
+                        display_name: Communications Towers
+                        x: 18934.6640625
+                        y: 60035.69921875
+                    Jubai:
+                        display_name: Jubai
+                        x: -46035.6640625
+                        y: 43845.59375
+                6:
+                    MEAMain:
+                        display_name: MEA Main
+                        x: -43503.0546875
+                        y: 86800.234375
+    RAAS v3:
+        background:
+            corners:
+                -   x: 169000.0
+                    y: 146000.0
+                -   x: -131500.0
+                    y: -154500.0
+            minimap_filename: T_Fallujah_Minimap
+            x_stretch_factor: 1.0
+            y_stretch_factor: 1.0
+        lanes:
+            Central:
+                0:
+                    USAMain:
+                        display_name: USA Main
+                        x: -36269.30859375
+                        y: -90469.9609375
+                1:
+                    CrashSite:
+                        display_name: Crash Site
+                        x: -58271.546875
+                        y: -49759.4375
+                    RefugeeCamp:
+                        display_name: Refugee Camp
+                        x: -25583.28125
+                        y: -68347.3125
+                2:
+                    DoubleTeeApartments:
+                        display_name: Double Tee Apartments
+                        x: 33478.05078125
+                        y: -49129.65234375
+                    Muallimin:
+                        display_name: Muallimin
+                        x: 1606.9921875
+                        y: -49685.33984375
+                3:
+                    Bazaar:
+                        display_name: Bazaar
+                        x: 33410.33984375
+                        y: -14251.07421875
+                    CommercialDistrictNorth:
+                        display_name: Commercial District North
+                        x: 6415.9296875
+                        y: -24826.48046875
+                    CommercialHotelBlock:
+                        display_name: Commercial Hotel Block
+                        x: 11760.37890625
+                        y: -13562.44140625
+                    CommericialDistrictSouth:
+                        display_name: Commericial District South
+                        x: 4843.1875
+                        y: -12608.34765625
+                4:
+                    Factory_13:
+                        display_name: Factory
+                        x: 45669.5
+                        y: 21980.94921875
+                    GreenZone:
+                        display_name: Green Zone
+                        x: 11188.123046875
+                        y: 22101.447265625
+                    RisalaDistrict:
+                        display_name: Risala District
+                        x: -24573.671875
+                        y: 25477.08984375
+                5:
+                    Al-Khadra:
+                        display_name: Al- Khadra
+                        x: -9707.4375
+                        y: 65452.640625
+                    CommunicationsTowers:
+                        display_name: Communications Towers
+                        x: 20334.5
+                        y: 60132.80859375
+                6:
+                    MEAMain:
+                        display_name: MEA Main
+                        x: 6220.546875
+                        y: 100677.90625
+            East:
+                0:
+                    USAMain:
+                        display_name: USA Main
+                        x: -36269.30859375
+                        y: -90469.9609375
+                1:
+                    CrashSite:
+                        display_name: Crash Site
+                        x: -58271.546875
+                        y: -49759.4375
+                    RefugeeCamp:
+                        display_name: Refugee Camp
+                        x: -25583.28125
+                        y: -68347.3125
+                2:
+                    AskariSlums:
+                        display_name: Askari Slums
+                        x: 74768.7734375
+                        y: -65355.5625
+                    CementPlant:
+                        display_name: Cement Plant
+                        x: 30364.3828125
+                        y: -73358.09375
+                    CompoundZulu:
+                        display_name: Compound Zulu
+                        x: 43856.265625
+                        y: -50296.765625
+                3:
+                    AskariHill:
+                        display_name: Askari Hill
+                        x: 76136.390625
+                        y: -35444.5859375
+                    Bazaar:
+                        display_name: Bazaar
+                        x: 33410.33984375
+                        y: -14251.07421875
+                    Mosque:
+                        display_name: Mosque
+                        x: 36722.12109375
+                        y: -30015.966796875
+                    OpenAirMarket:
+                        display_name: Open Air Market
+                        x: 70811.84375
+                        y: -14149.048828125
+                4:
+                    Factory:
+                        display_name: Factory
+                        x: 45669.5
+                        y: 21980.94921875
+                    GreenZone:
+                        display_name: Green Zone
+                        x: 11188.125
+                        y: 22101.447265625
+                5:
+                    Al-Khadra:
+                        display_name: Al- Khadra
+                        x: -9707.4375
+                        y: 65452.640625
+                    CommunicationsTowers:
+                        display_name: Communications Towers
+                        x: 20334.5
+                        y: 60132.80859375
+                6:
+                    MEAMain:
+                        display_name: MEA Main
+                        x: 6220.546875
+                        y: 100677.90625
+            West:
+                0:
+                    USAMain:
+                        display_name: USA Main
+                        x: -36269.30859375
+                        y: -90469.9609375
+                1:
+                    CrashSite:
+                        display_name: Crash Site
+                        x: -58271.546875
+                        y: -49759.4375
+                    RefugeeCamp:
+                        display_name: Refugee Camp
+                        x: -25583.28125
+                        y: -68347.3125
+                2:
+                    JamhoriaEast:
+                        display_name: Jamhoria East
+                        x: -56751.73828125
+                        y: -19337.943359375
+                    JamhoriaWest:
+                        display_name: Jamhoria West
+                        x: -65122.47265625
+                        y: -16875.509765625
+                    PoliceStation:
+                        display_name: Police Station
+                        x: -22732.59765625
+                        y: -34670.765625
+                3:
+                    Cemetery:
+                        display_name: Cemetery
+                        x: -49663.921875
+                        y: -2744.474609375
+                    CrossRoadsCentral:
+                        display_name: Cross Roads Central
+                        x: -26352.875
+                        y: -4977.92578125
+                    CrossRoadsNorth:
+                        display_name: Cross Roads North
+                        x: -32056.5078125
+                        y: -7638.751953125
+                    CrossRoadsSouth:
+                        display_name: Cross Roads South
+                        x: -19516.15234375
+                        y: -1797.470703125
+                4:
+                    Jubai:
+                        display_name: Jubai
+                        x: -46035.6640625
+                        y: 43845.59375
+                    RisalaDistrict:
+                        display_name: Risala District
+                        x: -24573.673828125
+                        y: 25477.08984375
+                    TrainingCamp:
+                        display_name: Training Camp
+                        x: -41152.77734375
+                        y: 85439.546875
+                5:
+                    Al-Khadra:
+                        display_name: Al- Khadra
+                        x: -9707.4375
+                        y: 65452.640625
+                    CommunicationsTowers:
+                        display_name: Communications Towers
+                        x: 20334.5
+                        y: 60132.80859375
+                6:
+                    MEAMain:
+                        display_name: MEA Main
+                        x: 6220.546875
+                        y: 100677.90625
 Fools Road:
     RAAS v1:
         background:

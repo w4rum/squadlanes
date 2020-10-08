@@ -499,7 +499,7 @@ function redrawCpLines() {
 
 function loadRaasDataFromString(yamlString) {
     raasData = YAML.parse(yamlString);
-    changeMap("Narva RAAS v1")
+    changeMap("Narva", "RAAS v1");
     triggerRaasDataSubscribers();
 }
 

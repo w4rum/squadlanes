@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="map-menus">
-                    <div class="dropdown border-dark dropdownMap">
+                    <div class="dropdown border-dark dropdownMap" id="abc">
                         <button class="dropbtn" id="dropDownMapButton"></button>
                         <div class="dropdown-content" id="dropDownMapMenu">
                         </div>
@@ -104,9 +104,15 @@
                 (Clickable)<br/>
                 <span style="background: rgb(0,255,13)">&nbsp&nbsp&nbsp&nbsp</span> - Confirmed Point<br/>
             </p>
+            <p style="font-size: 12px;">
+                Note that capture points sometimes change colour when confirming other points. This happens when a
+                capture point is, for example, both a possible mid point and a possible frontline defense point. In
+                these cases, we have assigned priorities to the colours to always highlight the most important
+                possibility.
+            </p>
             <p>
                 <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/dQw4w9WgXcQ?autoplay=1">
-                    How the fuck do I use this?</a>
+                    How the fuck do I use this?</a> (coming soon)
             </p>
             <p>
                 If you want to explore or contribute to this project, feel free to check out the code in
@@ -127,10 +133,10 @@
             <ul>
                 <li>
                     Tim | w4rum: UI design, implementation of the website and scripts for automatic extraction of
-                    capture point information
+                    capture point information.
                 </li>
                 <li>
-                    Captain, Angatar, RacialConfusion: UI design and countless hours of research into RAAS lanes and
+                    Captain, Angatar, RacialConfusion: UI design, countless hours of research into RAAS lanes and
                     manual refinement of the data used here.
                 </li>
             </ul>
@@ -162,7 +168,7 @@
         mapButton.innerHTML = map;
         layerMenu.innerHTML = "";
         for (const layer in raasData[map]) {
-            layerMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onclick="ddSelectLayer('${map}', '${layer}')">${layer}</a>`;
+            layerMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onmousedown="ddSelectLayer('${map}', '${layer}')">${layer}</a>`;
         }
         ddSelectLayer(map, Object.keys(raasData[map])[0]);
     }
@@ -173,21 +179,24 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        mapButton.addEventListener('mouseenter', () => {
+            mapMenu.classList.toggle("shown", true);
+        })
+        mapButton.addEventListener('mouseleave', () => {
+            mapMenu.classList.toggle("shown", false);
+        })
         onRaasDataLoad(() => {
             mapMenu.innerHTML = "";
             for (const map in raasData) {
-                mapMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onclick="ddSelectMap('${map}')">${map}</a>`;
+                mapMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onmousedown="ddSelectMap('${map}')">${map}</a>`;
             }
             ddSelectMap("Narva");
         })
-    });
-    document.addEventListener('DOMContentLoaded', function () {
+
         loadRaasData("raas-data.yaml", () => {
             //changeMap("Narva", "RAAS v1");
         });
-    }, false);
 
-    document.addEventListener('DOMContentLoaded', function () {
         const openLight = new OpenLight("auto");
         openLight.addOverrideByClassName("lane");
         openLight.init();

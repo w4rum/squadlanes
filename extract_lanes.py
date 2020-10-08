@@ -73,7 +73,7 @@ def capture_points(layer_dir):
             renamed_entry = cur_renames[entry]
         else:
             renamed_entry = entry
-        match = re.match(r"(0[0-9]|100)([CNESW]|Red|Yellow|Green|Blue)?-(.*)", renamed_entry)
+        match = re.match(r"(0[0-9]|100)([CNESWab]|Red|Yellow|Green|Blue)?-(.*)", renamed_entry)
         if match is None:
             continue
 
@@ -103,11 +103,9 @@ def capture_points(layer_dir):
             cluster_name = None
             c = components(layer_dir)
             for n in components(layer_dir):
-                if entry == "06E-Peredove" and n.startswith("06E"):
-                    print(0)
                 if not is_cluster_name(n):
                     continue
-                if not n.startswith(f"0{depth}{lane}"):
+                if not n.startswith(f"0{depth}{lane or ''}"):
                     continue
                 cluster_name = n
                 break
@@ -143,6 +141,8 @@ def proper_lane_name(lane_name):
         "Green": "Green",
         "Blue": "Blue",
         "Yellow": "Yellow",
+        "a": "Alpha",
+        "b": "Bravo",
     }[lane_name]
 
 
@@ -214,7 +214,7 @@ for map_name in os.listdir(map_dir):
             or "Forest" in map_name \
             or "Jensens_Range" in map_name \
             or "Tutorial" in map_name \
-            or "Fallujah" in map_name:
+            or "Fallujah" == map_name:
         continue
     for layer in os.listdir(f"{map_dir}/{map_name}/Gameplay_Layers"):
         if "RAAS" not in layer:
