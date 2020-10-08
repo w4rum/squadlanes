@@ -7,6 +7,7 @@ let ownMain = null;
 let allLanes = null;
 let laneLengths = null;
 let raasData = null;
+const raasDataSubscriber = new Set();
 
 const CP_POSSIBLE = 0
 const CP_CONFIRMED = 1
@@ -434,6 +435,10 @@ function redrawCpInfo() {
         }
 
         const labelInfo = cp.labelInfo();
+        if (cp === cpOpforMain || cp === cpBluforMain
+            || allLanes.size === 1) {
+            lanes = "&nbsp";
+        }
         cp.circleMarker.closeTooltip().unbindTooltip();
         if (cp.status() === CP_IMPOSSIBLE && cp !== cpOpforMain && cp !== cpBluforMain) {
             cp.circleMarker.setStyle({
@@ -463,6 +468,16 @@ function redrawCpInfo() {
         }
         cp.circleMarker.redraw();
     });
+    const laneList = document.getElementById("lanes");
+    laneList.innerHTML = "";
+    const poss = possibleLanes();
+    allLanes.forEach(lane => {
+        if (poss.has(lane)) {
+            laneList.innerHTML += `<div class="lane possible">${lane}</div>`
+        } else {
+            laneList.innerHTML += `<div class="lane impossible">${lane}</div>`
+        }
+    })
 }
 
 function redrawCpLines() {
@@ -484,19 +499,29 @@ function redrawCpLines() {
 
 function loadRaasDataFromString(yamlString) {
     raasData = YAML.parse(yamlString);
-    console.log(raasData);
     changeMap("Narva RAAS v1")
-    console.log("CHANGE");
+    triggerRaasDataSubscribers();
 }
 
 function loadRaasData(path, callback) {
     YAML.load(path, rd => {
         raasData = rd;
         callback();
+        triggerRaasDataSubscribers();
     });
 }
 
-function changeMap(map_name) {
+function onRaasDataLoad(callback) {
+    raasDataSubscriber.add(callback);
+}
+
+function triggerRaasDataSubscribers() {
+    raasDataSubscriber.forEach(callback => {
+        callback();
+    });
+}
+
+function changeMap(mapName, layerName) {
     // reset map data
     if (map !== null) {
         map.remove();
@@ -509,9 +534,7 @@ function changeMap(map_name) {
     allLanes = new Set();
     laneLengths = {};
 
-    const simple_map_name = map_name.substring(0, map_name.indexOf(" RAAS"));
-    const layer_name = map_name.substring(map_name.indexOf(" RAAS") + 1);
-    const layer_data = raasData[simple_map_name][layer_name];
+    const layer_data = raasData[mapName][layerName];
 
     const bounds = layer_data["background"]["corners"]
     const x_stretch = layer_data["background"]["x_stretch_factor"]
@@ -533,7 +556,7 @@ function changeMap(map_name) {
     map = L.map('map', {
         crs: crs,
         minZoom: -10,
-        maxZoom: -7,
+        maxZoom: -5,
         zoomSnap: 0.1,
         zoomDelta: 1.0,
         dragging: true,
@@ -542,6 +565,7 @@ function changeMap(map_name) {
         touchZoom: true,
         zoomControl: true,
         doubleClickZoom: false,
+        attributionControl: false,
     });
 
     map.fitBounds(baseBounds);
@@ -556,16 +580,14 @@ function changeMap(map_name) {
 
 
     // scale tiles to match map width and height
-    // Our TileLayer stretches 4096*64 units by default (at zoom 0)
-    // we just apply the scaling factor to the tile size to make it display correctly
-    // TODO: this has someting to do with zoomOffset, explain that
-    const tileSize = [256 * width / (4096 * 64 * 2), 256 * height / (4096 * 64 * 2)];
+    const zoomOffset = 12;
+    const tileSize = [width / Math.pow(2, zoomOffset), height / Math.pow(2, zoomOffset)];
     let map_image_name = layer_data["background"]["minimap_filename"];
     new L.TileLayer(`map-resources/tiles/${map_image_name}/{z}/{x}/{y}.png`, {
         tms: false,
-        minZoom: -10,
-        maxZoom: -7,
-        zoomOffset: 11,
+        minZoom: -12,
+        maxNativeZoom: -8,
+        zoomOffset: zoomOffset,
         tileSize: L.point(tileSize),
         pane: 'background',
         bounds: baseBounds,
@@ -666,15 +688,14 @@ function changeMap(map_name) {
     redrawCpInfo();
     redrawCpLines();
 
-    /*
     // Debug
-    map.addEventListener('mousemove', function (ev) {
-        const lat = ev.latlng.lat;
-        const lng = ev.latlng.lng;
-        console.log(`Pos: ${lat} / ${lng}`);
-        console.log(baseBounds);
-    });
-     */
+    if (window.location.hostname.startsWith("dev.")) {
+        map.addEventListener('mousedown', function (ev) {
+            const lat = ev.latlng.lat;
+            const lng = ev.latlng.lng;
+            console.log(`Pos: X=${lng} Y=${lat}`);
+        });
+    }
 
     const mapDiv = document.getElementById("map");
     new ResizeObserver(() => {
