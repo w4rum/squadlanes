@@ -111,8 +111,8 @@
                 possibility.
             </p>
             <p>
-                <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/dQw4w9WgXcQ?autoplay=1">
-                    How the fuck do I use this?</a> (coming soon)
+                <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/OFGYkDxdRYE?t=498">
+                    How the fuck do I use this?</a>
             </p>
             <p>
                 If you want to explore or contribute to this project, feel free to check out the code in
@@ -193,9 +193,11 @@
             ddSelectMap("Narva");
         })
 
-        loadRaasData("raas-data.yaml", () => {
-            //changeMap("Narva", "RAAS v1");
-        });
+        if (window.location.hostname.startsWith("dev.")) {
+            loadRaasData("raas-data-dev.yaml", () => {});
+        } else {
+            loadRaasData("raas-data.yaml", () => {});
+        }
 
         const openLight = new OpenLight("auto");
         openLight.addOverrideByClassName("lane");

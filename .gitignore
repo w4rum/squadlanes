@@ -11,3 +11,4 @@ map-resources/*
 !map-resources/Makefile
 umodel
 raas-data-auto.yaml
+__pycache__
