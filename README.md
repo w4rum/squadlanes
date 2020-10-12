@@ -4,8 +4,6 @@
 This is a work-in-progress.
 
 Capture Points and RAAS lanes are automatically extracted from Squad maps.
-Unfortunately, naming inconsistencies in the map elements and a lack of information on Unreal Engine 4's
-serialized object format require some manual fixes on the automatically extracted data.
 
 If you spot any specific errors, please open an issue!
 That helps us get an overview.
