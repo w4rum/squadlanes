@@ -49,7 +49,7 @@ class Path {
         let cur = destination;
         do {
             path.push(cur);
-            cur = parent_dict[cur.name];
+            cur = parent_dict.get(cur);
         } while (cur !== undefined);
 
         this.length = path.length - 1;
@@ -71,14 +71,14 @@ class CapturePoint {
         this.name = name;
         this.displayName = displayName;
         this.pos = pos;
-        this.laneDepths = {};
-        this.neighbours = {};
+        this.laneDepths = new Map();
+        this.neighbours = new Map();
         this.circleMarker = null;
         this.follower = null;
     }
 
     addLane(lane, depth) {
-        this.laneDepths[lane] = depth;
+        this.laneDepths.set(lane, depth);
     }
 
     pathsFrom(cpOther, restrictToLanes = null) {
@@ -95,7 +95,7 @@ class CapturePoint {
     pathFromSingleLane(cpOther, lane) {
         // BFS
         const visited = new Set([cpOther]);
-        const parent = {};
+        const parent = new Map();
         const queue = new Queue();
         let thisFound = false;
         queue.enqueue(cpOther);
@@ -106,22 +106,22 @@ class CapturePoint {
                 thisFound = true;
                 break;
             }
-            if (!(lane in cur.neighbours)) {
+            if (!cur.neighbours.has(lane)) {
                 continue;
             }
-            cur.neighbours[lane].forEach(nb => {
+            cur.neighbours.get(lane).forEach(nb => {
                 // if cur already has a different follower, don't consider nb for paths
                 if (cur.follower !== null && cur.follower !== nb) {
                     return;
                 }
                 // don't look back
-                if ((ownMain === cpBluforMain && cur.laneDepths[lane] > nb.laneDepths[lane])
-                    || (ownMain === cpOpforMain && cur.laneDepths[lane] < nb.laneDepths[lane])) {
+                if ((ownMain === cpBluforMain && cur.laneDepths.get(lane) > nb.laneDepths.get(lane))
+                    || (ownMain === cpOpforMain && cur.laneDepths.get(lane) < nb.laneDepths.get(lane))) {
                     return;
                 }
                 if (!visited.has(nb)) {
                     visited.add(nb);
-                    parent[nb.name] = cur;
+                    parent.set(nb, cur);
                     queue.enqueue(nb);
                 }
             });
@@ -156,8 +156,14 @@ class CapturePoint {
     }
 
     equal(cpOther) {
-        return this.name === cpOther.name
-            || pointDistance(this.pos, cpOther.pos) < 10.0
+        if (pointDistance(this.pos, cpOther.pos) < 1000.0) {
+            if (this.displayName !== cpOther.displayName) {
+                console.warn(`Same position but different display name: ` +
+                    `${this.name}/${this.displayName} vs. ${cpOther.name}/${cpOther.displayName}`);
+            }
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -167,8 +173,8 @@ class CapturePoint {
     If the CPs are not neighbours, false is returned.
      */
     isNeighbour(cpOther) {
-        for (const lane in this.neighbours) {
-            if (this.neighbours[lane].has(cpOther)) {
+        for (const lane of this.neighbours.keys()) {
+            if (this.neighbours.get(lane).has(cpOther)) {
                 return lane;
             }
         }
@@ -177,11 +183,11 @@ class CapturePoint {
 
     possibleNeighbours() {
         let pn = new Set();
-        for (const lane in this.neighbours) {
+        for (const lane of this.neighbours.keys()) {
             if (!possibleLanes().has(lane)) {
                 continue
             }
-            pn = union(pn, this.neighbours[lane]);
+            pn = union(pn, this.neighbours.get(lane));
         }
         return pn;
     }
@@ -260,7 +266,7 @@ class CapturePoint {
 
         let cur_prio = Number.MIN_SAFE_INTEGER;
         let cur_info = null;
-        for (const lane in this.laneDepths) {
+        for (const lane of this.laneDepths.keys()) {
             if (!possibleLanes().has(lane)) {
                 continue;
             }
@@ -272,10 +278,10 @@ class CapturePoint {
             if (this.name === "Marina") {
                 console.log();
             }
-            const def_depth = Math.floor(laneLengths[lane] / 2);
+            const def_depth = Math.floor(laneLengths.get(lane) / 2);
             let off_depth = def_depth + 1;
             // only check for mid-points on lanes with uneven capture points
-            if (laneLengths[lane] % 2 === 1) {
+            if (laneLengths.get(lane) % 2 === 1) {
                 const mid_depth = off_depth;
                 off_depth += 1;
                 if (dist === mid_depth && cur_prio < CLR_PRIORITY.MID_POINT) {
@@ -351,7 +357,7 @@ class CapturePoint {
             return;
         }
 
-        const cpLaneSet = new Set(Object.keys(this.laneDepths));
+        const cpLaneSet = new Set(this.laneDepths.keys());
         if (s !== CP_CONFIRMED) {
             // confirm CP
             lastConfirmedPoint().follower = this;
@@ -386,8 +392,8 @@ function possibleLanes() {
     let cur = ownMain;
     while (cur.follower !== null) {
         // check which lanes support this traversal
-        for (const lane in cur.neighbours) {
-            if (!cur.neighbours[lane].has(cur.follower)) {
+        for (const lane of cur.neighbours.keys()) {
+            if (!cur.neighbours.get(lane).has(cur.follower)) {
                 poss.delete(lane);
             }
         }
@@ -427,7 +433,7 @@ function redrawCpInfo() {
     capturePoints.forEach(cp => {
         // Try each lane. Only display lanes which can lead to this CP with the current confirmation line
         let lanes = [];
-        for (const lane in cp.laneDepths) {
+        for (const lane of cp.laneDepths.keys()) {
             const path = cp.pathFromSingleLane(ownMain, lane);
             if (path !== null) {
                 lanes.push(`${path.length}${lane[0]}`);
@@ -532,7 +538,7 @@ function changeMap(mapName, layerName) {
     cpLines = new Set();
     ownMain = null;
     allLanes = new Set();
-    laneLengths = {};
+    laneLengths = new Map();
 
     const layer_data = raasData[mapName][layerName];
 
@@ -597,11 +603,9 @@ function changeMap(mapName, layerName) {
     // this is also the set of vertices
     for (const lane in laneGraph) {
         for (let depth in laneGraph[lane]) {
-            for (const sdk_name in laneGraph[lane][depth]) {
-                depth = parseInt(depth);
-                cpRaw = laneGraph[lane][depth][sdk_name];
-                cp = new CapturePoint(
-                    sdk_name,
+            laneGraph[lane][depth].forEach(cpRaw => {
+                const cp = new CapturePoint(
+                    cpRaw["sdk_name"],
                     cpRaw["display_name"],
                     [cpRaw["y"], cpRaw["x"]]
                 );
@@ -615,15 +619,15 @@ function changeMap(mapName, layerName) {
                 })
                 if (!foundEqual) {
                     capturePoints.add(cp);
-                    if (depth === 0) {
+                    if (Number.parseInt(depth) === 0) {
                         cpBluforMain = cp;
-                    } else if (depth === Object.keys(laneGraph[lane]).length - 1) {
+                    } else if (Number.parseInt(depth) === Object.keys(laneGraph[lane]).length - 1) {
                         cpOpforMain = cp;
                     }
                 }
                 allLanes.add(lane);
-                laneLengths[lane] = Object.keys(laneGraph[lane]).length - 2; // amount of non-main CPs
-            }
+                laneLengths.set(lane, Object.keys(laneGraph[lane]).length - 2); // amount of non-main CPs
+            });
         }
     }
 
@@ -633,19 +637,19 @@ function changeMap(mapName, layerName) {
             if (cpA === cpB) {
                 return;
             }
-            for (const lane in cpA.laneDepths) {
-                if (!cpB.laneDepths.hasOwnProperty(lane)) {
+            for (const lane of cpA.laneDepths.keys()) {
+                if (!cpB.laneDepths.has(lane)) {
                     continue;
                 }
-                if (Math.abs(cpA.laneDepths[lane] - cpB.laneDepths[lane]) === 1) {
-                    if (!cpA.neighbours.hasOwnProperty(lane)) {
-                        cpA.neighbours[lane] = new Set();
+                if (Math.abs(cpA.laneDepths.get(lane) - cpB.laneDepths.get(lane)) === 1) {
+                    if (!cpA.neighbours.has(lane)) {
+                        cpA.neighbours.set(lane, new Set());
                     }
-                    cpA.neighbours[lane].add(cpB);
-                    if (!cpB.neighbours.hasOwnProperty(lane)) {
-                        cpB.neighbours[lane] = new Set();
+                    cpA.neighbours.get(lane).add(cpB);
+                    if (!cpB.neighbours.has(lane)) {
+                        cpB.neighbours.set(lane, new Set());
                     }
-                    cpB.neighbours[lane].add(cpA);
+                    cpB.neighbours.get(lane).add(cpA);
                 }
             }
         })

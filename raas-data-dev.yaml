@@ -8874,7 +8874,7 @@ Skorpo:
                     sdk_name: Bringedal
                     x: -190808.71875
                     y: 80426.1875
-                -   display_name: Heroysund
+                -   display_name: Heroysund (South)
                     sdk_name: Heroysund
                     x: -241692.875
                     y: 85508.71875
@@ -9048,11 +9048,11 @@ Skorpo:
                     sdk_name: FishOilFactory
                     x: -283572.5625
                     y: 61769.4453125
-                -   display_name: Heroysund
+                -   display_name: Heroysund (North)
                     sdk_name: Heroysund
                     x: -241245.125
                     y: 61500.1171875
-                -   display_name: Heroysund
+                -   display_name: Heroysund (South)
                     sdk_name: Heroysund_0
                     x: -241605.125
                     y: 85410.1171875
