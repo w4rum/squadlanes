@@ -11,8 +11,7 @@ That helps us get an overview.
 TODO: Explain how to deploy this and work on it.
 
 #### Attribution and Licenses
-- Squad map backgrounds were taken from the [Squad Wiki](https://squad.gamepedia.com/). According to a note there, they originate from
-  "Squad's main website".
+- Squad map backgrounds and capture point information were extracted from game files shipped through Steam and editor assets shipped through Epic Games Store.
   We hope our usage here is fine.
   If it is not, please send a DM to [w4rum](https://github.com/w4rum/).
 - [Leaflet](https://github.com/Leaflet/Leaflet). Released under
