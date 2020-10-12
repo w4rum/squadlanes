@@ -168,10 +168,12 @@
         mapButton.innerHTML = map;
         layerMenu.innerHTML = "";
         let nonCafOffset = 0;
+        let hasNonCaf = false;
         // add non-CAF
         for (const layer in raasData[map]) {
             if (!layer.includes("CAF")) {
                 layerMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onmousedown="ddSelectLayer('${map}', '${layer}')">${layer}</a>`;
+                hasNonCaf = true;
             } else {
                 nonCafOffset += 1;
             }
@@ -182,7 +184,8 @@
                 layerMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onmousedown="ddSelectLayer('${map}', '${layer}')">${layer}</a>`;
             }
         }
-        ddSelectLayer(map, Object.keys(raasData[map])[nonCafOffset]);
+        const offset = hasNonCaf ? nonCafOffset : 0;
+        ddSelectLayer(map, Object.keys(raasData[map])[offset]);
     }
 
     function ddSelectLayer(map, layer) {
