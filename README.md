@@ -8,7 +8,20 @@ Capture Points and RAAS lanes are automatically extracted from Squad maps.
 If you spot any specific errors, please open an issue!
 That helps us get an overview.
 
-TODO: Explain how to deploy this and work on it.
+#### Usage
+See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to work with our official deployment at [squadlanes.com](https://squadlanes.com).
+
+#### Deployment
+TODO
+
+#### Documentation / Project overview
+This project is still very much work-in-progress.
+The automatic extraction method has been completely replaced since v1.0 (when the video was released) and the UI has also been completely reworked since the first prototype.
+We already have tasks on our To-Do list that will likely lead to big changes in the algorithmic department of the website (Fallujah RAAS v1 / Parallel AAS).
+We don't think writing documentation while the project is still this volatile is worth the effort.
+If you want to contribute at this point in time, feel free to open issues and pull requests.
+Just be warned, it's probably a lot of unnecessary work.
+
 
 #### Attribution and Licenses
 - Squad map backgrounds and capture point information were extracted from game files shipped through Steam and editor assets shipped through Epic Games Store.
