@@ -98,11 +98,11 @@ Albasrah:
                     x: -7179.3359375
                     y: -7508.7265625
                 2:
-                -   display_name: Refinery
+                -   display_name: Refinery (North)
                     sdk_name: OilCisterns
                     x: 49634.0625
                     y: 17620.87109375
-                -   display_name: Refinery
+                -   display_name: Refinery (South)
                     sdk_name: Refinery
                     x: 47394.5703125
                     y: 33314.08203125
@@ -246,7 +246,7 @@ Belaya:
                     sdk_name: Depot
                     x: -82730.578125
                     y: 35897.078125
-                -   display_name: Kulushevo
+                -   display_name: Kulushevo (North)
                     sdk_name: Homestead
                     x: 23405.65625
                     y: 51761.7734375
@@ -254,7 +254,7 @@ Belaya:
                     sdk_name: KrasnyKut
                     x: -41385.015625
                     y: 70802.546875
-                -   display_name: Kulushevo
+                -   display_name: Kulushevo (South)
                     sdk_name: Kulushevo
                     x: -6155.34375
                     y: 83167.15625
@@ -373,7 +373,7 @@ Belaya:
                     sdk_name: Depot
                     x: -82730.578125
                     y: 35897.078125
-                -   display_name: Kulushevo
+                -   display_name: Kulushevo (North)
                     sdk_name: Homestead
                     x: 23405.65625
                     y: 51761.7734375
@@ -381,7 +381,7 @@ Belaya:
                     sdk_name: KrasnyKut
                     x: -41385.015625
                     y: 70802.546875
-                -   display_name: Kulushevo
+                -   display_name: Kulushevo (South)
                     sdk_name: Kulushevo
                     x: -6155.34375
                     y: 83167.15625
@@ -2032,11 +2032,11 @@ Fools Road:
                     x: 21611.0
                     y: -33328.0
                 4:
-                -   display_name: Hill 123
+                -   display_name: Hill 123 (East)
                     sdk_name: Hill123
                     x: 24785.0859375
                     y: -68137.93359375
-                -   display_name: Hill 123
+                -   display_name: Hill 123 (West)
                     sdk_name: Ruins
                     x: 2055.921875
                     y: -71795.69921875
@@ -2173,7 +2173,7 @@ Fools Road:
                     x: -104080.466796875
                     y: -35601.48828125
                 6:
-                -   display_name: MIL Main
+                -   display_name: RUS Main
                     sdk_name: RUSMain
                     x: -121973.935546875
                     y: -116268.24609375
@@ -3428,11 +3428,11 @@ Kamdesh:
                     x: -18939.03125
                     y: 10691.3984375
                 4:
-                -   display_name: OP Chaxton
+                -   display_name: OP Chaxton (West)
                     sdk_name: OPChaxton
                     x: -52556.57421875
                     y: 43349.08203125
-                -   display_name: OP Chaxton
+                -   display_name: OP Chaxton (East)
                     sdk_name: OPSokolov
                     x: 51719.3125
                     y: 44654.54296875
@@ -3981,7 +3981,7 @@ Kohat:
                     sdk_name: LowerSarozai
                     x: -178555.28125
                     y: -2083.171875
-                -   display_name: Sarozai Highlands
+                -   display_name: Sarozai Highlands (North)
                     sdk_name: SarozaiHighlands
                     x: -157165.59375
                     y: 25528.359375
@@ -3990,7 +3990,7 @@ Kohat:
                     x: -162191.34375
                     y: -18026.5
                 7:
-                -   display_name: Sarozai Highlands
+                -   display_name: Sarozai Highlands (South)
                     sdk_name: ToghSarai
                     x: -136233.28125
                     y: 73084.84375
@@ -4050,11 +4050,11 @@ Kohat:
                     x: 27415.26953125
                     y: 100869.28125
                 5:
-                -   display_name: Attock
+                -   display_name: Attock (West)
                     sdk_name: Attock
                     x: 2349.03515625
                     y: 163195.25
-                -   display_name: Attock
+                -   display_name: Attock (East)
                     sdk_name: BannuRd
                     x: 20929.734375
                     y: 158539.65625
@@ -4075,11 +4075,11 @@ Kohat:
                     x: 100994.21875
                     y: -41708.0625
                 2:
-                -   display_name: Lower Thirah
+                -   display_name: Lower Thirah (South)
                     sdk_name: LowerThira
                     x: 38850.65625
                     y: -34539.6171875
-                -   display_name: Lower Thirah
+                -   display_name: Lower Thirah (North)
                     sdk_name: UpperThira
                     x: 27030.8359375
                     y: -58590.421875
@@ -4115,11 +4115,11 @@ Kohat:
                     x: -162191.34375
                     y: -18026.5
                 6:
-                -   display_name: Sarozai Highlands
+                -   display_name: Sarozai Highlands (North)
                     sdk_name: SarozaiHighlands
                     x: -157165.59375
                     y: 25528.359375
-                -   display_name: Sarozai Highlands
+                -   display_name: Sarozai Highlands (South)
                     sdk_name: ToghSarai
                     x: -136233.28125
                     y: 73084.84375
@@ -5770,7 +5770,7 @@ Manic-5:
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
-            Alpha:
+            West:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain
@@ -5808,7 +5808,7 @@ Manic-5:
                     x: -92092.16015625
                     y: 42736.765625
                 4:
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (North)
                     sdk_name: AmbushSite
                     x: -108834.65625
                     y: 82577.0703125
@@ -5820,7 +5820,7 @@ Manic-5:
                     sdk_name: Fermont
                     x: -96886.8046875
                     y: 112410.5390625
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (South)
                     sdk_name: HilltopOP
                     x: -102338.65625
                     y: 91302.0703125
@@ -5864,7 +5864,7 @@ Manic-5:
                     sdk_name: RUSMain
                     x: 134162.87109375
                     y: 161324.4296875
-            Bravo:
+            Central:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain
@@ -5998,7 +5998,7 @@ Manic-5:
                     sdk_name: RUSMain
                     x: 134162.87109375
                     y: 161324.4296875
-            Charlie:
+            East:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain
@@ -6131,7 +6131,7 @@ Manic-5:
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
-            Alpha:
+            West:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain
@@ -6167,7 +6167,7 @@ Manic-5:
                     sdk_name: FermeConstantin
                     x: 73280.328125
                     y: -35028.390625
-                -   display_name: Ferme Dubois
+                -   display_name: Ferme Dubois (East)
                     sdk_name: FermeDubois
                     x: 21574.359375
                     y: -22699.1640625
@@ -6179,7 +6179,7 @@ Manic-5:
                     sdk_name: OldWorkcamp
                     x: -19679.33203125
                     y: -90976.1953125
-                -   display_name: Ferme Dubois
+                -   display_name: Ferme Dubois (West)
                     sdk_name: Penstocks
                     x: 2228.359375
                     y: -29855.1640625
@@ -6230,7 +6230,7 @@ Manic-5:
                     x: -151009.16015625
                     y: -32618.2265625
                 5:
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (North)
                     sdk_name: AmbushSite
                     x: -108834.66015625
                     y: 82577.0703125
@@ -6242,7 +6242,7 @@ Manic-5:
                     sdk_name: Fermont
                     x: -96886.80859375
                     y: 112410.5390625
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (South)
                     sdk_name: HilltopOP
                     x: -102338.66015625
                     y: 91302.0703125
@@ -6251,7 +6251,7 @@ Manic-5:
                     sdk_name: MILMain
                     x: -156204.75390625
                     y: 167256.4921875
-            Bravo:
+            Central:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain
@@ -6279,7 +6279,7 @@ Manic-5:
                     sdk_name: FermeConstantin
                     x: 73280.328125
                     y: -35028.390625
-                -   display_name: Ferme Dubois
+                -   display_name: Ferme Dubois (East)
                     sdk_name: FermeDubois
                     x: 21574.359375
                     y: -22699.1640625
@@ -6287,7 +6287,7 @@ Manic-5:
                     sdk_name: FirebaseMississauga
                     x: 57997.32421875
                     y: -16197.3984375
-                -   display_name: Ferme Dubois
+                -   display_name: Ferme Dubois (West)
                     sdk_name: Penstocks
                     x: 2228.359375
                     y: -29855.1640625
@@ -6334,7 +6334,7 @@ Manic-5:
                     x: -3399.765625
                     y: 97499.3671875
                 5:
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (North)
                     sdk_name: AmbushSite
                     x: -108834.671875
                     y: 82577.0703125
@@ -6346,7 +6346,7 @@ Manic-5:
                     sdk_name: Fermont
                     x: -96886.828125
                     y: 112410.5625
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (South)
                     sdk_name: HilltopOP
                     x: -102338.65625
                     y: 91302.0703125
@@ -6359,7 +6359,7 @@ Manic-5:
                     sdk_name: MILMain
                     x: -156204.75390625
                     y: 167256.4921875
-            Charlie:
+            East:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain
@@ -6426,7 +6426,7 @@ Manic-5:
                     x: -51062.03125
                     y: 159365.5546875
                 5:
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (North)
                     sdk_name: AmbushSite
                     x: -108834.65625
                     y: 82577.0703125
@@ -6438,7 +6438,7 @@ Manic-5:
                     sdk_name: Fermont
                     x: -96886.8046875
                     y: 112410.5390625
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (South)
                     sdk_name: HilltopOP
                     x: -102338.65625
                     y: 91302.0703125
@@ -6458,7 +6458,7 @@ Manic-5:
             x_stretch_factor: 1.0
             y_stretch_factor: 1.0
         lanes:
-            Alpha:
+            West:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain_1
@@ -6496,7 +6496,7 @@ Manic-5:
                     x: -92092.16015625
                     y: 42736.765625
                 4:
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (North)
                     sdk_name: AmbushSite
                     x: -108834.65625
                     y: 82577.0703125
@@ -6508,7 +6508,7 @@ Manic-5:
                     sdk_name: Fermont
                     x: -96886.8046875
                     y: 112410.5390625
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (South)
                     sdk_name: HilltopOP
                     x: -102338.65625
                     y: 91302.0703125
@@ -6552,7 +6552,7 @@ Manic-5:
                     sdk_name: RUSMain
                     x: 134162.87109375
                     y: 161324.4296875
-            Bravo:
+            Central:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain_1
@@ -6686,7 +6686,7 @@ Manic-5:
                     sdk_name: RUSMain
                     x: 134162.87109375
                     y: 161324.4296875
-            Charlie:
+            East:
                 0:
                 -   display_name: CAF Main
                     sdk_name: CAFMain_1
@@ -6880,7 +6880,7 @@ Manic-5:
                     x: -31294.33203125
                     y: -30227.1953125
                 3:
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (North)
                     sdk_name: AmbushSite
                     x: -108834.65625
                     y: 82577.0703125
@@ -6916,7 +6916,7 @@ Manic-5:
                     sdk_name: Gagnon
                     x: -57108.42578125
                     y: 72103.109375
-                -   display_name: Ambush Site
+                -   display_name: Ambush Site (South)
                     sdk_name: HilltopOP
                     x: -102338.65625
                     y: 91302.0703125
@@ -8591,7 +8591,7 @@ Skorpo:
                     sdk_name: ElkWarehouse
                     x: 11028.9375
                     y: 4245.140625
-                -   display_name: Steinsletta
+                -   display_name: Steinsletta (South)
                     sdk_name: Steinsletta
                     x: -35690.59375
                     y: 24892.3671875
@@ -8667,7 +8667,7 @@ Skorpo:
                     sdk_name: BornesetShipyardEast
                     x: -51147.9375
                     y: -11576.875
-                -   display_name: Steinsletta
+                -   display_name: Steinsletta (North)
                     sdk_name: Steinsletta
                     x: -26160.984375
                     y: 9320.86328125
@@ -10236,8 +10236,8 @@ Yehorivka:
                     y: -50091.90625
                 -   display_name: Upper Petrivka
                     sdk_name: UpperPetrivka
-                    x: 16130.15625
-                    y: -89660.6484375
+                    x: 17057.8125
+                    y: -90578.90625
                 -   display_name: West Petrivka
                     sdk_name: WestPetrivka
                     x: -20081.671875
@@ -10549,8 +10549,8 @@ Yehorivka:
                     y: -50091.90625
                 -   display_name: Upper Petrivka
                     sdk_name: UpperPetrivka
-                    x: 16130.15625
-                    y: -89660.6484375
+                    x: 17057.8125
+                    y: -90578.90625
                 -   display_name: West Petrivka
                     sdk_name: WestPetrivka
                     x: -20081.671875
@@ -10941,8 +10941,8 @@ Yehorivka:
                     y: -50091.90625
                 -   display_name: Upper Petrivka
                     sdk_name: UpperPetrivka
-                    x: 16130.15625
-                    y: -89660.6484375
+                    x: 17057.8125
+                    y: -90578.90625
                 -   display_name: West Petrivka
                     sdk_name: WestPetrivka
                     x: -20081.671875
@@ -11005,11 +11005,11 @@ Yehorivka:
                     sdk_name: BogCamp
                     x: 49150.578125
                     y: -24406.5625
-                -   display_name: Lower Petrivka
+                -   display_name: Lower Petrivka (East)
                     sdk_name: LowerPetrivka
                     x: 18661.03125
                     y: -54785.1875
-                -   display_name: Lower Petrivka
+                -   display_name: Lower Petrivka (West)
                     sdk_name: PetrivkaCoop
                     x: -8999.09375
                     y: -49107.31640625
