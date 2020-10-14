@@ -543,8 +543,6 @@ function changeMap(mapName, layerName) {
     const layer_data = raasData[mapName][layerName];
 
     const bounds = layer_data["background"]["corners"]
-    const x_stretch = layer_data["background"]["x_stretch_factor"]
-    const y_stretch = layer_data["background"]["y_stretch_factor"]
     const laneGraph = layer_data["lanes"]
 
     const baseBounds = [[bounds[0]["y"], bounds[0]["x"]], [bounds[1]["y"], bounds[1]["x"]]];
@@ -553,16 +551,23 @@ function changeMap(mapName, layerName) {
 
     const up_left_x = Math.min(bounds[0]["x"], bounds[1]["x"]);
     const up_left_y = Math.min(bounds[0]["y"], bounds[1]["y"]);
+
+    const zoomOffset = 0;
+    let tileSize = 256;
+
+    const x_stretch = tileSize / width;
+    const y_stretch = tileSize / height;
+
     const crs = L.extend({}, L.CRS.Simple, {
         // Move origin to upper left corner of map
         // need to do this because TileLayer always puts the left-upper corner on the origin
-        transformation: new L.Transformation(x_stretch, -up_left_x, y_stretch, -up_left_y),
+        transformation: new L.Transformation(x_stretch, -up_left_x * x_stretch, y_stretch, -up_left_y * y_stretch),
     });
 
     map = L.map('map', {
         crs: crs,
-        minZoom: -10,
-        maxZoom: -5,
+        minZoom: 0,
+        maxZoom: 6,
         zoomSnap: 0.1,
         zoomDelta: 1.0,
         dragging: true,
@@ -584,17 +589,41 @@ function changeMap(mapName, layerName) {
     map.createPane('background');
     map.getPane('background').style.zIndex = 0;
 
+    /*
+    (function(){
+        var originalInitTile = L.TileLayer.prototype._initTile
+        L.TileLayer.include({
+            _initTile: function (tile) {
+                originalInitTile.call(this, tile);
 
-    // scale tiles to match map width and height
-    const zoomOffset = 12;
-    const tileSize = [width / Math.pow(2, zoomOffset), height / Math.pow(2, zoomOffset)];
+                var tileSize = this.getTileSize();
+
+                tile.style.width = tileSize.x + 0 + 'px';
+                tile.style.height = tileSize.y + 0 + 'px';
+            }
+        });
+    })()
+     */
+
+    // scale tiles to match minimap width and height
+    //const zoomOffset = 10;
+    //let tileSize = [width / Math.pow(2, zoomOffset), height / Math.pow(2, zoomOffset)];
     let map_image_name = layer_data["background"]["minimap_filename"];
+    // hacky solution to reduce occurrences of 1px gap when using TileLayer
+    /*
+    document.getElementById("tile-container-style").textContent =
+        ".leaflet-tile-container img {\n" +
+        `    width: ${Math.floor(tileSize[0])}.5px !important;\n` +
+        `    height: ${Math.floor(tileSize[1])}.5px !important;\n` +
+        "}\n"
+
+     */
+    //tileSize = [256 / Math.pow(2, zoomOffset), 256 / Math.pow(2, zoomOffset)];
     new L.TileLayer(`map-resources/tiles/${map_image_name}/{z}/{x}/{y}.png`, {
         tms: false,
-        minZoom: -12,
-        maxNativeZoom: -8,
+        maxNativeZoom: 4,
         zoomOffset: zoomOffset,
-        tileSize: L.point(tileSize),
+        tileSize: tileSize,
         pane: 'background',
         bounds: baseBounds,
     }).addTo(map);
@@ -698,6 +727,7 @@ function changeMap(mapName, layerName) {
             const lat = ev.latlng.lat;
             const lng = ev.latlng.lng;
             console.log(`Pos: X=${lng} Y=${lat}`);
+            console.log(map.getZoom());
         });
     }
 

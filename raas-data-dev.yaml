@@ -1,4 +1,318 @@
-Albasrah:
+Al Basrah:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -160000.0
+                y: -160000.0
+            -   x: 160000.0
+                y: 160000.0
+            minimap_filename: albasrah_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: 36125.03125
+                    y: -132281.78125
+                1:
+                -   display_name: Basrah Airport
+                    sdk_name: BasrahAirport_467
+                    x: -65224.359375
+                    y: -72387.625
+                2:
+                -   display_name: North Hwy 6 Bridge
+                    sdk_name: NorthHwy6Bridge
+                    x: 35115.6953125
+                    y: -48801.421875
+                -   display_name: North VCP Ruins
+                    sdk_name: NorthVCPRuins
+                    x: -7601.359375
+                    y: -25780.234375
+                3:
+                -   display_name: Guesthouse SOC
+                    sdk_name: GuesthouseSOC
+                    x: -39695.828125
+                    y: 13334.515625
+                -   display_name: VCP
+                    sdk_name: VCP
+                    x: -7641.2421875
+                    y: -7703.6796875
+                4:
+                -   display_name: Al Khora
+                    sdk_name: AlKhora_939
+                    x: -84036.765625
+                    y: 34629.265625
+                -   display_name: Gas Station
+                    sdk_name: GasStation
+                    x: -4982.7265625
+                    y: 70535.828125
+                5:
+                -   display_name: East Basrah
+                    sdk_name: EastBasrah
+                    x: 32072.8984375
+                    y: 52926.27734375
+                -   display_name: Island Suburbs
+                    sdk_name: IslandSuburbs
+                    x: 65793.7578125
+                    y: 65649.34375
+                -   display_name: Lower Fringe
+                    sdk_name: LowerFringe
+                    x: 2869.7265625
+                    y: 113933.078125
+                -   display_name: Suburbs
+                    sdk_name: Suburbs
+                    x: 32586.7578125
+                    y: 76592.34375
+                -   display_name: West Basrah
+                    sdk_name: WestBasrah
+                    x: 13446.96875
+                    y: 51307.08203125
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain_1012
+                    x: 59644.46875
+                    y: 113148.140625
+    CAF Invasion v2:
+        background:
+            corners:
+            -   x: -160000.0
+                y: -160000.0
+            -   x: 160000.0
+                y: 160000.0
+            minimap_filename: albasrah_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: -118945.0625
+                    y: 105159.9375
+                1:
+                -   display_name: Basrah Mansion
+                    sdk_name: BasrahMansion
+                    x: 59924.7265625
+                    y: 90799.078125
+                -   display_name: Lower Estates
+                    sdk_name: LowerEstates
+                    x: 49169.7265625
+                    y: 107828.078125
+                -   display_name: Lower Estates
+                    sdk_name: LowerEstates2
+                    x: 59924.7265625
+                    y: 107153.078125
+                -   display_name: Lower Fringe
+                    sdk_name: LowerFringe
+                    x: -4642.2734375
+                    y: 113293.078125
+                -   display_name: Lower Fringe
+                    sdk_name: LowerFringe2
+                    x: 5874.7265625
+                    y: 108408.078125
+                -   display_name: Lower Fringe
+                    sdk_name: LowerFringe3
+                    x: 18194.7265625
+                    y: 108408.078125
+                -   display_name: Servo
+                    sdk_name: Servo
+                    x: 37289.7265625
+                    y: 107828.078125
+                2:
+                -   display_name: Commerce District
+                    sdk_name: CommerceDistrict
+                    x: 14637.2734375
+                    y: 81860.828125
+                -   display_name: Courtyard
+                    sdk_name: Courtyard
+                    x: 15977.2734375
+                    y: 68888.828125
+                -   display_name: Gas Station
+                    sdk_name: GasStation
+                    x: -4982.7265625
+                    y: 70535.828125
+                -   display_name: Oasis Park
+                    sdk_name: OasisPark
+                    x: -342.7265625
+                    y: 84515.828125
+                -   display_name: Suburbs
+                    sdk_name: Suburbs
+                    x: 32586.7578125
+                    y: 75620.34375
+                3:
+                -   display_name: West Basrah
+                    sdk_name: Apartments
+                    x: 13446.96875
+                    y: 45346.078125
+                -   display_name: East Basrah
+                    sdk_name: EastBasrah
+                    x: 31868.8984375
+                    y: 50113.28125
+                -   display_name: Market
+                    sdk_name: Market
+                    x: 13446.96875
+                    y: 56266.078125
+                -   display_name: Riverview Apartments
+                    sdk_name: RiverviewApartments
+                    x: 45457.8984375
+                    y: 51584.28125
+                4:
+                -   display_name: Guesthouse SOC
+                    sdk_name: GuesthouseSOC
+                    x: -39695.828125
+                    y: 13334.515625
+                -   display_name: North VCP Ruins
+                    sdk_name: NorthVCPRuins
+                    x: -7601.359375
+                    y: -25780.234375
+                -   display_name: VCP
+                    sdk_name: VCP
+                    x: -7641.2421875
+                    y: -7703.6796875
+                5:
+                -   display_name: Basrah Airport
+                    sdk_name: BasrahAirport
+                    x: -62444.359375
+                    y: -71759.625
+                6:
+                -   display_name: MEA Main
+                    sdk_name: MEAMain
+                    x: 37414.46875
+                    y: -128676.859375
+    Invasion v1:
+        background:
+            corners:
+            -   x: -160000.0
+                y: -160000.0
+            -   x: 160000.0
+                y: 160000.0
+            minimap_filename: albasrah_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain_571
+                    x: -65989.34375
+                    y: -69799.015625
+                1:
+                -   display_name: Ruins
+                    sdk_name: Ruins
+                    x: -84007.4921875
+                    y: 10320.5234375
+                2:
+                -   display_name: Al Khora
+                    sdk_name: AlKhora_808
+                    x: -84917.90625
+                    y: 34536.859375
+                3:
+                -   display_name: Druglord Compound
+                    sdk_name: DruglordCompound
+                    x: -38742.09765625
+                    y: 46751.796875
+                -   display_name: Poppy Production
+                    sdk_name: PoppyProduction
+                    x: -54764.84375
+                    y: 35760.15625
+                4:
+                -   display_name: Apartments
+                    sdk_name: Apartments
+                    x: 13993.87109375
+                    y: 44834.3828125
+                -   display_name: Market
+                    sdk_name: Market
+                    x: 12235.87109375
+                    y: 55678.3828125
+                -   display_name: West Outskirts
+                    sdk_name: WestOutskirts
+                    x: -2350.12890625
+                    y: 43866.3828125
+                5:
+                -   display_name: Mosque
+                    sdk_name: Mosque
+                    x: 31752.271484375
+                    y: 50332.046875
+                -   display_name: Refinery
+                    sdk_name: Refinery
+                    x: 45967.2734375
+                    y: 33777.046875
+                6:
+                -   display_name: Courtyard
+                    sdk_name: Courtyard
+                    x: 12857.6845703125
+                    y: 69389.0
+                -   display_name: North Island Suburbs
+                    sdk_name: NorthIslandSuburbs
+                    x: 62478.68359375
+                    y: 60805.0
+                7:
+                -   display_name: INS Main
+                    sdk_name: INSMain_613
+                    x: 59716.3671875
+                    y: 112148.359375
+    Invasion v2:
+        background:
+            corners:
+            -   x: -160000.0
+                y: -160000.0
+            -   x: 160000.0
+                y: 160000.0
+            minimap_filename: albasrah_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain
+                    x: 33920.3203125
+                    y: -132790.0
+                1:
+                -   display_name: Basrah Airport
+                    sdk_name: BasrahAirport_467
+                    x: -65224.359375
+                    y: -72387.625
+                2:
+                -   display_name: North Hwy 6 Bridge
+                    sdk_name: NorthHwy6Bridge
+                    x: 35115.6953125
+                    y: -48801.421875
+                -   display_name: North VCP Ruins
+                    sdk_name: NorthVCPRuins
+                    x: -7509.3046875
+                    y: -27339.421875
+                3:
+                -   display_name: Guesthouse SOC
+                    sdk_name: GuesthouseSOC
+                    x: -39695.828125
+                    y: 13334.515625
+                -   display_name: VCP
+                    sdk_name: VCP
+                    x: -7641.2421875
+                    y: -7703.6796875
+                4:
+                -   display_name: Al Khora
+                    sdk_name: AlKhora_939
+                    x: -84036.765625
+                    y: 34629.265625
+                5:
+                -   display_name: East Basrah
+                    sdk_name: EastBasrah
+                    x: 36073.98828125
+                    y: 51852.515625
+                -   display_name: West Basrah
+                    sdk_name: WestBasrah
+                    x: 6832.98828125
+                    y: 51852.515625
+                6:
+                -   display_name: Island Suburbs
+                    sdk_name: IslandSuburbs
+                    x: 65793.7578125
+                    y: 65649.34375
+                -   display_name: Suburbs
+                    sdk_name: Suburbs
+                    x: 32586.7578125
+                    y: 76592.34375
+                7:
+                -   display_name: INS Main
+                    sdk_name: INSMain_1012
+                    x: 59644.46875
+                    y: 113148.140625
     RAAS v1:
         background:
             corners:
@@ -7,8 +321,6 @@ Albasrah:
             -   x: 160000.0
                 y: 160000.0
             minimap_filename: albasrah_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -202,7 +514,7 @@ Albasrah:
                     sdk_name: INSMain_67
                     x: 58351.09375
                     y: 113565.8203125
-Belaya:
+Belaya Pass:
     CAF RAAS v1:
         background:
             corners:
@@ -211,8 +523,6 @@ Belaya:
             -   x: 195000.0
                 y: -208000.0
             minimap_filename: Belaya_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -338,8 +648,6 @@ Belaya:
             -   x: 195000.0
                 y: -208000.0
             minimap_filename: Belaya_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -457,6 +765,216 @@ Belaya:
                     sdk_name: RUSMain
                     x: 92757.01171875
                     y: -148585.46875
+    Invasion v1:
+        background:
+            corners:
+            -   x: -195400.0
+                y: 182500.0
+            -   x: 195000.0
+                y: -208000.0
+            minimap_filename: Belaya_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 92567.65625
+                    y: -151271.3125
+                1:
+                -   display_name: Central Velino
+                    sdk_name: CentralVelino
+                    x: 21234.0625
+                    y: -156555.5
+                -   display_name: Tire Factory
+                    sdk_name: TireFactory
+                    x: -29187.71875
+                    y: -138571.96875
+                -   display_name: Upper Velino
+                    sdk_name: UpperVelino
+                    x: 21234.0625
+                    y: -174545.4375
+                -   display_name: Velino Outskirts
+                    sdk_name: VelinoOutskirts
+                    x: -16906.0390625
+                    y: -174096.25
+                2:
+                -   display_name: Lumber Yard
+                    sdk_name: LumberYard
+                    x: 83505.15625
+                    y: -100785.4375
+                -   display_name: Velino Bog
+                    sdk_name: VelinoBog
+                    x: 29848.21875
+                    y: -112165.9375
+                3:
+                -   display_name: Coal Mine
+                    sdk_name: CoalMine
+                    x: 84034.3125
+                    y: -33601.84375
+                -   display_name: Gabukay
+                    sdk_name: Gabukay
+                    x: 26050.90625
+                    y: -31956.75
+                -   display_name: Train Tunnel
+                    sdk_name: TrainTunnel
+                    x: -52981.9375
+                    y: -71719.640625
+                4:
+                -   display_name: Depot
+                    sdk_name: Depot
+                    x: -81466.515625
+                    y: 35693.875
+                -   display_name: Homestead
+                    sdk_name: Homestead
+                    x: 25969.984375
+                    y: 49249.6484375
+                -   display_name: Radio Station
+                    sdk_name: RadioStation
+                    x: -51690.6640625
+                    y: 40656.28125
+                5:
+                -   display_name: Aniva
+                    sdk_name: Aniva
+                    x: -10406.46875
+                    y: 135517.734375
+                -   display_name: Krasny Kut
+                    sdk_name: KrasnyKut
+                    x: -45633.578125
+                    y: 68511.6875
+                6:
+                -   display_name: MIL Main
+                    sdk_name: MILMain_395
+                    x: -135128.53125
+                    y: 114546.546875
+    Invasion v2:
+        background:
+            corners:
+            -   x: -195400.0
+                y: 182500.0
+            -   x: 195000.0
+                y: -208000.0
+            minimap_filename: Belaya_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -135458.328125
+                    y: 114705.1875
+                1:
+                -   display_name: Aniva
+                    sdk_name: Aniva
+                    x: -12106.6640625
+                    y: 137158.75
+                -   display_name: Babenki
+                    sdk_name: Babenki_411
+                    x: 31956.8671875
+                    y: 128916.5
+                2:
+                -   display_name: Kulushevo
+                    sdk_name: Kulushevo
+                    x: -4810.3203125
+                    y: 83460.15625
+                -   display_name: Outpost
+                    sdk_name: Outpost_453
+                    x: -16649.953125
+                    y: 63383.75
+                3:
+                -   display_name: Nikola
+                    sdk_name: Nikola_479
+                    x: -26241.9140625
+                    y: -5669.96875
+                4:
+                -   display_name: Gabukay
+                    sdk_name: Gabukay
+                    x: 27360.515625
+                    y: -32869.765625
+                -   display_name: Karakul
+                    sdk_name: Karakul
+                    x: 31632.9296875
+                    y: 3392.859375
+                5:
+                -   display_name: Lower Velino
+                    sdk_name: LowerVelino
+                    x: 14762.7890625
+                    y: -152187.859375
+                -   display_name: Tire Factory
+                    sdk_name: TireFactory_858
+                    x: -28097.96875
+                    y: -137506.34375
+                -   display_name: Train Tunnel
+                    sdk_name: TrainTunnel
+                    x: -51757.9375
+                    y: -69308.59375
+                -   display_name: Upper Velino
+                    sdk_name: UpperVelino
+                    x: 24491.5703125
+                    y: -173774.953125
+                6:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 92757.015625
+                    y: -150335.46875
+    Invasion v3:
+        background:
+            corners:
+            -   x: -195400.0
+                y: 182500.0
+            -   x: 195000.0
+                y: -208000.0
+            minimap_filename: Belaya_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain_939
+                    x: 33050.96875
+                    y: 128184.0625
+                1:
+                -   display_name: Kulushevo
+                    sdk_name: Kulushevo_47
+                    x: -5117.234375
+                    y: 82675.90625
+                -   display_name: Outpost
+                    sdk_name: Outpost
+                    x: -16446.609375
+                    y: 63038.578125
+                2:
+                -   display_name: Depot
+                    sdk_name: Depot_129
+                    x: -80567.09375
+                    y: 36132.09375
+                -   display_name: Radio Station
+                    sdk_name: RadioStation
+                    x: -53047.5
+                    y: 40493.28125
+                3:
+                -   display_name: Industrial Yard
+                    sdk_name: IndustrialYard_195
+                    x: -108429.6875
+                    y: -19711.875
+                -   display_name: Karakul
+                    sdk_name: Karakul
+                    x: 31444.5234375
+                    y: 4005.71875
+                -   display_name: Nikola
+                    sdk_name: Nikola
+                    x: -26597.90625
+                    y: -5655.828125
+                4:
+                -   display_name: Coal Mine
+                    sdk_name: CoalMine
+                    x: 83105.46875
+                    y: -35029.609375
+                -   display_name: Gabukay
+                    sdk_name: Gabukay
+                    x: 27275.234375
+                    y: -30398.640625
+                5:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 92657.328125
+                    y: -151041.25
     RAAS v1:
         background:
             corners:
@@ -465,8 +983,6 @@ Belaya:
             -   x: 195000.0
                 y: -208000.0
             minimap_filename: Belaya_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -652,8 +1168,6 @@ Belaya:
             -   x: 195000.0
                 y: -208000.0
             minimap_filename: Belaya_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -723,8 +1237,6 @@ Belaya:
             -   x: 195000.0
                 y: -208000.0
             minimap_filename: Belaya_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -803,8 +1315,6 @@ Chora:
             -   x: 159990.0
                 y: 140000.0
             minimap_filename: Chora_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -922,6 +1432,146 @@ Chora:
                     sdk_name: MEAMain
                     x: -187696.69140625
                     y: 1654.0234375
+    Invasion v1:
+        background:
+            corners:
+            -   x: -246400.0
+                y: -266400.0
+            -   x: 159990.0
+                y: 140000.0
+            minimap_filename: Chora_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: 72863.998046875
+                    y: -152238.0
+                1:
+                -   display_name: Insurgent Checkpoint
+                    sdk_name: InsurgentCheckpoint
+                    x: -3509.228515625
+                    y: -112779.7890625
+                -   display_name: Mosque
+                    sdk_name: Mosque_4466
+                    x: 16126.998046875
+                    y: -85540.0
+                2:
+                -   display_name: Hemp Farm
+                    sdk_name: HempFarm_4471
+                    x: -33137.001953125
+                    y: -93485.0
+                -   display_name: Opium Blackmarket
+                    sdk_name: OpiumBlackmarket
+                    x: -29229.8515625
+                    y: -48937.203125
+                3:
+                -   display_name: Market
+                    sdk_name: Market
+                    x: -61566.373046875
+                    y: -47618.109375
+                -   display_name: Poppy Farm
+                    sdk_name: PoppyFarm
+                    x: -74972.001953125
+                    y: -74394.0
+                4:
+                -   display_name: Abdul's Farm
+                    sdk_name: AbdulsFarm
+                    x: -115097.767578125
+                    y: -67858.9765625
+                -   display_name: LowerOrchard
+                    sdk_name: LowerOrchard
+                    x: -90853.001953125
+                    y: -25562.0
+                5:
+                -   display_name: Nursery
+                    sdk_name: Nursery
+                    x: -122057.416015625
+                    y: -15368.1328125
+                6:
+                -   display_name: Monolith
+                    sdk_name: Monolith_4491
+                    x: -161734.001953125
+                    y: -32000.0
+                7:
+                -   display_name: INS Main
+                    sdk_name: INSMain_3708
+                    x: -205938.994140625
+                    y: -30026.0
+    Invasion v2:
+        background:
+            corners:
+            -   x: -246400.0
+                y: -266400.0
+            -   x: 159990.0
+                y: 140000.0
+            minimap_filename: Chora_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: 72864.0
+                    y: -152238.0
+                1:
+                -   display_name: Compound Abrams
+                    sdk_name: CompoundAbrams
+                    x: -21574.09375
+                    y: -113074.046875
+                -   display_name: Mosque
+                    sdk_name: Mosque_4466
+                    x: 16127.0
+                    y: -85540.0
+                2:
+                -   display_name: Hemp Farm
+                    sdk_name: HempFarm_4471
+                    x: -33137.0
+                    y: -93485.0
+                -   display_name: Naan Market
+                    sdk_name: NaanMarket
+                    x: -11605.1875
+                    y: -61369.015625
+                3:
+                -   display_name: Market
+                    sdk_name: Market
+                    x: -61759.671875
+                    y: -47869.14453125
+                -   display_name: Poppy Farm
+                    sdk_name: PoppyFarm
+                    x: -74972.0
+                    y: -74394.0
+                -   display_name: Radio Station
+                    sdk_name: RadioStation
+                    x: -55612.296875
+                    y: -44023.89453125
+                4:
+                -   display_name: Mosque
+                    sdk_name: IslandFarm
+                    x: -98056.1015625
+                    y: -48867.80078125
+                -   display_name: LowerOrchard
+                    sdk_name: LowerOrchard
+                    x: -90853.0
+                    y: -25562.0
+                5:
+                -   display_name: Nursery
+                    sdk_name: Nursery
+                    x: -122057.421875
+                    y: -15368.1328125
+                -   display_name: River Estate
+                    sdk_name: RiverEstate
+                    x: -134842.59375
+                    y: -50323.1875
+                6:
+                -   display_name: Monolith
+                    sdk_name: Monolith_4491
+                    x: -161734.0
+                    y: -32000.0
+                7:
+                -   display_name: INS Main
+                    sdk_name: INSMain_3708
+                    x: -205858.0
+                    y: -30172.0
     RAAS v1:
         background:
             corners:
@@ -930,8 +1580,6 @@ Chora:
             -   x: 159990.0
                 y: 140000.0
             minimap_filename: Chora_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1156,8 +1804,6 @@ Chora:
             -   x: 159990.0
                 y: 140000.0
             minimap_filename: Chora_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1216,6 +1862,83 @@ Chora:
                     x: -127241.625
                     y: -77822.625
 Fallujah:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -131500.0
+                y: -154500.0
+            -   x: 169000.0
+                y: 146000.0
+            minimap_filename: T_Fallujah_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: 154010.4375
+                    y: -35756.05078125
+                1:
+                -   display_name: Askari Hill
+                    sdk_name: AskariHill
+                    x: 75845.828125
+                    y: -35432.828125
+                -   display_name: Market
+                    sdk_name: Market
+                    x: 71107.3984375
+                    y: -14115.3046875
+                2:
+                -   display_name: Askari Slums
+                    sdk_name: AskariSlums
+                    x: 76797.265625
+                    y: -64156.14453125
+                -   display_name: Shurta Intersection
+                    sdk_name: ShurtaIntersection
+                    x: 52674.265625
+                    y: -55992.14453125
+                -   display_name: Warehouse
+                    sdk_name: Warehouse
+                    x: 29050.265625
+                    y: -72811.140625
+                3:
+                -   display_name: Bazaar
+                    sdk_name: Bazaar
+                    x: 32926.01171875
+                    y: -13454.1953125
+                -   display_name: Blue Mosque
+                    sdk_name: BlueMosque
+                    x: 36351.46875
+                    y: -29801.28125
+                -   display_name: Blue Mosque
+                    sdk_name: BlueMosque2
+                    x: 36351.46875
+                    y: -29801.28125
+                4:
+                -   display_name: Palace
+                    sdk_name: Palace
+                    x: 11159.423828125
+                    y: 20888.39453125
+                5:
+                -   display_name: Central Crossroads
+                    sdk_name: CentralCrossroads
+                    x: -26594.43359375
+                    y: -4347.38671875
+                -   display_name: Crossroads South Apartments
+                    sdk_name: CrossroadsSouthApartments
+                    x: -19845.73046875
+                    y: -2330.13671875
+                -   display_name: Crossroads South Apartments
+                    sdk_name: PoliceStation
+                    x: -22662.884765625
+                    y: -34460.51171875
+                -   display_name: TV Station
+                    sdk_name: TVStation
+                    x: -12598.73046875
+                    y: -6927.13671875
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -62520.46875
+                    y: -17936.19921875
     CAF RAAS v1:
         background:
             corners:
@@ -1224,8 +1947,6 @@ Fallujah:
             -   x: 169000.0
                 y: 146000.0
             minimap_filename: T_Fallujah_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1450,6 +2171,251 @@ Fallujah:
                     sdk_name: MEAMain
                     x: -101329.2578125
                     y: 19244.046875
+    Invasion v1:
+        background:
+            corners:
+            -   x: -131500.0
+                y: -154500.0
+            -   x: 169000.0
+                y: 146000.0
+            minimap_filename: T_Fallujah_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -119259.078125
+                    y: -96674.1640625
+                1:
+                -   display_name: Al Jamhoria
+                    sdk_name: AlJamhoria
+                    x: -61507.796875
+                    y: -15683.62109375
+                -   display_name: Crash Site
+                    sdk_name: CrashSite
+                    x: -61507.796875
+                    y: -47538.62109375
+                2:
+                -   display_name: Central Crossroads
+                    sdk_name: CentralCrossroads
+                    x: -26594.43359375
+                    y: -4347.3876953125
+                -   display_name: Crossroads North Apartments
+                    sdk_name: CrossroadsNorthApartments
+                    x: -32114.9765625
+                    y: -7515.673828125
+                -   display_name: Crossroads South Apartments
+                    sdk_name: CrossroadsSouthApartments
+                    x: -19845.73046875
+                    y: -2330.13671875
+                3:
+                -   display_name: Commercial District North
+                    sdk_name: CommercialDistrictNorth
+                    x: 3776.888671875
+                    y: -24372.12109375
+                -   display_name: Commercial District South
+                    sdk_name: CommercialDistrictSouth
+                    x: 2323.8134765625
+                    y: -12634.763671875
+                -   display_name: Commercial District Terror Hotel
+                    sdk_name: CommercialDistrictTerrorHotel
+                    x: 12038.0126953125
+                    y: -13648.8544921875
+                4:
+                -   display_name: Bazaar
+                    sdk_name: Bazaar
+                    x: 32926.01171875
+                    y: -13454.1953125
+                5:
+                -   display_name: Blue Mosque
+                    sdk_name: BlueMosque
+                    x: 36351.46875
+                    y: -29801.28125
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 61206.64453125
+                    y: -53455.60546875
+    Invasion v2:
+        background:
+            corners:
+            -   x: -131500.0
+                y: -154500.0
+            -   x: 169000.0
+                y: 146000.0
+            minimap_filename: T_Fallujah_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: MEA Main
+                    sdk_name: MEAMain
+                    x: -40156.25
+                    y: 85493.2421875
+                1:
+                -   display_name: Green Zone
+                    sdk_name: GreenZone
+                    x: 11199.642578125
+                    y: 22000.109375
+                2:
+                -   display_name: Bazaar
+                    sdk_name: Bazaar
+                    x: 32926.01171875
+                    y: -13454.1962890625
+                -   display_name: Blue Mosque
+                    sdk_name: BlueMosque
+                    x: 36351.46875
+                    y: -29801.28125
+                -   display_name: Cemetery
+                    sdk_name: Cemetery
+                    x: -48025.796875
+                    y: -1823.6171875
+                -   display_name: Central Crossroads
+                    sdk_name: CentralCrossroads
+                    x: -26594.43359375
+                    y: -4347.3876953125
+                -   display_name: Commercial District North
+                    sdk_name: CommercialDistrictNorth
+                    x: 3776.888671875
+                    y: -24372.12109375
+                -   display_name: Commercial District South
+                    sdk_name: CommercialDistrictSouth
+                    x: 2522.0234375
+                    y: -12265.322265625
+                -   display_name: Commercial District Terror Hotel
+                    sdk_name: CommercialDistrictTerrorHotel
+                    x: 11924.779296875
+                    y: -13520.0322265625
+                -   display_name: Crossroads North Apartments
+                    sdk_name: CrossroadsNorthApartments
+                    x: -32114.9765625
+                    y: -7515.673828125
+                -   display_name: Crossroads South Apartments
+                    sdk_name: CrossroadsSouthApartments
+                    x: -19845.73046875
+                    y: -2330.13671875
+                -   display_name: Open Air Market
+                    sdk_name: OpenAirMarket
+                    x: 70749.8515625
+                    y: -14163.3935546875
+                -   display_name: TV Station
+                    sdk_name: TVStation
+                    x: -13400.1484375
+                    y: -6666.42578125
+                3:
+                -   display_name: Al Jamhoria
+                    sdk_name: AlJamhoria
+                    x: -61507.796875
+                    y: -15683.62109375
+                -   display_name: Compound Zulu
+                    sdk_name: CompoundZulu
+                    x: 45183.828125
+                    y: -49667.265625
+                -   display_name: Double Tee
+                    sdk_name: DoubleTee
+                    x: 33491.62109375
+                    y: -49131.0078125
+                -   display_name: Muallimin
+                    sdk_name: Muallimin
+                    x: -1667.60546875
+                    y: -50997.359375
+                -   display_name: Northern Apartments
+                    sdk_name: NorthernApartments
+                    x: 17258.34765625
+                    y: -57349.6484375
+                -   display_name: Police Station
+                    sdk_name: PoliceStation
+                    x: -22818.306640625
+                    y: -34200.4609375
+                4:
+                -   display_name: Askari Slums
+                    sdk_name: AskariSlums
+                    x: 77528.69140625
+                    y: -63665.7109375
+                -   display_name: Cement Plant
+                    sdk_name: CementPlant
+                    x: 32195.08984375
+                    y: -73311.703125
+                -   display_name: Crash Site
+                    sdk_name: CrashSite
+                    x: -61507.78515625
+                    y: -47538.6171875
+                -   display_name: Refuge Aid Center
+                    sdk_name: RefugeAidCenter
+                    x: -16912.1640625
+                    y: -65895.03125
+                -   display_name: Refuge Camp
+                    sdk_name: RefugeCamp
+                    x: -28934.40234375
+                    y: -71021.96875
+                5:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -28380.5078125
+                    y: -92542.3671875
+    Invasion v3:
+        background:
+            corners:
+            -   x: -131500.0
+                y: -154500.0
+            -   x: 169000.0
+                y: 146000.0
+            minimap_filename: T_Fallujah_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -106593.2421875
+                    y: 18593.03125
+                1:
+                -   display_name: Al Jamhoria
+                    sdk_name: AlJamhoria
+                    x: -61507.796875
+                    y: -15683.62109375
+                -   display_name: Cemetery
+                    sdk_name: Cemetery
+                    x: -48025.796875
+                    y: -1823.62109375
+                2:
+                -   display_name: Commercial District North
+                    sdk_name: CommercialDistrictNorth
+                    x: 3776.888671875
+                    y: -24372.12109375
+                -   display_name: Commercial District South
+                    sdk_name: CommercialDistrictSouth
+                    x: 1059.59375
+                    y: -12455.333984375
+                -   display_name: Commercial District Terror Hotel
+                    sdk_name: CommercialDistrictTerrorHotel
+                    x: 11969.93359375
+                    y: -13535.701171875
+                -   display_name: TV Station
+                    sdk_name: TVStation
+                    x: -11864.595703125
+                    y: -7330.5419921875
+                3:
+                -   display_name: Bazaar
+                    sdk_name: Bazaar
+                    x: 32926.01171875
+                    y: -13454.1953125
+                -   display_name: Blue Mosque
+                    sdk_name: BlueMosque
+                    x: 36351.46875
+                    y: -29801.28125
+                4:
+                -   display_name: Askari Hill
+                    sdk_name: AskariHill
+                    x: 76061.96875
+                    y: -35346.9765625
+                -   display_name: Askari Slums
+                    sdk_name: AskariSlums
+                    x: 77528.6875
+                    y: -63665.7109375
+                5:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 154637.703125
+                    y: -35769.3359375
     RAAS v1:
         background:
             corners:
@@ -1458,8 +2424,6 @@ Fallujah:
             -   x: 169000.0
                 y: 146000.0
             minimap_filename: T_Fallujah_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1569,8 +2533,6 @@ Fallujah:
             -   x: 169000.0
                 y: 146000.0
             minimap_filename: T_Fallujah_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1668,8 +2630,6 @@ Fallujah:
             -   x: 169000.0
                 y: 146000.0
             minimap_filename: T_Fallujah_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1892,8 +2852,6 @@ Fools Road:
             -   x: -132576.921875
                 y: -132576.921875
             minimap_filename: Fools_Road_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -1947,6 +2905,82 @@ Fools Road:
                     sdk_name: RUSMain
                     x: -112147.935546875
                     y: 21618.75390625
+    Invasion v1:
+        background:
+            corners:
+            -   x: 44805.078125
+                y: 44805.078125
+            -   x: -132576.921875
+                y: -132576.921875
+            minimap_filename: Fools_Road_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain_4062
+                    x: -87566.078125
+                    y: 14580.328125
+                1:
+                -   display_name: Mine Entrance
+                    sdk_name: MineEntrance_12
+                    x: -33942.4921875
+                    y: -13813.0126953125
+                -   display_name: OP Fortress
+                    sdk_name: OPFortress_13
+                    x: -92276.0078125
+                    y: -46837.046875
+                -   display_name: Ridgeline
+                    sdk_name: Ridgeline_14
+                    x: -106151.46875
+                    y: -29199.4296875
+                2:
+                -   display_name: Ammo Hill
+                    sdk_name: AmmoHill_16
+                    x: -52508.0
+                    y: -52879.99609375
+                -   display_name: Dylym
+                    sdk_name: Dylym_17
+                    x: 32762.0
+                    y: -12951.0
+                -   display_name: Hill 11
+                    sdk_name: Hill11_18
+                    x: 21611.0
+                    y: -33209.0
+                -   display_name: Hill 13
+                    sdk_name: Hill13_19
+                    x: -14221.0
+                    y: -33883.9921875
+                3:
+                -   display_name: Darko's Homestead
+                    sdk_name: DarkosHomestead
+                    x: -72538.0
+                    y: -81428.0
+                -   display_name: Hill 123
+                    sdk_name: Hill123_20
+                    x: 27526.0859375
+                    y: -68469.9375
+                -   display_name: Taxi Homestead
+                    sdk_name: TaxiHomestead_21
+                    x: -86933.4375
+                    y: -83197.0
+                4:
+                -   display_name: Fortress
+                    sdk_name: Fortress_22
+                    x: -99173.421875
+                    y: -99763.703125
+                -   display_name: Hilltop Encampment
+                    sdk_name: HilltopEncampment
+                    x: -33619.0
+                    y: -79333.0
+                -   display_name: Verto
+                    sdk_name: Verto_23
+                    x: 10584.71875
+                    y: -88575.1796875
+                5:
+                -   display_name: MIL Main
+                    sdk_name: MILMain
+                    x: 11722.734375
+                    y: -118342.65625
     RAAS v1:
         background:
             corners:
@@ -1955,8 +2989,6 @@ Fools Road:
             -   x: -132576.921875
                 y: -132576.921875
             minimap_filename: Fools_Road_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -2110,8 +3142,6 @@ Fools Road:
             -   x: -132576.921875
                 y: -132576.921875
             minimap_filename: Fools_Road_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -2185,8 +3215,6 @@ Fools Road:
             -   x: -132576.921875
                 y: -132576.921875
             minimap_filename: Fools_Road_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -2254,6 +3282,79 @@ Fools Road:
                     x: 28387.953125
                     y: 37904.7578125
 Gorodok:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -207000.0
+                y: 227000.0
+            -   x: 227000.0
+                y: -207000.0
+            minimap_filename: gorodok_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: -156366.40625
+                    y: -179834.765625
+                1:
+                -   display_name: Fruit Farm
+                    sdk_name: FruitFarm
+                    x: -89929.921875
+                    y: -112611.609375
+                2:
+                -   display_name: Ambush Hill
+                    sdk_name: AmbushHill
+                    x: -24273.734375
+                    y: -89686.8828125
+                -   display_name: Shipping Yard
+                    sdk_name: ShippingYard
+                    x: -24647.75
+                    y: -141002.5
+                -   display_name: Yard Apartments
+                    sdk_name: YardApartments
+                    x: -17753.453125
+                    y: -119621.15625
+                3:
+                -   display_name: Hilltop Old Bunker
+                    sdk_name: HilltopOldBunker
+                    x: -43018.328125
+                    y: -5917.7578125
+                -   display_name: Niva Lower
+                    sdk_name: NivaLower
+                    x: 5987.375
+                    y: 14777.1796875
+                -   display_name: Niva Upper
+                    sdk_name: NivaUpper
+                    x: -28539.6796875
+                    y: 16926.75
+                4:
+                -   display_name: Pavlov's Farm
+                    sdk_name: PavlovsFarm
+                    x: 42921.21484375
+                    y: 141353.125
+                -   display_name: Soloninki Upper
+                    sdk_name: SoloninkiUpper
+                    x: 5199.8125
+                    y: 108053.0
+                5:
+                -   display_name: Boris' Farmstead
+                    sdk_name: BorisFarmstead
+                    x: 103270.046875
+                    y: 53523.59375
+                -   display_name: Industrial Park
+                    sdk_name: IndustrialPark
+                    x: 133171.0
+                    y: 110940.8125
+                -   display_name: Tunnel Defenses
+                    sdk_name: TunnelDefenses
+                    x: 136425.6875
+                    y: 21173.9921875
+                6:
+                -   display_name: MIL Main
+                    sdk_name: MILMain_49
+                    x: 156601.125
+                    y: -101546.609375
     CAF RAAS v1:
         background:
             corners:
@@ -2262,8 +3363,6 @@ Gorodok:
             -   x: 227000.0
                 y: -207000.0
             minimap_filename: gorodok_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -2398,8 +3497,6 @@ Gorodok:
             -   x: 227000.0
                 y: -207000.0
             minimap_filename: gorodok_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -2659,6 +3756,146 @@ Gorodok:
                     sdk_name: USAMain
                     x: 159602.1171875
                     y: -158814.3125
+    Invasion v1:
+        background:
+            corners:
+            -   x: -207000.0
+                y: 227000.0
+            -   x: 227000.0
+                y: -207000.0
+            minimap_filename: gorodok_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -130034.4453125
+                    y: 153105.53125
+                1:
+                -   display_name: Desna
+                    sdk_name: Desna
+                    x: -67825.7421875
+                    y: 121451.390625
+                -   display_name: Soloninki
+                    sdk_name: Soloninki
+                    x: 4166.59375
+                    y: 105315.984375
+                2:
+                -   display_name: River Fortification
+                    sdk_name: RiverFortification
+                    x: 38358.8125
+                    y: 47845.7421875
+                -   display_name: Train Bridge
+                    sdk_name: TrainBridge_844
+                    x: -1726.3125
+                    y: 50103.28125
+                3:
+                -   display_name: Hilltop Old Bunker
+                    sdk_name: HilltopOldBunker
+                    x: -43312.8203125
+                    y: -6070.734375
+                -   display_name: Niva Upper
+                    sdk_name: NivaUpper_1450
+                    x: -30554.59375
+                    y: 16516.1875
+                4:
+                -   display_name: Ambush Hill
+                    sdk_name: AmbushHill
+                    x: -25546.4921875
+                    y: -88484.71875
+                -   display_name: Grain Processing
+                    sdk_name: GrainProcessing
+                    x: -53366.15625
+                    y: -73550.5625
+                5:
+                -   display_name: Yard Apartments
+                    sdk_name: YardApartments
+                    x: -18717.4296875
+                    y: -118906.1875
+                6:
+                -   display_name: Shipping Yard
+                    sdk_name: ShippingYard
+                    x: -25259.890625
+                    y: -141254.0
+                7:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: -149204.5
+                    y: -159322.4375
+    Invasion v2:
+        background:
+            corners:
+            -   x: -207000.0
+                y: 227000.0
+            -   x: 227000.0
+                y: -207000.0
+            minimap_filename: gorodok_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: -156366.40625
+                    y: -179834.765625
+                1:
+                -   display_name: Fruit Farm
+                    sdk_name: FruitFarm
+                    x: -89929.921875
+                    y: -112611.609375
+                2:
+                -   display_name: Ambush Hill
+                    sdk_name: AmbushHill
+                    x: -24273.734375
+                    y: -89686.8828125
+                -   display_name: Shipping Yard
+                    sdk_name: ShippingYard
+                    x: -24647.75
+                    y: -141002.5
+                -   display_name: Yard Apartments
+                    sdk_name: YardApartments
+                    x: -17753.453125
+                    y: -119621.15625
+                3:
+                -   display_name: Hilltop Old Bunker
+                    sdk_name: HilltopOldBunker
+                    x: -43018.328125
+                    y: -5917.7578125
+                -   display_name: Niva Lower
+                    sdk_name: NivaLower
+                    x: 5987.375
+                    y: 14777.1796875
+                -   display_name: Niva Upper
+                    sdk_name: NivaUpper
+                    x: -28539.6796875
+                    y: 16926.75
+                4:
+                -   display_name: Pavlov's Farm
+                    sdk_name: PavlovsFarm
+                    x: 42921.21484375
+                    y: 141353.125
+                -   display_name: Soloninki Upper
+                    sdk_name: SoloninkiUpper
+                    x: 5199.8125
+                    y: 108053.0
+                5:
+                -   display_name: Boris' Farmstead
+                    sdk_name: BorisFarmstead
+                    x: 103830.53125
+                    y: 54303.53125
+                -   display_name: Industrial Park
+                    sdk_name: IndustrialPark
+                    x: 133171.0
+                    y: 110940.8125
+                6:
+                -   display_name: Tunnel Defenses
+                    sdk_name: TunnelDefenses
+                    x: 136425.6875
+                    y: 21173.9921875
+                7:
+                -   display_name: Militia Main
+                    sdk_name: MILMain_49
+                    x: 156081.125
+                    y: -101156.609375
     RAAS v1:
         background:
             corners:
@@ -2667,8 +3904,6 @@ Gorodok:
             -   x: 227000.0
                 y: -207000.0
             minimap_filename: gorodok_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -2936,8 +4171,6 @@ Gorodok:
             -   x: 227000.0
                 y: -207000.0
             minimap_filename: gorodok_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3072,8 +4305,6 @@ Gorodok:
             -   x: 227000.0
                 y: -207000.0
             minimap_filename: Gorodok_Minimap_RAAS_v3
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3147,8 +4378,6 @@ Gorodok:
             -   x: 77517.3671875
                 y: -133585.484375
             minimap_filename: Gorodok_Minimap_RAAS_v4
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3206,8 +4435,6 @@ Gorodok:
             -   x: 227000.0
                 y: -207000.0
             minimap_filename: gorodok_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3283,7 +4510,80 @@ Gorodok:
                     sdk_name: RUSMain
                     x: -153592.78125
                     y: -161748.0
-Kamdesh:
+Kamdesh Highlands:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Kamdesh_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: -156155.03125
+                    y: 38898.046875
+                1:
+                -   display_name: Sao
+                    sdk_name: Sao
+                    x: -94466.3671875
+                    y: 10547.05078125
+                -   display_name: Urmul
+                    sdk_name: Urmul_387
+                    x: -140063.578125
+                    y: -28605.5
+                -   display_name: Smuggler's Den
+                    sdk_name: SmugglersDen
+                    x: -49879.703125
+                    y: -13809.765625
+                2:
+                -   display_name: Agasi
+                    sdk_name: Agasi_457
+                    x: -73736.453125
+                    y: -96994.53125
+                -   display_name: OP Leeks
+                    sdk_name: OPLeeks
+                    x: -36672.82421875
+                    y: -70489.6015625
+                -   display_name: Paprok
+                    sdk_name: Paprok
+                    x: -17037.67578125
+                    y: -43794.203125
+                3:
+                -   display_name: Mandagal
+                    sdk_name: Mandagal
+                    x: -7894.140625
+                    y: -118493.375
+                -   display_name: Manyal
+                    sdk_name: Manyal
+                    x: 18859.328125
+                    y: -68624.3671875
+                4:
+                -   display_name: Godri
+                    sdk_name: Godri
+                    x: 63035.375
+                    y: 8808.13671875
+                -   display_name: Khail
+                    sdk_name: Khail
+                    x: 38129.9453125
+                    y: -11359.23828125
+                -   display_name: Nilaw
+                    sdk_name: Nilaw
+                    x: 61017.54296875
+                    y: -45318.75
+                5:
+                -   display_name: Storage Bunker
+                    sdk_name: StorageBunker
+                    x: 106136.6640625
+                    y: -53099.4375
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 121966.875
+                    y: -106714.90625
     CAF RAAS v1:
         background:
             corners:
@@ -3292,8 +4592,6 @@ Kamdesh:
             -   x: 201600.0
                 y: 201600.0
             minimap_filename: Kamdesh_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3379,6 +4677,237 @@ Kamdesh:
                     sdk_name: RUSMain
                     x: 79677.296875
                     y: 48566.21875
+    Invasion v1:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Kamdesh_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -153539.0
+                    y: 42571.546875
+                1:
+                -   display_name: Carpenter's Guild
+                    sdk_name: CarpentersGuild
+                    x: -84773.4375
+                    y: 84769.984375
+                -   display_name: OP Chaxton
+                    sdk_name: OPChaxton
+                    x: -52546.4375
+                    y: 43873.04296875
+                -   display_name: Toba
+                    sdk_name: Toba_633
+                    x: -115802.84375
+                    y: 109935.6328125
+                2:
+                -   display_name: Aringshah
+                    sdk_name: Aringshah_225
+                    x: -44745.265625
+                    y: 110201.328125
+                -   display_name: Darin
+                    sdk_name: Darin
+                    x: -15277.140625
+                    y: 77117.5078125
+                3:
+                -   display_name: Alingal
+                    sdk_name: Alingal_279
+                    x: 45357.34375
+                    y: 103140.53125
+                -   display_name: Deraki
+                    sdk_name: Deraki
+                    x: 57463.03125
+                    y: 140461.4375
+                -   display_name: Firing Range
+                    sdk_name: FiringRange
+                    x: -4329.375
+                    y: 146319.46875
+                4:
+                -   display_name: Kaga
+                    sdk_name: Kaga_393
+                    x: 102999.6875
+                    y: 90522.0546875
+                -   display_name: Kotal
+                    sdk_name: Kotal
+                    x: 132300.4375
+                    y: 120456.7109375
+                -   display_name: OP Sokolov
+                    sdk_name: OPSokolov
+                    x: 50032.09375
+                    y: 43337.94140625
+                5:
+                -   display_name: Hemp Farm
+                    sdk_name: HempFarm
+                    x: 122443.65625
+                    y: -13544.9375
+                -   display_name: Khail
+                    sdk_name: Khail
+                    x: 39577.515625
+                    y: -10789.07421875
+                -   display_name: Manyal
+                    sdk_name: Manyal
+                    x: 19010.640625
+                    y: -69140.3046875
+                -   display_name: Nilaw
+                    sdk_name: Nilaw
+                    x: 61742.546875
+                    y: -46795.375
+                -   display_name: Storage Bunker
+                    sdk_name: StorageBunker
+                    x: 107982.1875
+                    y: -52597.0234375
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain_1493
+                    x: 117059.6875
+                    y: -115189.375
+    Invasion v2:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Kamdesh_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain_1089
+                    x: -153276.390625
+                    y: 41870.890625
+                1:
+                -   display_name: Sao
+                    sdk_name: Sao
+                    x: -93745.8359375
+                    y: 10860.99609375
+                -   display_name: Urmul
+                    sdk_name: Urmul_387
+                    x: -140063.578125
+                    y: -28605.5
+                2:
+                -   display_name: Agro
+                    sdk_name: Agro
+                    x: -112698.96875
+                    y: -54375.42578125
+                -   display_name: Parun
+                    sdk_name: Parun
+                    x: -76177.75
+                    y: -47891.99609375
+                -   display_name: Smuggler's Den
+                    sdk_name: SmugglersDen
+                    x: -50185.515625
+                    y: -12998.44921875
+                3:
+                -   display_name: Agasi
+                    sdk_name: Agasi_457
+                    x: -73515.453125
+                    y: -95565.53125
+                -   display_name: Kushtoz
+                    sdk_name: Kushtoz
+                    x: -114253.375
+                    y: -116105.6015625
+                4:
+                -   display_name: OP Leeks
+                    sdk_name: OPLeeks
+                    x: -37212.78125
+                    y: -70697.140625
+                -   display_name: Manyal
+                    sdk_name: Manyal_721
+                    x: 18859.328125
+                    y: -68624.3671875
+                -   display_name: North Training Camp
+                    sdk_name: NorthTrainingCamp
+                    x: 34401.34765625
+                    y: -116557.921875
+                5:
+                -   display_name: Khail
+                    sdk_name: Khail
+                    x: 37773.0625
+                    y: -12294.90234375
+                -   display_name: Nilaw
+                    sdk_name: Nilaw
+                    x: 60988.796875
+                    y: -45067.0546875
+                -   display_name: Storage Bunker
+                    sdk_name: StorageBunker
+                    x: 107594.140625
+                    y: -52489.75
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain_1127
+                    x: 122394.25
+                    y: -107351.3203125
+    Invasion v3:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Kamdesh_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -153173.5546875
+                    y: 41680.96484375
+                1:
+                -   display_name: OP Chaxton
+                    sdk_name: OPChaxton
+                    x: -52366.515625
+                    y: 44344.0625
+                -   display_name: Sao
+                    sdk_name: Sao_391
+                    x: -94446.0
+                    y: 11838.546875
+                2:
+                -   display_name: Smuggler's Den
+                    sdk_name: SmugglersDen
+                    x: -50057.8984375
+                    y: -12657.0
+                3:
+                -   display_name: Paprok
+                    sdk_name: Paprok_591
+                    x: -18231.34375
+                    y: -43448.578125
+                -   display_name: Parun
+                    sdk_name: Parun
+                    x: -75628.6953125
+                    y: -48261.31640625
+                4:
+                -   display_name: Manyal
+                    sdk_name: Manyal_705
+                    x: 18378.4375
+                    y: -68012.98828125
+                -   display_name: OP Leeks
+                    sdk_name: OPLeeks
+                    x: -37043.21484375
+                    y: -70605.58203125
+                5:
+                -   display_name: Mandagal
+                    sdk_name: Mandagal
+                    x: -9728.150390625
+                    y: -119561.33203125
+                -   display_name: Shako
+                    sdk_name: Shako_735
+                    x: 73661.515625
+                    y: -96633.22265625
+                -   display_name: Training Camp North
+                    sdk_name: TrainingCampNorth
+                    x: 34401.28515625
+                    y: -115145.34765625
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain_965
+                    x: 122421.46875
+                    y: -107364.37890625
     RAAS v1:
         background:
             corners:
@@ -3387,8 +4916,6 @@ Kamdesh:
             -   x: 201600.0
                 y: 201600.0
             minimap_filename: Kamdesh_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Central:
                 0:
@@ -3616,8 +5143,6 @@ Kamdesh:
             -   x: 201600.0
                 y: 201600.0
             minimap_filename: Kamdesh_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3721,8 +5246,6 @@ Kamdesh:
             -   x: 201600.0
                 y: 201600.0
             minimap_filename: Kamdesh_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3826,8 +5349,6 @@ Kamdesh:
             -   x: 201600.0
                 y: 201600.0
             minimap_filename: Kamdesh_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -3894,6 +5415,171 @@ Kamdesh:
                     x: 79677.296875
                     y: 48566.21875
 Kohat:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -230000.0
+                y: -230000.0
+            -   x: 231700.0
+                y: 231700.0
+            minimap_filename: kohat_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: -151831.046875
+                    y: -73455.0
+                1:
+                -   display_name: Suni Khel
+                    sdk_name: SuniKhel
+                    x: -87661.2265625
+                    y: -79710.265625
+                2:
+                -   display_name: Chakar Kot
+                    sdk_name: ChakarKot
+                    x: -17039.904296875
+                    y: -57528.21875
+                3:
+                -   display_name: Ali Abad
+                    sdk_name: AliAbad
+                    x: 2055.65625
+                    y: -17173.5
+                -   display_name: Malak Abad
+                    sdk_name: MalakAbad
+                    x: -13677.328125
+                    y: 2430.84765625
+                4:
+                -   display_name: Khadizai Radio Tower
+                    sdk_name: KhadizaiRadioTower
+                    x: 31661.0703125
+                    y: 13909.703125
+                5:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 64271.1015625
+                    y: 18975.796875
+    Invasion v1:
+        background:
+            corners:
+            -   x: -230000.0
+                y: -230000.0
+            -   x: 231700.0
+                y: 231700.0
+            minimap_filename: kohat_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -862.26123046875
+                    y: 176683.140625
+                1:
+                -   display_name: Hangu
+                    sdk_name: Hangu_551
+                    x: 113715.21875
+                    y: 89954.546875
+                2:
+                -   display_name: FOB Connolly
+                    sdk_name: FOBConnolly_671
+                    x: 149222.875
+                    y: -1314.6875
+                -   display_name: Nasrat
+                    sdk_name: NasratProper
+                    x: 92287.71875
+                    y: -12693.59375
+                -   display_name: Upper Nasrat
+                    sdk_name: UpperNasrat
+                    x: 96574.6640625
+                    y: -40943.109375
+                3:
+                -   display_name: Ali Abad
+                    sdk_name: AliAbad
+                    x: -3023.31396484375
+                    y: -20923.04296875
+                -   display_name: Ali Abad
+                    sdk_name: AliAbad2
+                    x: 7047.912109375
+                    y: -10924.037109375
+                -   display_name: Chakar Kot
+                    sdk_name: ChakarKot
+                    x: -17039.904296875
+                    y: -57528.21875
+                -   display_name: Malak Abad
+                    sdk_name: MalakAbad
+                    x: -11675.931640625
+                    y: 8984.1796875
+                4:
+                -   display_name: Bahadur Proper
+                    sdk_name: BahadurProper
+                    x: -80808.484375
+                    y: 43119.203125
+                -   display_name: Darbond
+                    sdk_name: Darbond
+                    x: -52036.11328125
+                    y: 63189.28125
+                -   display_name: Lower Mohd Zai
+                    sdk_name: LowerMohdZai
+                    x: -18769.546875
+                    y: 69689.4375
+                5:
+                -   display_name: Sarozai Lower
+                    sdk_name: SarozaiLower
+                    x: -176059.59375
+                    y: -6594.375
+                -   display_name: Sarozai Upper
+                    sdk_name: SarozaiUpper
+                    x: -160011.09375
+                    y: -19978.875
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -138134.765625
+                    y: 70776.1171875
+    Invasion v2:
+        background:
+            corners:
+            -   x: -230000.0
+                y: -230000.0
+            -   x: 231700.0
+                y: 231700.0
+            minimap_filename: kohat_minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -151831.046875
+                    y: -73455.0
+                1:
+                -   display_name: Suni Khel
+                    sdk_name: SuniKhel
+                    x: -87661.2265625
+                    y: -79710.265625
+                2:
+                -   display_name: Chakar Kot
+                    sdk_name: ChakarKot
+                    x: -17039.904296875
+                    y: -57528.21875
+                3:
+                -   display_name: Ali Abad
+                    sdk_name: AliAbad
+                    x: 2055.65625
+                    y: -17173.5
+                -   display_name: Malak Abad
+                    sdk_name: MalakAbad
+                    x: -13677.328125
+                    y: 2430.84765625
+                4:
+                -   display_name: Khadizai Radio Tower
+                    sdk_name: KhadizaiRadioTower
+                    x: 31661.0703125
+                    y: 13909.703125
+                5:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 64271.1015625
+                    y: 18975.796875
     RAAS v1:
         background:
             corners:
@@ -3902,8 +5588,6 @@ Kohat:
             -   x: 231700.0
                 y: 231700.0
             minimap_filename: kohat_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -4136,8 +5820,6 @@ Kohat:
             -   x: 231700.0
                 y: 231700.0
             minimap_filename: kohat_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Green:
                 0:
@@ -4418,8 +6100,6 @@ Kohat:
             -   x: 231700.0
                 y: 231700.0
             minimap_filename: kohat_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Blue:
                 0:
@@ -4645,8 +6325,6 @@ Kohat:
             -   x: 231700.0
                 y: 231700.0
             minimap_filename: kohat_minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -4748,8 +6426,6 @@ Kokan Valley:
             -   x: -107634.9375
                 y: -107566.75
             minimap_filename: T_Kokan_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -4844,6 +6520,67 @@ Kokan Valley:
                     sdk_name: MEAMain
                     x: 46316.7734375
                     y: -88730.234375
+    Invasion v1:
+        background:
+            corners:
+            -   x: 142013.671875
+                y: 142013.671875
+            -   x: -107634.9375
+                y: -107566.75
+            minimap_filename: T_Kokan_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 68577.0
+                    y: 77619.0
+                1:
+                -   display_name: First Stand
+                    sdk_name: FirstStand
+                    x: 46447.33984375
+                    y: 38053.859375
+                2:
+                -   display_name: Gran Dell
+                    sdk_name: GranDell
+                    x: 34113.51953125
+                    y: 17308.28125
+                -   display_name: The Nest
+                    sdk_name: TheNest
+                    x: 19989.341796875
+                    y: 34462.5234375
+                3:
+                -   display_name: Sarak
+                    sdk_name: Sarak
+                    x: -19462.498046875
+                    y: 26589.11328125
+                -   display_name: Tempest Estate
+                    sdk_name: TempestEstate
+                    x: -25704.73828125
+                    y: 1696.828125
+                4:
+                -   display_name: District Center
+                    sdk_name: DistrictCenter
+                    x: 13841.9248046875
+                    y: -33493.0
+                -   display_name: Market
+                    sdk_name: Market
+                    x: -20576.1455078125
+                    y: -37186.3046875
+                5:
+                -   display_name: Ruins
+                    sdk_name: Ruins
+                    x: -36985.31640625
+                    y: -57013.234375
+                -   display_name: Stonebend
+                    sdk_name: Stonebend
+                    x: -10567.76953125
+                    y: -81105.921875
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 46330.0
+                    y: -89535.0
     RAAS v1:
         background:
             corners:
@@ -4852,8 +6589,6 @@ Kokan Valley:
             -   x: -107634.9375
                 y: -107566.75
             minimap_filename: T_Kokan_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -4932,8 +6667,6 @@ Kokan Valley:
             -   x: -107634.9375
                 y: -107566.75
             minimap_filename: T_Kokan_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -4996,6 +6729,162 @@ Kokan Valley:
                     x: 46330.0
                     y: -89535.0
 Lashkar Valley:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: 216700.0
+                y: 216700.0
+            -   x: -216700.0
+                y: -216700.0
+            minimap_filename: T_Lashkar_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: 6601.265625
+                    y: 153777.59375
+                1:
+                -   display_name: Furlongs
+                    sdk_name: Furlongs
+                    x: 139357.71923828125
+                    y: 102146.484375
+                -   display_name: Nangalam
+                    sdk_name: Gardez
+                    x: -18761.76904296875
+                    y: 66759.765625
+                -   display_name: Nangalam
+                    sdk_name: Nangalam
+                    x: -1614.08544921875
+                    y: 67155.6328125
+                -   display_name: Sheena
+                    sdk_name: Sheena_9
+                    x: -1492.28076171875
+                    y: 113096.484375
+                -   display_name: Soviet Outpost
+                    sdk_name: SovietOutpost
+                    x: 99307.71923828125
+                    y: 89146.484375
+                2:
+                -   display_name: Derapet
+                    sdk_name: Derapet
+                    x: -89404.32763671875
+                    y: 62557.1796875
+                -   display_name: Ghawchak Village
+                    sdk_name: GhawchakVillage
+                    x: 114141.70361328125
+                    y: 39928.15625
+                -   display_name: Gulestan
+                    sdk_name: Gulestan
+                    x: 81341.37548828125
+                    y: 2680.546875
+                -   display_name: Kumbar Maidan Lower
+                    sdk_name: KumbarMaidanLower
+                    x: -72119.81201171875
+                    y: 18988.09375
+                -   display_name: Kumbar Maidan Upper
+                    sdk_name: KumbarMaidanUpper
+                    x: -64504.32763671875
+                    y: 33357.1796875
+                -   display_name: Malgir
+                    sdk_name: Malgir
+                    x: 4484.59423828125
+                    y: 18957.65625
+                -   display_name: Marjah
+                    sdk_name: Marjah
+                    x: 150491.70361328125
+                    y: 2128.15625
+                -   display_name: Toormang
+                    sdk_name: Toormang
+                    x: 29758.78173828125
+                    y: 46817.390625
+                -   display_name: Watapur
+                    sdk_name: Watapur
+                    x: -148604.32763671875
+                    y: 79307.1796875
+                3:
+                -   display_name: Central Lashkar
+                    sdk_name: CentralLashkar
+                    x: -3589.53076171875
+                    y: -34778.34375
+                -   display_name: Lashkar East
+                    sdk_name: LashkarEast
+                    x: 8786.14111328125
+                    y: -34239.390625
+                -   display_name: Lashkar West
+                    sdk_name: LashkarWest
+                    x: -12351.83544921875
+                    y: -29760.65625
+                -   display_name: Upper Lashkar
+                    sdk_name: UpperLashkar
+                    x: -5348.39794921875
+                    y: -44069.421875
+                4:
+                -   display_name: Central Lashkar
+                    sdk_name: CentralLashkar
+                    x: -3589.53076171875
+                    y: -34778.34375
+                -   display_name: Lashkar East
+                    sdk_name: LashkarEast
+                    x: 8786.14111328125
+                    y: -34239.390625
+                -   display_name: Lashkar West
+                    sdk_name: LashkarWest
+                    x: -12351.83544921875
+                    y: -29760.65625
+                -   display_name: Upper Lashkar
+                    sdk_name: UpperLashkar
+                    x: -5348.39794921875
+                    y: -44069.421875
+                5:
+                -   display_name: Ak Toba
+                    sdk_name: AkToba
+                    x: 33051.82080078125
+                    y: -82640.0625
+                -   display_name: Sahib Abad
+                    sdk_name: SahibAbad
+                    x: 70176.75048828125
+                    y: -110927.375
+                6:
+                -   display_name: Sao
+                    sdk_name: Jowman
+                    x: -64737.34326171875
+                    y: -61157.546875
+                -   display_name: Outdoor Market
+                    sdk_name: OutdoorMarket
+                    x: -33727.40576171875
+                    y: -64615.2734375
+                7:
+                -   display_name: Dogram
+                    sdk_name: Dogram
+                    x: 89822.66455078125
+                    y: -140295.484375
+                -   display_name: Gosam
+                    sdk_name: Gosam
+                    x: 118653.70361328125
+                    y: -111440.65625
+                -   display_name: Dogram
+                    sdk_name: Kanju
+                    x: 144503.18798828125
+                    y: -70664.171875
+                8:
+                -   display_name: Asmar
+                    sdk_name: Asmar
+                    x: -93396.35888671875
+                    y: -111512.828125
+                -   display_name: Grape Farm
+                    sdk_name: GrapeFarm
+                    x: -120922.89794921875
+                    y: -94233.046875
+                -   display_name: Tizak
+                    sdk_name: Tizak
+                    x: -148215.51513671875
+                    y: -33933.6875
+                9:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -9156.15576171875
+                    y: -141057.125
     CAF RAAS v1:
         background:
             corners:
@@ -5004,8 +6893,6 @@ Lashkar Valley:
             -   x: -216700.0
                 y: -216700.0
             minimap_filename: T_Lashkar_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             '01':
                 0:
@@ -5181,6 +7068,158 @@ Lashkar Valley:
                     sdk_name: RUSMain
                     x: 149281.984375
                     y: -157351.65625
+    Invasion v1:
+        background:
+            corners:
+            -   x: 216700.0
+                y: 216700.0
+            -   x: -216700.0
+                y: -216700.0
+            minimap_filename: T_Lashkar_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: 6601.265625
+                    y: 153777.59375
+                1:
+                -   display_name: Derapet
+                    sdk_name: Derapet
+                    x: -88862.11669921875
+                    y: 63534.64453125
+                -   display_name: Gardez
+                    sdk_name: Gardez
+                    x: -18761.76513671875
+                    y: 66759.765625
+                -   display_name: Nangalam
+                    sdk_name: Nangalam
+                    x: -1614.08544921875
+                    y: 67155.6328125
+                -   display_name: Sheena
+                    sdk_name: Sheena_9
+                    x: -1492.28076171875
+                    y: 113096.484375
+                -   display_name: Soviet Outpost
+                    sdk_name: SovietOutpost
+                    x: 102874.86767578125
+                    y: 86866.015625
+                2:
+                -   display_name: Ghawchak Village
+                    sdk_name: GhawchakVillage
+                    x: 114141.70361328125
+                    y: 39928.15625
+                -   display_name: Gulestan
+                    sdk_name: Gulestan
+                    x: 81341.37548828125
+                    y: 2680.546875
+                -   display_name: Kumbar Maidan Lower
+                    sdk_name: KumbarMaidanLower
+                    x: -72119.81201171875
+                    y: 18988.09375
+                -   display_name: Kumbar Maidan Upper
+                    sdk_name: KumbarMaidanUpper
+                    x: -64504.32763671875
+                    y: 33357.1796875
+                -   display_name: Malgir
+                    sdk_name: Malgir
+                    x: 4484.59423828125
+                    y: 18957.65625
+                -   display_name: Tizak
+                    sdk_name: Tizak
+                    x: -148215.51513671875
+                    y: -33933.6875
+                -   display_name: Toor Camp
+                    sdk_name: ToorCamp
+                    x: -115091.87451171875
+                    y: -12461.09375
+                -   display_name: Toormang
+                    sdk_name: Toormang
+                    x: 29758.78173828125
+                    y: 46817.390625
+                3:
+                -   display_name: Central Lashkar
+                    sdk_name: CentralLashkar
+                    x: -3589.53076171875
+                    y: -34778.34375
+                -   display_name: Lashkar East
+                    sdk_name: LashkarEast
+                    x: 8786.14111328125
+                    y: -34239.390625
+                -   display_name: Lashkar Market
+                    sdk_name: LashkarMarket
+                    x: -12351.83544921875
+                    y: -29760.65625
+                -   display_name: Upper Lashkar
+                    sdk_name: UpperLashkar
+                    x: -5348.39794921875
+                    y: -44069.421875
+                4:
+                -   display_name: Central Lashkar
+                    sdk_name: CentralLashkar
+                    x: -3589.53076171875
+                    y: -34778.34375
+                -   display_name: Lashkar East
+                    sdk_name: LashkarEast
+                    x: 8786.14111328125
+                    y: -34239.390625
+                -   display_name: Lashkar Market
+                    sdk_name: LashkarMarket
+                    x: -12351.83544921875
+                    y: -29760.65625
+                -   display_name: Upper Lashkar
+                    sdk_name: UpperLashkar
+                    x: -5348.39794921875
+                    y: -44069.421875
+                5:
+                -   display_name: Ak Toba
+                    sdk_name: AkToba
+                    x: 33051.82080078125
+                    y: -82640.0625
+                -   display_name: Kanju
+                    sdk_name: Kanju
+                    x: 144503.18798828125
+                    y: -70664.171875
+                -   display_name: Takur Ghar
+                    sdk_name: TakurGhar
+                    x: 73452.40673828125
+                    y: -61977.41796875
+                6:
+                -   display_name: Jowman
+                    sdk_name: Jowman
+                    x: -64737.34326171875
+                    y: -61157.55859375
+                -   display_name: Outdoor Market
+                    sdk_name: OutdoorMarket
+                    x: -33727.40576171875
+                    y: -64615.27734375
+                7:
+                -   display_name: Sahib Abad
+                    sdk_name: SahibAbad
+                    x: 70176.75048828125
+                    y: -110927.375
+                -   display_name: Dogram
+                    sdk_name: Dogram
+                    x: 89822.66455078125
+                    y: -140295.484375
+                -   display_name: Gosam
+                    sdk_name: Gosam
+                    x: 118653.70361328125
+                    y: -111440.65625
+                8:
+                -   display_name: Asmar
+                    sdk_name: Asmar
+                    x: -93396.35888671875
+                    y: -111512.828125
+                -   display_name: Grape Farm
+                    sdk_name: GrapeFarm
+                    x: -120922.89794921875
+                    y: -94233.046875
+                9:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -9156.15576171875
+                    y: -141057.125
     RAAS v1:
         background:
             corners:
@@ -5189,8 +7228,6 @@ Lashkar Valley:
             -   x: -216700.0
                 y: -216700.0
             minimap_filename: T_Lashkar_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Central:
                 0:
@@ -5469,8 +7506,6 @@ Logar Valley:
             -   x: -88145.140625
                 y: -113238.7578125
             minimap_filename: Logar_Valley_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             North:
                 0:
@@ -5609,8 +7644,6 @@ Logar Valley:
             -   x: -88145.140625
                 y: -113238.7578125
             minimap_filename: Logar_Valley_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             North:
                 0:
@@ -5759,6 +7792,296 @@ Logar Valley:
                     x: 59797.234375
                     y: -2287.85546875
 Manic-5:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -201657.890625
+                y: -201674.84375
+            -   x: 201523.078125
+                y: 201503.078125
+            minimap_filename: T_Manic-5_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: 134443.84375
+                    y: 159823.28125
+                1:
+                -   display_name: Bridge Bravo
+                    sdk_name: BridgeBravo
+                    x: 110978.578125
+                    y: 102060.2109375
+                -   display_name: East Baie Comeau
+                    sdk_name: EastBaieComeau_1
+                    x: 36327.32421875
+                    y: 122601.5859375
+                -   display_name: Logistics Center
+                    sdk_name: LogisticsCenter
+                    x: 90186.640625
+                    y: 132807.03125
+                -   display_name: Lost QRF
+                    sdk_name: LostQRF
+                    x: 68117.25
+                    y: 98509.484375
+                -   display_name: Old Van Doo Garrison
+                    sdk_name: OldVanDooGarrison
+                    x: 13129.337890625
+                    y: 167482.84375
+                2:
+                -   display_name: Crash Site
+                    sdk_name: CrashSite
+                    x: -41106.1875
+                    y: 124530.9296875
+                -   display_name: Lower Baie Comeau
+                    sdk_name: LowerBaieComeau
+                    x: 14179.328125
+                    y: 90176.4375
+                -   display_name: Patrol Base
+                    sdk_name: PatrolBase
+                    x: -51136.1875
+                    y: 161380.9296875
+                -   display_name: Riverfront
+                    sdk_name: Riverfront
+                    x: 25742.1875
+                    y: 81912.4296875
+                -   display_name: Upper Baie Comeau
+                    sdk_name: UpperBaieComeau
+                    x: -2833.078125
+                    y: 96394.09375
+                3:
+                -   display_name: Fermont
+                    sdk_name: Fermont
+                    x: -96979.75
+                    y: 113381.1015625
+                -   display_name: Gagnon
+                    sdk_name: Gagnon
+                    x: -57615.703125
+                    y: 71830.6875
+                -   display_name: Hilltop OP
+                    sdk_name: HilltopOP
+                    x: -103805.75
+                    y: 91757.1015625
+                -   display_name: Lodging Site
+                    sdk_name: LodgingSite
+                    x: -13762.703125
+                    y: 18715.6875
+                -   display_name: Russian Trench
+                    sdk_name: RussianTrench
+                    x: -44831.703125
+                    y: 71734.6875
+                4:
+                -   display_name: Antenna Facility
+                    sdk_name: AntennaFacility
+                    x: -132318.28125
+                    y: 34733.6171875
+                -   display_name: Battalion HQ
+                    sdk_name: BattalionHQ
+                    x: -104955.8046875
+                    y: 10404.625
+                -   display_name: Dam Administration
+                    sdk_name: DamAdministration
+                    x: -69845.734375
+                    y: -27669.033203125
+                -   display_name: Lineman Offices
+                    sdk_name: LinemanOffices
+                    x: -58216.84765625
+                    y: -20777.484375
+                -   display_name: Maintenance Yard
+                    sdk_name: MaintenanceYard
+                    x: -54006.60546875
+                    y: -40312.03125
+                -   display_name: Power Station
+                    sdk_name: PowerStation
+                    x: -32728.8515625
+                    y: -30738.44140625
+                5:
+                -   display_name: Crossroads
+                    sdk_name: Crossroads
+                    x: -71845.2265625
+                    y: -109681.3046875
+                -   display_name: Dam Storage Site
+                    sdk_name: DamStorageSite
+                    x: -47721.171875
+                    y: -116887.6640625
+                -   display_name: Estate
+                    sdk_name: Estate
+                    x: -150188.78125
+                    y: -31098.798828125
+                -   display_name: Firebase Pentincton
+                    sdk_name: FirebasePentincton
+                    x: -120734.328125
+                    y: -107069.6640625
+                -   display_name: Prospector's Point
+                    sdk_name: ProspectorsPoint
+                    x: -106400.5859375
+                    y: -59086.45703125
+                6:
+                -   display_name: FLQ Main
+                    sdk_name: MILMain
+                    x: -173300.84375
+                    y: -172041.65625
+    CAF Invasion v2:
+        background:
+            corners:
+            -   x: -201657.890625
+                y: -201657.890625
+            -   x: 201523.078125
+                y: 201503.078125
+            minimap_filename: T_Manic-5_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: -174876.1875
+                    y: -173880.5625
+                1:
+                -   display_name: Antenna Facility
+                    sdk_name: AntennaFacility_31
+                    x: -132059.359375
+                    y: 35232.1640625
+                -   display_name: Battalion HQ
+                    sdk_name: BattalionHQ
+                    x: -106002.5
+                    y: 9291.13671875
+                -   display_name: Estate
+                    sdk_name: Estate
+                    x: -152482.515625
+                    y: -32954.2421875
+                -   display_name: Firebase Pentincton
+                    sdk_name: FirebasePentincton
+                    x: -121438.0078125
+                    y: -107226.5546875
+                -   display_name: Prospector's Point
+                    sdk_name: ProspectorsPoint
+                    x: -106728.3984375
+                    y: -60491.51953125
+                2:
+                -   display_name: Dam Administration
+                    sdk_name: DamAdministration
+                    x: -69612.703125
+                    y: -28449.384765625
+                -   display_name: Maintenance Yard
+                    sdk_name: MaintenanceYard
+                    x: -54078.65625
+                    y: -41174.95703125
+                -   display_name: Old Workcamp
+                    sdk_name: OldWorkcamp
+                    x: -19819.4453125
+                    y: -90950.6953125
+                3:
+                -   display_name: Cannabis Farm
+                    sdk_name: CannabisFarm
+                    x: 12012.283203125
+                    y: 22830.5703125
+                -   display_name: Dieppe
+                    sdk_name: Dieppe
+                    x: 63026.828125
+                    y: -67480.859375
+                -   display_name: Ferme Constantin
+                    sdk_name: FermeConstantin
+                    x: 73436.1875
+                    y: -34431.09375
+                -   display_name: Ferme Dubois
+                    sdk_name: FermeDubois
+                    x: 22277.447265625
+                    y: -24304.439453125
+                -   display_name: Firebase Mississauga
+                    sdk_name: FirebaseMississauga
+                    x: 56834.0
+                    y: -17184.712890625
+                -   display_name: Lodging Site
+                    sdk_name: LodgingSite
+                    x: -13883.59375
+                    y: 19076.7578125
+                -   display_name: Penstocks
+                    sdk_name: Penstocks
+                    x: 3290.1875
+                    y: -30159.626953125
+                -   display_name: Telecom Facility
+                    sdk_name: TelecomFacility
+                    x: 17726.390625
+                    y: -744.1171875
+                4:
+                -   display_name: Central Mont Joie
+                    sdk_name: CentralMontJoie
+                    x: 104392.9453125
+                    y: 7600.455078125
+                -   display_name: Construction Site
+                    sdk_name: ConstructionSite
+                    x: 108874.6328125
+                    y: -22953.1328125
+                -   display_name: Workshops
+                    sdk_name: DistributionOffices
+                    x: 158740.75
+                    y: 60302.38671875
+                -   display_name: East Mont Joie
+                    sdk_name: EastMontJoie
+                    x: 125658.578125
+                    y: 14029.7060546875
+                -   display_name: Ferme Gallant
+                    sdk_name: FermeGallant
+                    x: 158537.5625
+                    y: -15259.83984375
+                -   display_name: Gas Station
+                    sdk_name: GasStation
+                    x: 95398.671875
+                    y: -2475.05859375
+                -   display_name: Gold Mine
+                    sdk_name: GoldMine
+                    x: 185388.84375
+                    y: 82270.203125
+                -   display_name: Mine Administration
+                    sdk_name: MineAdministration
+                    x: 172115.328125
+                    y: 57691.3359375
+                -   display_name: Mont Joie Outskirts
+                    sdk_name: MontJoieOutskirts
+                    x: 138336.859375
+                    y: 25269.189453125
+                -   display_name: Mont Joie Town Center
+                    sdk_name: MontJoieTownCenter
+                    x: 118113.4453125
+                    y: -1819.7734375
+                -   display_name: Riverview Apartments
+                    sdk_name: RiverviewApartments
+                    x: 107770.0703125
+                    y: -2127.83203125
+                -   display_name: West Mont Joie
+                    sdk_name: WestMontJoie
+                    x: 92451.4140625
+                    y: 15964.4560546875
+                -   display_name: Workshops
+                    sdk_name: Workshops
+                    x: 187555.109375
+                    y: 70831.7421875
+                5:
+                -   display_name: Bridge Bravo
+                    sdk_name: BridgeBravo
+                    x: 110609.1796875
+                    y: 101846.2421875
+                -   display_name: East Baie Comeau
+                    sdk_name: EastBaieComeau
+                    x: 36327.32421875
+                    y: 122601.5859375
+                -   display_name: Logistics Center
+                    sdk_name: LogisticsCenter
+                    x: 89814.3046875
+                    y: 132981.984375
+                -   display_name: Lost QRF
+                    sdk_name: LostQRF
+                    x: 66470.5
+                    y: 96869.8828125
+                -   display_name: Old Van Doo Garrison
+                    sdk_name: OldVanDooGarrison
+                    x: 16960.498046875
+                    y: 167088.203125
+                6:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: 135004.546875
+                    y: 160376.296875
     CAF RAAS v1:
         background:
             corners:
@@ -5767,8 +8090,6 @@ Manic-5:
             -   x: 203165.59375
                 y: 203182.0
             minimap_filename: T_Manic-5_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             West:
                 0:
@@ -6128,8 +8449,6 @@ Manic-5:
             -   x: 203165.59375
                 y: 203182.0
             minimap_filename: T_Manic-5_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             West:
                 0:
@@ -6455,8 +8774,6 @@ Manic-5:
             -   x: 203165.59375
                 y: 203182.0
             minimap_filename: T_Manic-5_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             West:
                 0:
@@ -6816,8 +9133,6 @@ Manic-5:
             -   x: 203165.59375
                 y: 203182.0
             minimap_filename: T_Manic-5_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Alpha:
                 0:
@@ -7053,8 +9368,6 @@ Mestia:
             -   x: 120000.0
                 y: 130000.0
             minimap_filename: T_Mestia_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7112,6 +9425,131 @@ Mestia:
                     sdk_name: RUSMain
                     x: -97554.53125
                     y: -4619.865234375
+    Invasion V1:
+        background:
+            corners:
+            -   x: 120000.0
+                y: 130000.0
+            -   x: -120000.0
+                y: -110000.0
+            minimap_filename: T_Mestia_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 103581.1953125
+                    y: 53627.92578125
+                1:
+                -   display_name: Farmstead
+                    sdk_name: Farmstead
+                    x: 59162.79296875
+                    y: 27536.89453125
+                -   display_name: Train Bridge
+                    sdk_name: TrainBridge
+                    x: 18809.111328125
+                    y: 49771.58203125
+                2:
+                -   display_name: Crucible Gamma
+                    sdk_name: CrucibleGamma
+                    x: 29523.44921875
+                    y: -112.35546875
+                -   display_name: Tunnels
+                    sdk_name: Tunnels
+                    x: 33193.6796875
+                    y: 795.7578125
+                3:
+                -   display_name: Crucible Alpha
+                    sdk_name: CrucibleAlpha
+                    x: 10953.1015625
+                    y: -2141.046875
+                -   display_name: Crucible Bravo
+                    sdk_name: CrucibleBravo
+                    x: 7524.33984375
+                    y: 15815.6953125
+                -   display_name: Quarry
+                    sdk_name: Quarry
+                    x: 39833.0
+                    y: -39804.515625
+                4:
+                -   display_name: Armory
+                    sdk_name: Armory
+                    x: -58946.6875
+                    y: 23638.1796875
+                -   display_name: Fortification
+                    sdk_name: Fortification
+                    x: -34481.0
+                    y: -6994.0
+                5:
+                -   display_name: MIL Main
+                    sdk_name: MILMain_2178
+                    x: -39271.6875
+                    y: 66483.828125
+    Invasion V2:
+        background:
+            corners:
+            -   x: 120000.0
+                y: 130000.0
+            -   x: -120000.0
+                y: -110000.0
+            minimap_filename: T_Mestia_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -97621.8203125
+                    y: -4440.0
+                1:
+                -   display_name: Armory
+                    sdk_name: Armory
+                    x: -59456.0
+                    y: 24312.0703125
+                -   display_name: Fortification
+                    sdk_name: Fortification
+                    x: -33772.19140625
+                    y: -8284.05859375
+                2:
+                -   display_name: Warehouse
+                    sdk_name: Warehouse
+                    x: -39383.23046875
+                    y: 65502.765625
+                -   display_name: Waterfall
+                    sdk_name: Waterfall
+                    x: -11835.875
+                    y: 36489.3984375
+                3:
+                -   display_name: Crucible Alpha
+                    sdk_name: CrucibleAlpha
+                    x: 10871.8359375
+                    y: -2175.603271484375
+                -   display_name: Crucible Bravo
+                    sdk_name: CrucibleBravo
+                    x: 7703.015625
+                    y: 14936.4384765625
+                -   display_name: Crucible Gamma
+                    sdk_name: CrucibleGamma
+                    x: 28878.671875
+                    y: 350.203125
+                4:
+                -   display_name: Quarry
+                    sdk_name: Quarry
+                    x: 39423.203125
+                    y: -39847.6484375
+                -   display_name: Tunnels
+                    sdk_name: Tunnels
+                    x: 33193.6796875
+                    y: 795.7578125
+                5:
+                -   display_name: Farmstead
+                    sdk_name: Farmstead
+                    x: 59419.59375
+                    y: 27679.7734375
+                6:
+                -   display_name: MIL Main
+                    sdk_name: MILMain_2719
+                    x: 102483.515625
+                    y: 53127.34375
     RAAS v1:
         background:
             corners:
@@ -7120,8 +9558,6 @@ Mestia:
             -   x: 120000.0
                 y: 130000.0
             minimap_filename: T_Mestia_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7188,8 +9624,6 @@ Mutaha:
             -   x: 182000.0
                 y: -114000.0
             minimap_filename: Mutaha_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7291,8 +9725,6 @@ Mutaha:
             -   x: 182000.0
                 y: -114000.0
             minimap_filename: Mutaha_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7412,6 +9844,95 @@ Mutaha:
                     sdk_name: MEAMain
                     x: 173643.8125
                     y: 47718.828125
+    Invasion v1:
+        background:
+            corners:
+            -   x: -93500.0
+                y: 161500.0
+            -   x: 182000.0
+                y: -114000.0
+            minimap_filename: Mutaha_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain
+                    x: 158192.2734375
+                    y: 158827.453125
+                1:
+                -   display_name: South Farm
+                    sdk_name: SouthFarm
+                    x: 93917.4765625
+                    y: 93627.0546875
+                -   display_name: South Village
+                    sdk_name: SouthVillage
+                    x: 44995.7578125
+                    y: 105901.21875
+                -   display_name: Vineyard
+                    sdk_name: Vineyard
+                    x: 132612.171875
+                    y: 72708.65625
+                2:
+                -   display_name: Chop Garage
+                    sdk_name: ChopGarage
+                    x: 102691.109375
+                    y: 48974.671875
+                -   display_name: East Mosque
+                    sdk_name: EastMosque
+                    x: 79041.0625
+                    y: 4679.421875
+                -   display_name: Chop Garage
+                    sdk_name: School
+                    x: 80313.4140625
+                    y: 39369.3125
+                3:
+                -   display_name: Ammo Warehouse
+                    sdk_name: AmmoWarehouse
+                    x: 40760.24609375
+                    y: 13794.4609375
+                -   display_name: Intersection Checkpoint
+                    sdk_name: IntersectionCheckpoint
+                    x: 32994.6953125
+                    y: 22983.2109375
+                -   display_name: Police Station
+                    sdk_name: PoliceStation
+                    x: 26551.2890625
+                    y: 36305.1796875
+                4:
+                -   display_name: Baraka Road Market
+                    sdk_name: BarakaRoadMarket
+                    x: -35777.265625
+                    y: 8637.1484375
+                -   display_name: Baraka Road North
+                    sdk_name: BarakaRoadNorth
+                    x: -27621.3515625
+                    y: -390.1640625
+                -   display_name: Baraka Road South
+                    sdk_name: BarakaRoadSouth
+                    x: -26722.890625
+                    y: 8523.3046875
+                -   display_name: Crash Site
+                    sdk_name: CrashSite
+                    x: -27553.7421875
+                    y: 24862.16015625
+                -   display_name: Four Points
+                    sdk_name: FourPoints
+                    x: -17655.234375
+                    y: 57047.3828125
+                5:
+                -   display_name: North Market
+                    sdk_name: NorthMarket
+                    x: -14209.40625
+                    y: -36713.8125
+                -   display_name: Zatar Compound
+                    sdk_name: ZatarCompound
+                    x: -30106.9296875
+                    y: -23642.2109375
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -50473.8828125
+                    y: -105995.234375
     RAAS v1:
         background:
             corners:
@@ -7420,8 +9941,6 @@ Mutaha:
             -   x: 182000.0
                 y: -114000.0
             minimap_filename: Mutaha_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7492,6 +10011,83 @@ Mutaha:
                     x: 156168.40625
                     y: 158452.296875
 Nanisivik:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -201657.890625
+                y: -201674.84375
+            -   x: 201523.078125
+                y: 201503.078125
+            minimap_filename: Nanisivik_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: 154851.5
+                    y: -44821.859375
+                1:
+                -   display_name: Listening Post
+                    sdk_name: ListeningPost
+                    x: 1559.515625
+                    y: 91906.0703125
+                -   display_name: Observation Point
+                    sdk_name: ObservationPoint
+                    x: 18090.8046875
+                    y: 145121.9375
+                -   display_name: Tailing Pond
+                    sdk_name: TailingPond
+                    x: 83371.09814453125
+                    y: 66498.3828125
+                2:
+                -   display_name: Bay Airfield
+                    sdk_name: BayAirfield
+                    x: -28602.794921875
+                    y: 133384.296875
+                -   display_name: Cambridge Bay Lower
+                    sdk_name: CambridgeBayLower
+                    x: -14648.576171875
+                    y: 166293.671875
+                -   display_name: Cambridge Bay Upper
+                    sdk_name: CambridgeBayUpper
+                    x: -10053.783203125
+                    y: 143049.5
+                3:
+                -   display_name: Research Station
+                    sdk_name: ResearchStation
+                    x: -57282.7734375
+                    y: 94825.140625
+                -   display_name: RS East Wing
+                    sdk_name: RSEastWing
+                    x: -59205.5546875
+                    y: 105680.6796875
+                -   display_name: RS West Wing
+                    sdk_name: RSWestWing
+                    x: -59107.078125
+                    y: 85819.7265625
+                4:
+                -   display_name: Drill Site Baker
+                    sdk_name: DrillSiteBaker
+                    x: -85970.546875
+                    y: -17687.26171875
+                -   display_name: Drill Site Dorset
+                    sdk_name: DrillSiteDorset
+                    x: -95906.625
+                    y: -12815.3037109375
+                -   display_name: Taqqut Co-op
+                    sdk_name: op
+                    x: -156088.703125
+                    y: 3106.4453125
+                5:
+                -   display_name: Shimik
+                    sdk_name: Shimik
+                    x: -88707.9296875
+                    y: -44211.359375
+                6:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: -141127.828125
+                    y: -135052.75
     CAF RAAS v1:
         background:
             corners:
@@ -7500,8 +10096,6 @@ Nanisivik:
             -   x: 201523.078125
                 y: 201503.078125
             minimap_filename: Nanisivik_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7640,8 +10234,6 @@ Narva:
             -   x: 141029.375
                 y: -140207.4375
             minimap_filename: Narva_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -7927,6 +10519,156 @@ Narva:
                     sdk_name: RUSMain
                     x: 127197.40234375
                     y: 34703.69140625
+    Invasion v1:
+        background:
+            corners:
+            -   x: -138970.6875
+                y: 139792.515625
+            -   x: 141029.375
+                y: -140207.4375
+            minimap_filename: Narva_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -117096.96118164062
+                    y: -83362.4296875
+                1:
+                -   display_name: Radio Station
+                    sdk_name: RadioStation
+                    x: -54641.988525390625
+                    y: -77383.630859375
+                -   display_name: Ring Road
+                    sdk_name: RingRoad
+                    x: -64889.058837890625
+                    y: -9048.6259765625
+                2:
+                -   display_name: Factory
+                    sdk_name: Factory
+                    x: -6653.121826171875
+                    y: -52004.84765625
+                -   display_name: Old Hospital
+                    sdk_name: OldHospital
+                    x: -12697.287353515625
+                    y: -32847.90625
+                3:
+                -   display_name: Geneva Apts
+                    sdk_name: GenevaApts
+                    x: 7151.933349609375
+                    y: -27315.890625
+                -   display_name: Shopping Center
+                    sdk_name: ShoppingCenter
+                    x: 11203.785888671875
+                    y: -38790.0859375
+                -   display_name: Storefronts
+                    sdk_name: Storefronts
+                    x: 23419.062255859375
+                    y: -28055.96484375
+                4:
+                -   display_name: Kanda Court
+                    sdk_name: KandaCourt
+                    x: 22505.425537109375
+                    y: 19548.162109375
+                -   display_name: Shipping Yard
+                    sdk_name: ShippingYard
+                    x: 24756.933349609375
+                    y: 31850.79296875
+                -   display_name: Warehouse
+                    sdk_name: Warehouse
+                    x: 36158.687255859375
+                    y: 22839.9375
+                5:
+                -   display_name: Kiriku
+                    sdk_name: Kiriku
+                    x: 59363.456787109375
+                    y: 8381.04296875
+                -   display_name: Narva Castle
+                    sdk_name: NarvaCastle
+                    x: 50222.827880859375
+                    y: -16067.8125
+                -   display_name: Narva Heights
+                    sdk_name: NarvaHeights
+                    x: 50501.398193359375
+                    y: -34299.23828125
+                6:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 127133.99975585938
+                    y: 34257.44140625
+    Invasion v2:
+        background:
+            corners:
+            -   x: -138970.6875
+                y: 139792.515625
+            -   x: 141029.375
+                y: -140207.4375
+            minimap_filename: Narva_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain_831
+                    x: -117131.97265625
+                    y: -83430.875
+                1:
+                -   display_name: Abandoned Airfield
+                    sdk_name: AbandonedAirfield
+                    x: -77370.58203125
+                    y: -62469.3984375
+                -   display_name: Radio Station
+                    sdk_name: RadioStation
+                    x: -55891.6484375
+                    y: -72610.046875
+                2:
+                -   display_name: Church
+                    sdk_name: Church
+                    x: -26231.69140625
+                    y: -56960.73828125
+                -   display_name: Old Barracks
+                    sdk_name: OldBarracks
+                    x: -7880.234375
+                    y: -72459.140625
+                -   display_name: Oru Village
+                    sdk_name: OruVillage
+                    x: -31125.94140625
+                    y: 14263.78125
+                -   display_name: Ring Road
+                    sdk_name: RingRoad
+                    x: -64341.69140625
+                    y: -10036.6640625
+                3:
+                -   display_name: Geneva Apartments
+                    sdk_name: GenevaApartments
+                    x: 6987.69921875
+                    y: -28009.376953125
+                -   display_name: Old Hospital
+                    sdk_name: OldHospital
+                    x: -13493.888671875
+                    y: -31728.56640625
+                4:
+                -   display_name: Bridgeview Apartments
+                    sdk_name: BridgeviewApartments
+                    x: 13783.0
+                    y: -7238.869140625
+                -   display_name: Train Depot
+                    sdk_name: TrainDepot
+                    x: 24623.759765625
+                    y: -5073.466796875
+                5:
+                -   display_name: Narva Castle
+                    sdk_name: NarvaCastle_1104
+                    x: 50197.390625
+                    y: -15959.1640625
+                -   display_name: Narva Heights
+                    sdk_name: NarvaHeights
+                    x: 50521.03125
+                    y: -36498.30859375
+                6:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 127122.38671875
+                    y: 35020.9609375
     RAAS v1:
         background:
             corners:
@@ -7935,8 +10677,6 @@ Narva:
             -   x: 141029.375
                 y: -140207.4375
             minimap_filename: Narva_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -8231,8 +10971,6 @@ Skorpo:
             -   x: -380000.0
                 y: -380000.0
             minimap_filename: Skorpo_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             North:
                 0:
@@ -8369,6 +11107,117 @@ Skorpo:
                     sdk_name: RUSMain
                     x: 209435.3125
                     y: -116044.484375
+    Invasion v1:
+        background:
+            corners:
+            -   x: 380000.0
+                y: 380000.0
+            -   x: -380000.0
+                y: -380000.0
+            minimap_filename: Skorpo_Minimap_Invasion_v1
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -282189.03125
+                    y: 159439.984375
+                1:
+                -   display_name: Heroysund
+                    sdk_name: Heroysund
+                    x: -243451.65625
+                    y: 61121.9765625
+                2:
+                -   display_name: Lia
+                    sdk_name: Lia
+                    x: -154565.6875
+                    y: -12696.390625
+                -   display_name: Stordalen
+                    sdk_name: Stordalen
+                    x: -93784.0859375
+                    y: 95479.65625
+                3:
+                -   display_name: Borneset Shipyard East
+                    sdk_name: BornesetShipyardEast
+                    x: -51022.125
+                    y: -9727.7734375
+                -   display_name: Eik
+                    sdk_name: Eik
+                    x: -2317.25
+                    y: 21617.578125
+                4:
+                -   display_name: Ammo Dump (Resupply CP)
+                    sdk_name: AmmoDump
+                    x: 10256.5625
+                    y: 53702.140625
+                -   display_name: Observation Outpost
+                    sdk_name: ObservationOutpost
+                    x: -18939.078125
+                    y: 81813.5703125
+                5:
+                -   display_name: Svingen
+                    sdk_name: Svingen
+                    x: 133648.90625
+                    y: 18160.64453125
+                -   display_name: Uskedalen
+                    sdk_name: Uskedalen
+                    x: 82359.34375
+                    y: -20527.75
+                6:
+                -   display_name: Adnaklett
+                    sdk_name: Adnaklett
+                    x: 170434.125
+                    y: -27830.703125
+                7:
+                -   display_name: Militia Main
+                    sdk_name: MILMain
+                    x: 244777.25
+                    y: -111624.140625
+    Invasion v2:
+        background:
+            corners:
+            -   x: 151000.0
+                y: 207000.0
+            -   x: -111000.0
+                y: -55000.0
+            minimap_filename: Skorpo_Minimap_Invasion_v2
+        lanes:
+            Center:
+                0:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 72225.4296875
+                    y: 4828.359375
+                1:
+                -   display_name: Lower Eik
+                    sdk_name: LowerEik
+                    x: 11453.40625
+                    y: 4990.859375
+                2:
+                -   display_name: Upper Eik
+                    sdk_name: UpperEik
+                    x: -9509.125
+                    y: 28591.5625
+                3:
+                -   display_name: Water Storage
+                    sdk_name: WaterStorage
+                    x: 9954.375
+                    y: 54446.0625
+                4:
+                -   display_name: Pallane
+                    sdk_name: Pallane
+                    x: -28173.75
+                    y: 44205.9375
+                5:
+                -   display_name: Observation Outpost
+                    sdk_name: ObservationOutpost
+                    x: -19345.375
+                    y: 81737.34375
+                6:
+                -   display_name: MIL Main
+                    sdk_name: MILMain
+                    x: -2930.75
+                    y: 137727.796875
     RAAS v1:
         background:
             corners:
@@ -8377,8 +11226,6 @@ Skorpo:
             -   x: -380000.0
                 y: -380000.0
             minimap_filename: Skorpo_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             North:
                 0:
@@ -8556,8 +11403,6 @@ Skorpo:
             -   x: -130000.0
                 y: -220000.0
             minimap_filename: Skorpo_Minimap_RAAS_v2
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -8807,8 +11652,6 @@ Skorpo:
             -   x: -380000.0
                 y: -380000.0
             minimap_filename: Skorpo_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9069,8 +11912,6 @@ Skorpo:
             -   x: -380000.0
                 y: -380000.0
             minimap_filename: Skorpo_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             South:
                 0:
@@ -9217,6 +12058,100 @@ Skorpo:
                     x: 244053.84375
                     y: -110653.328125
 Sumari:
+    Invasion v1:
+        background:
+            corners:
+            -   x: -63973.92578125
+                y: -44728.078125
+            -   x: 66033.578125
+                y: 85297.234375
+            minimap_filename: Sumari_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -50802.0
+                    y: 29424.0
+                1:
+                -   display_name: Checkpoint
+                    sdk_name: Checkpoint_7
+                    x: -35435.0
+                    y: 36754.0
+                -   display_name: Gas Station
+                    sdk_name: GasStation
+                    x: -28569.576171875
+                    y: 23730.19140625
+                -   display_name: Two Story
+                    sdk_name: TwoStory_6
+                    x: -30972.0
+                    y: 28761.0
+                2:
+                -   display_name: Brickworks
+                    sdk_name: Brickworks_24
+                    x: -18566.0
+                    y: 31640.0
+                -   display_name: Courtyard
+                    sdk_name: Courtyard_25
+                    x: -20389.0
+                    y: 26108.0
+                -   display_name: Rooftop House
+                    sdk_name: RooftopHouse
+                    x: -12856.0
+                    y: 27506.0
+                3:
+                -   display_name: Al-Zawahiri Compound
+                    sdk_name: ZawahiriCompound_0
+                    x: -15460.376953125
+                    y: 18475.6015625
+                -   display_name: Market
+                    sdk_name: Market_1
+                    x: -16420.0
+                    y: 13735.0
+                -   display_name: Police Station
+                    sdk_name: PoliceStation_2
+                    x: -6562.0
+                    y: 19558.0
+                -   display_name: Slums
+                    sdk_name: Slums_3
+                    x: -3430.26171875
+                    y: 6994.7744140625
+                4:
+                -   display_name: Materials Site
+                    sdk_name: MaterialsSite_6
+                    x: 2466.55224609375
+                    y: 30029.859375
+                -   display_name: Mosque
+                    sdk_name: Mosque_7
+                    x: 7347.0
+                    y: 21882.0
+                -   display_name: Palace
+                    sdk_name: Palace_8
+                    x: 11606.0
+                    y: 26208.0
+                -   display_name: Souk
+                    sdk_name: Souk_9
+                    x: 7842.03515625
+                    y: 35073.9609375
+                5:
+                -   display_name: Bakery
+                    sdk_name: Bakery_10
+                    x: 19983.083984375
+                    y: 34361.71875
+                -   display_name: School
+                    sdk_name: School_11
+                    x: 24054.06640625
+                    y: 26069.45703125
+                6:
+                -   display_name: Training Camp
+                    sdk_name: TrainingCamp_12
+                    x: 37038.23828125
+                    y: 15709.7705078125
+                7:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 51066.90625
+                    y: 34736.73046875
     RAAS v1:
         background:
             corners:
@@ -9225,8 +12160,6 @@ Sumari:
             -   x: 66033.578125
                 y: 85297.234375
             minimap_filename: Sumari_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9321,8 +12254,6 @@ Sumari:
             -   x: 66033.578125
                 y: 85297.234375
             minimap_filename: Sumari_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9418,8 +12349,6 @@ Tallil Outskirts:
             -   x: 234000.0
                 y: 234000.0
             minimap_filename: Tallil_Outskirts_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9502,8 +12431,6 @@ Tallil Outskirts:
             -   x: 234000.0
                 y: 234000.0
             minimap_filename: Tallil_Outskirts_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Alpha:
                 0:
@@ -9613,6 +12540,188 @@ Tallil Outskirts:
                     sdk_name: MEAMain
                     x: -130551.71875
                     y: -194241.625
+    Invasion v1:
+        background:
+            corners:
+            -   x: -234000.015625
+                y: -234000.0
+            -   x: 234000.0
+                y: 234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -168277.484375
+                    y: 194902.140625
+                1:
+                -   display_name: Eridu
+                    sdk_name: Eridu_503
+                    x: -84179.140625
+                    y: 158200.71875
+                -   display_name: Mahatt Ur
+                    sdk_name: MahattUr
+                    x: 42831.1875
+                    y: 153315.46875
+                2:
+                -   display_name: Central Ali Air Base
+                    sdk_name: CentralAliAirBase_569
+                    x: -48826.56640625
+                    y: 102551.9453125
+                -   display_name: North Ali Air Base
+                    sdk_name: NorthAliAirBase
+                    x: -58166.7109375
+                    y: 81877.859375
+                -   display_name: South Ali Air Base
+                    sdk_name: SouthAliAirBase
+                    x: -33927.04296875
+                    y: 122196.4921875
+                3:
+                -   display_name: Abandoned Soviet Base
+                    sdk_name: AbandonedSovietBaseEast
+                    x: 25574.078125
+                    y: 19566.28125
+                -   display_name: Central Iraqi Hangars
+                    sdk_name: CentralIraqiHangars
+                    x: -55123.28125
+                    y: -18525.455078125
+                4:
+                -   display_name: East Al-Khidhir
+                    sdk_name: Khidhir1
+                    x: 112668.28125
+                    y: -63269.03125
+                -   display_name: East Al-Khidhir
+                    sdk_name: Khidhir2
+                    x: 112668.28125
+                    y: -52155.70703125
+                -   display_name: West Al-Khidhir
+                    sdk_name: Khidhir1
+                    x: 77297.1953125
+                    y: -67371.6953125
+                -   display_name: West Al-Khidhir
+                    sdk_name: Khidhir2
+                    x: 82962.453125
+                    y: -58442.515625
+                5:
+                -   display_name: Batha
+                    sdk_name: Batha
+                    x: 10387.5
+                    y: -134247.21875
+                6:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 151253.9375
+                    y: -196539.5625
+    Invasion v2:
+        background:
+            corners:
+            -   x: -234000.015625
+                y: -234000.0
+            -   x: 234000.0
+                y: 234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: -131723.265625
+                    y: -196166.3125
+                1:
+                -   display_name: North Batha
+                    sdk_name: NorthBatha
+                    x: 10272.765625
+                    y: -140722.0625
+                -   display_name: South Batha
+                    sdk_name: SouthBatha
+                    x: 9837.03125
+                    y: -130819.109375
+                2:
+                -   display_name: Al-Khidhir Outskirts
+                    sdk_name: KhidhirOutskirts1
+                    x: 51980.4375
+                    y: -76510.4765625
+                -   display_name: Al-Khidhir Outskirts
+                    sdk_name: KhidhirOutskirts2
+                    x: 54194.75
+                    y: -44860.109375
+                -   display_name: Al-Khidhir Outskirts
+                    sdk_name: KhidhirOutskirts3
+                    x: 59484.265625
+                    y: -28893.25
+                -   display_name: Batha Outskirts
+                    sdk_name: BathaOutskirts
+                    x: 37908.625
+                    y: -105029.4140625
+                3:
+                -   display_name: West Al-Khidhir
+                    sdk_name: Khidhir
+                    x: 79334.28125
+                    y: -63269.03125
+                4:
+                -   display_name: East Al-Khidhir
+                    sdk_name: Khidhir
+                    x: 115352.3125
+                    y: -56036.28125
+                5:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: 178632.96875
+                    y: 15951.84765625
+    Invasion v3:
+        background:
+            corners:
+            -   x: -234000.015625
+                y: -234000.0
+            -   x: 234000.0
+                y: 234000.0
+            minimap_filename: Tallil_Outskirts_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -49401.703125
+                    y: 104388.53125
+                1:
+                -   display_name: Gas Town
+                    sdk_name: GasTown
+                    x: 107562.609375
+                    y: 79343.125
+                2:
+                -   display_name: Al-Khidr Outskirts
+                    sdk_name: KhidrOutskirts
+                    x: 68920.046875
+                    y: -29101.9453125
+                -   display_name: Fab's Olive Farm
+                    sdk_name: FabsOliveFarm
+                    x: 183111.28125
+                    y: 13597.8828125
+                -   display_name: Overpass
+                    sdk_name: Overpass
+                    x: 121563.40625
+                    y: -5770.3046875
+                3:
+                -   display_name: East Al-Khidhir
+                    sdk_name: Khidhir
+                    x: 115352.3125
+                    y: -56036.28125
+                4:
+                -   display_name: West Al-Khidhir
+                    sdk_name: Khidhir
+                    x: 79334.28125
+                    y: -63269.03125
+                5:
+                -   display_name: Batha
+                    sdk_name: Batha
+                    x: 10387.5
+                    y: -134247.21875
+                6:
+                -   display_name: INS Main
+                    sdk_name: INSMain
+                    x: -127971.5078125
+                    y: -194656.015625
     RAAS v1:
         background:
             corners:
@@ -9621,8 +12730,6 @@ Tallil Outskirts:
             -   x: 234000.0
                 y: 234000.0
             minimap_filename: Tallil_Outskirts_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9705,8 +12812,6 @@ Tallil Outskirts:
             -   x: 234000.0
                 y: 234000.0
             minimap_filename: Tallil_Outskirts_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9805,8 +12910,6 @@ Tallil Outskirts:
             -   x: 234000.0
                 y: 234000.0
             minimap_filename: Tallil_Outskirts_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9874,8 +12977,6 @@ Tallil Outskirts:
             -   x: 234000.0
                 y: 234000.0
             minimap_filename: Tallil_Outskirts_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -9951,6 +13052,67 @@ Tallil Outskirts:
                     x: 151541.53125
                     y: -197780.84375
 Yehorivka:
+    CAF Invasion v1:
+        background:
+            corners:
+            -   x: -280000.0
+                y: -280000.0
+            -   x: 280000.0
+                y: 280000.0
+            minimap_filename: Yehorivka_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: CAF Main
+                    sdk_name: CAFMain
+                    x: 244273.27734375
+                    y: 217483.5625
+                1:
+                -   display_name: Yeho Airfield
+                    sdk_name: YehoAirfield
+                    x: 6367.1015625
+                    y: 112923.84375
+                2:
+                -   display_name: East Novo
+                    sdk_name: EastNovo
+                    x: 26890.44140625
+                    y: 59261.5
+                -   display_name: West Novo
+                    sdk_name: WestNovo
+                    x: 7951.74609375
+                    y: 59447.34375
+                3:
+                -   display_name: East Mogilyovo
+                    sdk_name: EastMogilyovo_505
+                    x: -52027.908203125
+                    y: 10698.828125
+                -   display_name: Lower Mogilyovo
+                    sdk_name: LowerMogilyovo
+                    x: -73830.947265625
+                    y: 65868.0
+                -   display_name: West Mogilyovo
+                    sdk_name: WestMogilyovo
+                    x: -87483.259765625
+                    y: 3877.765625
+                4:
+                -   display_name: Lower Petrivka
+                    sdk_name: LowerPetrivka
+                    x: 19486.232421875
+                    y: -55729.015625
+                -   display_name: West Petrivka
+                    sdk_name: WestPetrivka
+                    x: -20180.267578125
+                    y: -72191.515625
+                5:
+                -   display_name: Upper Petrivka
+                    sdk_name: UpperPetrivka
+                    x: 13943.4375
+                    y: -90499.046875
+                6:
+                -   display_name: MIL Main
+                    sdk_name: MILMain
+                    x: 13377.5859375
+                    y: -241133.78125
     CAF RAAS v1:
         background:
             corners:
@@ -9959,8 +13121,6 @@ Yehorivka:
             -   x: 280000.0
                 y: 280000.0
             minimap_filename: Yehorivka_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Central:
                 0:
@@ -10256,6 +13416,128 @@ Yehorivka:
                     sdk_name: RUSMain
                     x: -187473.78125
                     y: -240973.140625
+    Invasion v1:
+        background:
+            corners:
+            -   x: -280000.0
+                y: -280000.0
+            -   x: 280000.0
+                y: 280000.0
+            minimap_filename: Yehorivka_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: GB Main
+                    sdk_name: GBMain
+                    x: 241473.30859375
+                    y: 217111.6875
+                1:
+                -   display_name: Yeho Airfield
+                    sdk_name: YehoAirfield
+                    x: 6367.1015625
+                    y: 112923.84375
+                2:
+                -   display_name: East Novo
+                    sdk_name: EastNovo
+                    x: 26890.44140625
+                    y: 59261.5
+                -   display_name: West Novo
+                    sdk_name: WestNovo
+                    x: 7951.74609375
+                    y: 59447.34375
+                3:
+                -   display_name: East Mogilyovo
+                    sdk_name: EastMogilyovo_505
+                    x: -52027.908203125
+                    y: 10698.828125
+                -   display_name: Lower Mogilyovo
+                    sdk_name: LowerMogilyovo
+                    x: -73830.947265625
+                    y: 65868.0
+                -   display_name: West Mogilyovo
+                    sdk_name: WestMogilyovo
+                    x: -87483.259765625
+                    y: 3877.765625
+                4:
+                -   display_name: Lower Petrivka
+                    sdk_name: LowerPetrivka
+                    x: 19486.232421875
+                    y: -55729.015625
+                -   display_name: West Petrivka
+                    sdk_name: WestPetrivka
+                    x: -20180.267578125
+                    y: -72191.515625
+                5:
+                -   display_name: Upper Petrivka
+                    sdk_name: UpperPetrivka
+                    x: 13943.4375
+                    y: -90499.046875
+                6:
+                -   display_name: MIL Main
+                    sdk_name: MILMain
+                    x: 58202.58203125
+                    y: -190656.578125
+    Invasion v2:
+        background:
+            corners:
+            -   x: -280000.0
+                y: -280000.0
+            -   x: 280000.0
+                y: 280000.0
+            minimap_filename: Yehorivka_Minimap
+        lanes:
+            Center:
+                0:
+                -   display_name: USA Main
+                    sdk_name: USAMain
+                    x: -229461.40625
+                    y: 209430.8515625
+                1:
+                -   display_name: Yeho Airfield
+                    sdk_name: YehoAirfield
+                    x: 4824.0625
+                    y: 115446.78125
+                2:
+                -   display_name: Hilltop Encampment
+                    sdk_name: HilltopEncampment
+                    x: 154383.8125
+                    y: 130440.7265625
+                -   display_name: Trudove
+                    sdk_name: Trudove
+                    x: 193618.40625
+                    y: 182994.0078125
+                3:
+                -   display_name: East Stepne
+                    sdk_name: EastStepne
+                    x: 127564.78125
+                    y: -32517.796875
+                -   display_name: Stepne Dairy Farm
+                    sdk_name: StepneDairyFarm
+                    x: 154815.125
+                    y: -13370.15625
+                4:
+                -   display_name: Bog Camp
+                    sdk_name: BogCamp
+                    x: 49259.078125
+                    y: -25002.875
+                -   display_name: Yevhinivka
+                    sdk_name: Yevhinivka
+                    x: 75349.703125
+                    y: -59044.5625
+                5:
+                -   display_name: Ivanivka
+                    sdk_name: Ivanivka
+                    x: 58011.21875
+                    y: -189182.015625
+                -   display_name: Peredove
+                    sdk_name: Peredove
+                    x: 130043.953125
+                    y: -154290.390625
+                6:
+                -   display_name: RUS Main
+                    sdk_name: RUSMain
+                    x: 163643.421875
+                    y: -226513.4921875
     RAAS v1:
         background:
             corners:
@@ -10264,8 +13546,6 @@ Yehorivka:
             -   x: 280000.0
                 y: 280000.0
             minimap_filename: Yehorivka_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Central:
                 0:
@@ -10577,8 +13857,6 @@ Yehorivka:
             -   x: 280000.0
                 y: 280000.0
             minimap_filename: Yehorivka_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -10656,8 +13934,6 @@ Yehorivka:
             -   x: 280000.0
                 y: 280000.0
             minimap_filename: Yehorivka_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Central:
                 0:
@@ -10969,8 +14245,6 @@ Yehorivka:
             -   x: 280000.0
                 y: 280000.0
             minimap_filename: Yehorivka_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:
@@ -11048,8 +14322,6 @@ Yehorivka:
             -   x: 280000.0
                 y: 280000.0
             minimap_filename: Yehorivka_Minimap
-            x_stretch_factor: 1.0
-            y_stretch_factor: 1.0
         lanes:
             Center:
                 0:

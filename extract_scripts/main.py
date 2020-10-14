@@ -8,6 +8,8 @@ import yaml
 UMODEL_PATH = "/home/tim/Desktop/UEViewer/umodel"
 SINGLE_LANE_NAME = "Center"
 
+GAME_MODES = ["RAAS", "Invasion"]
+
 
 def add_tuples(*tuples: Tuple):
     s = []
@@ -150,12 +152,18 @@ def extract_map(map_dir):
             gameplay_layer_dir += "/Gameplay_Layers"
 
         for layer in os.listdir(gameplay_layer_dir):
-            if "RAAS" not in layer \
-                    or layer.endswith(".uexp"):
+            if not layer.endswith(".umap"):
+                continue
+            layer = layer.replace(".umap", "")
+
+            game_mode = None
+            for gm in GAME_MODES:
+                if gm.casefold() in layer.casefold():
+                    game_mode = gm
+                    break
+            if game_mode is None:
                 continue
             print(layer)
-            assert layer.endswith(".umap")
-            layer = layer.replace(".umap", "")
 
             yaml_filename = f"extracts/{layer}.yaml"
             if not os.path.isfile(yaml_filename):
@@ -181,7 +189,7 @@ def extract_map(map_dir):
             for obj in docs:
                 sdk_name = list(obj.keys())[0]
                 _, _, sdk_name = sdk_name.rpartition(".")
-                if not sdk_name.startswith("MapTextureCorner"):
+                if not sdk_name.startswith("MapTexture"):
                     continue
                 x, y = absolute_location(access_one(obj)["RootComponent"])
                 bounds.append((x, y))
@@ -211,7 +219,7 @@ def extract_map(map_dir):
                 minimap_filename = match.group(1)
                 if os.path.isfile(f"map-resources/full-size/{minimap_filename}.tga"):
                     break
-                umodel_cmd = ["./umodel",
+                umodel_cmd = [UMODEL_PATH,
                               "-export",
                               f"{map_dir}/{map_name}/Minimap/{minimap_filename}.uasset",
                               "-out=./extracts"
@@ -235,26 +243,43 @@ def extract_map(map_dir):
                         {"x": p[0], "y": p[1]}
                         for p in bounds
                     ],
-                    "x_stretch_factor": 1.0,
-                    "y_stretch_factor": 1.0,
                     "minimap_filename": minimap_filename,
                 },
                 "lanes": lane_graph,
             }
 
-            map_simple_name, _, map_layer_name = layer.rpartition("_RAAS_")
-            map_layer_name = "RAAS " + map_layer_name
+            MAP_RENAMES = {
+                "Al_Basrah_City": "Al Basrah",
+                "BASRAH_CITY": "Al Basrah",
+                "Belaya": "Belaya Pass",
+                "Fallujah_City": "Fallujah",
+                "Mestia_Green": "Mestia",
+            }
+
+            print(map_name)
+            pretty_map_name = map_name
+            if caf:
+                _, _, pretty_map_name = pretty_map_name.partition("CAF_")
+            pretty_map_name = MAP_RENAMES.get(pretty_map_name) or pretty_map_name
+            pretty_map_name = pretty_map_name.replace("_", " ")
+
+            # strip out map name from layer name
+            layer_game_mode_index = layer.casefold().index(game_mode.casefold())
+            pretty_layer_name = game_mode + layer[layer_game_mode_index + len(game_mode):]
+            pretty_layer_name = pretty_layer_name.strip()
+            pretty_layer_name = pretty_layer_name.replace("_", " ")
+            print(pretty_map_name)
+            assert pretty_map_name != ""
+            assert pretty_layer_name != ""
 
             if minimap_filename is None:
-                print(f"[WARN] {map_name}/{map_layer_name} has no minimap")
+                print(f"[WARN] {pretty_map_name}/{pretty_layer_name} has no minimap")
 
             if caf:
-                _, _, map_simple_name = map_simple_name.partition("CAF_")
-                map_layer_name = "CAF " + map_layer_name
-            map_simple_name = map_simple_name.replace("_", " ")
-            if map_simple_name not in maps:
-                maps[map_simple_name] = {}
-            maps[map_simple_name][map_layer_name] = layer_data
+                pretty_layer_name = "CAF " + pretty_layer_name
+            if pretty_map_name not in maps:
+                maps[pretty_map_name] = {}
+            maps[pretty_map_name][pretty_layer_name] = layer_data
 
     return maps
 
