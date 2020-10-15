@@ -1,12 +1,17 @@
 import os
 import re
 import subprocess
-from typing import Tuple, List, Union
+import sys
+from collections import OrderedDict
+from pprint import pprint
+from typing import Tuple, List, Union, Set
 
 import yaml
 
 UMODEL_PATH = "/home/tim/Desktop/UEViewer/umodel"
 SINGLE_LANE_NAME = "Center"
+
+DEBUG = False
 
 GAME_MODES = ["RAAS", "Invasion"]
 
@@ -34,18 +39,24 @@ def to_list(list_dict: dict):
     return l
 
 
-def to_cluster(cluster_root_dict: dict, docs: List[dict]):
+def to_cluster(cluster_name: str, docs: List[dict]):
+    cluster_root_dict = None
+    for obj_dict in docs:
+        if sdk_name(obj_dict) == cluster_name:
+            cluster_root_dict = access_one(obj_dict)
+            break
+    assert cluster_root_dict is not None
+
     # TODO: sometimes sdk names are reused
     # - Skorpo RAAS v2, North has SteinslettaFootHills in 1 and 2 but display names and pos are different
     # - Skorpo RAAS v3, South has Beltedals in 3 and 4, different pos
     if cluster_root_dict["ClassName"] in ["BP_CaptureZoneMain_C", "BP_CaptureZone_C", "BP_CaptureZoneInvasion_C"]:
-        return [to_capture_point(access_one(cluster_root_dict),
+        return [to_capture_point(cluster_root_dict,
                                  cluster_root_dict["ClassName"],
-                                 cp_sdk_name(cluster_root_dict))]
+                                 cp_sdk_name({cluster_name: ""}))]
     else:
         assert cluster_root_dict["ClassName"] == "BP_CaptureZoneCluster_C"
 
-    cluster_name = list(cluster_root_dict.keys())[0]
     cluster = []
     # iterate over all CPs and only take CPs that have this cluster as parent
     for obj_dict in docs:
@@ -61,11 +72,23 @@ def to_cluster(cluster_root_dict: dict, docs: List[dict]):
 
 
 def cp_sdk_name(cp_dict: dict):
-    sdk_name = list(cp_dict.keys())[0]
+    sdk_name = None
+    for key in cp_dict.keys():
+        if key != "ClassName":
+            sdk_name = key
+            break
+    assert sdk_name is not None
     _, _, sdk_name = sdk_name.rpartition(".")
     # TODO: fix TractorCo-op
     _, _, sdk_name = sdk_name.rpartition("-")
     return sdk_name
+
+
+def sdk_name(obj_dict: dict):
+    for key in obj_dict.keys():
+        if key != "ClassName":
+            return key
+    assert False
 
 
 def to_capture_point(cp_dict: dict, class_name: str, sdk_name: str):
@@ -94,7 +117,7 @@ def absolute_location(scene_root: Union[dict, str]):
     return add_tuples(rel, absolute_location(attach_parent))
 
 
-def get_lane_graph(docs: List[dict]):
+def get_lane_graph_and_clusters(docs: List[dict]):
     for obj in docs:
         obj = access_one(obj)
         if obj["ClassName"] == "SQRAASLaneInitializer_C":
@@ -107,37 +130,65 @@ def get_lane_graph(docs: List[dict]):
 
 def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
     lane_graph = {}
+    cluster_names = set()
     for lane in to_list(initializer_dict["AASLanes"]):
         lane: dict
         # TODO: fix CENTRAL
         # TODO: Lashkar CAF RAAS v1 has single lane '01'
-        lane_name = lane["LaneName"]
-        lane_graph[lane_name] = {}
-        lane_graph[lane_name] = to_lane_content(lane["AASLaneLinks"], docs)
-    return lane_graph
+        lane_name = lane["LaneName"].title()
+        link_list, pretty_link_list = get_link_list(lane["AASLaneLinks"], docs)
+        cluster_names |= get_cluster_names(link_list, docs)
+        lane_graph[lane_name] = pretty_link_list
+    clusters = get_cluster_list(cluster_names, docs)
+    return lane_graph, clusters
 
 
 def single_lane_graph(initializer_dict: dict, docs: List[dict]):
-    lane_graph = {}
-    lane_name = SINGLE_LANE_NAME
-    lane_graph[lane_name] = {}
-    lane_graph[lane_name] = to_lane_content(initializer_dict["DesignOutgoingLinks"], docs)
-    return lane_graph
+    link_list, pretty_link_list = get_link_list(initializer_dict["DesignOutgoingLinks"], docs)
+    clusters = get_cluster_list(get_cluster_names(link_list, docs), docs)
+    lane_graph = {
+        SINGLE_LANE_NAME: pretty_link_list,
+    }
+    return lane_graph, clusters
 
 
-def to_lane_content(link_array_dict: dict, docs: List[dict]):
+def prettify_cluster_name(cluster_name):
+    pretty = cluster_name.rpartition(".")[2]
+    assert pretty != ""
+    return pretty
+
+
+def get_link_list(link_array_dict: dict, docs: List[dict]):
+    # transform link list
     links = to_list(link_array_dict)
-    links.append(links[-1]["NodeB"])
-    lane_content = {}
-    for i in range(len(links) - 1):
-        links[i] = links[i]["NodeA"]
-    for i in range(len(links)):
-        lane_content[i] = to_cluster(links[i], docs)
-    return lane_content
+    links = list(map(lambda link: (sdk_name(link["NodeA"]), sdk_name(link["NodeB"])), links))
+    pretty_link_list = list(map(lambda l: {
+        "a": prettify_cluster_name(l[0]),
+        "b": prettify_cluster_name(l[1])
+    }, links))
+    return links, pretty_link_list
+
+
+def get_cluster_names(link_list: List[Tuple[str, str]], docs: List[dict]):
+    # flatten links list and remove duplicates
+    cluster_names = set()
+    for a, b in link_list:
+        cluster_names.add(a)
+        cluster_names.add(b)
+    return cluster_names
+
+
+def get_cluster_list(cluster_names: Set[str], docs: List[dict]):
+    clusters = {}
+    for name in cluster_names:
+        pretty_name = prettify_cluster_name(name)
+        clusters[pretty_name] = to_cluster(name, docs)
+    return clusters
 
 
 def extract_map(map_dir):
     maps = {}
+    i = 0
     for map_name in os.listdir(map_dir):
         if not os.path.isdir(f"{map_dir}/{map_name}") \
                 or "EntryMap" in map_name \
@@ -146,6 +197,9 @@ def extract_map(map_dir):
                 or "Tutorial" in map_name \
                 or "Fallujah" == map_name:
             continue
+        if i > 2 and DEBUG:
+            break
+        i += 1
         caf = map_name.startswith("CAF")
         gameplay_layer_dir = f"{map_dir}/{map_name}"
         if "Gameplay_Layers" in os.listdir(gameplay_layer_dir):
@@ -182,7 +236,7 @@ def extract_map(map_dir):
                 docs = list(yaml.safe_load_all(f))
 
             # get lane_graph
-            lane_graph = get_lane_graph(docs)
+            lane_graph, clusters = get_lane_graph_and_clusters(docs)
 
             # get map bounds
             bounds = []
@@ -237,17 +291,6 @@ def extract_map(map_dir):
                                  ])
                 break
 
-            layer_data = {
-                "background": {
-                    "corners": [
-                        {"x": p[0], "y": p[1]}
-                        for p in bounds
-                    ],
-                    "minimap_filename": minimap_filename,
-                },
-                "lanes": lane_graph,
-            }
-
             MAP_RENAMES = {
                 "Al_Basrah_City": "Al Basrah",
                 "BASRAH_CITY": "Al Basrah",
@@ -277,6 +320,26 @@ def extract_map(map_dir):
 
             if caf:
                 pretty_layer_name = "CAF " + pretty_layer_name
+
+            layer_data = {
+                "background": {
+                    "corners": [
+                        {"x": p[0], "y": p[1]}
+                        for p in bounds
+                    ],
+                    "minimap_filename": minimap_filename,
+                    "heightmap_filename": f"height-map-{pretty_map_name.rpartition(' ')[0].lower()}C1",
+                    "heightmap_transform": {
+                        "shift_x": 0,
+                        "shift_y": 0,
+                        "scale_x": 1.0,
+                        "scale_y": 1.0,
+                    }
+                },
+                "clusters": clusters,
+                "lanes": lane_graph,
+            }
+
             if pretty_map_name not in maps:
                 maps[pretty_map_name] = {}
             maps[pretty_map_name][pretty_layer_name] = layer_data

@@ -1,4 +1,5 @@
 let capturePoints = null;
+let clusters = null;
 let cpBluforMain = null;
 let cpOpforMain = null;
 let cpLines = null;
@@ -8,10 +9,6 @@ let allLanes = null;
 let laneLengths = null;
 let raasData = null;
 const raasDataSubscriber = new Set();
-
-const CP_POSSIBLE = 0
-const CP_CONFIRMED = 1
-const CP_IMPOSSIBLE = 2
 
 const CLR_CONFIRMED = "rgb(0,255,13)";
 const CLR_ACTIVE = "rgb(176,255,148)";
@@ -43,27 +40,34 @@ const CLR_PRIORITY = {
     OTHER: 0,
 }
 
-class Path {
-    constructor(parent_dict, destination) {
-        const path = [];
-        let cur = destination;
-        do {
-            path.push(cur);
-            cur = parent_dict.get(cur);
-        } while (cur !== undefined);
-
-        this.length = path.length - 1;
-        this.path = path.reverse();
+class Cluster {
+    constructor() {
+        this.outgoingEdges = new Map();
+        this.incomingEdges = new Map();
+        this.points = new Set();
     }
 
-    head() {
-        return this.path[0];
+    addEdgeTo(target, lane) {
+        this._addEdgeTo(target, lane, true);
     }
 
-    tail() {
-        return this.path[this.path.length - 1];
+    _addEdgeTo(target, lane, outgoing) {
+        const edgeSet = outgoing ? this.outgoingEdges : this.incomingEdges;
+        if (!edgeSet.has(lane)) {
+            edgeSet.set(lane, new Set());
+        }
+        edgeSet.get(lane).add(target);
+
+        // add backwards edges
+        if (outgoing) {
+            target._addEdgeTo(this, lane, false);
+        }
     }
 
+    addPoint(point, lane) {
+        this.points.add(point);
+        point.clusters.set(lane, this);
+    }
 }
 
 class CapturePoint {
@@ -71,88 +75,9 @@ class CapturePoint {
         this.name = name;
         this.displayName = displayName;
         this.pos = pos;
-        this.laneDepths = new Map();
-        this.neighbours = new Map();
         this.circleMarker = null;
-        this.follower = null;
-    }
-
-    addLane(lane, depth) {
-        this.laneDepths.set(lane, depth);
-    }
-
-    pathsFrom(cpOther, restrictToLanes = null) {
-        if (restrictToLanes === null) {
-            restrictToLanes = new Set(allLanes);
-        }
-        let paths = {};
-        restrictToLanes.forEach(lane => {
-            paths[lane] = this.pathFromSingleLane(cpOther, lane);
-        })
-        return paths;
-    }
-
-    pathFromSingleLane(cpOther, lane) {
-        // BFS
-        const visited = new Set([cpOther]);
-        const parent = new Map();
-        const queue = new Queue();
-        let thisFound = false;
-        queue.enqueue(cpOther);
-
-        while (!queue.isEmpty()) {
-            const cur = queue.dequeue();
-            if (cur === this) {
-                thisFound = true;
-                break;
-            }
-            if (!cur.neighbours.has(lane)) {
-                continue;
-            }
-            cur.neighbours.get(lane).forEach(nb => {
-                // if cur already has a different follower, don't consider nb for paths
-                if (cur.follower !== null && cur.follower !== nb) {
-                    return;
-                }
-                // don't look back
-                if ((ownMain === cpBluforMain && cur.laneDepths.get(lane) > nb.laneDepths.get(lane))
-                    || (ownMain === cpOpforMain && cur.laneDepths.get(lane) < nb.laneDepths.get(lane))) {
-                    return;
-                }
-                if (!visited.has(nb)) {
-                    visited.add(nb);
-                    parent.set(nb, cur);
-                    queue.enqueue(nb);
-                }
-            });
-        }
-
-        if (!thisFound) {
-            return null;
-        }
-
-        return new Path(parent, this);
-    }
-
-    distanceFrom(cpOther, onlyPossibleRoutes = true) {
-        let lanes = null;
-        if (onlyPossibleRoutes) {
-            lanes = possibleLanes();
-        }
-        // try all these lanes and return the shortest distance
-        // we need to try the lanes separately to avoid generating impossible paths that rely on using multiple lanes
-        const paths = this.pathsFrom(cpOther, lanes);
-        let shortestDist = Number.MAX_VALUE;
-        for (const lane in paths) {
-            if (paths[lane] !== null) {
-                shortestDist = Math.min(shortestDist, paths[lane].length);
-            }
-        }
-        return shortestDist;
-    }
-
-    distanceToOwnBase() {
-        return this.distanceFrom(ownMain);
+        this.clusters = new Map();
+        this.confirmedFollower = null;
     }
 
     equal(cpOther) {
@@ -166,171 +91,6 @@ class CapturePoint {
         return false;
     }
 
-    /*
-    Checks if the specified CP is a neighbour of this CP and returns the name of the lane on which it is a neighbour.
-    If the CPs are neighbours on multiple lanes, it is not specified which lane is returned.
-
-    If the CPs are not neighbours, false is returned.
-     */
-    isNeighbour(cpOther) {
-        for (const lane of this.neighbours.keys()) {
-            if (this.neighbours.get(lane).has(cpOther)) {
-                return lane;
-            }
-        }
-        return false;
-    }
-
-    possibleNeighbours() {
-        let pn = new Set();
-        for (const lane of this.neighbours.keys()) {
-            if (!possibleLanes().has(lane)) {
-                continue
-            }
-            pn = union(pn, this.neighbours.get(lane));
-        }
-        return pn;
-    }
-
-    status() {
-        if (this.confirmed()) {
-            return CP_CONFIRMED;
-        }
-        // If the CP is not reachable from main (which side we're playing doesn't matter)
-        if (this.distanceFrom(ownMain) === Number.MAX_VALUE) {
-            return CP_IMPOSSIBLE;
-        }
-        return CP_POSSIBLE;
-    }
-
-    active() {
-        let active = false;
-        // check if there is a confirmed neighbour that is the end of the confirmation line
-        this.possibleNeighbours().forEach(nb => {
-            if (nb.status() === CP_CONFIRMED && nb.follower === null) {
-                active = true;
-            }
-        })
-        return active;
-    }
-
-    confirmed() {
-        let cur = ownMain;
-        do {
-            if (cur === this) {
-                return true;
-            }
-            cur = cur.follower;
-        } while (cur !== null)
-        return false;
-
-    }
-
-    labelInfo() {
-        if (this === cpBluforMain || this === cpOpforMain) {
-            // only use actual distance if a main base has been selected
-            if (ownMain === cpBluforMain || ownMain === cpOpforMain) {
-                return {
-                    color: CLR_MAIN_BASE,
-                    number: this.distanceToOwnBase(),
-                };
-            } else {
-                return {
-                    color: CLR_MAIN_BASE,
-                    number: "&nbsp",
-                };
-            }
-
-        }
-        switch (this.status()) {
-            case CP_CONFIRMED:
-                return {
-                    color: CLR_CONFIRMED,
-                    number: this.distanceToOwnBase(),
-                };
-            case CP_IMPOSSIBLE:
-                return {
-                    color: CLR_IMPOSSIBLE,
-                    number: "&nbsp",
-                };
-            default:
-        }
-
-        if (this.active()) {
-            return {
-                color: CLR_ACTIVE,
-                number: this.distanceToOwnBase(),
-            };
-        }
-
-
-        let cur_prio = Number.MIN_SAFE_INTEGER;
-        let cur_info = null;
-        for (const lane of this.laneDepths.keys()) {
-            if (!possibleLanes().has(lane)) {
-                continue;
-            }
-            const path = this.pathFromSingleLane(ownMain, lane);
-            if (path === null) {
-                continue;
-            }
-            const dist = path.length;
-            if (this.name === "Marina") {
-                console.log();
-            }
-            const def_depth = Math.floor(laneLengths.get(lane) / 2);
-            let off_depth = def_depth + 1;
-            // only check for mid-points on lanes with uneven capture points
-            if (laneLengths.get(lane) % 2 === 1) {
-                const mid_depth = off_depth;
-                off_depth += 1;
-                if (dist === mid_depth && cur_prio < CLR_PRIORITY.MID_POINT) {
-                    cur_prio = CLR_PRIORITY.MID_POINT;
-                    cur_info = {
-                        color: CLR_MID_POINT,
-                        number: dist,
-                    };
-                    continue;
-                }
-            }
-            if (dist === def_depth && cur_prio < CLR_PRIORITY.DEF_POINT) {
-                cur_prio = CLR_PRIORITY.DEF_POINT;
-                cur_info = {
-                    color: CLR_DEF_POINT,
-                    number: dist,
-                };
-                continue;
-            }
-            if (dist === off_depth && cur_prio < CLR_PRIORITY.OFF_POINT) {
-                cur_prio = CLR_PRIORITY.OFF_POINT;
-                cur_info = {
-                    color: CLR_OFF_POINT,
-                    number: dist,
-                };
-                continue;
-            }
-            if (dist < def_depth && cur_prio < CLR_PRIORITY.OTHER) {
-                const offset = def_depth - dist;
-                cur_prio = CLR_PRIORITY.OTHER - offset;
-                cur_info = {
-                    color: CLR_DEF_OTHER[offset - 1],
-                    number: dist,
-                };
-                continue;
-            }
-            if (dist > off_depth && cur_prio < CLR_PRIORITY.OTHER) {
-                const offset = dist - off_depth;
-                cur_prio = CLR_PRIORITY.OTHER - offset;
-                cur_info = {
-                    color: CLR_OFF_OTHER[offset - 1],
-                    number: dist,
-                };
-                continue;
-            }
-        }
-        return cur_info;
-    }
-
     onClick() {
         // ignore clicks on own main
         if (this === ownMain) {
@@ -341,65 +101,69 @@ class CapturePoint {
             resetConfirmations();
             return;
         }
-        const s = this.status();
-        // Ignore clicks on mandatory and impossible CPs
-        if (s === CP_IMPOSSIBLE) {
-            return;
-        }
 
-        // Ignore clicks on possible but inactive CPs
-        if (s === CP_POSSIBLE && !this.active()) {
-            return;
-        }
-
-        // Ignore clicks on confirmed points of they're not the end of the confirmation line
-        if (s === CP_CONFIRMED && this.follower !== null) {
-            return;
-        }
-
-        const cpLaneSet = new Set(this.laneDepths.keys());
-        if (s !== CP_CONFIRMED) {
-            // confirm CP
-            lastConfirmedPoint().follower = this;
-        } else {
-            // un-confirm CP
-            let cur = ownMain;
-            while (cur.follower !== null) {
-                if (cur.follower === this) {
-                    cur.follower = null;
-                    break;
-                }
-                cur = cur.follower;
+        // iterate through confirmation line
+        let prev = null;
+        let cur = ownMain;
+        while (cur.confirmedFollower !== null) {
+            // if this point is in the middle of the confirmation line, ignore click
+            if (cur === this) {
+                return;
             }
 
+            prev = cur;
+            cur = cur.confirmedFollower;
         }
-        // re-check possibility of all cps and re-color them
-        redrawCpInfo();
-        redrawCpLines();
+        // if this point is the end of the confirmation line, remove it from the confirmation line
+        if (cur === this) {
+            prev.confirmedFollower = null;
+            redraw();
+            return;
+        }
+        // check if this point lies right after the confirmation line
+        const forward = ownMain !== cpOpforMain;
+        cur.clusters.forEach((cluster, lane) => {
+            const edgeSet = forward ? cluster.outgoingEdges : cluster.incomingEdges;
+            const thisCluster = this.clusters.get(lane);
+            if (edgeSet.get(lane).has(thisCluster)) {
+               // add point to confirmation line
+                cur.confirmedFollower = this;
+                redraw();
+                return;
+            }
+        });
+
+        // otherwise, point lies behind confirmation line and is not the next point
+        // => ignore click
+        return;
+    }
+}
+
+class CPRenderInfo {
+    constructor() {
+        this.color = CLR_IMPOSSIBLE;
+        this.visible = false;
+        this.centerNumber = "&nbsp";
+        this.laneLabels = [];
+        this.priority = Number.MIN_SAFE_INTEGER;
+    }
+
+    addInfoPossibility(color, depth, lane, priority) {
+        this.laneLabels.push(`${depth}${lane[0]}`);
+        this.visible = true;
+        if (priority > this.priority) {
+            this.priority = priority;
+            this.color = color;
+            this.centerNumber = depth;
+        }
     }
 }
 
 function resetConfirmations() {
     capturePoints.forEach(cp => {
-        cp.follower = null;
+        cp.confirmedFollower = null;
     });
-    redrawCpInfo();
-    redrawCpLines();
-}
-
-function possibleLanes() {
-    const poss = new Set(allLanes);
-    let cur = ownMain;
-    while (cur.follower !== null) {
-        // check which lanes support this traversal
-        for (const lane of cur.neighbours.keys()) {
-            if (!cur.neighbours.get(lane).has(cur.follower)) {
-                poss.delete(lane);
-            }
-        }
-        cur = cur.follower;
-    }
-    return poss;
+    redraw();
 }
 
 function pointDistance(posA, posB) {
@@ -429,77 +193,216 @@ function lastConfirmedPoint() {
     return cur;
 }
 
-function redrawCpInfo() {
+function redraw() {
+    // remove all existing on-click handlers
     capturePoints.forEach(cp => {
-        // Try each lane. Only display lanes which can lead to this CP with the current confirmation line
-        let lanes = [];
-        for (const lane of cp.laneDepths.keys()) {
-            const path = cp.pathFromSingleLane(ownMain, lane);
-            if (path !== null) {
-                lanes.push(`${path.length}${lane[0]}`);
-            }
+        cp.circleMarker.off('click');
+    })
+
+    // set default (hidden) rendering setting for all CPs
+    const renderInfos = new Map();
+    capturePoints.forEach(cp => {
+        renderInfos.set(cp, new CPRenderInfo());
+    });
+
+    // special treatment for main bases if none are selected
+    if (ownMain !== cpBluforMain && ownMain !== cpOpforMain) {
+        renderInfos.get(cpBluforMain).addInfoPossibility(CLR_MAIN_BASE, 0, "DUMMY", CLR_PRIORITY.MAIN_BASE);
+        renderInfos.get(cpOpforMain).addInfoPossibility(CLR_MAIN_BASE, 0, "DUMMY", CLR_PRIORITY.MAIN_BASE);
+    }
+
+    const forward = ownMain !== cpOpforMain;
+    const mainCp = ownMain;
+
+    // go through confirmation line
+    let possibleLanes = new Set(allLanes);
+    let lastConfirmedPoint = null;
+    let curConfirmedPoint = mainCp;
+    let curDepth = 0;
+    do {
+        // intersect possible lanes with CPs lanes
+        possibleLanes = intersection(possibleLanes, new Set(curConfirmedPoint.clusters.keys()));
+        // mark selected CP as confirmed in all possible lanes
+        possibleLanes.forEach(lane => {
+            renderInfos.get(curConfirmedPoint).addInfoPossibility(CLR_CONFIRMED, curDepth, lane, CLR_PRIORITY.CONFIRMED);
+        });
+        curDepth += 1;
+        lastConfirmedPoint = curConfirmedPoint;
+        curConfirmedPoint = curConfirmedPoint.confirmedFollower;
+    } while (curConfirmedPoint !== null);
+    const postConfirmationDepth = curDepth;
+
+
+    // traverse graph for each lane and collect render info
+    allLanes.forEach(lane => {
+        // ignore impossible lanes
+        if (!possibleLanes.has(lane)) {
+            return;
         }
 
-        const labelInfo = cp.labelInfo();
-        if (cp === cpOpforMain || cp === cpBluforMain
-            || allLanes.size === 1) {
-            lanes = "&nbsp";
+        // BFS over entire graph to get lane labels and depth-dependent color
+        const visited = new Set();
+        const queue = new Queue();
+        // start after last confirmed point
+        const edgeSet = forward ?
+            lastConfirmedPoint.clusters.get(lane).outgoingEdges
+            : lastConfirmedPoint.clusters.get(lane).incomingEdges;
+        edgeSet.get(lane).forEach(queue.enqueue);
+        queue.enqueue(null); // add null as a depth separator
+        curDepth = postConfirmationDepth;
+
+        // for the first level after the end of the confirmation line,
+        // apply the active color and set the on-click handler
+        let levelAfterConfirmation = true;
+
+        while (!queue.isEmpty()) {
+            const cur = queue.dequeue();
+            if (cur === null) {
+                curDepth += 1;
+                levelAfterConfirmation = false;
+                queue.enqueue(null); // re-add null for next level
+                if (queue.getLength() === 1) break; // end of BFS
+                continue;
+            }
+
+            // update info for all CPs in cluster
+            const defDepth = Math.floor(laneLengths.get(lane) / 2);
+            let offDepth = defDepth + 1;
+            let midDepth = null;
+            if (laneLengths.get(lane) % 2 === 1) {
+                midDepth = offDepth;
+                offDepth += 1;
+            }
+            cur.points.forEach(cp => {
+                const rI = renderInfos.get(cp);
+                if (levelAfterConfirmation) {
+                    rI.addInfoPossibility(CLR_ACTIVE, curDepth, lane, CLR_PRIORITY.ACTIVE);
+                    return;
+                }
+                if (cp === cpOpforMain || cp === cpBluforMain) {
+                    rI.addInfoPossibility(CLR_MAIN_BASE, curDepth, lane, CLR_PRIORITY.MAIN_BASE);
+                    return;
+                }
+                // get depths of layer to determine offense / defense / mid points
+                // only check for mid-points on lanes with uneven capture points
+                if (midDepth !== null && curDepth === midDepth) {
+                    rI.addInfoPossibility(CLR_MID_POINT, curDepth, lane, CLR_PRIORITY.MID_POINT);
+                    return;
+                }
+                if (curDepth === defDepth) {
+                    rI.addInfoPossibility(CLR_DEF_POINT, curDepth, lane, CLR_PRIORITY.DEF_POINT);
+                    return;
+                }
+                if (curDepth === offDepth) {
+                    rI.addInfoPossibility(CLR_OFF_POINT, curDepth, lane, CLR_PRIORITY.OFF_POINT);
+                    return;
+                }
+                if (curDepth < defDepth) {
+                    const offset = defDepth - curDepth;
+                    rI.addInfoPossibility(CLR_DEF_OTHER[offset - 1], curDepth, lane, CLR_PRIORITY.OTHER - offset);
+                    return;
+                }
+                if (curDepth > offDepth) {
+                    const offset = curDepth - offDepth;
+                    rI.addInfoPossibility(CLR_OFF_OTHER[offset - 1], curDepth, lane, CLR_PRIORITY.OTHER - offset);
+                    return;
+                }
+            });
+
+            const edgeSet = forward ? cur.outgoingEdges : cur.incomingEdges;
+
+            if (!edgeSet.has(lane)) {
+                continue;
+            }
+            edgeSet.get(lane).forEach(nb => {
+                if (!visited.has(nb)) {
+                    visited.add(nb);
+                    queue.enqueue(nb);
+                }
+            });
         }
-        cp.circleMarker.closeTooltip().unbindTooltip();
-        if (cp.status() === CP_IMPOSSIBLE && cp !== cpOpforMain && cp !== cpBluforMain) {
+
+    });
+
+    capturePoints.forEach(cp => {
+        // Update circle marker for all CPs
+        const rI = renderInfos.get(cp);
+        if (!rI.visible) {
+            cp.circleMarker.remove();
+            /*
             cp.circleMarker.setStyle({
                 opacity: 0.0,
                 interactive: false,
                 fill: false,
             });
-        } else {
-            cp.circleMarker.bindTooltip(
-                `<div class="cpTooltipName">${cp.displayName}</div>` +
-                `<div class="cpTooltipDepth">${labelInfo.number}</div>` +
-                `<div class="cpTooltipLanes">${lanes}</div>`, {
-                    permanent: true,
-                    direction: 'top',
-                    opacity: 1.0,
-                    className: 'cpTooltip',
-                    pane: 'cpTooltip',
-                    offset: [0, 50],
-                }).openTooltip();
-            cp.circleMarker.setStyle({
-                color: labelInfo.color,
-                opacity: 1.0,
-                interactive: true,
-                fill: true,
-            });
-
+             */
+            return;
         }
+        if (!map.hasLayer(cp.circleMarker)) {
+            cp.circleMarker.addTo(map);
+        }
+        cp.circleMarker.closeTooltip().unbindTooltip();
+
+        const mainChosen = ownMain === cpBluforMain || ownMain === cpOpforMain;
+        let laneTooltip = allLanes.size > 1 && mainChosen ? rI.laneLabels.join(",") : "&nbsp";
+        cp.circleMarker.bindTooltip(
+            `<div class="cpTooltipName">${cp.displayName}</div>` +
+            `<div class="cpTooltipDepth">${rI.centerNumber}</div>` +
+            `<div class="cpTooltipLanes">${laneTooltip}</div>`, {
+                permanent: true,
+                direction: 'top',
+                opacity: 1.0,
+                className: 'cpTooltip',
+                pane: 'cpTooltip',
+                offset: [0, 50],
+            }).openTooltip();
+        cp.circleMarker.setStyle({
+            color: rI.color,
+            opacity: 1.0,
+            interactive: true,
+            fill: true,
+        });
+        cp.circleMarker.on('click', ev => cp.onClick());
         cp.circleMarker.redraw();
     });
     const laneList = document.getElementById("lanes");
     laneList.innerHTML = "";
-    const poss = possibleLanes();
     allLanes.forEach(lane => {
-        if (poss.has(lane)) {
+        if (possibleLanes.has(lane)) {
             laneList.innerHTML += `<div class="lane possible">${lane}</div>`
         } else {
             laneList.innerHTML += `<div class="lane impossible">${lane}</div>`
         }
     })
-}
 
-function redrawCpLines() {
+    // confirmation line
     cpLines.forEach(line => {
         line.remove();
     })
-    let cur = ownMain;
-    while (cur.follower !== null) {
+    let cur = mainCp;
+    while (cur.confirmedFollower !== null) {
         // only connect neighbouring CPs when both are confirmed or mandatory
-        const line = L.polyline([cur.pos, cur.follower.pos], {
+        const line = L.polyline([cur.pos, cur.confirmedFollower.pos], {
             color: "rgb(102,202,193)",
             pane: "cpLines",
         }).addTo(map);
         cpLines.add(line);
-        cur = cur.follower;
+        cur = cur.confirmedFollower;
     }
+    // also connect to enemy main if confirmation line includes mercy bleed
+    possibleLanes.forEach(lane => {
+        const cluster = cur.clusters.get(lane);
+        const edgeSet = forward ? cluster.outgoingEdges : cluster.incomingEdges;
+        const otherMain = forward ? cpOpforMain : cpBluforMain;
+        if (edgeSet.get(lane).has(otherMain.clusters.get(lane))) {
+            // TODO: deduplicate
+            const line = L.polyline([cur.pos, otherMain.pos], {
+                color: "rgb(102,202,193)",
+                pane: "cpLines",
+            }).addTo(map);
+            cpLines.add(line);
+        }
+    })
 
 }
 
@@ -533,6 +436,8 @@ function changeMap(mapName, layerName) {
         map.remove();
     }
     capturePoints = new Set();
+    clusters = new Set();
+    const clustersByName = new Map();
     cpBluforMain = null;
     cpOpforMain = null;
     cpLines = new Set();
@@ -543,6 +448,7 @@ function changeMap(mapName, layerName) {
     const layer_data = raasData[mapName][layerName];
 
     const bounds = layer_data["background"]["corners"]
+    const raw_clusters = layer_data["clusters"]
     const laneGraph = layer_data["lanes"]
 
     const baseBounds = [[bounds[0]["y"], bounds[0]["x"]], [bounds[1]["y"], bounds[1]["x"]]];
@@ -589,36 +495,8 @@ function changeMap(mapName, layerName) {
     map.createPane('background');
     map.getPane('background').style.zIndex = 0;
 
-    /*
-    (function(){
-        var originalInitTile = L.TileLayer.prototype._initTile
-        L.TileLayer.include({
-            _initTile: function (tile) {
-                originalInitTile.call(this, tile);
-
-                var tileSize = this.getTileSize();
-
-                tile.style.width = tileSize.x + 0 + 'px';
-                tile.style.height = tileSize.y + 0 + 'px';
-            }
-        });
-    })()
-     */
-
     // scale tiles to match minimap width and height
-    //const zoomOffset = 10;
-    //let tileSize = [width / Math.pow(2, zoomOffset), height / Math.pow(2, zoomOffset)];
     let map_image_name = layer_data["background"]["minimap_filename"];
-    // hacky solution to reduce occurrences of 1px gap when using TileLayer
-    /*
-    document.getElementById("tile-container-style").textContent =
-        ".leaflet-tile-container img {\n" +
-        `    width: ${Math.floor(tileSize[0])}.5px !important;\n` +
-        `    height: ${Math.floor(tileSize[1])}.5px !important;\n` +
-        "}\n"
-
-     */
-    //tileSize = [256 / Math.pow(2, zoomOffset), 256 / Math.pow(2, zoomOffset)];
     new L.TileLayer(`map-resources/tiles/${map_image_name}/{z}/{x}/{y}.png`, {
         tms: false,
         maxNativeZoom: 4,
@@ -628,61 +506,80 @@ function changeMap(mapName, layerName) {
         bounds: baseBounds,
     }).addTo(map);
 
+    // note which clusters appear on which lane, we need this to establish CP->Cluster relationship per-lane
+    const clusters_on_lane = new Map();
+    for (const lane in laneGraph) {
+        const links = laneGraph[lane];
+        clusters_on_lane.set(lane, new Set());
+        links.forEach(link => {
+            clusters_on_lane.get(lane).add(link["a"]);
+            clusters_on_lane.get(lane).add(link["b"]);
+        })
+        allLanes.add(lane);
+        // length of possible lane instance, without main CPs
+        laneLengths.set(lane, links.length - 1);
+    }
     // extract capture points from YAML data
     // this is also the set of vertices
-    for (const lane in laneGraph) {
-        for (let depth in laneGraph[lane]) {
-            laneGraph[lane][depth].forEach(cpRaw => {
-                const cp = new CapturePoint(
-                    cpRaw["sdk_name"],
-                    cpRaw["display_name"],
-                    [cpRaw["y"], cpRaw["x"]]
-                );
-                cp.addLane(lane, depth);
-                let foundEqual = false;
-                capturePoints.forEach(cpOther => {
-                    if (cp.equal(cpOther)) {
-                        foundEqual = true;
-                        cpOther.addLane(lane, depth);
-                    }
-                })
-                if (!foundEqual) {
-                    capturePoints.add(cp);
-                    if (Number.parseInt(depth) === 0) {
-                        cpBluforMain = cp;
-                    } else if (Number.parseInt(depth) === Object.keys(laneGraph[lane]).length - 1) {
-                        cpOpforMain = cp;
-                    }
+    for (const cluster_name in raw_clusters) {
+
+        const cluster = new Cluster();
+        clusters.add(cluster);
+        clustersByName.set(cluster_name, cluster);
+
+        raw_clusters[cluster_name].forEach(cpRaw => {
+
+            // create point, avoid duplicates
+            let cp = new CapturePoint(
+                cpRaw["sdk_name"],
+                cpRaw["display_name"],
+                [cpRaw["y"], cpRaw["x"]]
+            );
+
+            // if there is an equal, just use it instead of the current CP, discard current CP
+            let foundEqual = false;
+            capturePoints.forEach(cpOther => {
+                if (cp.equal(cpOther)) {
+                    foundEqual = true;
+                    cp = cpOther;
                 }
-                allLanes.add(lane);
-                laneLengths.set(lane, Object.keys(laneGraph[lane]).length - 2); // amount of non-main CPs
-            });
-        }
+            })
+
+            // add CP to CP-set and associate CP with cluster per-lane
+            capturePoints.add(cp);
+            for (const lane of clusters_on_lane.keys()) {
+                if (clusters_on_lane.get(lane).has(cluster_name)) {
+                    cluster.addPoint(cp, lane);
+                }
+            }
+        });
     }
 
-    // generate set of edges
-    capturePoints.forEach(cpA => {
-        capturePoints.forEach(cpB => {
-            if (cpA === cpB) {
-                return;
-            }
-            for (const lane of cpA.laneDepths.keys()) {
-                if (!cpB.laneDepths.has(lane)) {
-                    continue;
-                }
-                if (Math.abs(cpA.laneDepths.get(lane) - cpB.laneDepths.get(lane)) === 1) {
-                    if (!cpA.neighbours.has(lane)) {
-                        cpA.neighbours.set(lane, new Set());
-                    }
-                    cpA.neighbours.get(lane).add(cpB);
-                    if (!cpB.neighbours.has(lane)) {
-                        cpB.neighbours.set(lane, new Set());
-                    }
-                    cpB.neighbours.get(lane).add(cpA);
-                }
-            }
-        })
+    let bluforCluster = null;
+    let opforCluster = null;
+
+    clustersByName.forEach((cluster, name) => {
+        if (name.startsWith("00-")) {
+            bluforCluster = cluster;
+        }
+        if (name.startsWith("100-")) {
+            opforCluster = cluster;
+        }
     })
+
+    cpBluforMain = [...bluforCluster.points][0];
+    cpOpforMain = [...opforCluster.points][0];
+
+
+    // generate set of edges
+    for (const lane in laneGraph) {
+        laneGraph[lane].forEach(link => {
+            const clusterA = clustersByName.get(link["a"]);
+            const clusterB = clustersByName.get(link["b"]);
+
+            clusterA.addEdgeTo(clusterB, lane);
+        });
+    }
 
     ownMain = new CapturePoint("dummy main", "dummy main", [0.0, 0.0]);
 
@@ -718,8 +615,7 @@ function changeMap(mapName, layerName) {
         })
     })
 
-    redrawCpInfo();
-    redrawCpLines();
+    redraw();
 
     // Debug
     if (window.location.hostname.startsWith("dev.")) {
