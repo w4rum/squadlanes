@@ -517,6 +517,7 @@ function changeMap(mapName, layerName) {
         })
         allLanes.add(lane);
         // length of possible lane instance, without main CPs
+        // TODO: Fallujah RAAS v1 lane lengths are wrong, better base it off of shortest path
         laneLengths.set(lane, links.length - 1);
     }
     // extract capture points from YAML data
@@ -555,22 +556,6 @@ function changeMap(mapName, layerName) {
         });
     }
 
-    let bluforCluster = null;
-    let opforCluster = null;
-
-    clustersByName.forEach((cluster, name) => {
-        if (name.startsWith("00-")) {
-            bluforCluster = cluster;
-        }
-        if (name.startsWith("100-")) {
-            opforCluster = cluster;
-        }
-    })
-
-    cpBluforMain = [...bluforCluster.points][0];
-    cpOpforMain = [...opforCluster.points][0];
-
-
     // generate set of edges
     for (const lane in laneGraph) {
         laneGraph[lane].forEach(link => {
@@ -580,6 +565,16 @@ function changeMap(mapName, layerName) {
             clusterA.addEdgeTo(clusterB, lane);
         });
     }
+
+    // find blufor and opfor main
+    // assume that blufor main is always the first point of a lane and opfor main is the last point
+    const first_lane = Object.values(laneGraph)[0]
+    let bluforCluster = clustersByName.get(first_lane[0]["a"]);
+    let opforCluster = clustersByName.get(first_lane[first_lane.length - 1]["b"]);
+
+    cpBluforMain = [...bluforCluster.points][0];
+    cpOpforMain = [...opforCluster.points][0];
+
 
     ownMain = new CapturePoint("dummy main", "dummy main", [0.0, 0.0]);
 

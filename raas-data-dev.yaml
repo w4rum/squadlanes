@@ -116,23 +116,23 @@ Al Basrah:
                 sdk_name: BasrahMansion
                 x: 59924.7265625
                 y: 90799.078125
-            -   display_name: Lower Estates
+            -   display_name: Lower Estates (West)
                 sdk_name: LowerEstates
                 x: 49169.7265625
                 y: 107828.078125
-            -   display_name: Lower Estates
+            -   display_name: Lower Estates (East)
                 sdk_name: LowerEstates2
                 x: 59924.7265625
                 y: 107153.078125
-            -   display_name: Lower Fringe
+            -   display_name: Lower Fringe (West)
                 sdk_name: LowerFringe
                 x: -4642.2734375
                 y: 113293.078125
-            -   display_name: Lower Fringe
+            -   display_name: Lower Fringe (Central)
                 sdk_name: LowerFringe2
                 x: 5874.7265625
                 y: 108408.078125
-            -   display_name: Lower Fringe
+            -   display_name: Lower Fringe (East)
                 sdk_name: LowerFringe3
                 x: 18194.7265625
                 y: 108408.078125
@@ -1851,7 +1851,7 @@ Chora:
                 sdk_name: IslandFarm
                 x: -98056.1015625
                 y: -48867.80078125
-            -   display_name: LowerOrchard
+            -   display_name: Lower Orchard
                 sdk_name: LowerOrchard
                 x: -90853.0
                 y: -25562.0
@@ -6465,11 +6465,11 @@ Kohat:
                 x: 96574.6640625
                 y: -40943.109375
             03-CaptureZoneCluster:
-            -   display_name: Ali Abad
+            -   display_name: Ali Abad (North)
                 sdk_name: AliAbad
                 x: -3023.31396484375
                 y: -20923.04296875
-            -   display_name: Ali Abad
+            -   display_name: Ali Abad (South)
                 sdk_name: AliAbad2
                 x: 7047.912109375
                 y: -10924.037109375
@@ -9315,7 +9315,7 @@ Manic-5:
                 sdk_name: ConstructionSite
                 x: 108874.6328125
                 y: -22953.1328125
-            -   display_name: Workshops
+            -   display_name: Workshops (West)
                 sdk_name: DistributionOffices
                 x: 158740.75
                 y: 60302.38671875
@@ -9355,7 +9355,7 @@ Manic-5:
                 sdk_name: WestMontJoie
                 x: 92451.4140625
                 y: 15964.4560546875
-            -   display_name: Workshops
+            -   display_name: Workshops (East)
                 sdk_name: Workshops
                 x: 187555.109375
                 y: 70831.7421875
@@ -11369,7 +11369,7 @@ Mutaha:
                 x: 132612.171875
                 y: 72708.65625
             02-BP_CaptureZoneCluster:
-            -   display_name: Chop Garage
+            -   display_name: Chop Garage (East)
                 sdk_name: ChopGarage
                 x: 102691.109375
                 y: 48974.671875
@@ -11377,7 +11377,7 @@ Mutaha:
                 sdk_name: EastMosque
                 x: 79041.0625
                 y: 4679.421875
-            -   display_name: Chop Garage
+            -   display_name: Chop Garage (West)
                 sdk_name: School
                 x: 80313.4140625
                 y: 39369.3125
@@ -14459,19 +14459,19 @@ Tallil Outskirts:
                 x: -55123.28125
                 y: -18525.455078125
             04-CaptureZoneCluster:
-            -   display_name: East Al-Khidhir
+            -   display_name: East Al-Khidhir (North)
                 sdk_name: Khidhir1
                 x: 112668.28125
                 y: -63269.03125
-            -   display_name: East Al-Khidhir
+            -   display_name: East Al-Khidhir (South)
                 sdk_name: Khidhir2
                 x: 112668.28125
                 y: -52155.70703125
-            -   display_name: West Al-Khidhir
+            -   display_name: West Al-Khidhir (North)
                 sdk_name: Khidhir1
                 x: 77297.1953125
                 y: -67371.6953125
-            -   display_name: West Al-Khidhir
+            -   display_name: West Al-Khidhir (South)
                 sdk_name: Khidhir2
                 x: 82962.453125
                 y: -58442.515625
@@ -14529,15 +14529,15 @@ Tallil Outskirts:
                 x: 9837.03125
                 y: -130819.109375
             02-CaptureZoneCluster:
-            -   display_name: Al-Khidhir Outskirts
+            -   display_name: Al-Khidhir Outskirts (North)
                 sdk_name: KhidhirOutskirts1
                 x: 51980.4375
                 y: -76510.4765625
-            -   display_name: Al-Khidhir Outskirts
+            -   display_name: Al-Khidhir Outskirts (Central)
                 sdk_name: KhidhirOutskirts2
                 x: 54194.75
                 y: -44860.109375
-            -   display_name: Al-Khidhir Outskirts
+            -   display_name: Al-Khidhir Outskirts (South)
                 sdk_name: KhidhirOutskirts3
                 x: 59484.265625
                 y: -28893.25
