@@ -194,9 +194,15 @@
 
     function ddSelectLayer(map, layer) {
         layerButton.innerHTML = layer;
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("map", map);
+        searchParams.set("layer", layer);
+        if (searchParams.toString() !== window.location.search.substr(1)) {
+            history.pushState({}, '', '?' + searchParams.toString());
+        }
         changeMap(map, layer);
     }
-
+    
     document.addEventListener('DOMContentLoaded', function () {
         mapButton.addEventListener('mouseenter', () => {
             mapMenu.classList.toggle("shown", true);
@@ -209,7 +215,13 @@
             for (const map in raasData) {
                 mapMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onmousedown="ddSelectMap('${map}')">${map}</a>`;
             }
-            ddSelectMap("Narva");
+            const searchParams = new URLSearchParams(window.location.search);
+            const map = searchParams.get('map');
+            const layer = searchParams.get('layer');
+
+            // we always need to call ddSelectMap to set currently selected map and the layer dropdown items
+            ddSelectMap(map || 'Narva');
+            layer && ddSelectLayer(map, layer);
         })
 
         if (window.location.hostname.startsWith("dev.")) {
