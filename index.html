@@ -167,6 +167,7 @@
     const mapButton = document.getElementById("dropDownMapButton");
     const layerMenu = document.getElementById("dropDownLayerMenu");
     const layerButton = document.getElementById("dropDownLayerButton");
+    const DEFAULT_MAP = "Narva";
 
     function ddSelectMap(map) {
         mapButton.innerHTML = map;
@@ -194,23 +195,60 @@
 
     function ddSelectLayer(map, layer) {
         layerButton.innerHTML = layer;
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("map", map);
+        searchParams.set("layer", layer);
+        if (searchParams.toString() !== window.location.search.substr(1)) {
+            history.pushState({}, '', '?' + searchParams.toString());
+        }
         changeMap(map, layer);
     }
-
+        
+    function handleQueryStringErrors(callback) {
+        try {
+            return callback();
+        } catch(error) {
+            const shouldCatchErrorAndResetQueryParams = !![
+                MapNotFoundError,
+                LayerNotFoundError,
+            ].find((errorType) => error instanceof errorType);
+            
+            if (shouldCatchErrorAndResetQueryParams) {
+                alert(error);
+                ddSelectMap(DEFAULT_MAP);
+            } else {
+                throw error;
+            }
+        }
+    }
+    
     document.addEventListener('DOMContentLoaded', function () {
         mapButton.addEventListener('mouseenter', () => {
             mapMenu.classList.toggle("shown", true);
-        })
+        });
         mapButton.addEventListener('mouseleave', () => {
             mapMenu.classList.toggle("shown", false);
-        })
+        });
         onRaasDataLoad(() => {
             mapMenu.innerHTML = "";
             for (const map in raasData) {
                 mapMenu.innerHTML += `<a class="dropdown-item text-light" href="#" onmousedown="ddSelectMap('${map}')">${map}</a>`;
             }
-            ddSelectMap("Narva");
-        })
+            const searchParams = new URLSearchParams(window.location.search);
+            const map = searchParams.get('map') || DEFAULT_MAP;
+            const layer = searchParams.get('layer');
+
+            handleQueryStringErrors(() => {
+                validateMapName(map);
+                // we always need to call ddSelectMap to set currently selected map and the layer dropdown items
+                ddSelectMap(map);
+                
+                if (layer) {
+                  validateLayerName(map, layer);  
+                  ddSelectLayer(map, layer);
+                } 
+            });
+        });
 
         if (window.location.hostname.startsWith("dev.")) {
             loadRaasData("raas-data-dev.yaml", () => {});

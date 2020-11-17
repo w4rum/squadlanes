@@ -630,3 +630,20 @@ function changeMap(mapName, layerName) {
         });
     }).observe(mapDiv);
 }
+
+function validateMapName(map) {
+    if (!raasData[map]) {
+        throw new MapNotFoundError(`No map found named ${map}`);
+    }
+    return true;
+}
+
+function validateLayerName(map, layer) {
+    if (!raasData[map][layer]) {
+        throw new LayerNotFoundError(`No layer for ${map} found named ${layer}`);
+    }
+    return true;
+}
+
+class MapNotFoundError extends Error {}
+class LayerNotFoundError extends Error {}
