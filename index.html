@@ -201,6 +201,7 @@
         if (searchParams.toString() !== window.location.search.substr(1)) {
             history.pushState({}, '', '?' + searchParams.toString());
         }
+        changeMap(map, layer);
     }
         
     function handleQueryStringErrors(callback) {
