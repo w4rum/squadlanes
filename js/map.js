@@ -665,7 +665,7 @@ function computeLaneProbabilities(point, possibleLanes) {
             if (!possibleLanes.has(lane)) {
                 return;
             }
-            let prob = (1/3) * (1/cluster.points.size);
+            let prob = 1/cluster.points.size;
             totalProb += prob;
             laneProb.set(lane, prob);
 	});
