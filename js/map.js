@@ -233,7 +233,7 @@ function redraw() {
     const postConfirmationDepth = curDepth;
 
     // Compute conditional probabilities
-    let laneProb = computeLaneProbabilities(lastConfirmedPoint);
+    let laneProb = computeLaneProbabilities(lastConfirmedPoint, possibleLanes);
 
     // traverse graph for each lane and collect render info
     allLanes.forEach(lane => {
@@ -371,7 +371,12 @@ function redraw() {
     laneList.innerHTML = "";
     allLanes.forEach(lane => {
         if (possibleLanes.has(lane)) {
-            laneList.innerHTML += `<div class="lane possible">${lane} ${laneProb.get(lane)}</div>`
+            // Only display lane probabilities if there are more than 1
+            if (laneProb.size === 1) {
+                laneList.innerHTML += `<div class="lane possible">${lane}</div>`
+            } else {
+                laneList.innerHTML += `<div class="lane possible">${lane}: ${toPercent(laneProb.get(lane))}%</div>`
+            }
         } else {
             laneList.innerHTML += `<div class="lane impossible">${lane}</div>`
         }
@@ -647,9 +652,8 @@ function validateLayerName(map, layer) {
     return true;
 }
 
-function computeLaneProbabilities(point) {
+function computeLaneProbabilities(point, possibleLanes) {
 	let lanes = point.clusters;
-	console.log(lanes);
 	let laneProb = new Map();
 
 	// Probability scaling
@@ -657,15 +661,23 @@ function computeLaneProbabilities(point) {
 
 	// Compute P(lane && point) for each lane
 	lanes.forEach((cluster, lane) => {
-		let prob = (1/3) * (1/cluster.points.size);
-		totalProb += prob;
-		laneProb.set(lane, prob);
+            // ignore impossible lanes
+            if (!possibleLanes.has(lane)) {
+                return;
+            }
+            let prob = (1/3) * (1/cluster.points.size);
+            totalProb += prob;
+            laneProb.set(lane, prob);
 	});
-	// Rescales probabilities to sum to 1 and rounds to 2 decimals
-	lanes.forEach((cluster, lane) => {
-		laneProb.set(lane, (laneProb.get(lane)/totalProb).toFixed(2));
+	// Rescales probabilities to sum to 1
+	laneProb.forEach((prob, lane) => {
+		laneProb.set(lane, (laneProb.get(lane)/totalProb));
 	});
 	return laneProb;
+}
+
+function toPercent(number) {
+    return Math.round(number*100);
 }
 
 class MapNotFoundError extends Error {}
