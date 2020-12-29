@@ -232,6 +232,8 @@ function redraw() {
     } while (curConfirmedPoint !== null);
     const postConfirmationDepth = curDepth;
 
+    // Compute conditional probabilities
+    let laneProb = computeLaneProbabilities(lastConfirmedPoint);
 
     // traverse graph for each lane and collect render info
     allLanes.forEach(lane => {
@@ -369,7 +371,7 @@ function redraw() {
     laneList.innerHTML = "";
     allLanes.forEach(lane => {
         if (possibleLanes.has(lane)) {
-            laneList.innerHTML += `<div class="lane possible">${lane}</div>`
+            laneList.innerHTML += `<div class="lane possible">${lane} ${laneProb.get(lane)}</div>`
         } else {
             laneList.innerHTML += `<div class="lane impossible">${lane}</div>`
         }
@@ -643,6 +645,27 @@ function validateLayerName(map, layer) {
         throw new LayerNotFoundError(`No layer for ${map} found named ${layer}`);
     }
     return true;
+}
+
+function computeLaneProbabilities(point) {
+	let lanes = point.clusters;
+	console.log(lanes);
+	let laneProb = new Map();
+
+	// Probability scaling
+	let totalProb = 0;
+
+	// Compute P(lane && point) for each lane
+	lanes.forEach((cluster, lane) => {
+		let prob = (1/3) * (1/cluster.points.size);
+		totalProb += prob;
+		laneProb.set(lane, prob);
+	});
+	// Rescales probabilities to sum to 1 and rounds to 2 decimals
+	lanes.forEach((cluster, lane) => {
+		laneProb.set(lane, (laneProb.get(lane)/totalProb).toFixed(2));
+	});
+	return laneProb;
 }
 
 class MapNotFoundError extends Error {}
