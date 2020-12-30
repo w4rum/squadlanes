@@ -232,6 +232,8 @@ function redraw() {
     } while (curConfirmedPoint !== null);
     const postConfirmationDepth = curDepth;
 
+    // Compute conditional probabilities
+    let laneProb = computeLaneProbabilities(lastConfirmedPoint, possibleLanes);
 
     // traverse graph for each lane and collect render info
     allLanes.forEach(lane => {
@@ -369,7 +371,12 @@ function redraw() {
     laneList.innerHTML = "";
     allLanes.forEach(lane => {
         if (possibleLanes.has(lane)) {
-            laneList.innerHTML += `<div class="lane possible">${lane}</div>`
+            // Only display lane probabilities if there are more than 1
+            if (laneProb.size === 1) {
+                laneList.innerHTML += `<div class="lane possible">${lane}</div>`
+            } else {
+                laneList.innerHTML += `<div class="lane possible">${lane}: ${toPercent(laneProb.get(lane))}%</div>`
+            }
         } else {
             laneList.innerHTML += `<div class="lane impossible">${lane}</div>`
         }
@@ -643,6 +650,34 @@ function validateLayerName(map, layer) {
         throw new LayerNotFoundError(`No layer for ${map} found named ${layer}`);
     }
     return true;
+}
+
+function computeLaneProbabilities(point, possibleLanes) {
+	let lanes = point.clusters;
+	let laneProb = new Map();
+
+	// Probability scaling
+	let totalProb = 0;
+
+	// Compute P(lane && point) for each lane
+	lanes.forEach((cluster, lane) => {
+            // ignore impossible lanes
+            if (!possibleLanes.has(lane)) {
+                return;
+            }
+            let prob = 1/cluster.points.size;
+            totalProb += prob;
+            laneProb.set(lane, prob);
+	});
+	// Rescales probabilities to sum to 1
+	laneProb.forEach((prob, lane) => {
+		laneProb.set(lane, (laneProb.get(lane)/totalProb));
+	});
+	return laneProb;
+}
+
+function toPercent(number) {
+    return Math.round(number*100);
 }
 
 class MapNotFoundError extends Error {}
