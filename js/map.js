@@ -220,8 +220,30 @@ function redraw() {
     let curConfirmedPoint = mainCp;
     let curDepth = 0;
     do {
-        // intersect possible lanes with CPs lanes
-        possibleLanes = intersection(possibleLanes, new Set(curConfirmedPoint.clusters.keys()));
+        // check on which lanes the edge from last->cur can be taken
+        let lanesWithCorrectEdge;
+        if (lastConfirmedPoint === null) {
+            // this is the first point, all lanes of this point are valid
+            // note: we can't just use allLanes because the dummy mains don't have lanes
+            lanesWithCorrectEdge = new Set(curConfirmedPoint.clusters.keys());
+        } else {
+            lanesWithCorrectEdge = new Set();
+            for (const lane of curConfirmedPoint.clusters.keys()) {
+                const lastCluster = lastConfirmedPoint.clusters.get(lane);
+                if (!lastCluster) continue;
+
+                const curCluster = curConfirmedPoint.clusters.get(lane);
+                if (!curCluster) continue;
+
+                const edgeSet = forward ? lastCluster.outgoingEdges : lastCluster.incomingEdges;
+                if (edgeSet.get(lane).has(curCluster)) {
+                    lanesWithCorrectEdge.add(lane);
+                }
+            }
+        }
+        // intersect possible lanes
+        possibleLanes = intersection(possibleLanes, lanesWithCorrectEdge);
+        // possibleLanes = intersection(possibleLanes, new Set());
         // mark selected CP as confirmed in all possible lanes
         possibleLanes.forEach(lane => {
             renderInfos.get(curConfirmedPoint).addInfoPossibility(CLR_CONFIRMED, curDepth, lane, CLR_PRIORITY.CONFIRMED);
