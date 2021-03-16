@@ -317,14 +317,13 @@ def extract_map(map_dir):
 
             # extract minimap image (.tga) with umodel
             for name in table_dump.splitlines():
-                # try standard minimap directory
-                match = re.match(f"[0-9]+ = .*/Maps/(.*/Minimap/(.*inimap.*))", name)
+                match = re.match(
+                    f"[0-9]+ = .*/Maps/(.*/(Minimap|Masks)/(.*inimap.*))", name
+                )
                 if match is None:
-                    # try alternative directory introduced with Goose Bay
-                    match = re.match(f"[0-9]+ = .*/Maps/(.*/Masks/(.*inimap.*))", name)
-                    if match is None:
-                        continue
-                minimap_path_in_package, minimap_name = match.group(1, 2)
+                    continue
+                minimap_path_in_package, minimap_name = match.group(1, 3)
+
                 # skip if minimap already exists
                 if os.path.isfile(
                     f"map-resources/full-size/{minimap_path_in_package}.tga"
@@ -343,6 +342,12 @@ def extract_map(map_dir):
                     )
                     == 0
                 ), "map extract failed"
+
+                # ignore maps smaller than 1 MiB
+                # (might be a thumbnail)
+                if os.stat(f"extracts/{minimap_name}.tga").st_size < 1 * 1024 * 1024:
+                    minimap_name = None
+                    continue
                 subprocess.call(
                     [
                         "mv",

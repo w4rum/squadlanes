@@ -55,10 +55,14 @@ def unpack_all_paks(paks_dir_path: str) -> None:
         if os.stat(path).st_size == 0:
             continue
 
-        # extract(path, "*.umap")
+        # extract layer info
+        extract(path, "*.umap")
+
+        # Need to get uexp, ubulk and uassets as well to correctly extract minimaps
+        # TODO: improve filter to only extract minimaps, not all files
         extract(path, "*.uexp")
-        # TODO: improve filter to only extract minimaps, not all uassets
-        # extract(path, "*.uasset")
+        extract(path, "*.ubulk")
+        extract(path, "*.uasset")
 
 
 os.makedirs(EXTRACT_DIR_PATH, exist_ok=True)
