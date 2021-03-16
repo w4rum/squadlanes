@@ -15,18 +15,19 @@ See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to wor
 TODO
 
 #### Documentation / Project overview
-This project is still very much work-in-progress.
-The automatic extraction method has been completely replaced since v1.0 (when the video was released) and the UI has also been completely reworked since the first prototype.
-We already have tasks on our To-Do list that will likely lead to big changes in the algorithmic department of the website (Fallujah RAAS v1 / Parallel AAS).
-We don't think writing documentation while the project is still this volatile is worth the effort.
+This project is in a rather unpolished and largely undocumented state.
+We apologize for this but don't have specific plans to fix this in the immediate future
+since the person responsible for the extraction scripts hasn't actively played Squad in
+quite a while and has moved to a kind of maintenance-only mode for this project.
 If you want to contribute at this point in time, feel free to open issues and pull requests.
-Just be warned, it's probably a lot of unnecessary work.
+Just be warned, it's probably a lot of work to get into it.
 
 
 #### Attribution and Licenses
-- Squad map backgrounds and capture point information were extracted from game files shipped through Steam and editor assets shipped through Epic Games Store.
+- Squad map backgrounds and capture point information were extracted from game files shipped through Steam.
   We hope our usage here is fine.
-  If it is not, please send a DM to [w4rum](https://github.com/w4rum/).
+  If it is not, please contact w4rum via [email](mailto:tim.schmidt@khorne.faith) or
+  Discord DM (`Tim | w4rum#4344`, reach me via https://discord.gg/FaT)
 - [Leaflet](https://github.com/Leaflet/Leaflet). Released under
   [BSD 2-Clause "Simplified" License](https://github.com/Leaflet/Leaflet/blob/master/LICENSE).
 - Bootstrap and the "Simple Sidebar" component:\
