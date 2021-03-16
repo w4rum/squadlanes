@@ -44,7 +44,7 @@ def anti_unique_ips(access_list: List[Tuple[datetime, str]]):
         s.add(ip)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # LOG_DIR = "/var/log/nginx"
     LOG_DIR = "."
     accesses = set()
@@ -72,7 +72,7 @@ if __name__ == '__main__':
         cur_hour += delta
 
     X_LABEL = "timestamp"
-    Y_LABEL = "returning accesses"
+    Y_LABEL = "accesses per day"
 
     fig = plt.figure()
     plt.xlabel(X_LABEL)
