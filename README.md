@@ -27,7 +27,7 @@ Just be warned, it's probably a lot of work to get into it.
 - Squad map backgrounds and capture point information were extracted from game files shipped through Steam.
   We hope our usage here is fine.
   If it is not, please contact w4rum via [email](mailto:tim.schmidt@khorne.faith) or
-  Discord DM (`Tim | w4rum#4344`, reach me via https://discord.gg/FaT)
+  Discord DM (`Tim | w4rum#4344`, reach me via https://discord.gg/aM5CYjnFxN)
 - [Leaflet](https://github.com/Leaflet/Leaflet). Released under
   [BSD 2-Clause "Simplified" License](https://github.com/Leaflet/Leaflet/blob/master/LICENSE).
 - Bootstrap and the "Simple Sidebar" component:\
