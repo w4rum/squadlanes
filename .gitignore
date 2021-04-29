@@ -12,3 +12,7 @@ map-resources/*
 umodel
 raas-data-auto.yaml
 __pycache__
+
+.cache
+dist
+vendor
