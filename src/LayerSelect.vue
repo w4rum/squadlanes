@@ -1,21 +1,7 @@
 <template lang="html">
   <div class="layer-selection">
-    <b-dropdown id="map-dropdown" ref="mapDropdown" class="tweaked-dropdown" :text="currMapName">
-      <b-dropdown-form v-on:submit.prevent="onInputFilterSubmit">
-        <b-form-group label="" label-for="map-filter">
-          <b-form-input
-            id="map-filter"
-            size="sm"
-            ref="mapFilterInput"
-            v-on:input="filterMap"
-            v-model="filterMapInput"
-          > 
-        </b-form-group>
-      </b-dropdown-form>
-      <b-dropdown-item v-for="map in mapNames" v-on:click="selectMap(map)">
-        {{ map }}
-      </b-dropdown-item>
-    </b-dropdown>
+    <b-form-input ref="mapDatalistInput" list="map-datalist" id="map-datalist-input" v-model="currMapNameInput" v-on:change="onSelectMap" v-on:focus="onFocusMapFilterInput"></b-form-input>
+    <b-form-datalist ref="mapDatalist" id="map-datalist" v-model="currMapName" :options="mapNames"></b-form-datalist>
     <b-dropdown id="layer-dropdown" class="tweaked-dropdown" :text="currLayerName">
       <b-dropdown-item
         v-for="layer in Object.keys(map.raasData[currMapName])"
@@ -37,17 +23,6 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 export default Vue.extend({
-  mounted() {
-    this.$root.$on('bv::dropdown::shown', bvEvent => {
-      console.log('Dropdown is about to be shown', bvEvent)
-      console.log('refs: ', this.$refs);
-      console.log('id: ', bvEvent.$el.id);
-      // if (bvEvent.$el.id === "map-dropdown") {
-      //   this.$refs.mapFilterInput.focus()
-      //   console.log('focus?');
-      // }
-    })
-  },
   props: {
     map: Object,
     startingMapName: String,
@@ -56,6 +31,7 @@ export default Vue.extend({
   created() {
     this.mapNames = Object.keys(this.map.raasData);
     this.currMapName = this.startingMapName;
+    this.currMapNameInput = this.currMapName;
     this.currLayerName = this.startingLayerName;
   },
   data() {
@@ -63,13 +39,14 @@ export default Vue.extend({
       currMapName: null,
       currLayerName: null,
       mapNames: null,
-      filterMapInput: '',
+      currMapNameInput: '',
     };
   },
   methods: {
     selectMap(map) {
       console.log("selected ", map);
       this.currMapName = map;
+      this.currMapNameInput = this.currMapName;
       this.map.changeMap(this.currMapName, Object.keys(this.map.raasData[this.currMapName])[0]);
     },
     selectLayer(layer) {
@@ -88,9 +65,14 @@ export default Vue.extend({
     onInputFilterSubmit() {
       console.log('submitted!');
       if (this.mapNames.length > 0) {
-        this.selectMap(this.mapNames[0]);
-        this.$refs.mapDropdown.hide(true);
       }
+    },
+    onFocusMapFilterInput() {
+      this.currMapNameInput = '';
+    },
+    onSelectMap(newMap) {
+      this.$refs.mapDatalistInput.$el.blur();
+      this.selectMap(newMap);
     }
   },
 });
