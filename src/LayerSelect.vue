@@ -1,6 +1,17 @@
 <template lang="html">
   <div class="layer-selection">
-    <b-dropdown id="map-dropdown" class="tweaked-dropdown" :text="currMapName">
+    <b-dropdown id="map-dropdown" ref="mapDropdown" class="tweaked-dropdown" :text="currMapName">
+      <b-dropdown-form v-on:submit.prevent="onInputFilterSubmit">
+        <b-form-group label="" label-for="map-filter">
+          <b-form-input
+            id="map-filter"
+            size="sm"
+            ref="mapFilterInput"
+            v-on:input="filterMap"
+            v-model="filterMapInput"
+          > 
+        </b-form-group>
+      </b-dropdown-form>
       <b-dropdown-item v-for="map in mapNames" v-on:click="selectMap(map)">
         {{ map }}
       </b-dropdown-item>
@@ -26,7 +37,17 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 export default Vue.extend({
-  methods: {},
+  mounted() {
+    this.$root.$on('bv::dropdown::shown', bvEvent => {
+      console.log('Dropdown is about to be shown', bvEvent)
+      console.log('refs: ', this.$refs);
+      console.log('id: ', bvEvent.$el.id);
+      // if (bvEvent.$el.id === "map-dropdown") {
+      //   this.$refs.mapFilterInput.focus()
+      //   console.log('focus?');
+      // }
+    })
+  },
   props: {
     map: Object,
     startingMapName: String,
@@ -42,6 +63,7 @@ export default Vue.extend({
       currMapName: null,
       currLayerName: null,
       mapNames: null,
+      filterMapInput: '',
     };
   },
   methods: {
@@ -55,6 +77,21 @@ export default Vue.extend({
       this.currLayerName = layer;
       this.map.changeMap(this.currMapName, this.currLayerName);
     },
+    filterMap() {
+      console.log('event: ', this.filterMapInput);
+      this.mapNames = Object.keys(this.map.raasData).filter(mapName => {
+        const normalized = mapName.toLowerCase().replace(' ', '');
+        const normalizedFilter = this.filterMapInput.toLowerCase().replace(' ', '');
+        return normalized.includes(normalizedFilter);
+      });
+    },
+    onInputFilterSubmit() {
+      console.log('submitted!');
+      if (this.mapNames.length > 0) {
+        this.selectMap(this.mapNames[0]);
+        this.$refs.mapDropdown.hide(true);
+      }
+    }
   },
 });
 </script>
@@ -67,6 +104,11 @@ export default Vue.extend({
 
 .layer-selection > :first-child {
   margin-right: 10px;
+}
+
+
+.dropdown-filter {
+  padding: .25em;
 }
 
 
