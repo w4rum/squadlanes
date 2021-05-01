@@ -1,10 +1,8 @@
 <template lang="html">
-  <div> 
-    <div class="lane-percentages card">
-      <div v-for="laneName in Object.keys(currentLanePercentages)" class="lane">
-        <label>{{ laneName }}</label>
-        <span>{{ currentLanePercentages[laneName] }}</span>
-      </div>
+  <div class="lane-percentages card">
+    <div v-for="laneName in Object.keys(currentLanePercentages)" class="lane">
+      <label>{{ laneName }}</label>
+      <span>{{ currentLanePercentages[laneName] }}%</span>
     </div>
   </div>
 
@@ -45,14 +43,17 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .lane-percentages {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: row;
   height: min-content;
   font-size: smaller;
+  width: min-content;
+  height: min-content;
+  margin: auto;
 }
 
 .lane-percentages > * {
-  padding: 10px;
+  padding: 5px;
 }
 
 .lane {
@@ -60,6 +61,12 @@ export default Vue.extend({
   flex-direction: column;
   align-items: center;
 }
+
+.lane label {
+  font-size: smaller;
+  margin: unset;
+}
+
 
 
 </style>

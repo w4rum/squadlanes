@@ -66,8 +66,8 @@ export default Vue.extend({
 .top-center {
   position: fixed;
   top: 0;
-  left: calc(50vw - 10vw);
-  width: 20vw;
+  left: calc(50vw - 25vw);
+  width: 50vw;
 }
 
 .top-right {
@@ -78,9 +78,9 @@ export default Vue.extend({
 
 .bottom-center {
   position: fixed;
-  width: 20vw;
+  width: 30vw;
   bottom: 0;
-  left: calc(50vw - 10vw);
+  left: calc(50vw - 15vw);
 }
 
 .bottom-right {
@@ -202,5 +202,16 @@ export default Vue.extend({
 
 .modal-backdrop {
   opacity: 30%;
+}
+
+
+@media only screen and (max-width: 850px) {
+  // .top-right {
+  //   padding-left: 60px;
+  // }
+  
+  .top-center {
+    top: 47px;
+  }
 }
 </style>

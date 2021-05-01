@@ -47,7 +47,8 @@ export default Vue.extend({
       console.log("selected ", map);
       this.currMapName = map;
       this.currMapNameInput = this.currMapName;
-      this.map.changeMap(this.currMapName, Object.keys(this.map.raasData[this.currMapName])[0]);
+      this.currLayerName = Object.keys(this.map.raasData[this.currMapName])[0];
+      this.map.changeMap(this.currMapName, this.currLayerName);
     },
     selectLayer(layer) {
       console.log({ layer });
@@ -82,6 +83,8 @@ export default Vue.extend({
 .layer-selection {
   display: flex;
   flex-wrap: nowrap;
+  max-width: 600px;
+  margin-left: 45px;
 }
 
 .layer-selection > :first-child {
@@ -91,6 +94,14 @@ export default Vue.extend({
 
 .dropdown-filter {
   padding: .25em;
+}
+
+#map-datalist-input {
+  grow: 1.5;
+}
+
+#layer-dropdown {
+  grow: .2;
 }
 
 
