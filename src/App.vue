@@ -24,7 +24,6 @@ import LanePercentages from "./LanePercentages";
 import LayerSelect from "./LayerSelect";
 import AboutModal from "./AboutModal";
 import MapLegend from "./MapLegend";
-import {OpenLight} from './map/openLight';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);

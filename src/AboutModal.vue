@@ -15,7 +15,7 @@
                    target="_blank" rel="noopener noreferrer">
                     our spreadsheet</a> with all the RAAS data.
                 If you want to build something on top of what we've done here, you can always find the latest RAAS data
-                that we use on this website <a href="raas-data.yaml" target="_blank" rel="noopener noreferrer">here</a>.
+                that we use on this website <a href="assets/raas-data.yaml" target="_blank" rel="noopener noreferrer">here</a>.
             </p>
             <p>
                 If you spot any specific errors, please head over to our GitHub repository and open an issue!
