@@ -34,8 +34,13 @@
                   </li>
               </ul>
             </p>
-    </b-modal>
-  </div>
+            <p>
+              Keyboard Shortcuts:
+              <ul>
+                <li><mono>m</mono> - Open map selection</li>
+                <li>l - open layer selection</li>
+            </p>
+    </b-modal> </div>
 </template>
 
 <script>

@@ -1,8 +1,23 @@
 <template lang="html">
   <div class="layer-selection">
-    <b-form-input ref="mapDatalistInput" list="map-datalist" id="map-datalist-input" v-model="currMapNameInput" v-on:change="onSelectMap" v-on:focus="onFocusMapFilterInput"></b-form-input>
-    <b-form-datalist ref="mapDatalist" id="map-datalist" v-model="currMapName" :options="mapNames"></b-form-datalist>
-    <b-dropdown id="layer-dropdown" class="tweaked-dropdown" :text="currLayerName">
+    <b-dropdown id="map-dropdown" ref="mapDropdown" class="tweaked-dropdown" :text="currMapName">
+      <b-dropdown-form v-on:submit.prevent="onInputFilterSubmit">
+        <b-form-group label="" label-for="map-filter">
+          <b-form-input
+            id="map-filter"
+            size="sm"
+            ref="filterMapInputRef"
+            v-on:input="filterMap"
+            v-model="filterMapInputValue"
+            v-on:keyup.stop="onKeyup"
+          > 
+        </b-form-group>
+        <b-dropdown-item v-for="map in mapNames" v-on:click="selectMap(map)">
+          {{ map }}
+        </b-dropdown-item>
+      </b-dropdown-form> 
+    </b-dropdown>
+    <b-dropdown ref="layerDropdown" id="layer-dropdown" class="tweaked-dropdown" :text="currLayerName">
       <b-dropdown-item
         v-for="layer in Object.keys(map.raasData[currMapName])"
         v-on:click="selectLayer(layer)"
@@ -36,46 +51,63 @@ export default Vue.extend({
   },
   data() {
     return {
+      filterMapInputValue: '',
       currMapName: null,
       currLayerName: null,
       mapNames: null,
-      currMapNameInput: '',
+      currMapNameInput: "",
     };
+  },
+  mounted() {
+    this.$root.$on('bv::dropdown::shown', bvEvent => {
+      this.filterMapInputValue = '';
+      this.filterMap();
+      var input = this.$refs.filterMapInputRef;
+      setTimeout(() => input.$el.focus(), 10)
+    });
+    
+    this.keyListener = (e) => {
+      console.log(this.$refs);
+      switch(e.key) {
+        case "m":
+          this.$refs.mapDropdown.show();
+          break;
+        case "l":
+          this.$refs.layerDropdown.show();
+          break;
+      }
+    }
+    document.addEventListener('keyup', this.keyListener);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keyup', this.keylistener);
   },
   methods: {
     selectMap(map) {
-      console.log("selected ", map);
       this.currMapName = map;
       this.currMapNameInput = this.currMapName;
       this.currLayerName = Object.keys(this.map.raasData[this.currMapName])[0];
       this.map.changeMap(this.currMapName, this.currLayerName);
     },
     selectLayer(layer) {
-      console.log({ layer });
       this.currLayerName = layer;
       this.map.changeMap(this.currMapName, this.currLayerName);
     },
     filterMap() {
-      console.log('event: ', this.filterMapInput);
-      this.mapNames = Object.keys(this.map.raasData).filter(mapName => {
-        const normalized = mapName.toLowerCase().replace(' ', '');
-        const normalizedFilter = this.filterMapInput.toLowerCase().replace(' ', '');
+      this.mapNames = Object.keys(this.map.raasData).filter((mapName) => {
+        const normalized = mapName.toLowerCase().replace(" ", "");
+        const normalizedFilter = this.filterMapInputValue.toLowerCase().replace(" ", "");
         return normalized.includes(normalizedFilter);
       });
     },
-    onInputFilterSubmit() {
-      console.log('submitted!');
+    onInputFilterSubmit(e) {
       if (this.mapNames.length > 0) {
+        this.selectMap(this.mapNames[0]);
+        this.$refs.mapDropdown.hide(true);
       }
     },
-    onFocusMapFilterInput() {
-      this.currMapNameInput = '';
-    },
-    onSelectMap(newMap) {
-      this.$refs.mapDatalistInput.$el.blur();
-      this.selectMap(newMap);
-    }
-  },
+    onKeyup(e) { }
+  }
 });
 </script>
 
@@ -91,18 +123,15 @@ export default Vue.extend({
   margin-right: 10px;
 }
 
-
 .dropdown-filter {
-  padding: .25em;
+  padding: 0.25em;
 }
 
 #map-datalist-input {
-  grow: 1.5;
+  flex-grow: 1.5;
 }
 
 #layer-dropdown {
-  grow: .2;
+  flex-grow: 0.2;
 }
-
-
 </style>

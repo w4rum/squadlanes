@@ -27,7 +27,6 @@ import MapLegend from "./MapLegend";
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-console.log({ map });
 
 export default Vue.extend({
   data() {
@@ -36,11 +35,6 @@ export default Vue.extend({
       startingMapName: "Narva",
       startingLayerName: "RAAS v1",
     };
-  },
-  mounted() {
-    map.changeMap(this.startingMapName, this.startingLayerName);
-    // const openLight = new  OpenLight('auto');
-    // openLight.init();
   },
   components: {
     LanePercentages,
