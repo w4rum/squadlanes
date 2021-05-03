@@ -21,6 +21,12 @@ We only provide a deployment guide for Linux systems.
 If you're using another operating system, then you're on your own.
 
 ### Extracting map images and layer data
+Even though we only need map layer data and map images, we're unpacking most of the
+game files, which will take up about 70 GiB of additional space.
+Make sure you have that available.
+You can change the config parameters in step 4 if you need to write to another
+drive.
+
 1. Install the following dependencies:
     - Python 3.8 or compatible
     - [Poetry](https://python-poetry.org/) 1.1.5 or compatible
