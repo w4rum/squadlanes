@@ -1,9 +1,10 @@
 import YAML from "yaml-js";
-import L_1 from "leaflet";
-import addTileLayer from "./L.TileLayer.NoGap";
+import L from "leaflet";
 import rassDataYaml from "../assets/raas-data.yaml";
-import { BehaviorSubject } from "rxjs";
-import { Queue } from "./queue";
+import {BehaviorSubject} from "rxjs";
+import {Queue} from "./queue";
+
+import mapTiles from '../assets/map-tiles/**/**/**.png'
 
 let capturePoints = null;
 let clusters = null;
@@ -399,7 +400,6 @@ function redraw() {
     });
 
     const laneProbabilities = [...allLanes.values()].reduce((acc, lane) => {
-        console.log({prop: laneProb});
         const prob = laneProb.get(lane);
         return {
             ...acc,
@@ -529,12 +529,21 @@ export function changeMap(mapName, layerName) {
     map.createPane('background');
     map.getPane('background').style.zIndex = 0;
 
-    // scale tiles to match minimap width and height
     let map_image_name = layer_data["background"]["minimap_filename"];
-    new L.TileLayer(`map-resources/tiles/${map_image_name}/{z}/{x}/{y}.png`, {
+
+    // override tile URL template function to support our loading our bundled tiles instead
+    const TileLayerBundledTiles = L.TileLayer.extend({
+        getTileUrl (coords) {
+            // we use the first constructor parameter (usually the URL template) as the map name
+            return mapTiles[this._url][coords.z][coords.x][coords.y];
+        }
+    });
+
+    new TileLayerBundledTiles(map_image_name, {
         tms: false,
         maxNativeZoom: 4,
         zoomOffset: zoomOffset,
+        // scale tiles to match minimap width and height
         tileSize: tileSize,
         pane: 'background',
         bounds: baseBounds,
