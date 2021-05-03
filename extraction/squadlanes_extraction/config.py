@@ -1,6 +1,14 @@
+########################################################################
+# REQUIRED SETTINGS - Our defaults will probably not work on your system
+########################################################################
+
 # Location of the steam-distributed Squad installation
 # e.g. "/mnt/windows-drive/Program Files (x86)/Steam/steamapps/common/Squad"
 SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
+
+################################################################################
+# OPTIONAL SETTINGS - Our defaults should work if you just cloned the repository
+################################################################################
 
 # Path to the UnrealPak Windows executable
 UNREAL_PAK_PATH = "./UnrealPakTool/UnrealPak.exe"
