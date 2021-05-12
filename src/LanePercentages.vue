@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="lane-percentages card bg-dark text-light">
+  <div class="lane-percentages card bg-dark">
     <div v-for="laneName in Object.keys(currentLanePercentages)" class="lane"
-         :class="{'text-muted': currentLanePercentages[laneName] === 0}">
+         :style="laneColor(currentLanePercentages[laneName])">
       <label>{{ laneName }}</label>
       <span>{{ currentLanePercentages[laneName] }}%</span>
     </div>
@@ -13,7 +13,6 @@ import { BehaviorSubject, Subscription } from "rxjs";
 import Vue from "vue";
 
 export default Vue.extend({
-  methods: {},
   props: {
     map: Object,
   },
@@ -32,8 +31,21 @@ export default Vue.extend({
       currentLanePercentages: null,
     }
   },
-  computed: {
-  }
+    methods: {
+      laneColor(lanePercentage) {
+          if (lanePercentage === 0) {
+            return "color: hsl(0, 0%, 50%);"
+          }
+
+          // we map lanePercentage in [0, 100] to hue in [RED_HUE, GREEN_HUE]
+          // note that RED_HUE is 0, so we don't actually have to put that into the formula
+          const GREEN_HUE = 120;
+
+          const cur_hue = lanePercentage / 100 * GREEN_HUE;
+
+          return `color: hsl(${cur_hue}, 100%, 50%);`;
+      }
+    },
 });
 </script>
 
