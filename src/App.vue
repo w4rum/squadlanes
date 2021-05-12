@@ -207,4 +207,11 @@ export default Vue.extend({
     top: 47px;
   }
 }
+
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+    content: none;
+}
 </style>
