@@ -10,7 +10,7 @@
             v-on:input="filterMap"
             v-model="filterMapInputValue"
             v-on:keyup.stop="onKeyup"
-          > 
+          />
         </b-form-group>
         <b-dropdown-item v-for="map in mapNames" v-on:click="selectMap(map)">
           {{ map }}
@@ -77,6 +77,7 @@ export default Vue.extend({
       }
     }
     document.addEventListener('keyup', this.keyListener);
+    this.map.changeMap(this.currMapName, this.currLayerName);
   },
   beforeDestroy() {
     document.removeEventListener('keyup', this.keylistener);

@@ -1,6 +1,7 @@
 <template lang="html">
-  <div class="lane-percentages card">
-    <div v-for="laneName in Object.keys(currentLanePercentages)" class="lane">
+  <div class="lane-percentages card bg-dark text-light">
+    <div v-for="laneName in Object.keys(currentLanePercentages)" class="lane"
+         :class="{'text-muted': currentLanePercentages[laneName] === 0}">
       <label>{{ laneName }}</label>
       <span>{{ currentLanePercentages[laneName] }}%</span>
     </div>

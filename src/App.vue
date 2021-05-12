@@ -214,4 +214,8 @@ export default Vue.extend({
 .leaflet-tooltip-right:before {
     content: none;
 }
+
+.leaflet-container {
+    background-color:rgba(255,0,0,0.0);
+}
 </style>
