@@ -531,11 +531,20 @@ export function changeMap(mapName, layerName) {
 
     let map_image_name = layer_data["background"]["minimap_filename"];
 
-    // override tile URL template function to support our loading our bundled tiles instead
+    // override tile URL template function to support loading our bundled tiles instead
     const TileLayerBundledTiles = L.TileLayer.extend({
         getTileUrl (coords) {
             // we use the first constructor parameter (usually the URL template) as the map name
-            return mapTiles[this._url][coords.z][coords.x][coords.y];
+            const map = mapTiles[this._url];
+            if (!map) return null;
+            const zoomLevel = map[coords.z];
+            if (!zoomLevel) return null;
+            const column = zoomLevel[coords.x];
+            if (!column) return null;
+            const cell = column[coords.y];
+            if (!cell) return null;
+
+            return cell;
         }
     });
 
@@ -660,8 +669,6 @@ export function changeMap(mapName, layerName) {
         map.addEventListener('mousedown', function (ev) {
             const lat = ev.latlng.lat;
             const lng = ev.latlng.lng;
-            console.log(`Pos: X=${lng} Y=${lat}`);
-            console.log(map.getZoom());
         });
     }
 
