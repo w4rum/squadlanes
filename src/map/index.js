@@ -531,7 +531,6 @@ export function changeMap(mapName, layerName) {
 
     let map_image_name = layer_data["background"]["minimap_filename"];
 
-    // console.log(mapTiles);
     // override tile URL template function to support loading our bundled tiles instead
     const TileLayerBundledTiles = L.TileLayer.extend({
         getTileUrl (coords) {
@@ -670,8 +669,6 @@ export function changeMap(mapName, layerName) {
         map.addEventListener('mousedown', function (ev) {
             const lat = ev.latlng.lat;
             const lng = ev.latlng.lng;
-            console.log(`Pos: X=${lng} Y=${lat}`);
-            console.log(map.getZoom());
         });
     }
 

@@ -19,9 +19,7 @@ export default Vue.extend({
   created () {
     const subscription = this.map.lanePercentages.subscribe((percentages) => {
       this.currentLanePercentages = percentages;
-      console.log({percentages});
     });
-    console.log(this.currentLanePercentages);
     this.subscription.add(subscription);
   },
   destroyed() {
@@ -32,9 +30,6 @@ export default Vue.extend({
       subscription: new Subscription(),
       currentLanePercentages: null,
     }
-  },
-  props: {
-    map: Object,
   },
   computed: {
   }

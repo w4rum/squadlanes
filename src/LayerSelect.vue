@@ -67,7 +67,6 @@ export default Vue.extend({
     });
     
     this.keyListener = (e) => {
-      console.log(this.$refs);
       switch(e.key) {
         case "m":
           this.$refs.mapDropdown.show();
