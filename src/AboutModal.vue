@@ -13,9 +13,11 @@
                     on GitHub</a> and
                 <a href="https://docs.google.com/spreadsheets/d/1dz4ryDm7vQnbm4dI19Qfuo9ISLt4UK6GyYXXwwolvRw/"
                    target="_blank" rel="noopener noreferrer">
-                    our spreadsheet</a> with all the RAAS data.
+                    our spreadsheet</a> with all the RAAS data that we collected manually (note that
+                we no longer use this sheet as a data source and have moved to fully automatic
+                data mining scripts).
                 If you want to build something on top of what we've done here, you can always find the latest RAAS data
-                that we use on this website <a href="assets/raas-data.yaml" target="_blank" rel="noopener noreferrer">here</a>.
+                that we use on this website <a href="https://raw.githubusercontent.com/w4rum/squadlanes/master/raas-data.yaml" target="_blank" rel="noopener noreferrer">here</a>.
             </p>
             <p>
                 If you spot any specific errors, please head over to our GitHub repository and open an issue!
@@ -23,23 +25,31 @@
             </p>
             <p>
               This project was made possible by the contributions of the following individuals:
-              <ul>
-                  <li>
-                      Tim | w4rum: Scripts for automatic extraction of capture points, lanes, etc.,
-                      implementation of the website, UI design
-                  </li>
-                  <li>
-                      Captain, Angatar, RacialConfusion: Countless hours of research into RAAS lanes and manual refinement
-                      of the data used here, UI design
-                  </li>
-              </ul>
             </p>
+            <ul>
+                <li>
+                    Tim | w4rum: Data mining scripts to automatically extract information about
+                    capture points, lanes, and map images, map UI
+                </li>
+                <li>
+                    grey275: Overall UI (Huge rework of the 2.0 UI, Vue.js framework, layer
+                    selection, popup menus, automatic scaling to screen size, ...)
+                </li>
+                <li>
+                    Captain, Angatar, RacialConfusion: Countless hours of research into RAAS lanes and manual refinement
+                    of the data used here, UI design
+                </li>
+                <li>
+                    sugordon: Conditional probability calculation
+                </li>
+            </ul>
             <p>
               Keyboard Shortcuts:
-              <ul>
-                <li><mono>m</mono> - Open map selection</li>
-                <li>l - open layer selection</li>
             </p>
+            <ul>
+              <li><mono>m</mono> - Open map selection</li>
+              <li>l - open layer selection</li>
+            </ul>
     </b-modal> </div>
 </template>
 
