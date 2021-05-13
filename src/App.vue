@@ -1,6 +1,8 @@
 <template lang="html">
   <div>
-    <span class="overlay top-center"> <lane-percentages :map="map"></lane-percentages> </span>
+    <span class="overlay top-center">
+      <lane-percentages :map="map"></lane-percentages>
+    </span>
     <span class="overlay top-right"
       ><layer-select
         :map="map"
@@ -124,14 +126,16 @@ export default Vue.extend({
   border: none !important;
   box-shadow: 0 0 0 transparent !important;
   font-weight: bold;
-  text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white;
+  text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white,
+    -1px -1px 0 white;
   text-align: center;
   line-height: 10px;
   resize: none;
 }
 
 .cpTooltip.mouseover {
-  text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+  text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black,
+    -1px -1px 0 black;
   color: white;
 }
 
@@ -197,12 +201,11 @@ export default Vue.extend({
   opacity: 30%;
 }
 
-
 @media only screen and (max-width: 850px) {
   // .top-right {
   //   padding-left: 60px;
   // }
-  
+
   .top-center {
     top: 47px;
   }
@@ -212,10 +215,10 @@ export default Vue.extend({
 .leaflet-tooltip-bottom:before,
 .leaflet-tooltip-left:before,
 .leaflet-tooltip-right:before {
-    content: none;
+  content: none;
 }
 
 .leaflet-container {
-    background-color:rgba(255,0,0,0.0);
+  background-color: rgba(255, 0, 0, 0);
 }
 </style>

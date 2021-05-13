@@ -1,12 +1,14 @@
 <template lang="html">
   <div class="lane-percentages card bg-dark">
-    <div v-for="laneName in Object.keys(currentLanePercentages)" class="lane"
-         :style="laneColor(currentLanePercentages[laneName])">
+    <div
+      v-for="laneName in Object.keys(currentLanePercentages)"
+      class="lane"
+      :style="laneColor(currentLanePercentages[laneName])"
+    >
       <label>{{ laneName }}</label>
       <span>{{ currentLanePercentages[laneName] }}%</span>
     </div>
   </div>
-
 </template>
 <script>
 import { BehaviorSubject, Subscription } from "rxjs";
@@ -16,7 +18,7 @@ export default Vue.extend({
   props: {
     map: Object,
   },
-  created () {
+  created() {
     const subscription = this.map.lanePercentages.subscribe((percentages) => {
       this.currentLanePercentages = percentages;
     });
@@ -29,23 +31,23 @@ export default Vue.extend({
     return {
       subscription: new Subscription(),
       currentLanePercentages: null,
-    }
+    };
   },
-    methods: {
-      laneColor(lanePercentage) {
-          if (lanePercentage === 0) {
-            return "color: hsl(0, 0%, 50%);"
-          }
-
-          // we map lanePercentage in [0, 100] to hue in [RED_HUE, GREEN_HUE]
-          // note that RED_HUE is 0, so we don't actually have to put that into the formula
-          const GREEN_HUE = 120;
-
-          const cur_hue = lanePercentage / 100 * GREEN_HUE;
-
-          return `color: hsl(${cur_hue}, 100%, 50%);`;
+  methods: {
+    laneColor(lanePercentage) {
+      if (lanePercentage === 0) {
+        return "color: hsl(0, 0%, 50%);";
       }
+
+      // we map lanePercentage in [0, 100] to hue in [RED_HUE, GREEN_HUE]
+      // note that RED_HUE is 0, so we don't actually have to put that into the formula
+      const GREEN_HUE = 120;
+
+      const cur_hue = (lanePercentage / 100) * GREEN_HUE;
+
+      return `color: hsl(${cur_hue}, 100%, 50%);`;
     },
+  },
 });
 </script>
 
@@ -74,7 +76,4 @@ export default Vue.extend({
   font-size: smaller;
   margin: unset;
 }
-
-
-
 </style>

@@ -1,0 +1,18 @@
+name: Prettier.js Code Formatting
+
+on: [push, pull_request]
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v3.3
+        with:
+          dry: true
+          prettier_options: --check src
+          prettier_version: 2.3.0

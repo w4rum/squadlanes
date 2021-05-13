@@ -1,6 +1,11 @@
 <template lang="html">
   <div class="layer-selection">
-    <b-dropdown id="map-dropdown" ref="mapDropdown" class="tweaked-dropdown" :text="currMapName">
+    <b-dropdown
+      id="map-dropdown"
+      ref="mapDropdown"
+      class="tweaked-dropdown"
+      :text="currMapName"
+    >
       <b-dropdown-form v-on:submit.prevent="onInputFilterSubmit">
         <b-form-group label="" label-for="map-filter">
           <b-form-input
@@ -15,9 +20,14 @@
         <b-dropdown-item v-for="map in mapNames" v-on:click="selectMap(map)">
           {{ map }}
         </b-dropdown-item>
-      </b-dropdown-form> 
+      </b-dropdown-form>
     </b-dropdown>
-    <b-dropdown ref="layerDropdown" id="layer-dropdown" class="tweaked-dropdown" :text="currLayerName">
+    <b-dropdown
+      ref="layerDropdown"
+      id="layer-dropdown"
+      class="tweaked-dropdown"
+      :text="currLayerName"
+    >
       <b-dropdown-item
         v-for="layer in Object.keys(map.raasData[currMapName])"
         v-on:click="selectLayer(layer)"
@@ -51,7 +61,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      filterMapInputValue: '',
+      filterMapInputValue: "",
       currMapName: null,
       currLayerName: null,
       mapNames: null,
@@ -59,15 +69,15 @@ export default Vue.extend({
     };
   },
   mounted() {
-    this.$root.$on('bv::dropdown::shown', bvEvent => {
-      this.filterMapInputValue = '';
+    this.$root.$on("bv::dropdown::shown", (bvEvent) => {
+      this.filterMapInputValue = "";
       this.filterMap();
       var input = this.$refs.filterMapInputRef;
-      setTimeout(() => input.$el.focus(), 10)
+      setTimeout(() => input.$el.focus(), 10);
     });
-    
+
     this.keyListener = (e) => {
-      switch(e.key) {
+      switch (e.key) {
         case "m":
           this.$refs.mapDropdown.show();
           break;
@@ -75,12 +85,12 @@ export default Vue.extend({
           this.$refs.layerDropdown.show();
           break;
       }
-    }
-    document.addEventListener('keyup', this.keyListener);
+    };
+    document.addEventListener("keyup", this.keyListener);
     this.map.changeMap(this.currMapName, this.currLayerName);
   },
   beforeDestroy() {
-    document.removeEventListener('keyup', this.keylistener);
+    document.removeEventListener("keyup", this.keylistener);
   },
   methods: {
     selectMap(map) {
@@ -96,7 +106,9 @@ export default Vue.extend({
     filterMap() {
       this.mapNames = Object.keys(this.map.raasData).filter((mapName) => {
         const normalized = mapName.toLowerCase().replace(" ", "");
-        const normalizedFilter = this.filterMapInputValue.toLowerCase().replace(" ", "");
+        const normalizedFilter = this.filterMapInputValue
+          .toLowerCase()
+          .replace(" ", "");
         return normalized.includes(normalizedFilter);
       });
     },
@@ -106,8 +118,8 @@ export default Vue.extend({
         this.$refs.mapDropdown.hide(true);
       }
     },
-    onKeyup(e) { }
-  }
+    onKeyup(e) {},
+  },
 });
 </script>
 

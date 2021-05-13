@@ -1,6 +1,8 @@
 <template lang="html">
   <div class="map-legend">
-      <b-button v-b-popover.click.top="popoverConfig" title="Popover Title">Legend</b-button>
+    <b-button v-b-popover.click.top="popoverConfig" title="Popover Title"
+      >Legend</b-button
+    >
   </div>
 </template>
 
