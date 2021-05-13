@@ -2,8 +2,12 @@
   <div>
     <b-button v-b-modal.about-modal class="about-button">?</b-button>
     <b-modal id="about-modal" title="About" ok-only>
-
-            <p>
+        <p>
+            <i>
+                Squad Lanes v2.1 (for Squad v2.6)
+            </i>
+        </p>
+        <p>
                 <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/OFGYkDxdRYE?t=498">
                     How the fuck do I use this?</a>
             </p>
