@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "squadlanes-extraction"
+version = "2.1.0"
+description = "Datamining scripts used to extract map images and lane information from Squad game files"
+authors = ["Tim Schmidt <tim.schmidt@khorne.faith>"]
+license = "AGPLv3"
+
+[tool.poetry.scripts]
+unpack = "squadlanes_extraction.main:unpack"
+extract = "squadlanes_extraction.main:extract"
+tiles = "squadlanes_extraction.main:tiles"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+PyYAML = "^5.4.1"
+pwntools = "^4.5.0"
+
+[tool.poetry.dev-dependencies]
+black = {version = "^20.8b1", extras = ["d"]}
+mypy = "^0.812"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

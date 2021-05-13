@@ -3,7 +3,9 @@
     "name": "startbootstrap-simple-sidebar",
     "version": "5.1.2",
     "scripts": {
-        "start": "node_modules/.bin/gulp watch"
+        "start": "node_modules/.bin/gulp watch",
+        "format": "node_modules/.bin/prettier --write src",
+        "format-check": "node_modules/.bin/prettier --check src"
     },
     "description": "A simple sidebar navigation HTMl template built with Bootstrap",
     "keywords": [
@@ -29,13 +31,27 @@
         "url": "https://github.com/StartBootstrap/startbootstrap-simple-sidebar.git"
     },
     "dependencies": {
+        "@vue/composition-api": "*",
         "bootstrap": "4.5.0",
-        "jquery": "3.5.1"
+        "bootstrap-vue": "^2.21.2",
+        "jquery": "3.5.1",
+        "leaflet": "^1.7.1",
+        "parcel-bundler": "^1.12.5",
+        "popper": "^1.0.1",
+        "rxjs": "^5.5.12",
+        "vue": "^2.6.12",
+        "vue-hot-reload-api": "^2.3.4",
+        "yaml": "^1.10.2",
+        "yaml-js": "^0.2.3"
     },
     "devDependencies": {
+        "@vue/component-compiler-utils": "^3.2.0",
         "browser-sync": "2.26.7",
         "del": "5.1.0",
         "gulp": "4.0.2",
-        "merge-stream": "2.0.0"
+        "merge-stream": "2.0.0",
+        "prettier": "2.3.0",
+        "sass": "^1.32.11",
+        "vue-template-compiler": "^2.6.12"
     }
 }

@@ -1,9 +1,6 @@
 node_modules
 raas-lanes
 .idea
-extracts
-lanes
-venv
 *.log
 extract.exe
 package-lock.json
@@ -12,3 +9,7 @@ map-resources/*
 umodel
 raas-data-auto.yaml
 __pycache__
+
+.cache
+dist
+vendor
