@@ -3,7 +3,7 @@
     "name": "startbootstrap-simple-sidebar",
     "version": "5.1.2",
     "scripts": {
-        "start": "node_modules/.bin/gulp watch",
+        "start": "node_modules/.bin/parcel src/index.html",
         "format": "node_modules/.bin/prettier --write src",
         "format-check": "node_modules/.bin/prettier --check src"
     },

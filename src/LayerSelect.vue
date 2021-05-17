@@ -43,6 +43,7 @@ import Vue from "vue";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap";
 import "bootstrap-vue/dist/bootstrap-vue";
+import { isSmallTouchDevice } from "./utils";
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -72,8 +73,10 @@ export default Vue.extend({
     this.$root.$on("bv::dropdown::shown", (bvEvent) => {
       this.filterMapInputValue = "";
       this.filterMap();
-      var input = this.$refs.filterMapInputRef;
-      setTimeout(() => input.$el.focus(), 10);
+      if (!isSmallTouchDevice()) {
+        var input = this.$refs.filterMapInputRef;
+        setTimeout(() => input.$el.focus(), 10);
+      }
     });
 
     this.keyListener = (e) => {
@@ -145,5 +148,10 @@ export default Vue.extend({
 
 #layer-dropdown {
   flex-grow: 0.2;
+}
+
+.dropdown-menu {
+  max-height: 100vh;
+  overflow-y: auto;
 }
 </style>
