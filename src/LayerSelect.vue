@@ -43,7 +43,7 @@ import Vue from "vue";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap";
 import "bootstrap-vue/dist/bootstrap-vue";
-import {isSmallTouchDevice} from './utils';
+import { isSmallTouchDevice } from "./utils";
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -73,9 +73,7 @@ export default Vue.extend({
     this.$root.$on("bv::dropdown::shown", (bvEvent) => {
       this.filterMapInputValue = "";
       this.filterMap();
-      console.log('is small: ', isSmallTouchDevice());
       if (!isSmallTouchDevice()) {
-        console.log({refs: this.$refs});
         var input = this.$refs.filterMapInputRef;
         setTimeout(() => input.$el.focus(), 10);
       }
