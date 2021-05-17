@@ -146,4 +146,9 @@ export default Vue.extend({
 #layer-dropdown {
   flex-grow: 0.2;
 }
+
+.dropdown-menu {
+  max-height: 100vh;
+  overflow-y: auto;
+}
 </style>
