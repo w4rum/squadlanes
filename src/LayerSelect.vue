@@ -131,7 +131,6 @@ export default Vue.extend({
   display: flex;
   flex-wrap: nowrap;
   max-width: 600px;
-  margin-left: 45px;
 }
 
 .layer-selection > :first-child {
