@@ -61,8 +61,8 @@ export default Vue.extend({
 .top-center {
   position: fixed;
   top: 0;
-  left: calc(50vw - 25vw);
-  width: 50vw;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .top-right {
@@ -73,9 +73,9 @@ export default Vue.extend({
 
 .bottom-center {
   position: fixed;
-  width: 30vw;
   bottom: 0;
-  left: calc(50vw - 15vw);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .bottom-right {

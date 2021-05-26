@@ -1,34 +1,30 @@
 {
-    "title": "Simple Sidebar",
-    "name": "startbootstrap-simple-sidebar",
-    "version": "5.1.2",
+    "title": "Squad Lanes",
+    "name": "squadlanes",
+    "version": "2.1.2",
     "scripts": {
         "start": "node_modules/.bin/parcel src/index.html",
         "format": "node_modules/.bin/prettier --write src",
         "format-check": "node_modules/.bin/prettier --check src"
     },
-    "description": "A simple sidebar navigation HTMl template built with Bootstrap",
-    "keywords": [
-        "css",
-        "sass",
-        "html",
-        "responsive",
-        "theme",
-        "template"
-    ],
-    "homepage": "https://startbootstrap.com/templates/simple-sidebar",
+    "description": "Interactive Squad Maps to help with RAAS capture point prediction",
+    "homepage": "https://squadlanes.com",
     "bugs": {
-        "url": "https://github.com/StartBootstrap/startbootstrap-simple-sidebar/issues",
-        "email": "feedback@startbootstrap.com"
+        "url": "https://github.com/w4rum/squadlanes/issues"
     },
-    "license": "MIT",
-    "author": "Start Bootstrap",
+    "license": "AGPLv3",
+    "author": "Tim | w4rum",
     "contributors": [
-        "David Miller (http://davidmiller.io/)"
+        "Tim | w4rum",
+        "grey275",
+        "Captain",
+        "Angatar",
+        "RacialConfusion",
+        "sugordon"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/StartBootstrap/startbootstrap-simple-sidebar.git"
+        "url": "https://github.com/w4rum/squadlanes"
     },
     "dependencies": {
         "@vue/composition-api": "*",
