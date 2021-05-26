@@ -37,7 +37,7 @@
         we've done here, you can always find the latest RAAS data that we use on
         this website
         <a
-          href="https://raw.githubusercontent.com/w4rum/squadlanes/master/raas-data.yaml"
+          href="https://raw.githubusercontent.com/w4rum/squadlanes/master/src/assets/raas-data.yaml"
           target="_blank"
           rel="noopener noreferrer"
           >here</a
