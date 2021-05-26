@@ -4,8 +4,10 @@
     "version": "2.1.2",
     "scripts": {
         "start": "node_modules/.bin/parcel src/index.html",
+        "build": "node_modules/.bin/parcel build src/index.html",
         "format": "node_modules/.bin/prettier --write src",
-        "format-check": "node_modules/.bin/prettier --check src"
+        "format-check": "node_modules/.bin/prettier --check src",
+        "deploy": "rsync -avz --stats --delete dist/ personal-vps:/var/www/squadlanes.com/public/"
     },
     "description": "Interactive Squad Maps to help with RAAS capture point prediction",
     "homepage": "https://squadlanes.com",
