@@ -89,8 +89,7 @@ Just be warned, it's probably a lot of work to get into it.
   Discord DM (`Tim | w4rum#4344`, reach me via https://discord.gg/aM5CYjnFxN)
 - [Leaflet](https://github.com/Leaflet/Leaflet). Released under
   [BSD 2-Clause "Simplified" License](https://github.com/Leaflet/Leaflet/blob/master/LICENSE).
-- Bootstrap and the "Simple Sidebar" component: Copyright 2013-2020 Start
-  Bootstrap LLC. Code released under the
+- Bootstrap. Copyright 2013-2020 Start Bootstrap LLC. Code released under the
   [MIT](https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/gh-pages/LICENSE)
   license.
 - This project relies on Konstantin Nosov's
