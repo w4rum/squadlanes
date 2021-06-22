@@ -31,6 +31,7 @@ drive.
     - Python 3.8 or compatible
     - [Poetry](https://python-poetry.org/) 1.1.5 or compatible
     - Docker 20.10.5 or compatible
+    - Wine 6.9 or compatible
 2. Move into the extraction sub-project:
     ```shell
     cd extraction  
