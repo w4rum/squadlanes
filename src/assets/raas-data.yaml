@@ -116,10 +116,6 @@ Al Basrah:
                 sdk_name: LowerFringe
                 x: -4642.2734375
                 y: 113293.078125
-            -   display_name: Lower Fringe
-                sdk_name: LowerFringe2
-                x: 5874.7265625
-                y: 108408.078125
             02-CaptureZoneCluster_0:
             -   display_name: Basrah Mansion
                 sdk_name: BasrahMansion
@@ -769,9 +765,9 @@ Belaya Pass:
                 shift_y: 0
             minimap_filename: Belaya_Minimap
         clusters:
-            00-CAFMain:
-            -   display_name: CAF Main
-                sdk_name: CAFMain
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
                 x: -135458.33203125
                 y: 114705.1875
             01-BP_CaptureZoneCluster:
@@ -879,14 +875,14 @@ Belaya Pass:
                 sdk_name: VelinoOutskirts
                 x: -18137.28125
                 y: -169825.71875
-            100-RUSMain:
-            -   display_name: RUS Main
-                sdk_name: RUSMain
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
                 x: 92757.01171875
                 y: -148585.46875
         lanes:
             Center:
-            -   a: 00-CAFMain
+            -   a: 00-Team1Main
                 b: 01-BP_CaptureZoneCluster
             -   a: 01-BP_CaptureZoneCluster
                 b: 02-BP_CaptureZoneCluster
@@ -897,7 +893,7 @@ Belaya Pass:
             -   a: 04-BP_CaptureZoneCluster
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
-                b: 100-RUSMain
+                b: 100-Team2Main
     Invasion v1:
         background:
             corners:
@@ -1478,7 +1474,7 @@ Belaya Pass:
             -   display_name: Team1 Main
                 sdk_name: Team1Main
                 x: 92731.375
-                y: -150747.5546875
+                y: -151775.5546875
             01-BP_CaptureZoneCluster:
             -   display_name: Lumber Yard
                 sdk_name: LumberYard
@@ -2231,54 +2227,50 @@ Fallujah:
                 x: 154010.4375
                 y: -35756.05078125
             01-CaptureZoneCluster:
+            -   display_name: Askari Outskirts
+                sdk_name: AskariOutskirts
+                x: 104267.78125
+                y: -36582.0390625
+            02-CaptureZoneCluster:
             -   display_name: Askari Hill
                 sdk_name: AskariHill
                 x: 75845.828125
                 y: -35432.828125
-            -   display_name: Market
-                sdk_name: Market
-                x: 71107.3984375
-                y: -14115.3046875
-            02-CaptureZoneCluster:
             -   display_name: Askari Slums
                 sdk_name: AskariSlums
                 x: 76797.265625
                 y: -64156.14453125
+            03-CaptureZoneCluster:
             -   display_name: Shurta Intersection
                 sdk_name: ShurtaIntersection
                 x: 52674.265625
-                y: -55992.14453125
+                y: -55992.140625
             -   display_name: Warehouse
                 sdk_name: Warehouse
                 x: 29050.265625
                 y: -72811.140625
-            03-CaptureZoneCluster:
-            -   display_name: Bazaar
-                sdk_name: Bazaar
-                x: 32926.01171875
-                y: -13454.1953125
+            04-CaptureZoneCluster:
             -   display_name: Blue Mosque
                 sdk_name: BlueMosque
                 x: 36351.46875
                 y: -29801.28125
-            -   display_name: Blue Mosque
-                sdk_name: BlueMosque2
-                x: 36351.46875
-                y: -29801.28125
-            04-CaptureZoneCluster:
-            -   display_name: Palace
-                sdk_name: Palace
-                x: 11159.423828125
-                y: 20888.39453125
             05-CaptureZoneCluster:
             -   display_name: Central Crossroads
                 sdk_name: CentralCrossroads
                 x: -26594.43359375
                 y: -4347.38671875
+            -   display_name: Commercial District
+                sdk_name: CommercialDistrict
+                x: 3293.40625
+                y: -24159.513671875
             -   display_name: Crossroads South Apartments
                 sdk_name: CrossroadsSouthApartments
                 x: -19845.73046875
                 y: -2330.13671875
+            -   display_name: Palace
+                sdk_name: Palace
+                x: 11183.609375
+                y: 20700.3203125
             -   display_name: Crossroads South Apartments
                 sdk_name: PoliceStation
                 x: -22662.884765625
@@ -3817,7 +3809,7 @@ Goose Bay:
             00-CAFMain:
             -   display_name: CAF Main
                 sdk_name: CAFMain
-                x: 160151.25
+                x: 160158.96875
                 y: 167143.5625
             01-CaptureZoneCluster_0:
             -   display_name: Happy Valley
@@ -3948,10 +3940,6 @@ Goose Bay:
                 x: -71157.9140625
                 y: 23211.62109375
             05-CaptureZoneCluster:
-            -   display_name: Drilling Site
-                sdk_name: DrillingSite
-                x: -95631.625
-                y: -14444.3046875
             -   display_name: Naval Refueling Station
                 sdk_name: NavalRefuelingStation
                 x: -117173.6875
@@ -9479,60 +9467,20 @@ Manic-5:
                 x: -174876.1875
                 y: -173880.5625
             01-CaptureZoneCluster:
-            -   display_name: Antenna Facility
-                sdk_name: AntennaFacility_31
-                x: -132059.359375
-                y: 35232.1640625
-            -   display_name: Battalion HQ
-                sdk_name: BattalionHQ
-                x: -106002.5
-                y: 9291.13671875
-            -   display_name: Estate
-                sdk_name: Estate
-                x: -152482.515625
-                y: -32954.2421875
             -   display_name: Firebase Pentincton
                 sdk_name: FirebasePentincton
                 x: -121438.0078125
                 y: -107226.5546875
-            -   display_name: Prospector's Point
-                sdk_name: ProspectorsPoint
-                x: -106728.3984375
-                y: -60491.51953125
             02-CaptureZoneCluster:
-            -   display_name: Dam Administration
-                sdk_name: DamAdministration
-                x: -69612.703125
-                y: -28449.384765625
-            -   display_name: Maintenance Yard
-                sdk_name: MaintenanceYard
-                x: -54078.65625
-                y: -41174.95703125
-            -   display_name: Old Workcamp
-                sdk_name: OldWorkcamp
-                x: -19819.4453125
-                y: -90950.6953125
+            -   display_name: Dam Checkpoint
+                sdk_name: DamCheckpoint
+                x: -66355.3984375
+                y: -132785.515625
             03-CaptureZoneCluster:
-            -   display_name: Cannabis Farm
-                sdk_name: CannabisFarm
-                x: 12012.283203125
-                y: 22830.5703125
-            -   display_name: Ferme Dubois
-                sdk_name: FermeDubois
-                x: 22277.447265625
-                y: -24304.439453125
-            -   display_name: Lodging Site
-                sdk_name: LodgingSite
-                x: -13883.59375
-                y: 19076.7578125
-            -   display_name: Penstocks
-                sdk_name: Penstocks
-                x: 3290.1875
-                y: -30159.626953125
-            -   display_name: Telecom Facility
-                sdk_name: TelecomFacility
-                x: 17726.390625
-                y: -744.1171875
+            -   display_name: Daniel-Johnson Dam
+                sdk_name: JohnsonDam
+                x: -21584.62109375
+                y: -116217.7578125
             04-CaptureZoneCluster:
             -   display_name: Dieppe
                 sdk_name: Dieppe
@@ -9555,34 +9503,14 @@ Manic-5:
                 sdk_name: ConstructionSite
                 x: 108874.6328125
                 y: -22953.125
-            -   display_name: Workshops (West)
-                sdk_name: DistributionOffices
-                x: 158740.75
-                y: 60302.38671875
             -   display_name: East Mont Joie
                 sdk_name: EastMontJoie
                 x: 125658.578125
                 y: 14029.703125
-            -   display_name: Ferme Gallant
-                sdk_name: FermeGallant
-                x: 158537.5625
-                y: -15259.84375
             -   display_name: Gas Station
                 sdk_name: GasStation
                 x: 95398.671875
                 y: -2475.0625
-            -   display_name: Gold Mine
-                sdk_name: GoldMine
-                x: 185388.84375
-                y: 82270.203125
-            -   display_name: Mine Administration
-                sdk_name: MineAdministration
-                x: 172115.328125
-                y: 57691.3359375
-            -   display_name: Mont Joie Outskirts
-                sdk_name: MontJoieOutskirts
-                x: 138336.859375
-                y: 25269.1875
             -   display_name: Mont Joie Town Center
                 sdk_name: MontJoieTownCenter
                 x: 118113.4453125
@@ -9591,14 +9519,6 @@ Manic-5:
                 sdk_name: RiverviewApartments
                 x: 107770.0703125
                 y: -2127.828125
-            -   display_name: West Mont Joie
-                sdk_name: WestMontJoie
-                x: 92451.4140625
-                y: 15964.453125
-            -   display_name: Workshops (East)
-                sdk_name: Workshops
-                x: 187555.109375
-                y: 70831.7421875
             100-USAMain:
             -   display_name: USA Main
                 sdk_name: USAMain
@@ -15294,9 +15214,9 @@ Yehorivka:
                 shift_y: 0
             minimap_filename: Yehorivka_Minimap
         clusters:
-            00-CAFMain:
-            -   display_name: CAF Main
-                sdk_name: CAFMain
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
                 x: 244273.27734375
                 y: 217483.5625
             01-BP_CaptureZoneCluster:
@@ -15340,14 +15260,14 @@ Yehorivka:
                 sdk_name: UpperPetrivka
                 x: 13943.4375
                 y: -90499.046875
-            100-MILMain:
-            -   display_name: MIL Main
-                sdk_name: MILMain
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
                 x: 13377.5859375
                 y: -241133.78125
         lanes:
             Center:
-            -   a: 00-CAFMain
+            -   a: 00-Team1Main
                 b: 01-BP_CaptureZoneCluster
             -   a: 01-BP_CaptureZoneCluster
                 b: 02-BP_CaptureZoneCluster
@@ -15358,7 +15278,7 @@ Yehorivka:
             -   a: 04-BP_CaptureZoneCluster
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
-                b: 100-MILMain
+                b: 100-Team2Main
     CAF RAAS v1:
         background:
             corners:

@@ -66,6 +66,9 @@ drive.
     Once you're done, overwrite the existing file in `src/assets/raas-data.yaml`.
     You don't *have* to overwrite the existing file and can just use that one instead.
     The important part of this process is the extraction of the map tiles.
+   
+If any of these steps don't seem to work, i.e., `poetry run tiles` finishes instantly but doesn't 
+actually produce any tiles, then open the config file, set `LOG_LEVEL = "debug"` and try again.
 
 ### Web Server Deployment
 
