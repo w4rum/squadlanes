@@ -72,7 +72,7 @@ drive.
 TODO
 
 ## Documentation / Project overview for developers
-This project is in somewhat unpolished and largely undocumented state.
+This project is in a somewhat unpolished and largely undocumented state.
 We apologize for this but don't have specific plans to fix this in the immediate future
 since the person responsible for the extraction scripts hasn't actively played Squad in
 quite a while and has moved to a kind of maintenance-only mode for this project.
