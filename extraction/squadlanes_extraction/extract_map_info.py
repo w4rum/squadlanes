@@ -222,10 +222,6 @@ def extract_map(map_dir: str, progress: Progress):
 
         progress.status(map_name)
 
-        # CAF does some things differently, so we have to remember whether we're
-        # processing a CAF map
-        is_caf = map_name.startswith("CAF")
-
         # Some maps have their Gameplay Layers in a subdirectory called Gameplay_Layers.
         # For maps that don't have the Gameplay_Layers subdirectory, all the
         # umap files in the map root directory are gameplay layers.
@@ -373,27 +369,25 @@ def extract_map(map_dir: str, progress: Progress):
             }
 
             pretty_map_name = map_name
-            if is_caf:
-                _, _, pretty_map_name = pretty_map_name.partition("CAF_")
             pretty_map_name = MAP_RENAMES.get(pretty_map_name) or pretty_map_name
             pretty_map_name = pretty_map_name.replace("_", " ")
 
             # strip out map name from layer name
+            is_caf = layer.startswith("CAF_")  # don't strip out CAF prefix
             layer_game_mode_index = layer.casefold().index(game_mode.casefold())
             pretty_layer_name = (
                 game_mode + layer[layer_game_mode_index + len(game_mode) :]
             )
             pretty_layer_name = pretty_layer_name.strip()
             pretty_layer_name = pretty_layer_name.replace("_", " ")
+            if is_caf:
+                pretty_layer_name = "CAF " + pretty_layer_name
             assert pretty_map_name != ""
             assert pretty_layer_name != ""
 
             assert (
                 minimap_name is not None
             ), f"{pretty_map_name}/{pretty_layer_name} has no minimap"
-
-            if is_caf:
-                pretty_layer_name = "CAF " + pretty_layer_name
 
             layer_data = {
                 "background": {

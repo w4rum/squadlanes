@@ -10,7 +10,6 @@ from pwnlib.log import Progress
 from pwnlib.context import context
 
 VANILLA_SUBDIR = "/SquadGame/Content/Paks"
-CAF_SUBDIR = "/SquadGame/Plugins/Mods/CanadianArmedForces/Content/Paks/WindowsNoEditor"
 
 
 def _unpack_pak_with_filter(pak_path: str, filter: str) -> None:
@@ -68,16 +67,12 @@ def unpack():
     with log.progress("-- Unpacking Vanilla Assets") as progress:
         _unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + VANILLA_SUBDIR, progress)
 
-    with log.progress("-- Unpacking CAF Assets") as progress:
-        _unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + CAF_SUBDIR, progress)
-
     # some assets are extracted into a different directories
     # e.g., "./Content/" vs. "./SquadGame/Content/"
     # (not sure why this is inconsistent)
     with log.progress("-- Merging directories"):
         merge_paths = [
             ("SquadGame", "."),
-            ("Plugins/Mods/CanadianArmedForces/", "."),
             ("Content", "."),
         ]
         for src, dst in merge_paths:
