@@ -56,9 +56,12 @@ export default Vue.extend({
   },
   created() {
     this.mapNames = Object.keys(this.map.raasData);
-    this.currMapName = this.startingMapName;
+
+    // read map and layer from URL hash part of possible
+    var urlHashParams = new URLSearchParams(location.hash.substr(1));
+    this.currMapName = urlHashParams.get("map") || this.startingMapName;
     this.currMapNameInput = this.currMapName;
-    this.currLayerName = this.startingLayerName;
+    this.currLayerName = urlHashParams.get("layer") || this.startingLayerName;
   },
   data() {
     return {
@@ -90,21 +93,17 @@ export default Vue.extend({
       }
     };
     document.addEventListener("keyup", this.keyListener);
-    this.map.changeMap(this.currMapName, this.currLayerName);
+    this.changeMapAndLayer(this.currMapName, this.currLayerName);
   },
   beforeDestroy() {
     document.removeEventListener("keyup", this.keylistener);
   },
   methods: {
     selectMap(map) {
-      this.currMapName = map;
-      this.currMapNameInput = this.currMapName;
-      this.currLayerName = Object.keys(this.map.raasData[this.currMapName])[0];
-      this.map.changeMap(this.currMapName, this.currLayerName);
+      this.changeMapAndLayer(map, null);
     },
     selectLayer(layer) {
-      this.currLayerName = layer;
-      this.map.changeMap(this.currMapName, this.currLayerName);
+      this.changeMapAndLayer(this.currMapName, layer);
     },
     filterMap() {
       this.mapNames = Object.keys(this.map.raasData).filter((mapName) => {
@@ -122,6 +121,24 @@ export default Vue.extend({
       }
     },
     onKeyup(e) {},
+    changeMapAndLayer(map, layer) {
+      this.currMapName = map;
+      this.currMapNameInput = this.currMapName;
+
+      if (!layer) {
+        this.currLayerName = Object.keys(
+          this.map.raasData[this.currMapName]
+        )[0];
+      } else {
+        this.currLayerName = layer;
+      }
+
+      var urlHashParams = new URLSearchParams(location.hash.substr(1));
+      urlHashParams.set("map", this.currMapName);
+      urlHashParams.set("layer", this.currLayerName);
+      location.hash = urlHashParams.toString();
+      this.map.changeMap(this.currMapName, this.currLayerName);
+    },
   },
 });
 </script>
