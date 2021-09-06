@@ -57,11 +57,13 @@ export default Vue.extend({
   created() {
     this.mapNames = Object.keys(this.map.raasData);
 
-    // read map and layer from URL hash part of possible
-    var urlHashParams = new URLSearchParams(location.hash.substr(1));
-    this.currMapName = urlHashParams.get("map") || this.startingMapName;
-    this.currMapNameInput = this.currMapName;
-    this.currLayerName = urlHashParams.get("layer") || this.startingLayerName;
+    // read map and layer from URL hash part if possible
+    this.selectMapAndLayerFromUrl()
+
+    // listen to back and forwards button
+    window.onpopstate = (event) => {
+      this.selectMapAndLayerFromUrl()
+    };
   },
   data() {
     return {
@@ -139,6 +141,13 @@ export default Vue.extend({
       location.hash = urlHashParams.toString();
       this.map.changeMap(this.currMapName, this.currLayerName);
     },
+    selectMapAndLayerFromUrl() {
+      var urlHashParams = new URLSearchParams(location.hash.substr(1));
+      this.changeMapAndLayer(
+        urlHashParams.get("map") || this.startingMapName,
+        urlHashParams.get("layer") || this.startingLayerName
+      );
+    }
   },
 });
 </script>
