@@ -1,8 +1,6 @@
 # [Squad Lanes](https://squadlanes.com)
 ##### Interactive Squad Maps to help with RAAS capture point prediction
 
-This is a work-in-progress.
-
 Capture Points and RAAS lanes are automatically extracted from Squad maps.
 
 If you spot any specific errors, please open an issue!
@@ -14,11 +12,20 @@ See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to wor
 ## Deployment
 In order to run your own instance of Squad Lanes, you need to
 1. Extract the map images and layer data with our Python extraction scripts
-2. Run the webserver using NodeJS and Parcel
+2. Package the static files with ParcelJS
+3. Deploy the static files to a web server, e.g., nginx
 
-Both of these tasks are futher explained in the following sections.
+These tasks are futher explained in the following sections.
 We only provide a deployment guide for Linux systems.
 If you're using another operating system, then you're on your own.
+
+Note that if you're trying to port this to a different operating system,
+the `umodel-squadlanes` executable included in this repository is not from the
+original [UEViewer project](https://github.com/gildor2/UEViewer) but instead
+from [our own fork](https://github.com/w4rum/UEViewer).
+Our version behaves very differently and the original `umodel` executable will
+*not* work for our use case.
+You have to use our fork to build an executable for your operating system.
 
 ### Extracting map images and layer data
 Even though we only need map layer data and map images, we're unpacking most of the
@@ -60,27 +67,55 @@ drive.
     ```shell
     poetry run tiles
     ```
-8. The map tiles are now in the web assets directory if you're using the default config.
+8. The map tiles are now in `src/assets/map-tiles` if you're using the default config.
     The layer data was saved to `extraction/raas-data-auto.yml`.
-    You can make manual changes to that if necessary.
+    If you want to, you can make manual changes to the layer data.
     Once you're done, overwrite the existing file in `src/assets/raas-data.yaml`.
-    You don't *have* to overwrite the existing file and can just use that one instead.
-    The important part of this process is the extraction of the map tiles.
+    Note that instead of using the layer data you just generated, you can also just use
+    the layer data included in this repository.
+    The important part of this process is the extraction of the map tiles, which are too
+    big (~1 GiB) to be included here.
    
 If any of these steps don't seem to work, e.g., `poetry run tiles` finishes instantly but doesn't 
 actually produce any tiles, then open the config file, set `LOG_LEVEL = "debug"` and try again.
+That should provide you with more verbose output.
 
 ### Web Server Deployment
 
-TODO
+If you want to deploy this locally to change the front-end files and test around, follow the
+"Development" instructions.
+
+If you want to deploy this to a production server, follow the "Production" instructions.
+
+#### Development
+1. Run `npm run start`.
+2. ParcelJS will now package the static files.
+   This can take a couple of minutes on your first run.
+3. The development server can now be reached at `http://localhost:1234/`.
+   Changing any files while the server is running will cause an automatic update.
+   However, you might still need to hit F5 for some parts, e.g., changes to the map
+   logic.
+   
+#### Production
+1. Run `npm run build`.
+2. ParcelJS will now package the static files.
+   This can take a couple of minutes on your first run.
+3. The packaged static files are now in `dist/`.
+4. Upload the contents of `dist/` into your server's webroot and make your web server
+   return the `index.html` that you just uploaded.
+   
+If you want a nice and easy way to delta-upload your `dist` directory to your web server
+with `rsync`, take a look at the `deploy` command in `package.json` and adjust that to
+your needs.
 
 ## Documentation / Project overview for developers
 This project is in a somewhat unpolished and largely undocumented state.
 We apologize for this but don't have specific plans to fix this in the immediate future
-since the person responsible for the extraction scripts hasn't actively played Squad in
-quite a while and has moved to a kind of maintenance-only mode for this project.
+since the person responsible for most of the code including the extraction scripts 
+(Tim | w4rum) hasn't actively played Squad in quite a while and has moved to a kind
+of maintenance-only mode for this project.
 If you want to contribute at this point in time, feel free to open issues and pull
-requests.
+requests and we'll be happy to work with you.
 Just be warned, it's probably a lot of work to get into it.
 
 
