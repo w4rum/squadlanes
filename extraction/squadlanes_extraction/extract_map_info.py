@@ -24,7 +24,14 @@ def add_tuples(*tuples: Tuple):
     return tuple(s)
 
 
-def to_list(list_dict: dict):
+def index_dict_to_list(list_dict: dict):
+    """
+    Takes a list in dict-form (indices = keys) and transform it into a proper list, obeying the
+    included indices.
+
+    Example:
+    { "0": "A", "1": "B", "2": "C" } => ["A", "B", "C"]
+    """
     highest_index = -1
     for key in list_dict.keys():
         key = int(key)
@@ -129,36 +136,47 @@ def absolute_location(scene_root: Union[dict, str]):
 
 
 def get_lane_graph_and_clusters(docs: List[dict]):
+    # get lane graph and clusters
     for obj in docs:
         obj = access_one(obj)
         if obj["ClassName"] == "SQRAASLaneInitializer_C":
-            return multi_lane_graph(obj, docs)
+            lane_graph, clusters = multi_lane_graph(obj, docs)
+            break
         if obj["ClassName"] == "SQGraphRAASInitializerComponent":
-            return single_lane_graph(obj, docs)
+            lane_graph, clusters = single_lane_graph(obj, docs)
+            break
+    else:
+        assert False, "no RAAS initializer found"
 
-    assert False
+    # identify main clusters
+    mains = []
+    for obj in docs:
+        if access_one(obj)["ClassName"] != "BP_CaptureZoneMain_C":
+            continue
+        mains.append(cp_sdk_name(obj))
+    assert len(mains) == 2, f"found {len(mains)} main bases"
+
+    return lane_graph, clusters, mains
 
 
 def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
     lane_graph = {}
     cluster_names = set()
-    for lane in to_list(initializer_dict["AASLanes"]):
+    for lane in index_dict_to_list(initializer_dict["AASLanes"]):
         lane: dict
         # TODO: fix CENTRAL
         # TODO: Lashkar CAF RAAS v1 has single lane '01'
         lane_name = lane["LaneName"].title()
-        link_list, pretty_link_list = get_link_list(lane["AASLaneLinks"], docs)
-        cluster_names |= get_cluster_names(link_list, docs)
+        link_list, pretty_link_list = get_link_list(lane["AASLaneLinks"])
+        cluster_names |= get_cluster_names(link_list)
         lane_graph[lane_name] = pretty_link_list
     clusters = get_cluster_list(cluster_names, docs)
     return lane_graph, clusters
 
 
 def single_lane_graph(initializer_dict: dict, docs: List[dict]):
-    link_list, pretty_link_list = get_link_list(
-        initializer_dict["DesignOutgoingLinks"], docs
-    )
-    clusters = get_cluster_list(get_cluster_names(link_list, docs), docs)
+    link_list, pretty_link_list = get_link_list(initializer_dict["DesignOutgoingLinks"])
+    clusters = get_cluster_list(get_cluster_names(link_list), docs)
     lane_graph = {
         SINGLE_LANE_NAME: pretty_link_list,
     }
@@ -171,12 +189,26 @@ def prettify_cluster_name(cluster_name):
     return pretty
 
 
-def get_link_list(link_array_dict: dict, docs: List[dict]):
-    # transform link list
-    links = to_list(link_array_dict)
-    links = list(
-        map(lambda link: (sdk_name(link["NodeA"]), sdk_name(link["NodeB"])), links)
-    )
+def get_link_list(
+    raw_link_dict: dict,
+):
+    # raw_link_dict is a dict in the form: index -> object
+    # transform that to a proper list, obeying the included indices
+    raw_link_list = index_dict_to_list(raw_link_dict)
+
+    # throw away all of the object info
+    # the only thing we care about are the SDK names of the node
+    links = []
+    for raw_link in raw_link_list:
+        # since 2.12, some links are broken, containing only one element
+        # this is the same in the SDK, so I assume OWI fucked this up and this isn't just an
+        # incorrect extraction
+        # I also assume that the actual game silently ignores these links
+        if raw_link["NodeA"] == "None" or raw_link["NodeB"] == "None":
+            continue
+
+        links.append((sdk_name(raw_link["NodeA"]), sdk_name(raw_link["NodeB"])))
+
     pretty_link_list = list(
         map(
             lambda l: {
@@ -189,7 +221,7 @@ def get_link_list(link_array_dict: dict, docs: List[dict]):
     return links, pretty_link_list
 
 
-def get_cluster_names(link_list: List[Tuple[str, str]], docs: List[dict]):
+def get_cluster_names(link_list: List[Tuple[str, str]]):
     # flatten links list and remove duplicates
     cluster_names = set()
     for a, b in link_list:
@@ -265,7 +297,7 @@ def extract_map(map_dir: str, progress: Progress):
                     ],
                     stderr=stderr,
                 )
-                log.debug(yaml_content)
+                log.debug(yaml_content.decode("UTF-8"))
                 _, _, yaml_content = yaml_content.partition(b"---")
                 with open(yaml_filename, "wb") as f:
                     f.write(yaml_content)
@@ -276,7 +308,7 @@ def extract_map(map_dir: str, progress: Progress):
                 docs = list(yaml.safe_load_all(f))
 
             # build lane graph from map info
-            lane_graph, clusters = get_lane_graph_and_clusters(docs)
+            lane_graph, clusters, mains = get_lane_graph_and_clusters(docs)
 
             # get map bounds from map info by looking at the two MapTexture objects
             bounds = []
@@ -401,6 +433,7 @@ def extract_map(map_dir: str, progress: Progress):
                         "scale_y": 1.0,
                     },
                 },
+                "mains": mains,
                 "clusters": clusters,
                 "lanes": lane_graph,
             }

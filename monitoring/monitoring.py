@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 
 def read_log_file(path: str) -> Set[Tuple[datetime, str]]:
+    print("read file")
     if path.endswith(".gz"):
         with gzip.open(path, "rt") as f:
             log_data = f.read()
@@ -15,9 +16,14 @@ def read_log_file(path: str) -> Set[Tuple[datetime, str]]:
         with open(path, "r") as f:
             log_data = f.read()
     accesses = set()
-    for line in log_data.splitlines():
-        pattern = re.compile(r'([^-]*) - - \[([^\]]*)\] "GET /raas-data.yaml')
-        match = re.match(pattern, line)
+    # look for accesses to the index file
+    pattern = re.compile(r'([^-]*) - - \[([^\]]*)\] "GET /(\?[^ ]*)? HTTP/[^"]+')
+    print("scan")
+    splitlines = log_data.splitlines()
+    for i, line in enumerate(splitlines):
+        if i % 1000 == 0:
+            print(f"{i / len(splitlines) * 100 : .2f}%")
+        match = re.match(pattern, line)  # note: re.match is a lot faster than re.search
         if match is None:
             continue
         ip, timestamp_str = match.group(1, 2)
@@ -44,21 +50,8 @@ def anti_unique_ips(access_list: List[Tuple[datetime, str]]):
         s.add(ip)
 
 
-if __name__ == "__main__":
-    # LOG_DIR = "/var/log/nginx"
-    LOG_DIR = "."
-    accesses = set()
-    for filename in os.listdir(LOG_DIR):
-        if filename.startswith("access."):
-            accesses |= read_log_file(f"{LOG_DIR}/{filename}")
-
-    access_list = sorted(list(accesses), key=lambda tup: tup[0])
-    access_list_uniq = list(unique_ips(access_list))
-    access_list_returning = list(anti_unique_ips(access_list))
-
-    shown_list = access_list
-
-    cur_hour = access_list[0][0]
+def plot(shown_list, plt, label):
+    cur_hour = shown_list[0][0]
     delta = timedelta(days=1)
     x = []
     y = []
@@ -71,14 +64,35 @@ if __name__ == "__main__":
         y.append(in_range)
         cur_hour += delta
 
+    plt.plot(x, y, label=label)
+
+
+if __name__ == "__main__":
+    # LOG_DIR = "/var/log/nginx"
+    LOG_DIR = "."
+    print("read")
+    accesses = read_log_file(f"{LOG_DIR}/access.log")
+
+    print("sort")
+    access_list = sorted(list(accesses), key=lambda tup: tup[0])
+    print("filter unique")
+    access_list_uniq = list(unique_ips(access_list))
+    # print("filter non-unique")
+    # access_list_returning = list(anti_unique_ips(access_list))
+
+    print("plot 1")
+    plot(access_list, plt, "accesses")
+    print("plot 2")
+    plot(access_list_uniq, plt, "first-time visitors")
+    # print("plot 3")
+    # plot(access_list_uniq, plt, "returning visitors")
+    print(access_list_uniq)
+
+    print("render")
     X_LABEL = "timestamp"
     Y_LABEL = "accesses per day"
 
-    fig = plt.figure()
     plt.xlabel(X_LABEL)
     plt.ylabel(Y_LABEL)
-
-    ax = plt.axes()
-    ax.plot(x, y)
-
+    plt.legend()
     plt.show()

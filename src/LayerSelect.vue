@@ -58,11 +58,11 @@ export default Vue.extend({
     this.mapNames = Object.keys(this.map.raasData);
 
     // read map and layer from URL hash part if possible
-    this.selectMapAndLayerFromUrl()
+    this.selectMapAndLayerFromUrl();
 
     // listen to back and forwards button
     window.onpopstate = (event) => {
-      this.selectMapAndLayerFromUrl()
+      this.selectMapAndLayerFromUrl();
     };
   },
   data() {
@@ -147,7 +147,7 @@ export default Vue.extend({
         urlHashParams.get("map") || this.startingMapName,
         urlHashParams.get("layer") || this.startingLayerName
       );
-    }
+    },
   },
 });
 </script>

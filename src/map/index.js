@@ -1,3 +1,9 @@
+/*
+Over 800 lines of code?
+Fucking hell, good thing I don't have to understand this in a couple of months
+from now.
+ */
+
 import YAML from "yaml-js";
 import L from "leaflet";
 import rassDataYaml from "../assets/raas-data.yaml";
@@ -540,6 +546,7 @@ export function changeMap(mapName, layerName) {
   const bounds = layer_data["background"]["corners"];
   const raw_clusters = layer_data["clusters"];
   const laneGraph = layer_data["lanes"];
+  const rawMains = layer_data["mains"];
 
   const baseBounds = [
     [bounds[0]["y"], bounds[0]["x"]],
@@ -632,9 +639,6 @@ export function changeMap(mapName, layerName) {
       clusters_on_lane.get(lane).add(link["b"]);
     });
     allLanes.add(lane);
-    // length of possible lane instance, without main CPs
-    // TODO: Fallujah RAAS v1 lane lengths are wrong, better base it off of shortest path
-    laneLengths.set(lane, links.length - 1);
   }
   // extract capture points from YAML data
   // this is also the set of vertices
@@ -679,16 +683,25 @@ export function changeMap(mapName, layerName) {
     });
   }
 
-  // find blufor and opfor main
-  // assume that blufor main is always the first point of a lane and opfor main is the last point
-  const first_lane = Object.values(laneGraph)[0];
-  let bluforCluster = clustersByName.get(first_lane[0]["a"]);
-  let opforCluster = clustersByName.get(first_lane[first_lane.length - 1]["b"]);
+  // find mains
+  for (const cp of capturePoints) {
+    if (cp.name === rawMains[0]) {
+      cpBluforMain = cp;
+    } else if (cp.name === rawMains[1]) {
+      cpOpforMain = cp;
+    }
+  }
+  if (!cpBluforMain || !cpOpforMain) {
+    throw new Error("mains not found");
+  }
 
-  cpBluforMain = [...bluforCluster.points][0];
-  cpOpforMain = [...opforCluster.points][0];
-
+  // create invisible dummy main capture point until the user has chosen a main
   ownMain = new CapturePoint("dummy main", "dummy main", [0.0, 0.0]);
+
+  // find lane length via shortest-path
+  for (const lane of allLanes) {
+    laneLengths.set(lane, getLaneLength(lane));
+  }
 
   // create markers for capture points
   capturePoints.forEach((cp) => {
@@ -781,6 +794,43 @@ function computeLaneProbabilities(point, possibleLanes) {
 
 function toPercent(number) {
   return Math.round(number * 100);
+}
+
+/*
+Determine length of lange via BFS (not including main CPs)
+ */
+function getLaneLength(lane) {
+  // go from blufor main cluster to opfor main cluster
+  let endCluster = cpOpforMain.clusters.get(lane);
+  const visited = new Set();
+  const activeClusters = new Set();
+
+  const queue = new Queue();
+  queue.enqueue(cpBluforMain.clusters.get(lane)) ;
+  queue.enqueue(null); // depth separator
+
+  let depth = 0;
+
+  while (!queue.isEmpty()) {
+    const cur = queue.dequeue();
+    if (cur === endCluster) {
+      return depth - 1;
+    }
+    if (cur === null) {
+      depth += 1;
+      queue.enqueue(null); // re-add null for next level
+      if (queue.getLength() === 1) break; // end of BFS
+      continue;
+    }
+
+    // enqueue all unvisited neighbours
+    cur.outgoingEdges.get(lane).forEach((nb) => {
+      if (!visited.has(nb)) {
+        visited.add(nb);
+        queue.enqueue(nb);
+      }
+    });
+  }
 }
 
 class MapNotFoundError extends Error {}
