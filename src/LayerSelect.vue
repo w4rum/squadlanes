@@ -71,7 +71,6 @@ export default Vue.extend({
       currMapName: null,
       currLayerName: null,
       mapNames: null,
-      currMapNameInput: "",
     };
   },
   mounted() {
@@ -124,25 +123,42 @@ export default Vue.extend({
     },
     onKeyup(e) {},
     changeMapAndLayer(map, layer) {
-      this.currMapName = map;
-      this.currMapNameInput = this.currMapName;
-
-      if (!layer) {
-        this.currLayerName = Object.keys(
-          this.map.raasData[this.currMapName]
-        )[0];
-      } else {
-        this.currLayerName = layer;
+      console.log(map, layer);
+      // check that map exists
+      if (!(map in this.map.raasData)) {
+        console.error(
+          `Invalid map specified. ` +
+          `Switching back to default map and layer.`
+        );
+        map = this.startingMapName;
+        layer = this.startingLayerName;
       }
 
-      var urlHashParams = new URLSearchParams(location.hash.substr(1));
+      // check that layer exists (if it was specified)
+      if (layer && !(layer in this.map.raasData[map])) {
+        console.warn(
+          `Invalid layer specified. ` +
+          `Going back to default layer for ${map}.`
+        );
+        layer = null;
+      }
+
+      // if no layer was specified (or we just cleared it), go to default layer
+      if (!layer) {
+        layer = Object.keys(this.map.raasData[map])[0];
+      }
+
+      this.currMapName = map;
+      this.currLayerName = layer;
+
+      let urlHashParams = new URLSearchParams(location.hash.substr(1));
       urlHashParams.set("map", this.currMapName);
       urlHashParams.set("layer", this.currLayerName);
       location.hash = urlHashParams.toString();
       this.map.changeMap(this.currMapName, this.currLayerName);
     },
     selectMapAndLayerFromUrl() {
-      var urlHashParams = new URLSearchParams(location.hash.substr(1));
+      let urlHashParams = new URLSearchParams(location.hash.substr(1));
       this.changeMapAndLayer(
         urlHashParams.get("map") || this.startingMapName,
         urlHashParams.get("layer") || this.startingLayerName

@@ -3,7 +3,7 @@
     <b-button v-b-modal.about-modal class="about-button">?</b-button>
     <b-modal id="about-modal" title="About" ok-only>
       <p>
-        <i> Squad Lanes v2.1.6 (for Squad v2.12) </i>
+        <i> Squad Lanes v2.1.7 (for Squad v2.12) </i>
       </p>
       <p>
         <a
