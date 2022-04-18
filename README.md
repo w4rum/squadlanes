@@ -15,7 +15,11 @@ The project contains one container for the extraction process and one container 
 
 ### Extraction Container
 
-1. Adjust the path to your local squad folder in the `docker-compose.yml` under `volumes:` => `- "PATH/TO/SQUAD:/opt/squadgame"`. Only change the path left of the column!
+1. Adjust the path to your local squad folder in the `docker-compose.yml`
+   ```shell
+   volumes:
+      - "PATH/TO/SQUAD:/opt/squadgame" # <-- Only change the path left of the column!
+   ```
 2. Start the container with
    ```shell
    docker compose up extraction -d
