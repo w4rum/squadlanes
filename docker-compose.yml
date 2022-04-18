@@ -1,12 +1,23 @@
 version: "3.8"
 
 services:
-  squadlanes:
+  extraction:
     container_name: squadlanes
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile-extraction
     tty: true
     volumes:
-      - "D:/Programme/Steam/steamapps/common/Squad:/opt/squadgame"
+      - "PATH/TO/SQUAD:/opt/squadgame"
       - "./:/opt/squadlanes"
+      
+  web:
+    container_name: squadlanes_web
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-node
+    tty: true
+    volumes:
+      - "./:/opt/squadlanes-web"
+    ports:
+      - "1234:1234"

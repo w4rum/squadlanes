@@ -1,0 +1,5 @@
+FROM node:17
+
+RUN mkdir -p /opt/squadlanes-web
+
+WORKDIR /opt/squadlanes-web

@@ -9,6 +9,30 @@ That helps us get an overview.
 ## Usage
 See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to work with our official deployment at [squadlanes.com](https://squadlanes.com).
 
+## Deployment with Docker and docker-compose
+
+The project contains one container for the extraction process and one container for the frontend.
+
+### Extraction Container
+
+1. Adjust the path to your local squad folder in the `docker-compose.yml` under `volumes:` => `- "PATH/TO/SQUAD:/opt/squadgame"`. Only change the path left of the column!
+2. Start the container with
+   ```shell
+   docker compose up extraction -d
+   ```
+3. Enter the container with an interactive bash
+   ```shell
+   docker compose exec -it extraction /bin/bash
+   ```
+4. Now you can follow the [deployment](#deployment) instructions within this container. Start with step 2 of [Extracting map images and layer data](#extracting-map-images-and-layer-data)
+
+### Frontend Container
+
+1. Start the container with `docker compose up web -d`.
+2. Install npm dependencies with `docker compose exec web npm install`
+3. Start the npm development server with `docker compose exec web npm start`
+4. Access the frontend on http://localhost:1234
+
 ## Deployment
 In order to run your own instance of Squad Lanes, you need to
 1. Extract the map images and layer data with our Python extraction scripts
