@@ -26,7 +26,7 @@ The project contains one container for the extraction process and one container 
    ```
 3. Enter the container with an interactive bash
    ```shell
-   docker compose exec -it extraction /bin/bash
+   docker compose exec -it extraction bash
    ```
 4. Now you can follow the [deployment](#deployment) instructions within this container. Start with step 2 of [Extracting map images and layer data](#extracting-map-images-and-layer-data)
 
