@@ -792,7 +792,7 @@ function getLaneLength(lane) {
   const activeClusters = new Set();
 
   const queue = new Queue();
-  queue.enqueue(cpBluforMain.clusters.get(lane)) ;
+  queue.enqueue(cpBluforMain.clusters.get(lane));
   queue.enqueue(null); // depth separator
 
   let depth = 0;

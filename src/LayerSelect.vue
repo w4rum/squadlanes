@@ -127,8 +127,7 @@ export default Vue.extend({
       // check that map exists
       if (!(map in this.map.raasData)) {
         console.error(
-          `Invalid map specified. ` +
-          `Switching back to default map and layer.`
+          `Invalid map specified. Switching back to default map and layer.`
         );
         map = this.startingMapName;
         layer = this.startingLayerName;
@@ -138,7 +137,7 @@ export default Vue.extend({
       if (layer && !(layer in this.map.raasData[map])) {
         console.warn(
           `Invalid layer specified. ` +
-          `Going back to default layer for ${map}.`
+            `Going back to default layer for ${map}.`
         );
         layer = null;
       }
