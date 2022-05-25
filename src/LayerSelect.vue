@@ -29,7 +29,7 @@
       :text="currLayerName"
     >
       <b-dropdown-item
-        v-for="layer in Object.keys(map.raasData[currMapName])"
+        v-for="layer in Object.keys(raasData[currMapName])"
         v-on:click="selectLayer(layer)"
       >
         {{ layer }}
@@ -44,18 +44,19 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap";
 import "bootstrap-vue/dist/bootstrap-vue";
 import { isSmallTouchDevice } from "./utils";
+import { changeLayer, raasData } from "./map";
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 export default Vue.extend({
   props: {
-    map: Object,
+    mapData: Object,
     startingMapName: String,
     startingLayerName: String,
   },
   created() {
-    this.mapNames = Object.keys(this.map.raasData);
+    this.mapNames = Object.keys(this.raasData);
 
     // read map and layer from URL hash part if possible
     this.selectMapAndLayerFromUrl();
@@ -71,6 +72,7 @@ export default Vue.extend({
       currMapName: null,
       currLayerName: null,
       mapNames: null,
+      raasData,
     };
   },
   mounted() {
@@ -107,7 +109,7 @@ export default Vue.extend({
       this.changeMapAndLayer(this.currMapName, layer);
     },
     filterMap() {
-      this.mapNames = Object.keys(this.map.raasData).filter((mapName) => {
+      this.mapNames = Object.keys(this.raasData).filter((mapName) => {
         const normalized = mapName.toLowerCase().replace(" ", "");
         const normalizedFilter = this.filterMapInputValue
           .toLowerCase()
@@ -123,9 +125,8 @@ export default Vue.extend({
     },
     onKeyup(e) {},
     changeMapAndLayer(map, layer) {
-      console.log(map, layer);
       // check that map exists
-      if (!(map in this.map.raasData)) {
+      if (!(map in this.raasData)) {
         console.error(
           `Invalid map specified. Switching back to default map and layer.`
         );
@@ -134,7 +135,7 @@ export default Vue.extend({
       }
 
       // check that layer exists (if it was specified)
-      if (layer && !(layer in this.map.raasData[map])) {
+      if (layer && !(layer in this.raasData[map])) {
         console.warn(
           `Invalid layer specified. ` +
             `Going back to default layer for ${map}.`
@@ -144,7 +145,7 @@ export default Vue.extend({
 
       // if no layer was specified (or we just cleared it), go to default layer
       if (!layer) {
-        layer = Object.keys(this.map.raasData[map])[0];
+        layer = Object.keys(this.raasData[map])[0];
       }
 
       this.currMapName = map;
@@ -154,7 +155,7 @@ export default Vue.extend({
       urlHashParams.set("map", this.currMapName);
       urlHashParams.set("layer", this.currLayerName);
       location.hash = urlHashParams.toString();
-      this.map.changeMap(this.currMapName, this.currLayerName);
+      changeLayer(this.currMapName, this.currLayerName);
     },
     selectMapAndLayerFromUrl() {
       let urlHashParams = new URLSearchParams(location.hash.substr(1));
