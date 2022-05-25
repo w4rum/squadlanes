@@ -27,4 +27,4 @@ export type RaasData = {
 };
 
 // @ts-ignore
-export const raasData: RaasData = import("../assets/raas-data.yaml");
+export let raasData: RaasData = require("../assets/raas-data.yaml");

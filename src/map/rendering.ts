@@ -1,9 +1,7 @@
 import {
-  Browser,
   CircleMarker,
   circleMarker,
   CRS,
-  DomEvent,
   DomUtil,
   extend,
   Map as LeafletMap,
@@ -13,14 +11,13 @@ import {
   TileLayer,
   Transformation,
 } from "leaflet";
-// @ts-ignore
-import mapTiles from "../assets/map-tiles/**/**/**.png";
 import { CapturePoint } from "./capturePoint";
 import { mapData } from "./mapData";
 import { handleConfirmationClick } from "./confirmation";
 import { Lane } from "./lane";
 import { Queue } from "queue-typescript";
 import { LayerData } from "./raasData";
+import { Cluster } from "./cluster";
 
 const CLR_CONFIRMED = "rgb(0,255,13)";
 const CLR_ACTIVE = "rgb(176,255,148)";
@@ -55,16 +52,16 @@ const CLR_PRIORITY = {
 class CPRenderInfo {
   public color: string;
   public visible: boolean;
-  public centerNumber: string;
-  public laneLabels: string[];
+  public centerNumber: number | null;
+  public laneLabels: Map<Lane, number>;
 
   private priority: any;
 
   constructor() {
     this.color = CLR_IMPOSSIBLE;
     this.visible = false;
-    this.centerNumber = "&nbsp";
-    this.laneLabels = [];
+    this.centerNumber = null;
+    this.laneLabels = new Map();
     this.priority = Number.MIN_SAFE_INTEGER;
   }
 
@@ -76,12 +73,12 @@ class CPRenderInfo {
   ) {
     // only add lane tag if CP is not on the confirmation line
     if (depth !== null && lane !== null) {
-      this.laneLabels.push(`${depth}${lane.name}`);
-      this.centerNumber = depth.toString();
+      this.laneLabels.set(lane, depth);
     }
 
     this.visible = true;
     if (priority > this.priority) {
+      this.centerNumber = depth;
       this.priority = priority;
       this.color = color;
     }
@@ -97,27 +94,28 @@ let renderInfos: Map<CircleMarker, CPRenderInfo> = new Map();
 
 let confirmationLines: Set<Polyline> = new Set();
 
-const dummyLane = new Lane("DUMMY");
+const mapTiles = require("../assets/map-tiles/**/**/**.png");
 
 export function resetMap(layerData: LayerData) {
   // remove existing map data
   if (map !== null) {
     map.remove();
+    renderInfos = new Map();
     capturePointByCircleMarker = new Map();
     circleMarkerByCapturePoint = new Map();
   }
 
-  const bounds = layerData["background"]["corners"];
+  const bounds = layerData.background.corners;
 
   const baseBounds = [
-    [bounds[0]["y"], bounds[0]["x"]],
-    [bounds[1]["y"], bounds[1]["x"]],
+    [bounds[0].y, bounds[0].x],
+    [bounds[1].y, bounds[1].x],
   ];
-  const width = Math.abs(bounds[0]["x"] - bounds[1]["x"]);
-  const height = Math.abs(bounds[0]["y"] - bounds[1]["y"]);
+  const width = Math.abs(bounds[0].x - bounds[1].x);
+  const height = Math.abs(bounds[0].y - bounds[1].y);
 
-  const up_left_x = Math.min(bounds[0]["x"], bounds[1]["x"]);
-  const up_left_y = Math.min(bounds[0]["y"], bounds[1]["y"]);
+  const up_left_x = Math.min(bounds[0].x, bounds[1].x);
+  const up_left_y = Math.min(bounds[0].y, bounds[1].y);
 
   const zoomOffset = 0;
   let tileSize = 256;
@@ -179,7 +177,7 @@ export function resetMap(layerData: LayerData) {
     },
   });
 
-  let map_image_name = layerData["background"]["minimap_filename"];
+  let map_image_name = layerData.background.minimap_filename;
   // @ts-ignore
   new TileLayerBundledTiles(map_image_name, {
     tms: false,
@@ -201,13 +199,6 @@ export function resetMap(layerData: LayerData) {
     // remember mapping between CircleMarker and CapturePoint
     circleMarkerByCapturePoint.set(cp, cm);
     capturePointByCircleMarker.set(cm, cp);
-
-    cm.addTo(map!);
-
-    // clicks are used to confirm points
-    cm.on("click", (ev) => {
-      handleConfirmationClick(cp);
-    });
 
     // during mouseover, the font color and size changes
     // (we add a CSS class and re-open the tooltip)
@@ -255,12 +246,6 @@ export function resetMap(layerData: LayerData) {
 }
 
 export function redraw() {
-  // remove all existing on-click handlers
-  // (to remove on-click functionality of invisible CPs)
-  circleMarkerByCapturePoint.forEach((cm) => {
-    cm.off("click");
-  });
-
   // set default (hidden) rendering setting for all CPs
   circleMarkerByCapturePoint.forEach((cm) => {
     renderInfos.set(cm, new CPRenderInfo());
@@ -274,7 +259,7 @@ export function redraw() {
     mapData.mains.forEach((mainCp) => {
       renderInfos
         .get(circleMarkerByCapturePoint.get(mainCp)!)!
-        .upgrade(CLR_MAIN_BASE, 0, dummyLane, CLR_PRIORITY.MAIN_BASE);
+        .upgrade(CLR_MAIN_BASE, null, null, CLR_PRIORITY.MAIN_BASE);
     });
   }
 
@@ -284,23 +269,31 @@ export function redraw() {
     // remove hidden CPs and re-add previously hidden but not visible CPs
     if (!rI.visible) {
       // hide circlemarker
+      cm.off("click");
       cm.remove();
       return;
     } else if (!map!.hasLayer(cm)) {
       cm.addTo(map!);
+      cm.on("click", (ev) => {
+        handleConfirmationClick(cp);
+      });
     }
 
     // delete old tooltip
     cm.closeTooltip().unbindTooltip();
 
     // concat lane labels (unless main hasn't been chosen yet)
-    let laneTooltip =
-      mapData.ownMain !== null ? rI.laneLabels.join(",") : "&nbsp";
+    let laneTooltip = Array.from(rI.laneLabels)
+      .map(([lane, depth]) => `${depth}${lane.name[0]}`)
+      .join(",");
+    if (laneTooltip === "" || mapData.ownMain === null) {
+      laneTooltip = "&nbsp";
+    }
 
     // create new tooltip
     cm.bindTooltip(
       `<div class="cpTooltipName">${cp.displayName}</div>` +
-        `<div class="cpTooltipDepth">${rI.centerNumber}</div>` +
+        `<div class="cpTooltipDepth">${rI.centerNumber || "&nbsp"}</div>` +
         `<div class="cpTooltipLanes">${laneTooltip}</div>`,
       {
         permanent: true,
@@ -350,88 +343,99 @@ function determineCPPossibilities() {
   // show all points on the confirmation line
   let curConfirmedPoint = mapData.ownMain;
   let endOfConfirmationLine: CapturePoint;
-  let depth = 0;
+  let confirmationDepth = 0;
   while (curConfirmedPoint !== null) {
     endOfConfirmationLine = curConfirmedPoint;
 
     renderInfos
       .get(circleMarkerByCapturePoint.get(curConfirmedPoint)!)!
-      .upgrade(CLR_CONFIRMED, null, null, CLR_PRIORITY.CONFIRMED);
+      .upgrade(CLR_CONFIRMED, confirmationDepth, null, CLR_PRIORITY.CONFIRMED);
 
     curConfirmedPoint = curConfirmedPoint.confirmedFollower;
-    depth += 1;
+    confirmationDepth += 1;
   }
-  const confirmationDepth = depth;
+  confirmationDepth -= 1;
 
   // use BFS to show all the points beyond the end of the confirmation line
-  // ignore impossible lanes
-  const possibleLanes: Set<Lane> = new Set();
   mapData.lanes.forEach((lane) => {
-    if (lane.probability > 0) {
-      possibleLanes.add(lane);
-    }
-  });
+    // ignore impossible lanes
+    if (lane.probability === 0) return;
 
-  let queue: Queue<CapturePoint | null> = new Queue();
-  queue.enqueue(endOfConfirmationLine!);
-  // use null as a depth-separator
-  queue.enqueue(null);
+    let queue: Queue<CapturePoint | null> = new Queue();
+    queue.enqueue(endOfConfirmationLine!);
+    // use null as a depth-separator
+    queue.enqueue(null);
 
-  // note that we don't have a "visited" set
-  // this is acceptable because
-  // - we only explore in one direction (towards enemy main)
-  // - the impact of unnecessarily checking clusters multiple times is negligible
+    // note that our "visited" set initially does not include
+    // the clusters of the confirmation line
+    // this is acceptable because they will be ignored anyway since they're not
+    // closer to the enemy main
+    let visited: Set<Cluster> = new Set();
 
-  while (queue.length > 0) {
-    let cp = queue.dequeue();
+    let depth = confirmationDepth + 1;
 
-    // check if we've exhausted the current depth
-    if (cp === null) {
-      // if there are no remaining capture points, stop
-      if (queue.length === 0) {
-        break;
-      } else {
-        depth += 1;
+    while (queue.length > 0) {
+      let cp = queue.dequeue();
+
+      // check if we've exhausted the current depth
+      if (cp === null) {
+        // if there are no remaining capture points, stop
+        if (queue.length === 0) break;
+
         // insert a new depth-separator
         queue.enqueue(null);
+        depth += 1;
         continue;
       }
-    }
 
-    // go through possible neighbours of this CP
-    // (first, go through all possible clusters for this CP)
-    cp.clusters.forEach((cluster) => {
-      // go through all possible lanes and check if cluster appears on that lane
-      possibleLanes.forEach((lane) => {
-        // go through all neighbouring clusters on this lane
+      // go through possible neighbours of this CP
+      // (first, go through all clusters that contain this CP)
+      cp.clusters.forEach((cluster) => {
+        // for this cluster, go through all neighbouring clusters on this lane
         // (will be undefined if cluster is not present on this lane)
         const nbClusters = cluster.edges.get(lane);
 
-        // if the cluster isn't present on this lane, skip lane
+        // if the cluster is not present on this lane, skip it
         if (nbClusters === undefined) return;
 
         nbClusters.forEach((nbCluster) => {
+          // don't double-check clusters
+          if (visited.has(nbCluster)) return;
+          visited.add(nbCluster);
+
           // only look at clusters that are closer to the enemy main
-          if (nbCluster.distanceToOwnMain.get(lane)! <= depth) return;
+          // TODO: is this restriction really guaranteed?
+          //       possible counter example:
+          //       A -+----> B
+          //          |->C---^
+          //      route A-C-B might be possible.
+          if (nbCluster.distanceToOwnMain.get(lane)! < depth) return;
 
           // go through all CPs of neighbouring cluster
           nbCluster.points.forEach((nbCp) => {
+            let rI = renderInfos.get(circleMarkerByCapturePoint.get(nbCp)!)!;
+
+            // check if it's the enemy main
+            if (mapData.mains.has(nbCp)) {
+              rI.upgrade(CLR_MAIN_BASE, null, null, CLR_PRIORITY.MAIN_BASE);
+              return;
+            }
+
             // add color possibility
             const { color, priority } = getColorAndPriorityForLaneDepth(
               lane,
               depth,
               confirmationDepth
             );
-            renderInfos
-              .get(circleMarkerByCapturePoint.get(nbCp)!)!
-              .upgrade(color, depth, lane, priority);
+
+            rI.upgrade(color, depth, lane, priority);
             // check that CPs neighbours next
             queue.enqueue(nbCp);
           });
         });
       });
-    });
-  }
+    }
+  });
 }
 
 function getColorAndPriorityForLaneDepth(
@@ -450,11 +454,6 @@ function getColorAndPriorityForLaneDepth(
   } else {
     midDepth = defDepth + 1;
     offDepth = defDepth + 2;
-  }
-
-  // enemy main (no need to check own main because it's always a confirmed CP)
-  if (depth === lane.length) {
-    return { color: CLR_MAIN_BASE, priority: CLR_PRIORITY.MAIN_BASE };
   }
 
   // the following are checked in order of decreasing priority

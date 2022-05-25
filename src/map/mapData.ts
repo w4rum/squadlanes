@@ -100,14 +100,23 @@ class MapData {
   }
 
   public refreshLaneLengthsAndClusterDistances() {
-    // go from one main cluster to the other one via BFS
+    if (this.ownMain === null) return;
+
+    // go from our main cluster to the enemy one via BFS
     // assume that
     // - there are always 2 mains
     // - the main clusters are always on all lanes
     if (this.mains.size !== 2) {
       throw "amount of mains is not 2";
     }
-    const [startMain, endMain] = Array.from(this.mains);
+
+    const [mainA, mainB] = Array.from(this.mains);
+    let startMain = this.ownMain;
+    let endMain = mainA;
+    if (this.ownMain === mainA) {
+      endMain = mainB;
+    }
+
     let startCluster = Array.from(startMain.clusters)[0];
     let endCluster = Array.from(endMain.clusters)[0];
 
@@ -122,14 +131,6 @@ class MapData {
       while (queue.length > 0) {
         const cluster = queue.dequeue();
 
-        if (cluster === endCluster) {
-          // if we're at the enemy main, update lane length but don't
-          // go backwards to find other neighbours
-          // (if we did, we could come across unvisited clusters prematurely)
-          lane.length = depth - 1;
-          continue;
-        }
-
         if (cluster === null) {
           // we've exhausted the current depth
           depth += 1;
@@ -140,6 +141,14 @@ class MapData {
 
         // remember cluster depth
         cluster.distanceToOwnMain.set(lane, depth);
+
+        // if we're at the enemy main, update lane length but don't
+        // go backwards to find other neighbours
+        // (if we did, we could come across unvisited clusters prematurely)
+        if (cluster === endCluster) {
+          lane.length = depth - 1;
+          continue;
+        }
 
         // enqueue all unvisited neighbour clusters
         cluster.edges.get(lane)!.forEach((nbCluster) => {

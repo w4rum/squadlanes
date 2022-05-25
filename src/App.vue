@@ -1,11 +1,11 @@
 <template lang="html">
   <div>
     <span class="overlay top-center">
-      <lane-percentages :map="map"></lane-percentages>
+      <lane-percentages :map-data="mapData"></lane-percentages>
     </span>
     <span class="overlay top-right"
       ><layer-select
-        :map="map"
+        :map-data="mapData"
         :startingMapName="startingMapName"
         :startingLayerName="startingLayerName"
       ></layer-select
@@ -21,11 +21,11 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap";
 import "bootstrap-vue/dist/bootstrap-vue";
 
-import * as map from "./map";
 import LanePercentages from "./LanePercentages";
 import LayerSelect from "./LayerSelect";
 import AboutModal from "./AboutModal";
 import MapLegend from "./MapLegend";
+import { mapData } from "./map";
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -33,7 +33,7 @@ Vue.use(IconsPlugin);
 export default Vue.extend({
   data() {
     return {
-      map,
+      mapData,
       startingMapName: "Narva",
       startingLayerName: "RAAS v1",
     };
