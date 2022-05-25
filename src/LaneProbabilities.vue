@@ -1,8 +1,11 @@
 <template lang="html">
-  <div class="lane-percentages card bg-dark">
-    <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">
-      <label>{{ lane.name }}</label>
-      <span>{{ Math.floor(lane.probability * 100) }}%</span>
+  <div class="card bg-dark">
+    <div class="text-white text-center small m-1">Squad v2.16</div>
+    <div class="lane-percentages">
+      <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">
+        <label>{{ lane.name }}</label>
+        <span>{{ Math.floor(lane.probability * 100) }}%</span>
+      </div>
     </div>
   </div>
 </template>
