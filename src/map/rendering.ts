@@ -94,8 +94,6 @@ let renderInfos: Map<CircleMarker, CPRenderInfo> = new Map();
 
 let confirmationLines: Set<Polyline> = new Set();
 
-const mapTiles = require("../assets/map-tiles/**/**/**.png");
-
 export function resetMap(layerData: LayerData) {
   // remove existing map data
   if (map !== null) {
@@ -160,34 +158,19 @@ export function resetMap(layerData: LayerData) {
   map.createPane("background");
   map.getPane("background")!.style.zIndex = "0";
 
-  // override tile URL template function to support loading our bundled tiles instead
-  const TileLayerBundledTiles = TileLayer.extend({
-    getTileUrl(coords: { x: number; y: number; z: number }) {
-      // we use the first constructor parameter (usually the URL template) as the map name
-      const map = mapTiles[this._url];
-      if (!map) return null;
-      const zoomLevel = map[coords.z];
-      if (!zoomLevel) return null;
-      const column = zoomLevel[coords.x];
-      if (!column) return null;
-      const cell = column[coords.y];
-      if (!cell) return null;
-
-      return cell;
-    },
-  });
-
-  let map_image_name = layerData.background.minimap_filename;
-  // @ts-ignore
-  new TileLayerBundledTiles(map_image_name, {
-    tms: false,
-    maxNativeZoom: 4,
-    zoomOffset: zoomOffset,
-    // scale tiles to match minimap width and height
-    tileSize: tileSize,
-    pane: "background",
-    bounds: baseBounds,
-  }).addTo(map);
+  new TileLayer(
+    `map-tiles/${layerData.background.minimap_filename}/{z}/{x}/{y}.png`,
+    {
+      tms: false,
+      maxNativeZoom: 4,
+      zoomOffset: zoomOffset,
+      // scale tiles to match minimap width and height
+      tileSize: tileSize,
+      pane: "background",
+      // @ts-ignore
+      bounds: baseBounds,
+    }
+  ).addTo(map);
 
   // create markers for capture points
   mapData.capturePoints.forEach((cp) => {
