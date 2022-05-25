@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <span class="overlay top-center">
-      <lane-percentages :map-data="mapData"></lane-percentages>
+      <lane-percentages :lanes="mapData.lanes"></lane-percentages>
     </span>
     <span class="overlay top-right"
       ><layer-select
@@ -21,7 +21,7 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap";
 import "bootstrap-vue/dist/bootstrap-vue";
 
-import LanePercentages from "./LanePercentages";
+import LanePercentages from "./LaneProbabilities";
 import LayerSelect from "./LayerSelect";
 import AboutModal from "./AboutModal";
 import MapLegend from "./MapLegend";

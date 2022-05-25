@@ -125,6 +125,7 @@ class MapData {
       const queue: Queue<Cluster | null> = new Queue();
       queue.enqueue(startCluster);
       queue.enqueue(null); // depth separator
+      visited.add(startCluster);
 
       let depth = 0;
 

@@ -4,6 +4,7 @@ import { mapData } from "./mapData";
 import { raasData } from "./raasData";
 import { redraw, resetMap } from "./rendering";
 import { Lane } from "./lane";
+import Vue from "vue";
 
 export function changeLayer(mapName: string, layerName: string) {
   // delete all existing map data
@@ -28,7 +29,9 @@ export function changeLayer(mapName: string, layerName: string) {
       clusters_on_lane.get(lane).add(link["a"]);
       clusters_on_lane.get(lane).add(link["b"]);
     });
-    mapData.lanes.add(lane);
+
+    // make Vue observable so that the percentages change
+    mapData.lanes.add(Vue.observable(lane));
   }
 
   // extract clusters and capture points from YAML data

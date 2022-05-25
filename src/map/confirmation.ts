@@ -45,8 +45,14 @@ export function handleConfirmationClick(cp: CapturePoint) {
       let edgeSet = sourceCluster.edges.get(lane);
       if (edgeSet === undefined) return;
 
+      // don't look backwards
+      const sourceDepth = sourceCluster.distanceToOwnMain.get(lane)!;
+
       // check if CP is in any reachable targetCluster
       edgeSet.forEach((targetCluster) => {
+        const targetDepth = targetCluster.distanceToOwnMain.get(lane)!;
+        if (targetDepth < sourceDepth) return;
+
         if (targetCluster.points.has(cp)) reachable = true;
       });
     });

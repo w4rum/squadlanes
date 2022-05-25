@@ -1,12 +1,8 @@
 <template lang="html">
   <div class="lane-percentages card bg-dark">
-    <div
-      v-for="lane of mapData.lanes"
-      class="lane"
-      :style="laneColor(lane)"
-    >
+    <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">
       <label>{{ lane.name }}</label>
-      <span>{{ lane.probability }}%</span>
+      <span>{{ Math.floor(lane.probability * 100) }}%</span>
     </div>
   </div>
 </template>
@@ -15,7 +11,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    mapData: Object,
+    lanes: Set,
   },
   methods: {
     laneColor(lane) {

@@ -265,11 +265,20 @@ export function redraw() {
     // delete old tooltip
     cm.closeTooltip().unbindTooltip();
 
-    // concat lane labels (unless main hasn't been chosen yet)
+    // concat lane labels
     let laneTooltip = Array.from(rI.laneLabels)
       .map(([lane, depth]) => `${depth}${lane.name[0]}`)
       .join(",");
-    if (laneTooltip === "" || mapData.ownMain === null) {
+
+    // hide lane label for
+    // - main bases
+    // - confirmed points
+    // - layers with just one lane
+    if (
+      mapData.lanes.size === 1 ||
+      mapData.mains.has(cp) ||
+      laneTooltip === ""
+    ) {
       laneTooltip = "&nbsp";
     }
 
