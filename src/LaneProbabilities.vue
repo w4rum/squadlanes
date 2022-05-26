@@ -18,8 +18,6 @@ export default Vue.extend({
   },
   methods: {
     laneColor(lane) {
-      console.log(lane.name);
-      console.log(lane.probability);
       if (lane.probability === 0) {
         return "color: hsl(0, 0%, 50%);";
       }

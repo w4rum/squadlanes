@@ -67,7 +67,7 @@ drive.
     ```shell
     poetry run tiles
     ```
-8. The map tiles are now in `src/assets/map-tiles` if you're using the default config.
+8. The map tiles are now in `dist/map-tiles` if you're using the default config.
     The layer data was saved to `extraction/raas-data-auto.yml`.
     If you want to, you can make manual changes to the layer data.
     Once you're done, overwrite the existing file in `src/assets/raas-data.yaml`.
@@ -90,7 +90,7 @@ If you want to deploy this to a production server, follow the "Production" instr
 #### Development
 1. Run `npm run start`.
 2. ParcelJS will now package the static files.
-   This can take a couple of minutes on your first run.
+   This should only take a couple of seconds.
 3. The development server can now be reached at `http://localhost:1234/`.
    Changing any files while the server is running will cause an automatic update.
    However, you might still need to hit F5 for some parts, e.g., changes to the map
