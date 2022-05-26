@@ -30,7 +30,7 @@ LAYER_DUMP_DIR = "./intermediate-files/layer-dumps"
 FULLSIZE_MAP_DIR = "./intermediate-files/map-fullsize"
 
 # Directory into which the small map tiles are generated
-TILE_MAP_DIR = "../src/assets/map-tiles"
+TILE_MAP_DIR = "../dist/map-tiles"
 
 # Verbosity of the logging
 #  Recommended values: info, debug
