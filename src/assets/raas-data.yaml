@@ -5801,12 +5801,12 @@ Goose Bay:
             01-CaptureZoneCluster_0:
             -   display_name: Happy Valley
                 sdk_name: HappyValley
-                x: 127085.1953125
-                y: 191263.0
+                x: -12954.671363761765
+                y: 149429.32645328357
             -   display_name: Shipping Center
                 sdk_name: ShippingCenter
-                x: 149647.5
-                y: 109256.96875
+                x: 71633.31306066847
+                y: 140545.65349667874
             02-CaptureZoneCluster_1:
             -   display_name: OP Hebb
                 sdk_name: OPHebb_3
@@ -5896,12 +5896,12 @@ Goose Bay:
             01-CaptureZoneCluster_0:
             -   display_name: Happy Valley
                 sdk_name: HappyValley
-                x: 126184.421875
-                y: 190419.875
+                x: -12497.917235704343
+                y: 148283.19024068356
             -   display_name: OP Hebb
                 sdk_name: OPHebb_3
-                x: 99349.4140625
-                y: 149767.8359375
+                x: 15574.829896865238
+                y: 108475.81915608709
             02-CaptureZoneCluster_1:
             -   display_name: 5 Wing HQ
                 sdk_name: 5WingHQ
@@ -5987,16 +5987,16 @@ Goose Bay:
             01-CaptureZoneCluster_0:
             -   display_name: Happy Valley
                 sdk_name: HappyValley
-                x: 58097.36328125
-                y: 183117.21875
+                x: -22308.47373446422
+                y: 142870.631747765
             -   display_name: Refinery
                 sdk_name: Refinery
-                x: 37379.67578125
-                y: 47248.765625
+                x: 96659.00289008854
+                y: 74050.58644471053
             -   display_name: Shipping Center
                 sdk_name: ShippingCenter
-                x: 90176.80078125
-                y: 94791.8359375
+                x: 71633.30639264439
+                y: 140545.65737348504
             02-CaptureZoneCluster_1:
             -   display_name: CFB Goose Bay
                 sdk_name: CFBGooseBay

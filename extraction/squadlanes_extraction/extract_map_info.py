@@ -1,5 +1,7 @@
+import math
 import os
 import re
+import struct
 import subprocess
 from typing import Tuple, List, Union, Set
 
@@ -125,14 +127,46 @@ def to_capture_point(cp_dict: dict, class_name: str, sdk_name: str):
     return {"sdk_name": sdk_name, "display_name": display_name, "x": x, "y": y}
 
 
-def absolute_location(scene_root: Union[dict, str]):
+def absolute_location(
+    scene_root: Union[dict, str],
+    offset: tuple[float, float] = (0, 0),
+):
+    # if we've traversed back to the root, simply return the offset
     if scene_root == "None":
-        return 0, 0
+        return offset
 
-    rel = access_one(scene_root)["RelativeLocation"]
-    rel = (rel["X"], rel["Y"])
-    attach_parent = access_one(scene_root)["AttachParent"]
-    return add_tuples(rel, absolute_location(attach_parent))
+    # 1. rotate the current offset by this object's rotation
+    rel_rot = access_one(scene_root)["RelativeRotation"]
+
+    # note: z axis, roll, and pitch should be zero for clusters etc. and are ignored
+
+    # for some reason, UEViewer treats the rotation as ints, when they're actually floats
+    # see https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FRotator/
+    yaw_degrees: float = struct.unpack("<f", struct.pack("<i", rel_rot["Yaw"]))[0]
+
+    rotated_offset = rotate(offset, yaw_degrees)
+
+    # 2. translate the current offset by this object's translation
+    rel_loc = access_one(scene_root)["RelativeLocation"]
+    rel_loc = (rel_loc["X"], rel_loc["Y"])
+
+    new_offset = add_tuples(rotated_offset, rel_loc)
+
+    # 3. traverse the tree upwards towards the root
+    parent = access_one(scene_root)["AttachParent"]
+
+    return absolute_location(parent, new_offset)
+
+
+def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:
+    yaw_radians = math.radians(yaw_degrees)
+
+    x, y = loc
+
+    rotated_x = x * math.cos(yaw_radians) - y * math.sin(yaw_radians)
+    rotated_y = x * math.sin(yaw_radians) + y * math.cos(yaw_radians)
+
+    return rotated_x, rotated_y
 
 
 def get_lane_graph_and_clusters(docs: List[dict]):
