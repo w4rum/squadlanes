@@ -418,14 +418,14 @@ function determineCPPossibilities() {
 
     // part (2)
     possibleConfirmedPaths.forEach((confirmedPath) => {
-      const possibleDepthsMap = getAllPossibleDepths(
-        confirmedPath,
-        endOfConfirmationLine,
-        lane
-      );
+      const possibleDepthsMap = getAllPossibleDepths(confirmedPath, lane);
 
       possibleDepthsMap.forEach((possibleDepths, cluster) => {
         possibleDepths.forEach((depth) => {
+          // assume that paths with more than 8 flags (excluding the target main) are not possible
+          // TODO: research this more
+          if (depth.path_length > 8) return;
+
           const { color, priority } = getColorAndPriorityForLaneDepth(
             depth.path_length,
             depth.depth,
