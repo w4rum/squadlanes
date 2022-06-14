@@ -13,11 +13,12 @@ import {
 } from "leaflet";
 import { CapturePoint } from "./capturePoint";
 import { mapData } from "./mapData";
-import { handleConfirmationClick } from "./confirmation";
 import { Lane } from "./lane";
-import { Queue } from "queue-typescript";
 import { LayerData } from "./raasData";
-import { Cluster } from "./cluster";
+import {
+  getAllPossibleConfirmedPaths,
+  getAllPossibleDepths,
+} from "./graphUtil";
 
 const CLR_CONFIRMED = "rgb(0,255,13)";
 const CLR_ACTIVE = "rgb(176,255,148)";
@@ -93,6 +94,8 @@ let circleMarkerByCapturePoint: Map<CapturePoint, CircleMarker> = new Map();
 let renderInfos: Map<CircleMarker, CPRenderInfo> = new Map();
 
 let confirmationLines: Set<Polyline> = new Set();
+
+let confirmablePoints: Set<CircleMarker> = new Set();
 
 export function resetMap(layerData: LayerData) {
   // remove existing map data
@@ -233,6 +236,7 @@ export function redraw() {
   circleMarkerByCapturePoint.forEach((cm) => {
     renderInfos.set(cm, new CPRenderInfo());
   });
+  confirmablePoints = new Set();
 
   // upgrade CPRenderInfo as far as possible for every point
   if (mapData.ownMain !== null) {
@@ -258,8 +262,12 @@ export function redraw() {
     } else if (!map!.hasLayer(cm)) {
       cm.addTo(map!);
       cm.on("click", (ev) => {
-        handleConfirmationClick(cp);
+        onClick(cm, cp);
       });
+    }
+
+    if (rI.color === CLR_ACTIVE) {
+      confirmablePoints.add(cm);
     }
 
     // delete old tooltip
@@ -332,6 +340,11 @@ export function redraw() {
 }
 
 function determineCPPossibilities() {
+  // special treat enemy main
+  renderInfos
+    .get(circleMarkerByCapturePoint.get(mapData.enemyMain()!)!)!
+    .upgrade(CLR_MAIN_BASE, null, null, CLR_PRIORITY.MAIN_BASE);
+
   // show all points on the confirmation line
   let curConfirmedPoint = mapData.ownMain;
   let endOfConfirmationLine: CapturePoint;
@@ -348,99 +361,98 @@ function determineCPPossibilities() {
   }
   confirmationDepth -= 1;
 
-  // use BFS to show all the points beyond the end of the confirmation line
+  /*
+   * This is where the most complex graph logic happens.
+   *
+   * Our goal is to find
+   * (1) which clusters are reachable
+   * (2) for the reachable clusters, at which depths they can be encountered
+   *
+   * (1) is trivial if we can do (2) because we're hiding all points by default.
+   *
+   * (2), however, is trickier. To be certain, we have to examine *every*
+   * possible path that the RNG can take that includes our current confirmation
+   * line.
+   *
+   * We can't make any simplifying assumptions here like
+   * "always go towards enemy main" because paths *can* go backwards as long
+   * as the enemy main remains reachable without passing the same cluster twice.
+   * Essentially, we have to treat the map as a generic undirected graph.
+   * The most interesting example of this is Yeho RAAS v12 (Squad v2.16).
+   *
+   * Note:
+   * That layer doesn't have lanes. However, the addition of lanes does not
+   * really change the logic here. Each lane can be represented as an
+   * independent graph. We only need to implement this for a single-lane map
+   * and then wrap it in a forEach.
+   *
+   * The algorithm here works in two steps and is essentially a "sandwich"
+   * double-DFS, meaning that we start one DFS from each main and meet in the
+   * middle:
+   *
+   * (1) We start a DFS from our main and traverse the confirmation line.
+   *
+   *     Problem is: We don't know which clusters are confirmed. We only know
+   *     which points are confirmed and those can be in multiple clusters.
+   *
+   *     So during our DFS, we will determine all possible combinations of
+   *     clusters that can form the confirmation line, meaning that we will get
+   *     all possible first halves of the path.
+   *
+   * (2) We start a DFS from the enemy main for *every* possible first half that
+   *     we've discovered in (1).
+   *
+   *     During this DFS, we will go through all possible paths from the enemy
+   *     main and try to reach the end of the confirmation line without using
+   *     the same cluster twice. Every time we succeed, we remember the path
+   *     that we've found.
+   *
+   * At the end, we go through all found paths and add note the depth at which
+   * we've seen each cluster. Then finally, we upgrade the renderInfo for
+   * each point as far as possible.
+   */
+
   mapData.lanes.forEach((lane) => {
-    // ignore impossible lanes
-    if (lane.probability === 0) return;
+    // part (1)
+    const possibleConfirmedPaths = getAllPossibleConfirmedPaths(lane);
 
-    let queue: Queue<CapturePoint | null> = new Queue();
-    queue.enqueue(endOfConfirmationLine!);
-    // use null as a depth-separator
-    queue.enqueue(null);
+    // part (2)
+    possibleConfirmedPaths.forEach((confirmedPath) => {
+      const possibleDepthsMap = getAllPossibleDepths(confirmedPath, lane);
 
-    // note that our "visited" set initially does not include
-    // the clusters of the confirmation line
-    // this is acceptable because they will be ignored anyway since they're not
-    // closer to the enemy main
-    let visited: Set<Cluster> = new Set();
+      possibleDepthsMap.forEach((possibleDepths, cluster) => {
+        possibleDepths.forEach((depth) => {
+          // assume that paths with more than 8 flags (excluding the target main) are not possible
+          // TODO: research this more
+          if (depth.path_length > 8) return;
 
-    let depth = confirmationDepth + 1;
-
-    while (queue.length > 0) {
-      let cp = queue.dequeue();
-
-      // check if we've exhausted the current depth
-      if (cp === null) {
-        // if there are no remaining capture points, stop
-        if (queue.length === 0) break;
-
-        // insert a new depth-separator
-        queue.enqueue(null);
-        depth += 1;
-        continue;
-      }
-
-      // go through possible neighbours of this CP
-      // (first, go through all clusters that contain this CP)
-      cp.clusters.forEach((cluster) => {
-        // for this cluster, go through all neighbouring clusters on this lane
-        // (will be undefined if cluster is not present on this lane)
-        const nbClusters = cluster.edges.get(lane);
-
-        // if the cluster is not present on this lane, skip it
-        if (nbClusters === undefined) return;
-
-        nbClusters.forEach((nbCluster) => {
-          // don't double-check clusters
-          if (visited.has(nbCluster)) return;
-          visited.add(nbCluster);
-
-          // only look at clusters that are closer to the enemy main
-          // TODO: is this restriction really guaranteed?
-          //       possible counter example:
-          //       A -+----> B
-          //          |->C---^
-          //      route A-C-B might be possible.
-          if (nbCluster.distanceToOwnMain.get(lane)! < depth) return;
-
-          // go through all CPs of neighbouring cluster
-          nbCluster.points.forEach((nbCp) => {
-            let rI = renderInfos.get(circleMarkerByCapturePoint.get(nbCp)!)!;
-
-            // check if it's the enemy main
-            if (mapData.mains.has(nbCp)) {
-              rI.upgrade(CLR_MAIN_BASE, null, null, CLR_PRIORITY.MAIN_BASE);
-              return;
-            }
-
-            // add color possibility
-            const { color, priority } = getColorAndPriorityForLaneDepth(
-              lane,
-              depth,
-              confirmationDepth
-            );
-
-            rI.upgrade(color, depth, lane, priority);
-            // check that CPs neighbours next
-            queue.enqueue(nbCp);
+          const { color, priority } = getColorAndPriorityForLaneDepth(
+            depth.path_length,
+            depth.depth,
+            confirmationDepth
+          );
+          cluster.points.forEach((cp) => {
+            renderInfos
+              .get(circleMarkerByCapturePoint.get(cp)!)!
+              .upgrade(color, depth.depth, lane, priority);
           });
         });
       });
-    }
+    });
   });
 }
 
 function getColorAndPriorityForLaneDepth(
-  lane: Lane,
+  path_length: number,
   depth: number,
   confirmationDepth: number
 ): { color: string; priority: number } {
-  const defDepth = Math.floor(lane.length / 2);
+  const defDepth = Math.floor(path_length / 2);
   let offDepth: number;
   let midDepth: number;
 
   // on an even-length lane, there is no midpoint
-  if (lane.length % 2 === 0) {
+  if (path_length % 2 === 0) {
     midDepth = -1;
     offDepth = defDepth + 1;
   } else {
@@ -486,4 +498,41 @@ function getColorAndPriorityForLaneDepth(
   }
 
   throw `this shouldn't happen`;
+}
+
+function onClick(cm: CircleMarker, cp: CapturePoint) {
+  // if a main base was clicked, switch main base and reset
+  if (mapData.mains.has(cp)) {
+    mapData.ownMain = cp;
+    mapData.resetConfirmationLine();
+    mapData.refreshLaneLengthsAndClusterDistances();
+    mapData.refreshLaneProbabilities();
+    redraw();
+    return;
+  }
+
+  // go to last point on confirmation line
+  let curCp = mapData.ownMain!;
+  let prevCp = null;
+  while (curCp.confirmedFollower !== null) {
+    prevCp = curCp;
+    curCp = curCp.confirmedFollower;
+  }
+  const endOfConfirmationLine = curCp;
+
+  // if clicked point is the last one of the confirmation line,
+  // unconfirm point
+  if (cp === endOfConfirmationLine) {
+    prevCp!.confirmedFollower = null;
+    mapData.refreshLaneProbabilities();
+    redraw();
+    return;
+  }
+
+  if (confirmablePoints.has(cm)) {
+    endOfConfirmationLine.confirmedFollower = cp;
+    mapData.refreshLaneProbabilities();
+    redraw();
+    return;
+  }
 }

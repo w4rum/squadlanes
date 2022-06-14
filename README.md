@@ -95,7 +95,7 @@ drive.
     ```shell
     poetry run tiles
     ```
-8. The map tiles are now in `src/assets/map-tiles` if you're using the default config.
+8. The map tiles are now in `dist/map-tiles` if you're using the default config.
     The layer data was saved to `extraction/raas-data-auto.yml`.
     If you want to, you can make manual changes to the layer data.
     Once you're done, overwrite the existing file in `src/assets/raas-data.yaml`.
@@ -118,7 +118,7 @@ If you want to deploy this to a production server, follow the "Production" instr
 #### Development
 1. Run `npm run start`.
 2. ParcelJS will now package the static files.
-   This can take a couple of minutes on your first run.
+   This should only take a couple of seconds.
 3. The development server can now be reached at `http://localhost:1234/`.
    Changing any files while the server is running will cause an automatic update.
    However, you might still need to hit F5 for some parts, e.g., changes to the map
@@ -137,15 +137,18 @@ with `rsync`, take a look at the `deploy` command in `package.json` and adjust t
 your needs.
 
 ## Documentation / Project overview for developers
-This project is in a somewhat unpolished and largely undocumented state.
-We apologize for this but don't have specific plans to fix this in the immediate future
-since the person responsible for most of the code including the extraction scripts 
-(Tim | w4rum) hasn't actively played Squad in quite a while and has moved to a kind
-of maintenance-only mode for this project.
+Big parts of this project are in a somewhat unpolished and largely undocumented state.
+The front-end, especially the map logic, has good commenting and if you're familiar with graph
+algorithms you might be able to make sense of it.
+
+The python data mining scripts, however, are very spaghetti at the moment.
+
+We apologize for this but don't have specific plans to fix this in the immediate future.
+
 If you want to contribute at this point in time, feel free to open issues and pull
 requests and we'll be happy to work with you.
-Just be warned, it's probably a lot of work to get into it.
 
+Just be warned, it's probably a lot of work to get into it.
 
 ## Attribution and Licenses
 - Squad map backgrounds and capture point information were extracted from game files
@@ -163,9 +166,5 @@ Just be warned, it's probably a lot of work to get into it.
   license.
   We use [our own fork](https://github.com/w4rum/UEViewer) that we have modified
   slightly to better fit our use case.
-- [Leaflet.TileLayer.NoGap](https://github.com/Leaflet/Leaflet.TileLayer.NoGap) by
-  Iván Sánchez Ortega, released under the
-  [Beer-Ware License](https://github.com/Leaflet/Leaflet.TileLayer.NoGap/blob/master/LICENSE).
-  (Where do we send that beer?)
 - The original contributions found in this repository are released under AGPLv3
   (see LICENSE).

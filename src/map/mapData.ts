@@ -10,6 +10,13 @@ class MapData {
   public ownMain: CapturePoint | null = null;
   public lanes: Set<Lane> = new Set();
 
+  public enemyMain(): CapturePoint | null {
+    if (this.mains.size !== 2) return null;
+
+    const mains = Array.from(this.mains);
+    return this.ownMain === mains[0] ? mains[1] : mains[0];
+  }
+
   public refreshLaneProbabilities() {
     // if we haven't chosen a main yet, just default all lanes being impossible
     if (this.ownMain === null) {

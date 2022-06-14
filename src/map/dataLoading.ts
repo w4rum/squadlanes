@@ -36,7 +36,7 @@ export function changeLayer(mapName: string, layerName: string) {
 
   // extract clusters and capture points from YAML data
   for (const clusterName in layerData.clusters) {
-    const cluster = new Cluster();
+    const cluster = new Cluster(clusterName);
     mapData.clusters.add(cluster);
     clustersByName.set(clusterName, cluster);
 
