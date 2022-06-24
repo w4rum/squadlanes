@@ -10,6 +10,12 @@ SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
 # OPTIONAL SETTINGS - Our defaults should work if you just cloned the repository
 ################################################################################
 
+# Limit how many unpack processes are run in parallel
+# - increase to make unpacking faster (up to the speed of your storage device) but require more RAM
+# - decrease to use less RAM but unpack slower
+# (16 uses about 3-4 GiB of RAM)
+MAXIMUM_PARALLEL_UNPACKS = 16
+
 # Path to the UnrealPak Windows executable
 UNREAL_PAK_PATH = "./UnrealPakTool/UnrealPak.exe"
 

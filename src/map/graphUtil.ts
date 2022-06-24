@@ -118,6 +118,7 @@ function getPossibleDepthsFromHere(
     // then we are a possible end of the path
     if (nbCluster === targetCluster) {
       possiblePaths.push(path);
+      return;
     }
 
     // ignore confirmed clusters that don't contain the target CP

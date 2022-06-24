@@ -1,44 +1,56 @@
+import asyncio
 import os
 import subprocess
 import sys
 from glob import glob
 from pprint import pprint
+import shlex
 
 from squadlanes_extraction import config
 from pwn import log, logging
-from pwnlib.log import Progress
+from pwnlib.log import Logger
 from pwnlib.context import context
 
 VANILLA_SUBDIR = "/SquadGame/Content/Paks"
 
-
-def _unpack_pak_with_filter(pak_path: str, filter: str) -> None:
-    command = [
-        f"wine",
-        config.UNREAL_PAK_PATH,
-        f"Z:/{pak_path}",
-        f"-cryptokeys=Z:/{os.path.abspath(config.CRYPTO_JSON_PATH)}",
-        f"-Extract",
-        f"Z:/{os.path.abspath(config.UNPACKED_ASSETS_DIR)}",
-        f"-Filter={filter}",
-    ]
-
-    if context.log_level <= logging.DEBUG:
-        pprint(command)
-        sys.stdout.flush()
-        stdout = sys.stdout
-        stderr = sys.stderr
-    else:
-        stdout = subprocess.DEVNULL
-        stderr = subprocess.DEVNULL
-
-    subprocess.call(command, stdout=stdout, stderr=stderr)
+parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_UNPACKS)
 
 
-def _unpack_relevant_files_in_dir(paks_dir_path: str, progress: Progress) -> None:
+async def _unpack_pak_with_filter(
+    pak_path: str, filters: list[str], name: str, log: Logger
+) -> None:
+    async with parallel_limit:
+        with log.progress(f"Unpacking: {name}"):
+            for flt in filters:
+                command = [
+                    f"wine",
+                    config.UNREAL_PAK_PATH,
+                    f"Z:/{pak_path}",
+                    f"-cryptokeys=Z:/{os.path.abspath(config.CRYPTO_JSON_PATH)}",
+                    f"-Extract",
+                    f"Z:/{os.path.abspath(config.UNPACKED_ASSETS_DIR)}",
+                    f"-Filter={flt}",
+                ]
+
+                if context.log_level <= logging.DEBUG:
+                    pprint(command)
+                    sys.stdout.flush()
+                    stdout = asyncio.subprocess.PIPE
+                    stderr = asyncio.subprocess.PIPE
+                else:
+                    stdout = asyncio.subprocess.DEVNULL
+                    stderr = asyncio.subprocess.DEVNULL
+
+                process = await asyncio.subprocess.create_subprocess_shell(
+                    shlex.join(command), stdout=stdout, stderr=stderr
+                )
+                await process.wait()
+
+
+async def _unpack_relevant_files_in_dir(paks_dir_path: str, log: Logger) -> None:
+    unpack_runs = []
+
     for name in os.listdir(paks_dir_path):
-        progress.status(name)
-
         path = f"{paks_dir_path}/{name}"
 
         # ignore dirs
@@ -51,26 +63,26 @@ def _unpack_relevant_files_in_dir(paks_dir_path: str, progress: Progress) -> Non
         if os.stat(path).st_size == 0:
             continue
 
-        # extract layer info
-        _unpack_pak_with_filter(path, "*.umap")
+        unpack_runs.append(
+            _unpack_pak_with_filter(
+                path, ["*.umap", "*.uexp", "*.ubulk", "*.uasset"], name, log
+            )
+        )
 
-        # Need to get uexp, ubulk and uassets as well to correctly extract minimaps
-        # TODO: improve filter to only extract minimaps, not all files
-        _unpack_pak_with_filter(path, "*.uexp")
-        _unpack_pak_with_filter(path, "*.ubulk")
-        _unpack_pak_with_filter(path, "*.uasset")
+    await asyncio.gather(*unpack_runs)
 
 
 def unpack():
     os.makedirs(config.UNPACKED_ASSETS_DIR, exist_ok=True)
 
-    with log.progress("-- Unpacking Vanilla Assets") as progress:
-        _unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + VANILLA_SUBDIR, progress)
+    asyncio.run(
+        _unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + VANILLA_SUBDIR, log)
+    )
 
     # some assets are extracted into a different directories
     # e.g., "./Content/" vs. "./SquadGame/Content/"
     # (not sure why this is inconsistent)
-    with log.progress("-- Merging directories"):
+    with log.progress("Merging directories"):
         merge_paths = [
             ("SquadGame", "."),
             ("Content", "."),

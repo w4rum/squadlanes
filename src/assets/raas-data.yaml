@@ -141,24 +141,40 @@ Al Basrah:
                 sdk_name: AlKhora_939
                 x: -84036.765625
                 y: 34629.265625
+            -   display_name: Druglord Compound
+                sdk_name: DruglordCompound
+                x: -38607.953125
+                y: 46763.734375
+            -   display_name: Poppy Production
+                sdk_name: PoppyProduction
+                x: -56506.953125
+                y: 40656.734375
             05-CaptureZoneCluster:
-            -   display_name: East Basrah
-                sdk_name: EastBasrah
-                x: 36073.98828125
-                y: 51852.515625
-            -   display_name: West Basrah
-                sdk_name: WestBasrah
-                x: 6832.98828125
-                y: 51852.515625
+            -   display_name: Apartments
+                sdk_name: Apartments
+                x: 14913.0234375
+                y: 43564.546875
+            -   display_name: Crossroads
+                sdk_name: Crossroads
+                x: 23409.9609375
+                y: 62657.44921875
+            -   display_name: Gas Station
+                sdk_name: GasStation
+                x: -4390.078125
+                y: 71171.3203125
+            -   display_name: Mosque
+                sdk_name: Mosque
+                x: 31542.98828125
+                y: 50106.49609375
             06-CaptureZoneCluster:
             -   display_name: Island Suburbs
                 sdk_name: IslandSuburbs
                 x: 65793.7578125
                 y: 65649.34375
-            -   display_name: Suburbs
-                sdk_name: Suburbs
-                x: 32586.7578125
-                y: 76592.34375
+            -   display_name: Lower Fringe
+                sdk_name: LowerFringe
+                x: 1690.5859375
+                y: 112194.203125
             100-Team2Main:
             -   display_name: Team2 Main
                 sdk_name: Team2Main
@@ -4031,8 +4047,8 @@ Fallujah:
             00-Team1Main:
             -   display_name: Team1 Main
                 sdk_name: Team1Main
-                x: -106593.2421875
-                y: 18593.03125
+                x: -104643.2421875
+                y: 16031.03125
             01-CaptureZoneCluster:
             -   display_name: Al Jamhoria
                 sdk_name: AlJamhoria
@@ -4042,24 +4058,25 @@ Fallujah:
                 sdk_name: Cemetery
                 x: -48025.796875
                 y: -1823.62109375
-            02-CaptureZoneCluster:
-            -   display_name: Commercial District North
-                sdk_name: CommercialDistrictNorth
-                x: 3776.888671875
-                y: -24372.12109375
-            -   display_name: Commercial District South
-                sdk_name: CommercialDistrictSouth
-                x: 1059.59375
-                y: -12455.333984375
-            -   display_name: Commercial District Terror Hotel
-                sdk_name: CommercialDistrictTerrorHotel
-                x: 11969.93359375
-                y: -13535.701171875
+            02-CaptureZoneCluster2:
+            -   display_name: Crossroads Stronghold
+                sdk_name: CrossroadsStronghold
+                x: -19741.673828125
+                y: -2577.478515625
             -   display_name: TV Station
                 sdk_name: TVStation
                 x: -11864.595703125
                 y: -7330.5419921875
-            03-CaptureZoneCluster:
+            03-CaptureZoneCluster_1:
+            -   display_name: Commercial District North
+                sdk_name: CommercialDistrictNorth
+                x: 3776.888671875
+                y: -24372.12109375
+            -   display_name: Commercial District Terror Hotel
+                sdk_name: CommercialDistrictTerrorHotel
+                x: 11969.93359375
+                y: -13535.701171875
+            04-CaptureZoneCluster:
             -   display_name: Bazaar
                 sdk_name: Bazaar
                 x: 32926.01171875
@@ -4068,7 +4085,7 @@ Fallujah:
                 sdk_name: BlueMosque
                 x: 36351.46875
                 y: -29801.28125
-            04-CaptureZoneCluster:
+            05-CaptureZoneCluster:
             -   display_name: Askari Hill
                 sdk_name: AskariHill
                 x: 76061.96875
@@ -4077,6 +4094,10 @@ Fallujah:
                 sdk_name: AskariSlums
                 x: 77528.6875
                 y: -63665.7109375
+            -   display_name: Market
+                sdk_name: Market
+                x: 70821.203125
+                y: -14388.2001953125
             100-Team2Main:
             -   display_name: Team2 Main
                 sdk_name: Team2Main
@@ -4087,12 +4108,14 @@ Fallujah:
             -   a: 00-Team1Main
                 b: 01-CaptureZoneCluster
             -   a: 01-CaptureZoneCluster
-                b: 02-CaptureZoneCluster
-            -   a: 02-CaptureZoneCluster
-                b: 03-CaptureZoneCluster
-            -   a: 03-CaptureZoneCluster
+                b: 02-CaptureZoneCluster2
+            -   a: 02-CaptureZoneCluster2
+                b: 03-CaptureZoneCluster_1
+            -   a: 03-CaptureZoneCluster_1
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
         mains:
         - Team1Main
@@ -5086,6 +5109,256 @@ Fallujah:
         mains:
         - Team1Main
         - Team2Main
+    RAAS v6:
+        background:
+            corners:
+            -   x: -131500.0
+                y: -154500.0
+            -   x: 169000.0
+                y: 146000.0
+            heightmap_filename: height-map-C1
+            heightmap_transform:
+                scale_x: 1.0
+                scale_y: 1.0
+                shift_x: 0
+                shift_y: 0
+            minimap_filename: T_Fallujah_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: 154986.40625
+                y: -37067.3125
+            01-CaptureZoneCluster:
+            -   display_name: Askari Outskirts
+                sdk_name: AskariOutskirts
+                x: 104517.78125
+                y: -36517.984375
+            -   display_name: Cloverleaf Outpost
+                sdk_name: CloverleafOutpost
+                x: 119595.15625
+                y: -27106.625
+            A2-CaptureZoneCluster:
+            -   display_name: Askari Hill
+                sdk_name: AskariHill_15
+                x: 76193.1953125
+                y: -35303.6796875
+            -   display_name: Askari Slums
+                sdk_name: AskariSlums_14
+                x: 76350.65625
+                y: -64422.46875
+            A3-CaptureZoneCluster:
+            -   display_name: Mosque
+                sdk_name: Mosque_21
+                x: 36569.8125
+                y: -29706.03125
+            -   display_name: Shurta
+                sdk_name: Shurta_19
+                x: 48314.84375
+                y: -47033.984375
+            -   display_name: Shurta Apartments
+                sdk_name: ShurtaApartments_20
+                x: 33115.27734375
+                y: -49261.375
+            -   display_name: Warehouse
+                sdk_name: Warehouse
+                x: 30364.3828125
+                y: -73358.09375
+            A4-CaptureZoneCluster:
+            -   display_name: Muallimin
+                sdk_name: Muallimin_25
+                x: 22.95703125
+                y: -49731.8125
+            -   display_name: Muallimin NE
+                sdk_name: MualliminNE
+                x: 2350.622314453125
+                y: -73934.7890625
+            A5-CaptureZoneCluster:
+            -   display_name: Police Station
+                sdk_name: PoliceStation_30
+                x: -22732.59765625
+                y: -34670.765625
+            -   display_name: Refugee Camp
+                sdk_name: RefugeeCamp
+                x: -28284.169921875
+                y: -71218.2890625
+            -   display_name: Train Station
+                sdk_name: TrainStation
+                x: -36957.1015625
+                y: -89911.546875
+            A6-CaptureZoneCluster:
+            -   display_name: Checkpoint
+                sdk_name: Checkpoint
+                x: -94205.9765625
+                y: -51911.03125
+            -   display_name: Crash Site
+                sdk_name: CrashSite
+                x: -60761.51953125
+                y: -50534.875
+            B2-CaptureZoneCluster:
+            -   display_name: Askari Hill
+                sdk_name: AskariHill
+                x: 76193.1953125
+                y: -35303.6796875
+            -   display_name: Askari Slums
+                sdk_name: AskariSlums
+                x: 76350.65625
+                y: -64422.46875
+            -   display_name: Industrial Yard
+                sdk_name: IndustrialYard
+                x: 56190.0859375
+                y: -15464.4462890625
+            B3-CaptureZoneCluster:
+            -   display_name: Bazaar
+                sdk_name: Bazaar
+                x: 33410.34375
+                y: -14251.0625
+            -   display_name: Mosque
+                sdk_name: Mosque
+                x: 36569.8125
+                y: -29706.03125
+            -   display_name: Shurta
+                sdk_name: Shurta
+                x: 48314.84375
+                y: -47033.984375
+            -   display_name: Shurta Apartments
+                sdk_name: ShurtaApartments
+                x: 33115.27734375
+                y: -49261.375
+            B4-CaptureZoneCluster:
+            -   display_name: Commercial District North
+                sdk_name: CommercialDistrictNorth
+                x: 6872.29150390625
+                y: -22377.58203125
+            -   display_name: Commercial District South
+                sdk_name: CommercialDistrictSouth
+                x: 11611.7529296875
+                y: -15579.232421875
+            -   display_name: Muallimin
+                sdk_name: Muallimin
+                x: 22.95703125
+                y: -49731.8125
+            B5-CaptureZoneCluster:
+            -   display_name: Crossroads
+                sdk_name: CrossRoads
+                x: -26352.87890625
+                y: -4977.921875
+            -   display_name: Crossroads South
+                sdk_name: CrossRoadsSouth
+                x: -19516.15234375
+                y: -1797.46875
+            -   display_name: Police Station
+                sdk_name: PoliceStation
+                x: -22732.59765625
+                y: -34670.765625
+            -   display_name: TV Station
+                sdk_name: TVStation
+                x: -14376.890625
+                y: -8013.0546875
+            B6-CaptureZoneCluster:
+            -   display_name: Cemetary
+                sdk_name: Cemetary
+                x: -49410.28515625
+                y: -2916.615234375
+            -   display_name: Old Town
+                sdk_name: OldTown
+                x: -61930.30078125
+                y: -15990.359375
+            C2-CaptureZoneCluster:
+            -   display_name: Industrial Yard
+                sdk_name: IndustrialYard_50
+                x: 56190.0859375
+                y: -15464.4462890625
+            C3-CaptureZoneCluster:
+            -   display_name: Al-Fallujah
+                sdk_name: Fallujah
+                x: 37146.734375
+                y: 8391.318359375
+            -   display_name: Bazaar
+                sdk_name: Bazaar_42
+                x: 33410.34375
+                y: -14251.0625
+            C4-CaptureZoneCluster:
+            -   display_name: Communications Towers
+                sdk_name: CommunicationsTowers
+                x: 18934.6640625
+                y: 60035.703125
+            -   display_name: Green Zone
+                sdk_name: GreenZone_39
+                x: 10935.21875
+                y: 21535.34375
+            C5-CaptureZoneCluster:
+            -   display_name: Al-Khadra
+                sdk_name: Khadra
+                x: -9367.5009765625
+                y: 62782.0859375
+            -   display_name: Risala
+                sdk_name: Risala_37
+                x: -24613.892578125
+                y: 24128.615234375
+            C6-CaptureZoneCluster:
+            -   display_name: Jubai
+                sdk_name: Jubai_35
+                x: -45602.3046875
+                y: 44406.578125
+            -   display_name: Training Camp
+                sdk_name: TrainingCamp
+                x: -40495.8828125
+                y: 85014.515625
+            Z-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: -101329.2578125
+                y: 16993.046875
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: B2-CaptureZoneCluster
+            -   a: B2-CaptureZoneCluster
+                b: B3-CaptureZoneCluster
+            -   a: B3-CaptureZoneCluster
+                b: B4-CaptureZoneCluster
+            -   a: B4-CaptureZoneCluster
+                b: B5-CaptureZoneCluster
+            -   a: B5-CaptureZoneCluster
+                b: B6-CaptureZoneCluster
+            -   a: B6-CaptureZoneCluster
+                b: Z-Team2Main
+            North:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: A2-CaptureZoneCluster
+            -   a: A2-CaptureZoneCluster
+                b: A3-CaptureZoneCluster
+            -   a: A3-CaptureZoneCluster
+                b: A4-CaptureZoneCluster
+            -   a: A4-CaptureZoneCluster
+                b: A5-CaptureZoneCluster
+            -   a: A5-CaptureZoneCluster
+                b: A6-CaptureZoneCluster
+            -   a: A6-CaptureZoneCluster
+                b: Z-Team2Main
+            South:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: C2-CaptureZoneCluster
+            -   a: C2-CaptureZoneCluster
+                b: C3-CaptureZoneCluster
+            -   a: C3-CaptureZoneCluster
+                b: C4-CaptureZoneCluster
+            -   a: C4-CaptureZoneCluster
+                b: C5-CaptureZoneCluster
+            -   a: C5-CaptureZoneCluster
+                b: C6-CaptureZoneCluster
+            -   a: C6-CaptureZoneCluster
+                b: Z-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
 Fools Road:
     Invasion v1:
         background:
@@ -5982,8 +6255,8 @@ Goose Bay:
             00-Team1Main:
             -   display_name: Team1 Main
                 sdk_name: Team1Main
-                x: 160158.96875
-                y: 167143.5625
+                x: 160982.96875
+                y: 167883.5625
             01-CaptureZoneCluster_0:
             -   display_name: Happy Valley
                 sdk_name: HappyValley
@@ -6031,7 +6304,7 @@ Goose Bay:
             -   display_name: Team2 Main
                 sdk_name: Team2Main
                 x: 33130.6484375
-                y: -164092.859375
+                y: -161831.859375
         lanes:
             Center:
             -   a: 00-Team1Main
@@ -6045,6 +6318,93 @@ Goose Bay:
         mains:
         - Team1Main
         - Team2Main
+    Invasion v4:
+        background:
+            corners:
+            -   x: -201657.890625
+                y: -201674.84375
+            -   x: 201523.078125
+                y: 201503.078125
+            heightmap_filename: height-map-gooseC1
+            heightmap_transform:
+                scale_x: 1.0
+                scale_y: 1.0
+                shift_x: 0
+                shift_y: 0
+            minimap_filename: CAF_GooseBay_Minimap
+        clusters:
+            00-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 94637.46875
+                y: -110987.9375
+            01-CaptureZoneCluster_0:
+            -   display_name: Hilltop Redoubt
+                sdk_name: HilltopRedoubt
+                x: -9418.587534366976
+                y: -12533.232273100832
+            -   display_name: Sheshatshiu
+                sdk_name: Sheshatshiu
+                x: -9470.745585851546
+                y: -129876.13678663422
+            -   display_name: Train Yard
+                sdk_name: TrainYard
+                x: -83217.56066186535
+                y: -102546.78557243239
+            02-CaptureZoneCluster_1:
+            -   display_name: Naval Refueling Station
+                sdk_name: NavalRefuelingStation
+                x: -117173.6875
+                y: -61101.78125
+            -   display_name: Shimik
+                sdk_name: Shimik
+                x: -89615.234375
+                y: -46329.59375
+            03-CaptureZoneCluster_0:
+            -   display_name: Drilling Site
+                sdk_name: DrillingSite
+                x: -95499.328125
+                y: -14771.0078125
+            -   display_name: Weather Station
+                sdk_name: WeatherStation
+                x: -71157.9140625
+                y: 23211.62109375
+            04-CaptureZoneCluster:
+            -   display_name: Fishing Village
+                sdk_name: FishingVillage
+                x: -118280.46875
+                y: 56246.34375
+            -   display_name: Taqqut Co-op
+                sdk_name: op
+                x: -163137.90625
+                y: 5012.62109375
+            05-CaptureZoneCluster:
+            -   display_name: 5 Wing HQ
+                sdk_name: 5WingHQ
+                x: -94237.46875
+                y: 113216.34375
+            100-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -184268.0625
+                y: 152384.828125
+        lanes:
+            Center:
+            -   a: 100-Team1Main
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 03-CaptureZoneCluster_0
+            -   a: 03-CaptureZoneCluster_0
+                b: 02-CaptureZoneCluster_1
+            -   a: 02-CaptureZoneCluster_1
+                b: 01-CaptureZoneCluster_0
+            -   a: 01-CaptureZoneCluster_0
+                b: 00-Team2Main
+        mains:
+        - Team2Main
+        - Team1Main
     RAAS v1:
         background:
             corners:
@@ -6286,6 +6646,246 @@ Goose Bay:
         - Team1Main
         - Team2Main
     RAAS v2:
+        background:
+            corners:
+            -   x: -201657.890625
+                y: -201674.84375
+            -   x: 201523.078125
+                y: 201503.078125
+            heightmap_filename: height-map-gooseC1
+            heightmap_transform:
+                scale_x: 1.0
+                scale_y: 1.0
+                shift_x: 0
+                shift_y: 0
+            minimap_filename: CAF_GooseBay_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -155425.31640625
+                y: -177174.78125
+            A1-BP_CaptureZoneCluster:
+            -   display_name: Naval Refueling Station
+                sdk_name: NavalRefuelingStation
+                x: -119867.52734375
+                y: -62222.51171875
+            -   display_name: Train Yard
+                sdk_name: TrainYard2
+                x: -84322.08984375
+                y: -102467.6875
+            A2-BP_CaptureZoneCluster:
+            -   display_name: Drilling Site
+                sdk_name: DrillingSite
+                x: -93284.79296875
+                y: -16391.96875
+            -   display_name: Taqqut Coop
+                sdk_name: TaqqutCoop
+                x: -163869.26953125
+                y: 9353.2265625
+            A3-BP_CaptureZoneCluster:
+            -   display_name: Factory
+                sdk_name: Factory
+                x: -182942.95703125
+                y: 79042.1328125
+            -   display_name: Fishing Village
+                sdk_name: FishingVillage
+                x: -117068.41015625
+                y: 56524.734375
+            -   display_name: Weather Station
+                sdk_name: WeatherStation
+                x: -72329.78515625
+                y: 22739.271484375
+            A4-BP_CaptureZoneCluster:
+            -   display_name: 5 Wing HQ
+                sdk_name: 5WingHQ
+                x: -94748.40625
+                y: 112784.734375
+            -   display_name: Research Station
+                sdk_name: ResearchStation
+                x: -56760.55078125
+                y: 93948.4296875
+            A5-BP_CaptureZoneCluster:
+            -   display_name: Happy Valley
+                sdk_name: HappyValley
+                x: -11882.46875
+                y: 148504.6875
+            -   display_name: OP Hebb
+                sdk_name: OPHebb3
+                x: 17313.59375
+                y: 109189.734375
+            A6-BP_CaptureZoneCluster:
+            -   display_name: Shipping Center
+                sdk_name: ShippingCenter
+                x: 71757.53125
+                y: 140494.6875
+            B1-BP_CaptureZoneCluster:
+            -   display_name: Train Yard
+                sdk_name: TrainYard
+                x: -84322.0859375
+                y: -102467.6875
+            B2-BP_CaptureZoneCluster:
+            -   display_name: Sheshatshiu
+                sdk_name: Sheshatshiu2
+                x: -6299.671875
+                y: -129362.5
+            -   display_name: Shimik
+                sdk_name: Shimik
+                x: -87510.6171875
+                y: -45542.63671875
+            -   display_name: Shimik
+                sdk_name: Shimik2
+                x: -87510.6171875
+                y: -45542.63671875
+            B3-BP_CaptureZoneCluster:
+            -   display_name: Churchill
+                sdk_name: Churchill
+                x: 33101.51171875
+                y: -88630.3515625
+            -   display_name: Hilltop Redoubt
+                sdk_name: HilltopRedoubt
+                x: -7964.3046875
+                y: -12600.625
+            B4-BP_CaptureZoneCluster:
+            -   display_name: Airfield Checkpoint
+                sdk_name: AirfieldCheckpoint
+                x: 85375.9453125
+                y: 25355.529296875
+            -   display_name: Airfield Defenses
+                sdk_name: AirfieldDefenses
+                x: 28257.986328125
+                y: 63870.38671875
+            -   display_name: CFB Goose Bay
+                sdk_name: CFBGooseBay
+                x: 35158.78515625
+                y: 38097.6171875
+            -   display_name: CFB Goose Bay
+                sdk_name: CFBGooseBay_13
+                x: 57985.26953125
+                y: 10629.796875
+            B5-BP_CaptureZoneCluster:
+            -   display_name: OP Hebb
+                sdk_name: OPHebb2
+                x: 17313.59375
+                y: 109189.734375
+            -   display_name: Refinery
+                sdk_name: Refinery
+                x: 97166.40625
+                y: 72668.9921875
+            B6-BP_CaptureZoneCluster:
+            -   display_name: Postville
+                sdk_name: Postville
+                x: 146216.40234375
+                y: 132838.9921875
+            -   display_name: Shipping Center
+                sdk_name: ShippingCenter2
+                x: 71757.52734375
+                y: 140494.6796875
+            C1-BP_CaptureZoneCluster:
+            -   display_name: Sheshatshiu
+                sdk_name: Sheshatshiu3
+                x: -42068.203125
+                y: -127696.3671875
+            C2-BP_CaptureZoneCluster:
+            -   display_name: Churchill
+                sdk_name: Churchill2
+                x: 33101.51171875
+                y: -88630.3515625
+            -   display_name: FOB Inkpen
+                sdk_name: FOBInkpen
+                x: 93381.515625
+                y: -111260.3515625
+            C3-BP_CaptureZoneCluster2:
+            -   display_name: NORAD Facility
+                sdk_name: NORADFacility
+                x: 94088.203125
+                y: -45713.5234375
+            C4-BP_CaptureZoneCluster_3:
+            -   display_name: Airfield Checkpoint
+                sdk_name: AirfieldCheckpoint
+                x: 85375.94140625
+                y: 25355.529296875
+            -   display_name: CFB Goose Bay
+                sdk_name: CFBGooseBay
+                x: 52177.2734375
+                y: 27021.34375
+            -   display_name: Military Housing
+                sdk_name: MilitaryHousing
+                x: 142171.16796875
+                y: 11872.8046875
+            -   display_name: Military Housing
+                sdk_name: MilitaryHousing2
+                x: 142171.16796875
+                y: 11872.8046875
+            C5-BP_CaptureZoneCluster:
+            -   display_name: Refinery
+                sdk_name: Refinery2
+                x: 97166.40234375
+                y: 72668.9921875
+            C6-BP_CaptureZoneCluster:
+            -   display_name: Postville
+                sdk_name: Postville2
+                x: 146216.40234375
+                y: 132838.9921875
+            -   display_name: Shipping Center
+                sdk_name: ShippingCenter3
+                x: 71757.52734375
+                y: 140494.6796875
+            Z-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 185516.83984375
+                y: 173713.8984375
+        lanes:
+            Alpha:
+            -   a: 00-Team1Main
+                b: A1-BP_CaptureZoneCluster
+            -   a: A1-BP_CaptureZoneCluster
+                b: A2-BP_CaptureZoneCluster
+            -   a: A2-BP_CaptureZoneCluster
+                b: A3-BP_CaptureZoneCluster
+            -   a: A3-BP_CaptureZoneCluster
+                b: A4-BP_CaptureZoneCluster
+            -   a: A4-BP_CaptureZoneCluster
+                b: A5-BP_CaptureZoneCluster
+            -   a: A5-BP_CaptureZoneCluster
+                b: A6-BP_CaptureZoneCluster
+            -   a: A6-BP_CaptureZoneCluster
+                b: Z-Team2Main
+            Bravo:
+            -   a: 00-Team1Main
+                b: B1-BP_CaptureZoneCluster
+            -   a: B1-BP_CaptureZoneCluster
+                b: B2-BP_CaptureZoneCluster
+            -   a: B2-BP_CaptureZoneCluster
+                b: B3-BP_CaptureZoneCluster
+            -   a: B3-BP_CaptureZoneCluster
+                b: B4-BP_CaptureZoneCluster
+            -   a: B4-BP_CaptureZoneCluster
+                b: B5-BP_CaptureZoneCluster
+            -   a: B5-BP_CaptureZoneCluster
+                b: B6-BP_CaptureZoneCluster
+            -   a: B6-BP_CaptureZoneCluster
+                b: Z-Team2Main
+            Charlie:
+            -   a: 00-Team1Main
+                b: C1-BP_CaptureZoneCluster
+            -   a: C1-BP_CaptureZoneCluster
+                b: C2-BP_CaptureZoneCluster
+            -   a: C2-BP_CaptureZoneCluster
+                b: C3-BP_CaptureZoneCluster2
+            -   a: C3-BP_CaptureZoneCluster2
+                b: C4-BP_CaptureZoneCluster_3
+            -   a: C4-BP_CaptureZoneCluster_3
+                b: C5-BP_CaptureZoneCluster
+            -   a: C5-BP_CaptureZoneCluster
+                b: C6-BP_CaptureZoneCluster
+            -   a: C6-BP_CaptureZoneCluster
+                b: Z-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
+    RAAS v3:
         background:
             corners:
             -   x: -201657.890625
@@ -8999,10 +9599,6 @@ Gorodok:
                 sdk_name: NivaLower2_8
                 x: 10831.248657226562
                 y: 20179.91015625
-            -   display_name: River Fortification
-                sdk_name: RiverFortification
-                x: 37653.81311035156
-                y: 48035.84375
             04E-BP_CaptureZoneCluster_2:
             -   display_name: Gas Station
                 sdk_name: GasStation_4
@@ -15565,6 +16161,265 @@ Lashkar Valley:
         mains:
         - Team1Main
         - Team2Main
+    RAAS v5:
+        background:
+            corners:
+            -   x: 216700.0
+                y: 216700.0
+            -   x: -216700.0
+                y: -216700.0
+            heightmap_filename: height-map-lashkarC1
+            heightmap_transform:
+                scale_x: 1.0
+                scale_y: 1.0
+                shift_x: 0
+                shift_y: 0
+            minimap_filename: T_Lashkar_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: 7080.52001953125
+                y: 153772.203125
+            1-BP_CaptureZoneCluster:
+            -   display_name: Sheena
+                sdk_name: Sheena
+                x: -812.96826171875
+                y: 113603.015625
+            A2-BP_CaptureZoneCluster:
+            -   display_name: Derapet
+                sdk_name: Derapet
+                x: -88498.2109375
+                y: 63689.609375
+            -   display_name: Watapur
+                sdk_name: Watapur
+                x: -148119.53125
+                y: 79625.203125
+            A3-BP_CaptureZoneCluster:
+            -   display_name: Ajabay
+                sdk_name: Ajabay
+                x: -142438.171875
+                y: 7448.09375
+            -   display_name: Kumbar Maidan Lower
+                sdk_name: KumbarMaidanLower
+                x: -66389.9296875
+                y: 33911.71875
+            -   display_name: Kumbar Maidan Upper
+                sdk_name: KumbarMaidanUpper
+                x: -73074.0
+                y: 18067.8203125
+            A4_BP_CaptureZoneCluster:
+            -   display_name: Tizak
+                sdk_name: Tizak
+                x: -148017.375
+                y: -33583.22265625
+            -   display_name: Toor Camp
+                sdk_name: ToorCamp
+                x: -115956.65625
+                y: -12454.232421875
+            A5-BP_CaptureZoneCluster:
+            -   display_name: Jowman
+                sdk_name: Jowman
+                x: -64492.5
+                y: -60375.28125
+            -   display_name: Grape Farm
+                sdk_name: GrapeFarm
+                x: -121507.125
+                y: -93031.515625
+            -   display_name: Vinyard
+                sdk_name: Vinyard
+                x: -156653.984375
+                y: -137830.21875
+            A6-BP_CaptureZoneCluster:
+            -   display_name: Arandu
+                sdk_name: Arandu
+                x: -43317.921875
+                y: -141230.0625
+            -   display_name: OP Letterkenny
+                sdk_name: OPLetterkenny
+                x: -7812.65625
+                y: -139281.015625
+            A7_BP_CaptureZoneCluster:
+            -   display_name: Dogram
+                sdk_name: Dogram
+                x: 88888.2734375
+                y: -141273.140625
+            -   display_name: Gosam
+                sdk_name: Gosam
+                x: 117267.4375
+                y: -109923.1875
+            -   display_name: Sahib Abad
+                sdk_name: SahibAbad
+                x: 69331.6796875
+                y: -111421.65625
+            B2-BP_CaptureZoneCluster:
+            -   display_name: Gardez
+                sdk_name: Gardez
+                x: -18161.298828125
+                y: 66049.953125
+            -   display_name: Nangalam
+                sdk_name: Nangalam
+                x: 332.125
+                y: 68809.75
+            B3-BP_CaptureZoneCluster:
+            -   display_name: Toormang East
+                sdk_name: ToormangEast
+                x: 29813.71875
+                y: 45796.234375
+            -   display_name: Toormang West
+                sdk_name: ToormangWest
+                x: 19202.640625
+                y: 43022.5390625
+            B4-BP_CaptureZoneCluster:
+            -   display_name: Orchard
+                sdk_name: Orchard
+                x: 5855.81640625
+                y: -6135.96484375
+            B5-BP_CaptureZoneCluster:
+            -   display_name: Outdoor Market
+                sdk_name: OutdoorMarket
+                x: -33947.9453125
+                y: -64192.8671875
+            -   display_name: Lashkar
+                sdk_name: Lashkar
+                x: -8853.1640625
+                y: -41203.88671875
+            -   display_name: Lashkar Market
+                sdk_name: Market
+                x: -17214.890625
+                y: -37021.6875
+            B6-BP_CaptureZoneCluster:
+            -   display_name: Ak Toba
+                sdk_name: AkToba
+                x: 30919.359375
+                y: -81680.9453125
+            -   display_name: Takur Ghar
+                sdk_name: TakurGhar
+                x: 73936.015625
+                y: -62804.05078125
+            B7-BP_CaptureZoneCluster:
+            -   display_name: Dogram
+                sdk_name: Dogram
+                x: 88888.2734375
+                y: -141273.140625
+            -   display_name: Gosam
+                sdk_name: Gosam
+                x: 117267.4375
+                y: -109923.1875
+            -   display_name: Sahib Abad
+                sdk_name: SahibAbad
+                x: 69331.6796875
+                y: -111421.65625
+            C2-BP_CaptureZoneCluster:
+            -   display_name: Furlongs
+                sdk_name: Furlongs
+                x: 138592.125
+                y: 100574.625
+            -   display_name: Soviet Outpost
+                sdk_name: SovietOutpost
+                x: 102958.84375
+                y: 86762.140625
+            C3-BP_CaptureZoneCluster:
+            -   display_name: Ghawchak Village
+                sdk_name: GhawchakVillage
+                x: 113769.6796875
+                y: 40493.72265625
+            C4_BP_CaptureZoneCluster:
+            -   display_name: Gulestan
+                sdk_name: Gulestan
+                x: 81407.90625
+                y: 2677.5625
+            -   display_name: Marjah
+                sdk_name: Marjah
+                x: 151601.3125
+                y: 2385.32421875
+            C5-BP_CaptureZoneCluster:
+            -   display_name: Kunar
+                sdk_name: Kunar
+                x: 175579.078125
+                y: -41289.96484375
+            C6-BP_CaptureZoneCluster:
+            -   display_name: KamKay
+                sdk_name: KamKay
+                x: 189732.359375
+                y: -83366.3203125
+            -   display_name: Kanju Lower
+                sdk_name: KanjuLower
+                x: 145539.984375
+                y: -70691.734375
+            -   display_name: Kanju Upper
+                sdk_name: KanjuUpper
+                x: 144771.609375
+                y: -55638.4375
+            C7_BP_CaptureZoneCluster:
+            -   display_name: Dir
+                sdk_name: Dir
+                x: 182541.390625
+                y: -111514.40625
+            -   display_name: Gosam
+                sdk_name: Gosam
+                x: 117267.4375
+                y: -109923.1875
+            Z100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 149281.984375
+                y: -157351.65625
+        lanes:
+            Alpha:
+            -   a: 00-Team1Main
+                b: 1-BP_CaptureZoneCluster
+            -   a: 1-BP_CaptureZoneCluster
+                b: A2-BP_CaptureZoneCluster
+            -   a: A2-BP_CaptureZoneCluster
+                b: A3-BP_CaptureZoneCluster
+            -   a: A3-BP_CaptureZoneCluster
+                b: A4_BP_CaptureZoneCluster
+            -   a: A4_BP_CaptureZoneCluster
+                b: A5-BP_CaptureZoneCluster
+            -   a: A5-BP_CaptureZoneCluster
+                b: A6-BP_CaptureZoneCluster
+            -   a: A6-BP_CaptureZoneCluster
+                b: A7_BP_CaptureZoneCluster
+            -   a: A7_BP_CaptureZoneCluster
+                b: Z100-Team2Main
+            Bravo:
+            -   a: 00-Team1Main
+                b: 1-BP_CaptureZoneCluster
+            -   a: 1-BP_CaptureZoneCluster
+                b: B2-BP_CaptureZoneCluster
+            -   a: B2-BP_CaptureZoneCluster
+                b: B3-BP_CaptureZoneCluster
+            -   a: B3-BP_CaptureZoneCluster
+                b: B4-BP_CaptureZoneCluster
+            -   a: B4-BP_CaptureZoneCluster
+                b: B5-BP_CaptureZoneCluster
+            -   a: B5-BP_CaptureZoneCluster
+                b: B6-BP_CaptureZoneCluster
+            -   a: B6-BP_CaptureZoneCluster
+                b: B7-BP_CaptureZoneCluster
+            -   a: B7-BP_CaptureZoneCluster
+                b: Z100-Team2Main
+            Charlie:
+            -   a: 00-Team1Main
+                b: 1-BP_CaptureZoneCluster
+            -   a: 1-BP_CaptureZoneCluster
+                b: C2-BP_CaptureZoneCluster
+            -   a: C2-BP_CaptureZoneCluster
+                b: C3-BP_CaptureZoneCluster
+            -   a: C3-BP_CaptureZoneCluster
+                b: C4_BP_CaptureZoneCluster
+            -   a: C4_BP_CaptureZoneCluster
+                b: C5-BP_CaptureZoneCluster
+            -   a: C5-BP_CaptureZoneCluster
+                b: C6-BP_CaptureZoneCluster
+            -   a: C6-BP_CaptureZoneCluster
+                b: C7_BP_CaptureZoneCluster
+            -   a: C7_BP_CaptureZoneCluster
+                b: Z100-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
 Logar Valley:
     RAAS v1:
         background:
@@ -18862,6 +19717,173 @@ Mutaha:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
+    RAAS v6:
+        background:
+            corners:
+            -   x: -93500.0
+                y: 161500.0
+            -   x: 182000.0
+                y: -114000.0
+            heightmap_filename: height-map-C1
+            heightmap_transform:
+                scale_x: 1.0
+                scale_y: 1.0
+                shift_x: 0
+                shift_y: 0
+            minimap_filename: Mutaha_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -46984.375
+                y: -105397.1875
+            01-BP_CaptureZoneCluster:
+            -   display_name: Road Block
+                sdk_name: NorthMarket
+                x: -15021.951171875
+                y: -36723.64453125
+            -   display_name: Zatar Compound
+                sdk_name: ZatarCompound
+                x: -30213.82421875
+                y: -22430.6796875
+            02N-BP_CaptureZoneCluster:
+            -   display_name: HVT Compound
+                sdk_name: HVTCompound
+                x: 32793.5546875
+                y: -16804.84375
+            -   display_name: Hydro Station
+                sdk_name: HydroStation
+                x: 32690.5546875
+                y: -47858.84375
+            02W-BP_CaptureZoneCluster:
+            -   display_name: Baraka Road Blockade
+                sdk_name: BarakaRoadBlockade
+                x: -26204.490234375
+                y: 4532.6015625
+            -   display_name: Baraka Suburbs
+                sdk_name: BarakaSuburbs
+                x: -8547.736328125
+                y: 9939.84375
+            -   display_name: Crash Site
+                sdk_name: CrashSite
+                x: -28418.22265625
+                y: 25018.27734375
+            03C-BP_CaptureZoneCluster:
+            -   display_name: Ammo Warehouse
+                sdk_name: AmmoWarehouse
+                x: 41230.859375
+                y: 14600.83203125
+            -   display_name: Intersection Checkpoint
+                sdk_name: IntersectionCheckpoint
+                x: 33263.96875
+                y: 23000.6015625
+            -   display_name: Police Station
+                sdk_name: PoliceStation
+                x: 26498.912109375
+                y: 34648.1953125
+            03N-BP_CaptureZoneCluster:
+            -   display_name: Communication Outpost
+                sdk_name: CommunicationOutpost
+                x: 91591.2734375
+                y: -30634.7890625
+            -   display_name: Shamal Compound
+                sdk_name: ShamalCompound
+                x: 71765.9140625
+                y: -50333.8046875
+            03S-BP_CaptureZoneCluster:
+            -   display_name: Drying House
+                sdk_name: DryingHouse
+                x: 18435.912109375
+                y: 55792.1953125
+            -   display_name: Four Points
+                sdk_name: FourPoints
+                x: -19132.0859375
+                y: 56460.1953125
+            -   display_name: Overgrown Village
+                sdk_name: OvergrownVillage
+                x: -5760.0859375
+                y: 66028.1953125
+            04E-BP_CaptureZoneCluster:
+            -   display_name: Chop Shop
+                sdk_name: ChopShop
+                x: 103211.015625
+                y: 47976.90625
+            -   display_name: East Mosque
+                sdk_name: EastMosque
+                x: 79491.96875
+                y: 7849.4921875
+            -   display_name: School
+                sdk_name: School
+                x: 80535.4609375
+                y: 39199.53515625
+            -   display_name: Sharq District
+                sdk_name: SharqDistrict
+                x: 125817.015625
+                y: 27298.90625
+            04S-BP_CaptureZoneCluster:
+            -   display_name: Highway Farm
+                sdk_name: HighwayFarm
+                x: 41271.96875
+                y: 64827.4921875
+            -   display_name: Highway South Bridges
+                sdk_name: HighwaySouthBridges
+                x: 45611.96875
+                y: 80257.4921875
+            -   display_name: Orchard
+                sdk_name: Orchard
+                x: 68533.96875
+                y: 71897.4921875
+            -   display_name: Village
+                sdk_name: SouthVillage
+                x: 45187.96875
+                y: 104510.5
+            05-BP_CaptureZoneCluster:
+            -   display_name: South Farm
+                sdk_name: SouthFarm
+                x: 94631.53125
+                y: 94834.671875
+            -   display_name: Vineyard
+                sdk_name: Vineyard
+                x: 134172.65625
+                y: 72695.234375
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 156168.40625
+                y: 158452.296875
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01-BP_CaptureZoneCluster
+            -   a: 01-BP_CaptureZoneCluster
+                b: 02W-BP_CaptureZoneCluster
+            -   a: 02W-BP_CaptureZoneCluster
+                b: 03C-BP_CaptureZoneCluster
+            -   a: 03C-BP_CaptureZoneCluster
+                b: 04E-BP_CaptureZoneCluster
+            -   a: 04E-BP_CaptureZoneCluster
+                b: 05-BP_CaptureZoneCluster
+            -   a: 05-BP_CaptureZoneCluster
+                b: 100-Team2Main
+            -   a: 01-BP_CaptureZoneCluster
+                b: 02N-BP_CaptureZoneCluster
+            -   a: 02N-BP_CaptureZoneCluster
+                b: 03C-BP_CaptureZoneCluster
+            -   a: 02N-BP_CaptureZoneCluster
+                b: 03N-BP_CaptureZoneCluster
+            -   a: 03N-BP_CaptureZoneCluster
+                b: 04E-BP_CaptureZoneCluster
+            -   a: 04S-BP_CaptureZoneCluster
+                b: 05-BP_CaptureZoneCluster
+            -   a: 03S-BP_CaptureZoneCluster
+                b: 04S-BP_CaptureZoneCluster
+            -   a: 03C-BP_CaptureZoneCluster
+                b: 04S-BP_CaptureZoneCluster
+            -   a: 02W-BP_CaptureZoneCluster
+                b: 03S-BP_CaptureZoneCluster
         mains:
         - Team1Main
         - Team2Main
@@ -22486,8 +23508,8 @@ Tallil Outskirts:
                 y: -1809.0625
             -   display_name: Iraqi Hangars A
                 sdk_name: IraqiHangarsA
-                x: -71970.07421875
-                y: -30402.046875
+                x: -69342.07421875
+                y: -36507.046875
             -   display_name: Iraqi Hangars B
                 sdk_name: IraqiHangarsB
                 x: -56095.4453125
@@ -22518,7 +23540,7 @@ Tallil Outskirts:
             -   display_name: Batha
                 sdk_name: Batha
                 x: 10941.140625
-                y: -133341.25
+                y: -135089.25
             100-Team2Main:
             -   display_name: Team2 Main
                 sdk_name: Team2Main

@@ -5,8 +5,10 @@
         title="We've implemented a new not-yet-perfect prediction logic that
 should support all kinds of layers OWI might throw at us.
 Unfortunately, it's a bit too permissive on the new layers right now.
-You might, e.g., see a 15-point path on Gorodok RAAS v11 that most
-likely is not actually possible in-game.
+You might, e.g., see some very weird paths on Narva RAAS v4 that most
+likely are not actually possible in-game.
+
+However, all paths *are* possible in-game, should also be possible here.
 
 We're working on identifying the correct restrictions to accurately map
 the in-game experience.
@@ -16,7 +18,7 @@ completely broke down on the new layers.
 
 Old layers should not be affected and work just fine."
       >
-        Squad v2.16
+        Squad v3.0.1
         <span class="text-warning"> &#x26a0;</span></a
       >
     </div>
