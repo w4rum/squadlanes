@@ -424,7 +424,7 @@ function determineCPPossibilities() {
         possibleDepths.forEach((depth) => {
           // assume that paths with more than 8 flags (excluding the target main) are not possible
           // TODO: research this more
-          if (depth.path_length > 8) return;
+          if (depth.path_length > 9) return;
 
           const { color, priority } = getColorAndPriorityForLaneDepth(
             depth.path_length,
