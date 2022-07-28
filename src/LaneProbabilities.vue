@@ -2,24 +2,14 @@
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
       <a
-        title="We've implemented a new not-yet-perfect prediction logic that
-should support all kinds of layers OWI might throw at us.
-Unfortunately, it's a bit too permissive on the new layers right now.
-You might, e.g., see some very weird paths on Narva RAAS v4 that most
-likely are not actually possible in-game.
+        title="We think we've fixed our previous problems with the path logic.
 
-However, all paths *are* possible in-game, should also be possible here.
+The data here should now match the in-game experience.
 
-We're working on identifying the correct restrictions to accurately map
-the in-game experience.
-
-For now, though, we've released the new logic anyways because the old logic
-completely broke down on the new layers.
-
-Old layers should not be affected and work just fine."
+Please report any inconsistencies on our GitHub repository (link in the help section on the bottom-right)."
       >
-        Squad v3.0.1
-        <span class="text-warning"> &#x26a0;</span></a
+        Squad v3.1
+        <span class="text-warning"> &#9989;</span></a
       >
     </div>
     <div class="lane-percentages">

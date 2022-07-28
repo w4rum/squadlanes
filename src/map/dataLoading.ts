@@ -69,9 +69,8 @@ export function changeLayer(mapName: string, layerName: string) {
       const clusterA = clustersByName.get(link.a)!;
       const clusterB = clustersByName.get(link.b)!;
 
-      // add undirected edge
+      // add directed edge
       clusterA.addEdgeTo(clusterB, lane);
-      clusterB.addEdgeTo(clusterA, lane);
     });
   });
 

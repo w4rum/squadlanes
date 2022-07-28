@@ -6336,8 +6336,8 @@ Goose Bay:
             00-Team2Main:
             -   display_name: Team2 Main
                 sdk_name: Team2Main
-                x: 94637.46875
-                y: -110987.9375
+                x: 92477.46875
+                y: -109170.9375
             01-CaptureZoneCluster_0:
             -   display_name: Hilltop Redoubt
                 sdk_name: HilltopRedoubt

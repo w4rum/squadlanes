@@ -3,7 +3,7 @@
     <b-button v-b-modal.about-modal class="about-button">?</b-button>
     <b-modal id="about-modal" title="About" ok-only>
       <p>
-        <i> Squad Lanes v2.3.4 (for Squad v3.0.1) </i>
+        <i> Squad Lanes v2.4.0 (for Squad v3.1) </i>
       </p>
       <p>
         <a
@@ -22,20 +22,8 @@
           target="_blank"
           rel="noopener noreferrer"
           >our repository on GitHub</a
-        >
-        and
-        <a
-          href="https://docs.google.com/spreadsheets/d/1dz4ryDm7vQnbm4dI19Qfuo9ISLt4UK6GyYXXwwolvRw/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          our spreadsheet</a
-        >
-        with all the RAAS data that we collected manually (note that we no
-        longer use this sheet as a data source and have moved to fully automatic
-        data mining scripts). If you want to build something on top of what
-        we've done here, you can always find the latest RAAS data that we use on
-        this website
+        >. If you want to build something on top of what we've done here, you
+        can always find the latest RAAS data that we use on this website
         <a
           href="https://raw.githubusercontent.com/w4rum/squadlanes/master/src/assets/raas-data.yaml"
           target="_blank"
@@ -53,8 +41,8 @@
       </p>
       <ul>
         <li>
-          Tim | w4rum: Data mining scripts to automatically extract information
-          about capture points, lanes, and map images, map UI
+          Tim | w4rum: Data mining scripts to automatically extract map data
+          (capture points, lanes, map images, ...), path logic, map UI
         </li>
         <li>
           grey275: Overall UI (Huge rework of the 2.0 UI, Vue.js framework,

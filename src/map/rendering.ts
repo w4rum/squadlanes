@@ -377,7 +377,7 @@ function determineCPPossibilities() {
    * We can't make any simplifying assumptions here like
    * "always go towards enemy main" because paths *can* go backwards as long
    * as the enemy main remains reachable without passing the same cluster twice.
-   * Essentially, we have to treat the map as a generic undirected graph.
+   * Essentially, we have to treat the map as a generic directed graph.
    * The most interesting example of this is Yeho RAAS v12 (Squad v2.16).
    *
    * Note:
@@ -422,10 +422,6 @@ function determineCPPossibilities() {
 
       possibleDepthsMap.forEach((possibleDepths, cluster) => {
         possibleDepths.forEach((depth) => {
-          // assume that paths with more than 8 flags (excluding the target main) are not possible
-          // TODO: research this more
-          if (depth.path_length > 9) return;
-
           const { color, priority } = getColorAndPriorityForLaneDepth(
             depth.path_length,
             depth.depth,
@@ -504,6 +500,7 @@ function onClick(cm: CircleMarker, cp: CapturePoint) {
   // if a main base was clicked, switch main base and reset
   if (mapData.mains.has(cp)) {
     mapData.ownMain = cp;
+    mapData.refreshGraphDirection();
     mapData.resetConfirmationLine();
     mapData.refreshLaneLengthsAndClusterDistances();
     mapData.refreshLaneProbabilities();
