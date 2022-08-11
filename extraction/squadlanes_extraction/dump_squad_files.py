@@ -1,24 +1,22 @@
 import asyncio
 import os
+import shlex
 import subprocess
 import sys
 from glob import glob
 from pprint import pprint
-import shlex
+
+from pwn import log, logging
+from pwnlib.context import context
 
 from squadlanes_extraction import config
-from pwn import log, logging
-from pwnlib.log import Logger
-from pwnlib.context import context
 
 VANILLA_SUBDIR = "/SquadGame/Content/Paks"
 
 parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_UNPACKS)
 
 
-async def _unpack_pak_with_filter(
-    pak_path: str, filters: list[str], name: str, log: Logger
-) -> None:
+async def _unpack_pak_with_filter(pak_path: str, filters: list[str], name: str) -> None:
     async with parallel_limit:
         with log.progress(f"Unpacking: {name}"):
             for flt in filters:
@@ -47,7 +45,7 @@ async def _unpack_pak_with_filter(
                 await process.wait()
 
 
-async def _unpack_relevant_files_in_dir(paks_dir_path: str, log: Logger) -> None:
+async def _unpack_relevant_files_in_dir(paks_dir_path: str) -> None:
     unpack_runs = []
 
     for name in os.listdir(paks_dir_path):
@@ -65,7 +63,7 @@ async def _unpack_relevant_files_in_dir(paks_dir_path: str, log: Logger) -> None
 
         unpack_runs.append(
             _unpack_pak_with_filter(
-                path, ["*.umap", "*.uexp", "*.ubulk", "*.uasset"], name, log
+                path, ["*.umap", "*.uexp", "*.ubulk", "*.uasset"], name
             )
         )
 
@@ -75,25 +73,27 @@ async def _unpack_relevant_files_in_dir(paks_dir_path: str, log: Logger) -> None
 def unpack():
     os.makedirs(config.UNPACKED_ASSETS_DIR, exist_ok=True)
 
-    asyncio.run(
-        _unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + VANILLA_SUBDIR, log)
-    )
+    asyncio.run(_unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + VANILLA_SUBDIR))
 
     # some assets are extracted into a different directories
     # e.g., "./Content/" vs. "./SquadGame/Content/"
     # (not sure why this is inconsistent)
+    # BlackCoast is also an "expansion" and thus in a different directory
     with log.progress("Merging directories"):
         merge_paths = [
             ("SquadGame", "."),
             ("Content", "."),
+            ("Plugins/Expansions/BlackCoast/Content/Maps", "Maps/BlackCoast"),
         ]
         for src, dst in merge_paths:
+            out_dir = f"{config.UNPACKED_ASSETS_DIR}/{dst}"
+            os.makedirs(out_dir, exist_ok=True)
             subprocess.call(
                 [
                     "cp",
                     "--recursive",
                     "--link",  # don't copy, hard-link instead
                     *glob(f"{config.UNPACKED_ASSETS_DIR}/{src}/*"),
-                    f"{config.UNPACKED_ASSETS_DIR}/{dst}",
+                    out_dir,
                 ],
             )

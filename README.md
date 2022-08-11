@@ -134,9 +134,9 @@ Just be warned, it's probably a lot of work to get into it.
   [MIT](https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/gh-pages/LICENSE)
   license.
 - This project relies on Konstantin Nosov's
-  [UEViewer](https://github.com/gildor2/UEViewer) which is currently not covered by a
-  license.
+  [UEViewer](https://github.com/gildor2/UEViewer).
   We use [our own fork](https://github.com/w4rum/UEViewer) that we have modified
-  slightly to better fit our use case.
+  slightly to better fit our use case. 
+  Code released under the [MIT](https://github.com/gildor2/UEViewer/blob/master/LICENSE.txt) license.
 - The original contributions found in this repository are released under AGPLv3
   (see LICENSE).
