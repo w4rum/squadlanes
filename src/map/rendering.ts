@@ -271,7 +271,8 @@ export function redraw() {
     }
 
     // delete old tooltip
-    cm.closeTooltip().unbindTooltip();
+    cm.closeTooltip();
+    cm.unbindTooltip();
 
     // concat lane labels
     let laneTooltip = Array.from(rI.laneLabels)
