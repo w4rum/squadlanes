@@ -42,3 +42,6 @@ TILE_MAP_DIR = "../dist/map-tiles"
 #  Recommended values: info, debug
 LOG_LEVEL = "info"
 # LOG_LEVEL = "debug"
+
+# set to False to extract in series (slower but makes debugging easier)
+EXTRACT_PARALLEL = True

@@ -1,16 +1,16 @@
 <template lang="html">
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
-      <a
-        title="We think we've fixed our previous problems with the path logic.
+<!--      <a-->
+<!--        title="We think we've fixed our previous problems with the path logic.-->
 
-The data here should now match the in-game experience.
+<!--The data here should now match the in-game experience.-->
 
-Please report any inconsistencies on our GitHub repository (link in the help section on the bottom-right)."
-      >
-        Squad v3.1
-        <span class="text-warning"> &#9989;</span></a
-      >
+<!--Please report any inconsistencies on our GitHub repository (link in the help section on the bottom-right)."-->
+<!--      >-->
+        Squad v3.3
+<!--        <span class="text-warning"> &#9989;</span>-->
+<!--      </a>-->
     </div>
     <div class="lane-percentages">
       <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">

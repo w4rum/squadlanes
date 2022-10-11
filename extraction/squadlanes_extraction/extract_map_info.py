@@ -368,7 +368,7 @@ async def extract_layer(
         minimap_path_in_package, minimap_name = match.group(1, 3)
 
         # BlackCoast has slightly different directory structure
-        if "Black_Coast" in layer:
+        if "BlackCoast" in layer:
             minimap_path_in_package = "BlackCoast/" + minimap_path_in_package
 
         # skip if minimap already exists
@@ -385,10 +385,17 @@ async def extract_layer(
             ]
         )
 
+        if context.log_level <= logging.DEBUG:
+            stderr = sys.stderr
+            stdout = sys.stdout
+        else:
+            stderr = asyncio.subprocess.DEVNULL
+            stdout = asyncio.subprocess.DEVNULL
+
         map_extract_process = await asyncio.subprocess.create_subprocess_shell(
             umodel_cmd,
-            stdout=asyncio.subprocess.DEVNULL,
-            stderr=asyncio.subprocess.DEVNULL,
+            stdout=stdout,
+            stderr=stderr,
         )
         assert await map_extract_process.wait() == 0, "map extract failed"
 
@@ -514,10 +521,15 @@ async def extract_map_dir(map_dir: str):
         extraction_runs.append(extract_map(map_dir, map_name))
 
     # TODO: this doesn't increase performance at the moment because we're CPU-bound
-    #       need to find and optimize the bottleneck
-    #       also need to limit the amount of worker probably
-    for pretty_map_name, map_data in await asyncio.gather(*extraction_runs):
-        maps[pretty_map_name] = map_data
+    #       need to find and optimize the bottleneck (or run multiple processes)
+    #       also need to limit the amount of workers probably
+    if config.EXTRACT_PARALLEL:
+        for pretty_map_name, map_data in await asyncio.gather(*extraction_runs):
+            maps[pretty_map_name] = map_data
+    else:
+        for coro in extraction_runs:
+            pretty_map_name, map_data = await coro
+            maps[pretty_map_name] = map_data
 
     return maps
 
