@@ -140,3 +140,4 @@ Just be warned, it's probably a lot of work to get into it.
   Code released under the [MIT](https://github.com/gildor2/UEViewer/blob/master/LICENSE.txt) license.
 - The original contributions found in this repository are released under AGPLv3
   (see LICENSE).
+- The favicons in `src/assets/favicons` are based on the [Geo alt](https://icons.getbootstrap.com/icons/geo-alt/) icon from [Bootstrap Icons](https://icons.getbootstrap.com/) v1.9.1 licensed under the [MIT License](https://github.com/twbs/icons/blob/main/LICENSE.md).
