@@ -11285,6 +11285,1395 @@ Gorodok:
         mains:
         - Team1Main_0
         - Team2Main_1
+Harju:
+    Invasion v1:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -32822.2890625
+                y: 111334.375
+            01a-CaptureZoneCluster:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse
+                x: -57392.92578125
+                y: 57130.94921875
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -93520.6328125
+                y: 48678.328125
+            01b-CaptureZoneCluster:
+            -   display_name: Distribution Center
+                sdk_name: DistributionCenter
+                x: 30106.390625
+                y: 48669.046875
+            -   display_name: Factory
+                sdk_name: Factory
+                x: 47347.390625
+                y: 41588.046875
+            -   display_name: Pier One
+                sdk_name: PierOne
+                x: 54737.1953125
+                y: 78401.515625
+            -   display_name: Pipe Control
+                sdk_name: PipeControl
+                x: 43561.390625
+                y: 63487.046875
+            02a-CaptureZoneCluster:
+            -   display_name: Fuel Storage
+                sdk_name: FuelStorage
+                x: -83303.8125
+                y: -27564.48828125
+            -   display_name: Kapy
+                sdk_name: Kapy
+                x: -19393.625
+                y: 24500.828125
+            -   display_name: Missle Silo
+                sdk_name: MissleSilo
+                x: -79372.9375
+                y: 19200.54296875
+            -   display_name: "M\xE4ntyharju"
+                sdk_name: "M\xE4ntyharju"
+                x: -40101.6640625
+                y: 19654.875
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35600.0625
+                y: -13757.10546875
+            02b-CaptureZoneCluster:
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86392.4296875
+                y: 21182.234375
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 114943.4296875
+                y: 5381.4765625
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21
+                x: 83428.90625
+                y: -4411.2421875
+            03a-CaptureZoneCluster:
+            -   display_name: Ammo Bunker
+                sdk_name: AmmoBunker
+                x: -93660.734375
+                y: -133998.140625
+            -   display_name: Checkpoint
+                sdk_name: Checkpoint
+                x: -49234.796875
+                y: -56363.34375
+            -   display_name: Hangars
+                sdk_name: Hangars
+                x: -46870.34375
+                y: -109850.40625
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 19001.921875
+                y: -53293.15625
+            -   display_name: Military Apartments
+                sdk_name: MilitaryApartments
+                x: -75974.015625
+                y: -83092.09375
+            -   display_name: Powerplant
+                sdk_name: Powerplant
+                x: 15530.4921875
+                y: -16164.390625
+            -   display_name: Waste Treatment
+                sdk_name: WasteTreatment
+                x: -144007.53125
+                y: -45739.59375
+            03b-CaptureZoneCluster:
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard
+                x: 123993.640625
+                y: -62464.296875
+            04-CaptureZoneCluster:
+            -   display_name: BioChem Lab
+                sdk_name: BioChemLab
+                x: 62387.87109375
+                y: -104627.3046875
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81572.4296875
+                y: -67057.671875
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 62899.671875
+                y: -62278.4375
+            -   display_name: Shopping District
+                sdk_name: ShoppingDistrict
+                x: 68478.3359375
+                y: -83708.3125
+            -   display_name: Town Hall
+                sdk_name: TownHall
+                x: 78218.078125
+                y: -90923.5390625
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 189085.875
+                y: -111321.3125
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01a-CaptureZoneCluster
+            -   a: 01a-CaptureZoneCluster
+                b: 02a-CaptureZoneCluster
+            -   a: 02a-CaptureZoneCluster
+                b: 03a-CaptureZoneCluster
+            -   a: 03a-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 100-Team2Main
+            -   a: 00-Team1Main
+                b: 01b-CaptureZoneCluster
+            -   a: 01b-CaptureZoneCluster
+                b: 02b-CaptureZoneCluster
+            -   a: 02b-CaptureZoneCluster
+                b: 03b-CaptureZoneCluster
+            -   a: 03b-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+        mains:
+        - Team1Main
+        - Team2Main
+    Invasion v2:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: 138780.546875
+                y: 117837.5859375
+            01-CaptureZoneCluster:
+            -   display_name: Beachhead
+                sdk_name: Beachhead
+                x: 126664.265625
+                y: 37854.03125
+            02-CaptureZoneCluster:
+            -   display_name: Factory
+                sdk_name: Factory
+                x: 47341.8125
+                y: 41592.171875
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86610.0546875
+                y: 20554.724609375
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 114982.65625
+                y: 5410.59375
+            03-CaptureZoneCluster:
+            -   display_name: Liminka
+                sdk_name: Liminka
+                x: 145566.171875
+                y: -32527.9296875
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21
+                x: 82823.0703125
+                y: -4134.69140625
+            04-CaptureZoneCluster:
+            -   display_name: Harju Outskirts
+                sdk_name: HarjuOutskirts
+                x: 86293.0546875
+                y: -49055.3046875
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard
+                x: 123828.1875
+                y: -60111.12109375
+            05-CaptureZoneCluster:
+            -   display_name: Shopping District
+                sdk_name: ShoppingDistrict
+                x: 68542.984375
+                y: -83869.90625
+            -   display_name: Town Hall
+                sdk_name: TownHall
+                x: 78130.546875
+                y: -91134.0
+            06-CaptureZoneCluster:
+            -   display_name: Construction Site
+                sdk_name: ConstructionSite
+                x: 31139.38671875
+                y: -91334.984375
+            -   display_name: Estate
+                sdk_name: Estate
+                x: 158506.78125
+                y: -145218.578125
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 60900.90625
+                y: -178624.15625
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: 02-CaptureZoneCluster
+            -   a: 02-CaptureZoneCluster
+                b: 03-CaptureZoneCluster
+            -   a: 03-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 06-CaptureZoneCluster
+            -   a: 06-CaptureZoneCluster
+                b: 100-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
+    Invasion v3:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main_1:
+            -   display_name: Team1 Main_1
+                sdk_name: Team1Main_1
+                x: 186983.8125
+                y: 83870.0
+            01-CaptureZoneCluster:
+            -   display_name: Swamp Homestead
+                sdk_name: SwampHomestead
+                x: 167527.9375
+                y: -8715.0859375
+            02-CaptureZoneCluster:
+            -   display_name: Liminka
+                sdk_name: Liminka
+                x: 145566.171875
+                y: -32527.9296875
+            03-CaptureZoneCluster:
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard
+                x: 125570.3046875
+                y: -60351.4296875
+            04-CaptureZoneCluster:
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81632.46875
+                y: -67015.546875
+            -   display_name: Harju Central
+                sdk_name: HarjuCentral
+                x: 88637.9453125
+                y: -82028.1171875
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 62835.53515625
+                y: -62286.46875
+            -   display_name: Shopping District
+                sdk_name: ShoppingDistrict
+                x: 68528.1953125
+                y: -83863.515625
+            05-CaptureZoneCluster:
+            -   display_name: BioChem Lab
+                sdk_name: BioChemLab
+                x: 62183.62109375
+                y: -104360.4453125
+            -   display_name: Construction Site
+                sdk_name: ConstructionSite_1
+                x: 31121.361328125
+                y: -90996.0234375
+            -   display_name: Estate
+                sdk_name: Estate
+                x: 158473.5
+                y: -145194.578125
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 19017.125
+                y: -53305.80859375
+            -   display_name: Northern Neighborhood
+                sdk_name: NorthernNeighborhood
+                x: 80463.0625
+                y: -119618.3125
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 60900.90625
+                y: -178624.15625
+        lanes:
+            Center:
+            -   a: 00-Team1Main_1
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: 02-CaptureZoneCluster
+            -   a: 02-CaptureZoneCluster
+                b: 03-CaptureZoneCluster
+            -   a: 03-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 100-Team2Main
+        mains:
+        - Team1Main_1
+        - Team2Main
+    Invasion v4:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -126927.671875
+                y: 93618.5078125
+            01-CaptureZoneCluster:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse
+                x: -56549.8984375
+                y: 57325.32421875
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -93028.359375
+                y: 47869.14453125
+            02-CaptureZoneCluster:
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground
+                x: -79671.34375
+                y: 18740.59375
+            -   display_name: "M\xE4ntyharju"
+                sdk_name: "M\xE4ntyharju"
+                x: -41155.86328125
+                y: 16920.1953125
+            03-CaptureZoneCluster:
+            -   display_name: Fuel Storage
+                sdk_name: FuelStorage
+                x: -83299.6015625
+                y: -27391.66796875
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35670.5
+                y: -13788.509765625
+            04-CaptureZoneCluster:
+            -   display_name: Paper Mill
+                sdk_name: PaperMill
+                x: -132797.140625
+                y: -30762.181640625
+            -   display_name: Waste Treatment
+                sdk_name: WasteTreatment
+                x: -147791.0
+                y: -45254.94921875
+            05-CaptureZoneCluster:
+            -   display_name: East Service Hangar
+                sdk_name: EastServiceHangar
+                x: -68287.3515625
+                y: -98286.0546875
+            -   display_name: Hangars
+                sdk_name: Hangars
+                x: -48910.78515625
+                y: -111257.328125
+            -   display_name: Military Apartments
+                sdk_name: MilitaryApartments
+                x: -75992.4921875
+                y: -83113.40625
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 60900.90625
+                y: -178624.15625
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: 02-CaptureZoneCluster
+            -   a: 02-CaptureZoneCluster
+                b: 03-CaptureZoneCluster
+            -   a: 03-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 100-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
+    RAAS v1:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -132965.09375
+                y: 98590.25
+            01-CaptureZoneCluster:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse
+                x: -57348.7890625
+                y: 57330.46484375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -93028.875
+                y: 47777.171875
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35635.7734375
+                y: -13833.06640625
+            02-CaptureZoneCluster_0:
+            -   display_name: Construction Site
+                sdk_name: ConstructionSite
+                x: 31166.970703125
+                y: -90969.5
+            -   display_name: Forest Industrial
+                sdk_name: ForestIndustrial
+                x: -7026.34375
+                y: -95115.40625
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 19105.5546875
+                y: -53953.2578125
+            -   display_name: "Mets\xE4kyl\xE4"
+                sdk_name: "Mets\xE4kyl\xE4"
+                x: -1084.47265625
+                y: -47268.83984375
+            03-CaptureZoneCluster:
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81925.09375
+                y: -66755.25
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 64224.640625
+                y: -64982.29296875
+            -   display_name: Northern Apartments
+                sdk_name: NorthernApartments
+                x: 86604.546875
+                y: -99757.0
+            -   display_name: Town Hall
+                sdk_name: TownHall
+                x: 78178.3046875
+                y: -91112.15625
+            -   display_name: Wundamart
+                sdk_name: Wundamart
+                x: 70653.375
+                y: -82744.0625
+            04-CaptureZoneCluster:
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86960.921875
+                y: 20273.53125
+            -   display_name: Railyard
+                sdk_name: Lumberyard_0
+                x: 125634.609375
+                y: -60356.75390625
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 114963.65625
+                y: 5389.59765625
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21
+                x: 83115.21875
+                y: -4352.67578125
+            05-CaptureZoneCluster:
+            -   display_name: Factory
+                sdk_name: Factory
+                x: 47325.24609375
+                y: 41607.25390625
+            -   display_name: Pier 1
+                sdk_name: Pier1
+                x: 54712.53515625
+                y: 78324.3828125
+            -   display_name: Pipe Control
+                sdk_name: PipeControl
+                x: 43336.4609375
+                y: 63585.37890625
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 132958.28125
+                y: 111438.375
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: 02-CaptureZoneCluster_0
+            -   a: 02-CaptureZoneCluster_0
+                b: 03-CaptureZoneCluster
+            -   a: 03-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 100-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
+    RAAS v2:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -180698.90625
+                y: 30405.21875
+            01-CaptureZoneCluster:
+            -   display_name: Paper Mill
+                sdk_name: PaperMill
+                x: -132859.921875
+                y: -30807.443359375
+            -   display_name: Waste Treatment
+                sdk_name: WasteTreatment
+                x: -144098.671875
+                y: -45502.9140625
+            02-CaptureZoneCluster_0:
+            -   display_name: Trucking Depot
+                sdk_name: TruckingDepot
+                x: -129720.71875
+                y: -60671.62890625
+            03-CaptureZoneCluster:
+            -   display_name: Checkpoint
+                sdk_name: Checkpoint
+                x: -49639.26171875
+                y: -57514.15234375
+            -   display_name: Military Apartments
+                sdk_name: MilitaryApartments
+                x: -75979.59375
+                y: -83116.171875
+            -   display_name: West Service Hangar
+                sdk_name: WestServiceHangar
+                x: -65614.265625
+                y: -96362.5546875
+            04-CaptureZoneCluster:
+            -   display_name: East Hangars
+                sdk_name: EastHangars
+                x: -47878.703125
+                y: -112277.453125
+            -   display_name: Forest Industrial
+                sdk_name: ForestIndustrial
+                x: -7480.7109375
+                y: -95049.609375
+            -   display_name: Gun Range
+                sdk_name: GunRange
+                x: -16338.24609375
+                y: -137338.90625
+            05-CaptureZoneCluster:
+            -   display_name: Scrapyard
+                sdk_name: Scrapyard
+                x: 23411.953125
+                y: -119533.015625
+            06-CaptureZoneCluster:
+            -   display_name: Biochem Lab
+                sdk_name: BioChemLab
+                x: 62175.9921875
+                y: -104302.0546875
+            100-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 143024.28125
+                y: -171573.875
+        lanes:
+            Center:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: 02-CaptureZoneCluster_0
+            -   a: 02-CaptureZoneCluster_0
+                b: 03-CaptureZoneCluster
+            -   a: 03-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 06-CaptureZoneCluster
+            -   a: 06-CaptureZoneCluster
+                b: 100-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
+    RAAS v3:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main_0:
+            -   display_name: Team1 Main_0
+                sdk_name: Team1Main_0
+                x: -127521.4375
+                y: 96632.21875
+            A1-CaptureZoneCluster_4:
+            -   display_name: Bog
+                sdk_name: Bog_3
+                x: -122001.3359375
+                y: 16305.5615234375
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground_4
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            A2-CaptureZoneCluster_0:
+            -   display_name: Factory
+                sdk_name: PaperMill
+                x: -134052.875
+                y: -30552.6015625
+            -   display_name: Trucking Depot
+                sdk_name: TruckingDepot
+                x: -129328.0625
+                y: -60827.61328125
+            -   display_name: Waste Treatment
+                sdk_name: WasteTreatment
+                x: -143994.8125
+                y: -45224.01953125
+            A3-CaptureZoneCluster_1:
+            -   display_name: Ammunition Bunker
+                sdk_name: AmmunitionBunker
+                x: -91282.9765625
+                y: -135308.203125
+            -   display_name: Hangers
+                sdk_name: Hangers_1
+                x: -46870.34375
+                y: -109850.40625
+            -   display_name: Military Apartments
+                sdk_name: MilitaryApartments_5
+                x: -73715.4140625
+                y: -83044.0390625
+            A4-CaptureZoneCluster_2:
+            -   display_name: Castle
+                sdk_name: Castle_7
+                x: -47367.171875
+                y: -158727.6875
+            -   display_name: Training Center
+                sdk_name: TrainingCenter_6
+                x: -17825.3515625
+                y: -136117.546875
+            A5-CaptureZoneCluster_3:
+            -   display_name: Airfield Power Plant
+                sdk_name: AirfieldPowerPlant_8
+                x: -7189.52734375
+                y: -95249.1875
+            -   display_name: Scrapyard
+                sdk_name: Scrapyard_9
+                x: 23164.25
+                y: -119848.6953125
+            A6-CaptureZoneCluster_5:
+            -   display_name: Estate
+                sdk_name: Estate_10
+                x: 157028.078125
+                y: -145002.53125
+            -   display_name: Northern Neighborhood
+                sdk_name: NorthernNeighborhood_2
+                x: 85009.546875
+                y: -120992.0
+            A7-CaptureZoneCluster_6:
+            -   display_name: Liminka
+                sdk_name: Liminka_11
+                x: 146216.046875
+                y: -30691.875
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard
+                x: 123229.6171875
+                y: -61397.91015625
+            A8-CaptureZoneCluster_7:
+            -   display_name: Swamp Homestead
+                sdk_name: SwampHomestead_12
+                x: 169319.390625
+                y: -6631.19140625
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 115329.640625
+                y: 6874.578125
+            B1-CaptureZoneCluster_15:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse_17
+                x: -57113.0859375
+                y: 56548.140625
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground_18
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            B2-CaptureZoneCluster_14:
+            -   display_name: Storage Site South
+                sdk_name: FuelStorage
+                x: -83313.96875
+                y: -26829.974609375
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35617.8515625
+                y: -13638.6796875
+            B3-CaptureZoneCluster_13:
+            -   display_name: Checkpoint
+                sdk_name: Checkpoint_16
+                x: -49645.7109375
+                y: -57015.23046875
+            -   display_name: "Mets\xE4kyl\xE4"
+                sdk_name: "Mets\xE4kyl\xE4"
+                x: -2753.638671875
+                y: -51166.25
+            B4-CaptureZoneCluster_12:
+            -   display_name: BioChem Lab
+                sdk_name: BioChemLab
+                x: 62920.31640625
+                y: -104465.1015625
+            -   display_name: Construction Site
+                sdk_name: ConstructionSite
+                x: 30726.744140625
+                y: -92303.5703125
+            B5-CaptureZoneCluster_11:
+            -   display_name: Northern Apartments
+                sdk_name: NorthernApartments_11
+                x: 85003.4453125
+                y: -98552.953125
+            -   display_name: Town Hall
+                sdk_name: ShoppingDistrict
+                x: 68696.9375
+                y: -83439.234375
+            -   display_name: Town Hall
+                sdk_name: TownHall
+                x: 78932.8515625
+                y: -90640.625
+            B6-CaptureZoneCluster_10:
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81774.0234375
+                y: -67217.71875
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 62071.49609375
+                y: -66383.3046875
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard_0
+                x: 123229.6171875
+                y: -61397.91015625
+            B7-CaptureZoneCluster_9:
+            -   display_name: Liminka
+                sdk_name: Liminka_14
+                x: 146216.046875
+                y: -30691.875
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21_15
+                x: 82557.875
+                y: -3893.53515625
+            B8-CaptureZoneCluster_8:
+            -   display_name: Beachhead
+                sdk_name: Beachhead_13
+                x: 127992.8828125
+                y: 37722.3515625
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86537.484375
+                y: 20991.5390625
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 18901.15625
+                y: -53259.203125
+            C1-CaptureZoneCluster_16:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse_19
+                x: -57113.0859375
+                y: 56548.140625
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground_20
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            C2-CaptureZoneCluster_17:
+            -   display_name: "K\xE4py"
+                sdk_name: "K\xE4py"
+                x: -19346.349609375
+                y: 24586.154296875
+            -   display_name: "M\xE4ntyharju"
+                sdk_name: "M\xE4ntyharju"
+                x: -40857.078125
+                y: 17172.578125
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35617.8515625
+                y: -13638.6796875
+            C3-CaptureZoneCluster_18:
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 18901.15625
+                y: -53259.203125
+            -   display_name: "Mets\xE4kyl\xE4"
+                sdk_name: "Mets\xE4kyl\xE4"
+                x: -2753.638671875
+                y: -51166.25
+            -   display_name: Power Plant
+                sdk_name: PowerPlant_0
+                x: 15782.9521484375
+                y: -16272.810546875
+            C4-CaptureZoneCluster_19:
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81774.0234375
+                y: -67217.71875
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 62071.49609375
+                y: -66383.3046875
+            -   display_name: Harju Outskirts
+                sdk_name: HarjuOutskirts
+                x: 86980.5
+                y: -50396.9453125
+            C5-CaptureZoneCluster_20:
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86537.484375
+                y: 20991.5390625
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 115329.640625
+                y: 6874.578125
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21_21
+                x: 82557.875
+                y: -3893.5361328125
+            C6-CaptureZoneCluster_21:
+            -   display_name: Distribution Center
+                sdk_name: DistributionCenter
+                x: 29871.7890625
+                y: 48819.25
+            -   display_name: Factory
+                sdk_name: Factory
+                x: 46559.65625
+                y: 41344.59375
+            -   display_name: Pier One
+                sdk_name: PierOne
+                x: 54529.44921875
+                y: 78552.4375
+            -   display_name: Pipe Control
+                sdk_name: PipeControl
+                x: 43189.96875
+                y: 65339.84375
+            Z-Team2Main_1:
+            -   display_name: Team2 Main_1
+                sdk_name: Team2Main_1
+                x: 132958.28125
+                y: 111438.375
+        lanes:
+            Alpha:
+            -   a: 00-Team1Main_0
+                b: A1-CaptureZoneCluster_4
+            -   a: A1-CaptureZoneCluster_4
+                b: A2-CaptureZoneCluster_0
+            -   a: A2-CaptureZoneCluster_0
+                b: A3-CaptureZoneCluster_1
+            -   a: A3-CaptureZoneCluster_1
+                b: A4-CaptureZoneCluster_2
+            -   a: A4-CaptureZoneCluster_2
+                b: A5-CaptureZoneCluster_3
+            -   a: A5-CaptureZoneCluster_3
+                b: A6-CaptureZoneCluster_5
+            -   a: A6-CaptureZoneCluster_5
+                b: A7-CaptureZoneCluster_6
+            -   a: A7-CaptureZoneCluster_6
+                b: A8-CaptureZoneCluster_7
+            -   a: A8-CaptureZoneCluster_7
+                b: Z-Team2Main_1
+            Bravo:
+            -   a: 00-Team1Main_0
+                b: B1-CaptureZoneCluster_15
+            -   a: B1-CaptureZoneCluster_15
+                b: B2-CaptureZoneCluster_14
+            -   a: B2-CaptureZoneCluster_14
+                b: B3-CaptureZoneCluster_13
+            -   a: B3-CaptureZoneCluster_13
+                b: B4-CaptureZoneCluster_12
+            -   a: B4-CaptureZoneCluster_12
+                b: B5-CaptureZoneCluster_11
+            -   a: B5-CaptureZoneCluster_11
+                b: B6-CaptureZoneCluster_10
+            -   a: B6-CaptureZoneCluster_10
+                b: B7-CaptureZoneCluster_9
+            -   a: B7-CaptureZoneCluster_9
+                b: B8-CaptureZoneCluster_8
+            -   a: B8-CaptureZoneCluster_8
+                b: Z-Team2Main_1
+            Charlie:
+            -   a: 00-Team1Main_0
+                b: C1-CaptureZoneCluster_16
+            -   a: C1-CaptureZoneCluster_16
+                b: C2-CaptureZoneCluster_17
+            -   a: C2-CaptureZoneCluster_17
+                b: C3-CaptureZoneCluster_18
+            -   a: C3-CaptureZoneCluster_18
+                b: C4-CaptureZoneCluster_19
+            -   a: C4-CaptureZoneCluster_19
+                b: C5-CaptureZoneCluster_20
+            -   a: C5-CaptureZoneCluster_20
+                b: C6-CaptureZoneCluster_21
+            -   a: C6-CaptureZoneCluster_21
+                b: Z-Team2Main_1
+        mains:
+        - Team1Main_0
+        - Team2Main_1
+    RAAS v4:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main_0:
+            -   display_name: Team1 Main_0
+                sdk_name: Team1Main_0
+                x: -127521.4375
+                y: 96632.21875
+            A1-CaptureZoneCluster_4:
+            -   display_name: Bog
+                sdk_name: Bog_3
+                x: -122001.3359375
+                y: 16305.5615234375
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground_4
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            A2-CaptureZoneCluster_0:
+            -   display_name: Factory
+                sdk_name: PaperMill
+                x: -134052.875
+                y: -30552.6015625
+            -   display_name: Trucking Depot
+                sdk_name: TruckingDepot
+                x: -129328.0625
+                y: -60827.61328125
+            -   display_name: Waste Treatment
+                sdk_name: WasteTreatment
+                x: -143994.8125
+                y: -45224.01953125
+            A3-CaptureZoneCluster_1:
+            -   display_name: Ammunition Bunker
+                sdk_name: AmmunitionBunker
+                x: -91282.9765625
+                y: -135308.203125
+            -   display_name: Hangers
+                sdk_name: Hangers_1
+                x: -46870.34375
+                y: -109850.40625
+            -   display_name: Military Apartments
+                sdk_name: MilitaryApartments_5
+                x: -73715.4140625
+                y: -83044.0390625
+            A4-CaptureZoneCluster_2:
+            -   display_name: Castle
+                sdk_name: Castle_7
+                x: -47367.171875
+                y: -158727.6875
+            -   display_name: Training Center
+                sdk_name: TrainingCenter_6
+                x: -17825.3515625
+                y: -136117.546875
+            A5-CaptureZoneCluster_3:
+            -   display_name: Airfield Power Plant
+                sdk_name: AirfieldPowerPlant_8
+                x: -7189.52734375
+                y: -95249.1875
+            -   display_name: Scrapyard
+                sdk_name: Scrapyard_9
+                x: 23164.25
+                y: -119848.6953125
+            A6-CaptureZoneCluster_5:
+            -   display_name: Estate
+                sdk_name: Estate_10
+                x: 157028.078125
+                y: -145002.53125
+            -   display_name: Northern Neighborhood
+                sdk_name: NorthernNeighborhood_2
+                x: 85009.546875
+                y: -120992.0
+            A7-CaptureZoneCluster_6:
+            -   display_name: Liminka
+                sdk_name: Liminka_11
+                x: 146216.046875
+                y: -30691.875
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard
+                x: 123229.6171875
+                y: -61397.91015625
+            A8-CaptureZoneCluster_7:
+            -   display_name: Swamp Homestead
+                sdk_name: SwampHomestead_12
+                x: 169319.390625
+                y: -6631.19140625
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 115329.640625
+                y: 6874.578125
+            B1-CaptureZoneCluster_15:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse_17
+                x: -57113.0859375
+                y: 56548.140625
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground_18
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            B2-CaptureZoneCluster_14:
+            -   display_name: Storage Site South
+                sdk_name: FuelStorage
+                x: -83313.96875
+                y: -26829.974609375
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35617.8515625
+                y: -13638.6796875
+            B3-CaptureZoneCluster_13:
+            -   display_name: Checkpoint
+                sdk_name: Checkpoint_16
+                x: -49645.7109375
+                y: -57015.23046875
+            -   display_name: "Mets\xE4kyl\xE4"
+                sdk_name: "Mets\xE4kyl\xE4"
+                x: -2753.638671875
+                y: -51166.25
+            B4-CaptureZoneCluster_12:
+            -   display_name: BioChem Lab
+                sdk_name: BioChemLab
+                x: 62920.31640625
+                y: -104465.1015625
+            -   display_name: Construction Site
+                sdk_name: ConstructionSite
+                x: 30726.744140625
+                y: -92303.5703125
+            B5-CaptureZoneCluster_11:
+            -   display_name: Northern Apartments
+                sdk_name: NorthernApartments_11
+                x: 85003.4453125
+                y: -98552.953125
+            -   display_name: Town Hall
+                sdk_name: ShoppingDistrict
+                x: 68696.9375
+                y: -83439.234375
+            -   display_name: Town Hall
+                sdk_name: TownHall
+                x: 78932.8515625
+                y: -90640.625
+            B6-CaptureZoneCluster_10:
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81774.0234375
+                y: -67217.71875
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 62071.49609375
+                y: -66383.3046875
+            -   display_name: Lumber Yard
+                sdk_name: LumberYard_0
+                x: 123229.6171875
+                y: -61397.91015625
+            B7-CaptureZoneCluster_9:
+            -   display_name: Liminka
+                sdk_name: Liminka_14
+                x: 146216.046875
+                y: -30691.875
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21_15
+                x: 82557.875
+                y: -3893.53515625
+            B8-CaptureZoneCluster_8:
+            -   display_name: Beachhead
+                sdk_name: Beachhead_13
+                x: 127992.8828125
+                y: 37722.3515625
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86537.484375
+                y: 20991.5390625
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 18901.15625
+                y: -53259.203125
+            C1-CaptureZoneCluster_16:
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse_19
+                x: -57113.0859375
+                y: 56548.140625
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground_20
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            C2-CaptureZoneCluster_17:
+            -   display_name: "K\xE4py"
+                sdk_name: "K\xE4py"
+                x: -19346.349609375
+                y: 24586.154296875
+            -   display_name: "M\xE4ntyharju"
+                sdk_name: "M\xE4ntyharju"
+                x: -40857.078125
+                y: 17172.578125
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35617.8515625
+                y: -13638.6796875
+            C3-CaptureZoneCluster_18:
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 18901.15625
+                y: -53259.203125
+            -   display_name: "Mets\xE4kyl\xE4"
+                sdk_name: "Mets\xE4kyl\xE4"
+                x: -2753.638671875
+                y: -51166.25
+            -   display_name: Power Plant
+                sdk_name: PowerPlant_0
+                x: 15782.9521484375
+                y: -16272.810546875
+            C4-CaptureZoneCluster_19:
+            -   display_name: Bombed Apartments
+                sdk_name: BombedApartments
+                x: 81774.0234375
+                y: -67217.71875
+            -   display_name: Harju Industrial
+                sdk_name: HarjuIndustrial
+                x: 62071.49609375
+                y: -66383.3046875
+            -   display_name: Harju Outskirts
+                sdk_name: HarjuOutskirts
+                x: 86980.5
+                y: -50396.9453125
+            C5-CaptureZoneCluster_20:
+            -   display_name: "J\xE4rvikyl\xE4"
+                sdk_name: "J\xE4rvikyl\xE4"
+                x: 86537.484375
+                y: 20991.5390625
+            -   display_name: Truck Stop
+                sdk_name: TruckStop
+                x: 115329.640625
+                y: 6874.578125
+            -   display_name: Warehouse 21
+                sdk_name: Warehouse21_21
+                x: 82557.875
+                y: -3893.5361328125
+            C6-CaptureZoneCluster_21:
+            -   display_name: Distribution Center
+                sdk_name: DistributionCenter
+                x: 29871.7890625
+                y: 48819.25
+            -   display_name: Factory
+                sdk_name: Factory
+                x: 46559.65625
+                y: 41344.59375
+            -   display_name: Pier One
+                sdk_name: PierOne
+                x: 54529.44921875
+                y: 78552.4375
+            -   display_name: Pipe Control
+                sdk_name: PipeControl
+                x: 43189.96875
+                y: 65339.84375
+            Z-Team2Main_1:
+            -   display_name: Team2 Main_1
+                sdk_name: Team2Main_1
+                x: 132958.28125
+                y: 111438.375
+        lanes:
+            Alpha:
+            -   a: 00-Team1Main_0
+                b: A1-CaptureZoneCluster_4
+            -   a: A1-CaptureZoneCluster_4
+                b: A2-CaptureZoneCluster_0
+            -   a: A2-CaptureZoneCluster_0
+                b: A3-CaptureZoneCluster_1
+            -   a: A3-CaptureZoneCluster_1
+                b: A4-CaptureZoneCluster_2
+            -   a: A4-CaptureZoneCluster_2
+                b: A5-CaptureZoneCluster_3
+            -   a: A5-CaptureZoneCluster_3
+                b: A6-CaptureZoneCluster_5
+            -   a: A6-CaptureZoneCluster_5
+                b: A7-CaptureZoneCluster_6
+            -   a: A7-CaptureZoneCluster_6
+                b: A8-CaptureZoneCluster_7
+            -   a: A8-CaptureZoneCluster_7
+                b: Z-Team2Main_1
+            Bravo:
+            -   a: 00-Team1Main_0
+                b: B1-CaptureZoneCluster_15
+            -   a: B1-CaptureZoneCluster_15
+                b: B2-CaptureZoneCluster_14
+            -   a: B2-CaptureZoneCluster_14
+                b: B3-CaptureZoneCluster_13
+            -   a: B3-CaptureZoneCluster_13
+                b: B4-CaptureZoneCluster_12
+            -   a: B4-CaptureZoneCluster_12
+                b: B5-CaptureZoneCluster_11
+            -   a: B5-CaptureZoneCluster_11
+                b: B6-CaptureZoneCluster_10
+            -   a: B6-CaptureZoneCluster_10
+                b: B7-CaptureZoneCluster_9
+            -   a: B7-CaptureZoneCluster_9
+                b: B8-CaptureZoneCluster_8
+            -   a: B8-CaptureZoneCluster_8
+                b: Z-Team2Main_1
+            Charlie:
+            -   a: 00-Team1Main_0
+                b: C1-CaptureZoneCluster_16
+            -   a: C1-CaptureZoneCluster_16
+                b: C2-CaptureZoneCluster_17
+            -   a: C2-CaptureZoneCluster_17
+                b: C3-CaptureZoneCluster_18
+            -   a: C3-CaptureZoneCluster_18
+                b: C4-CaptureZoneCluster_19
+            -   a: C4-CaptureZoneCluster_19
+                b: C5-CaptureZoneCluster_20
+            -   a: C5-CaptureZoneCluster_20
+                b: C6-CaptureZoneCluster_21
+            -   a: C6-CaptureZoneCluster_21
+                b: Z-Team2Main_1
+        mains:
+        - Team1Main_0
+        - Team2Main_1
+    RAAS v5:
+        background:
+            corners:
+            -   x: -201600.0
+                y: -201600.0
+            -   x: 201600.0
+                y: 201600.0
+            minimap_filename: Harju_Minimap
+        clusters:
+            00-Team1Main:
+            -   display_name: Team1 Main
+                sdk_name: Team1Main
+                x: -119441.3515625
+                y: 95044.3671875
+            01-CaptureZoneCluster:
+            -   display_name: Bog
+                sdk_name: Bog
+                x: -122001.3359375
+                y: 16305.5625
+            -   display_name: Lighthouse
+                sdk_name: Lighthouse
+                x: -57158.921875
+                y: 56622.34765625
+            -   display_name: Missile Silos Underground
+                sdk_name: MissileSilosUnderground
+                x: -78099.34375
+                y: 19153.59375
+            -   display_name: "N\xE4kym\xE4"
+                sdk_name: "N\xE4kym\xE4"
+                x: -92604.953125
+                y: 45634.0625
+            02-CaptureZoneCluster:
+            -   display_name: Fuel Storage
+                sdk_name: FuelStorage
+                x: -82931.40625
+                y: -27418.296875
+            -   display_name: Wheat Farm
+                sdk_name: WheatFarm
+                x: -35600.9921875
+                y: -13408.265625
+            03-CaptureZoneCluster:
+            -   display_name: Paper Mill
+                sdk_name: PaperMill
+                x: -132745.984375
+                y: -30881.359375
+            -   display_name: Trucking Depot
+                sdk_name: TruckingDepot
+                x: -129668.3125
+                y: -61200.79296875
+            -   display_name: Waste Treatment
+                sdk_name: WasteTreatment
+                x: -143994.8125
+                y: -45224.01953125
+            04-CaptureZoneCluster:
+            -   display_name: Military Apartments
+                sdk_name: MilitaryApartments
+                x: -153449.1953125
+                y: -170869.1015625
+            05-CaptureZoneCluster:
+            -   display_name: Hangars
+                sdk_name: Hangars
+                x: -100844.84375
+                y: -227338.1875
+            06-CaptureZoneCluster:
+            -   display_name: Castle
+                sdk_name: Castle
+                x: -47367.171875
+                y: -158727.6875
+            -   display_name: Scrapyard
+                sdk_name: Scrapyard
+                x: 23164.25
+                y: -119848.6953125
+            -   display_name: Training Center
+                sdk_name: TrainingCenter
+                x: -17825.3515625
+                y: -136117.546875
+            Z-Team2Main:
+            -   display_name: Team2 Main
+                sdk_name: Team2Main
+                x: 56959.31640625
+                y: -179413.859375
+        lanes:
+            Alpha:
+            -   a: 00-Team1Main
+                b: 01-CaptureZoneCluster
+            -   a: 01-CaptureZoneCluster
+                b: 02-CaptureZoneCluster
+            -   a: 02-CaptureZoneCluster
+                b: 03-CaptureZoneCluster
+            -   a: 03-CaptureZoneCluster
+                b: 04-CaptureZoneCluster
+            -   a: 04-CaptureZoneCluster
+                b: 05-CaptureZoneCluster
+            -   a: 05-CaptureZoneCluster
+                b: 06-CaptureZoneCluster
+            -   a: 06-CaptureZoneCluster
+                b: Z-Team2Main
+        mains:
+        - Team1Main
+        - Team2Main
 Kamdesh Highlands:
     Invasion v1:
         background:

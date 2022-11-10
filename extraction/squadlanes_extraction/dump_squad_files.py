@@ -78,12 +78,13 @@ def unpack():
     # some assets are extracted into a different directories
     # e.g., "./Content/" vs. "./SquadGame/Content/"
     # (not sure why this is inconsistent)
-    # BlackCoast is also an "expansion" and thus in a different directory
+    # BlackCoast and Harju are also "expansions" and are thus in a different directory
     with log.progress("Merging directories"):
         merge_paths = [
             ("SquadGame", "."),
             ("Content", "."),
             ("Plugins/Expansions/BlackCoast/Content/Maps", "Maps/BlackCoast"),
+            ("Plugins/Expansions/Harju/Content/Maps", "Maps/Harju"),
         ]
         for src, dst in merge_paths:
             out_dir = f"{config.UNPACKED_ASSETS_DIR}/{dst}"

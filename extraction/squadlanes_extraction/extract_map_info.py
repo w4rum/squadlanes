@@ -140,16 +140,19 @@ def absolute_location(
     if scene_root == "None":
         return offset
 
-    # 1. rotate the current offset by this object's rotation
-    rel_rot = access_one(scene_root)["RelativeRotation"]
+    # 1. rotate the current offset by this object's rotation, if it has a rotation
+    if "RelativeRotation" in access_one(scene_root):
+        rel_rot = access_one(scene_root)["RelativeRotation"]
 
-    # note: z axis, roll, and pitch should be zero for clusters etc. and are ignored
+        # note: z axis, roll, and pitch should be zero for clusters etc. and are ignored
 
-    # for some reason, UEViewer treats the rotation as ints, when they're actually floats
-    # see https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FRotator/
-    yaw_degrees: float = struct.unpack("<f", struct.pack("<i", rel_rot["Yaw"]))[0]
+        # for some reason, UEViewer treats the rotation as ints, when they're actually floats
+        # see https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FRotator/
+        yaw_degrees: float = struct.unpack("<f", struct.pack("<i", rel_rot["Yaw"]))[0]
 
-    rotated_offset = rotate(offset, yaw_degrees)
+        rotated_offset = rotate(offset, yaw_degrees)
+    else:
+        rotated_offset = offset
 
     # 2. translate the current offset by this object's translation
     rel_loc = access_one(scene_root)["RelativeLocation"]
@@ -306,6 +309,10 @@ async def extract_layer(
             stderr=stderr,
         )
         yaml_content, _ = await layer_extract_process.communicate()
+
+        # fix encoding fuckups caused by umlauts (fuck you harju)
+        yaml_content = yaml_content.decode("ISO-8859-1").encode("UTF-8")
+
         log.debug(yaml_content.decode("UTF-8"))
         _, _, yaml_content = yaml_content.partition(b"---")
         with open(yaml_filename, "wb") as f:
@@ -356,8 +363,8 @@ async def extract_layer(
         with open(table_dump_filename, "wb") as f:
             f.write(table_dump)
 
-    with open(table_dump_filename, "r") as f:
-        table_dump = f.read()
+    with open(table_dump_filename, "rb") as f:
+        table_dump = f.read().decode("ISO-8859-1")  # again, fucky umlaut encoding
 
     # extract minimap image (.tga) with umodel
     for name in table_dump.splitlines():
@@ -367,9 +374,12 @@ async def extract_layer(
 
         minimap_path_in_package, minimap_name = match.group(1, 3)
 
-        # BlackCoast has slightly different directory structure
-        if "BlackCoast" in layer:
-            minimap_path_in_package = "BlackCoast/" + minimap_path_in_package
+        # expansions have a slightly different directory structure
+        expansion_dirs = ["BlackCoast", "Harju"]
+        for ed in expansion_dirs:
+            if ed in layer:
+                minimap_path_in_package = f"{ed}/{minimap_path_in_package}"
+                break
 
         # skip if minimap already exists
         os.makedirs(config.FULLSIZE_MAP_DIR, exist_ok=True)

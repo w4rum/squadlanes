@@ -8,7 +8,7 @@
 
 <!--Please report any inconsistencies on our GitHub repository (link in the help section on the bottom-right)."-->
 <!--      >-->
-        Squad v3.3
+        Squad v3.4
 <!--        <span class="text-warning"> &#9989;</span>-->
 <!--      </a>-->
     </div>
