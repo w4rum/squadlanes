@@ -345,6 +345,27 @@ def hlp_lattice(initializer_dict: dict, docs: List[dict]):
         for nb in neighbours:
             links.append((cluster, sdk_name(nb)))
 
+    # there might be some unreachable clusters due to errors by hawk
+    # Squad won't care about them, but we want to explicitly remove them
+    # to avoid fuckups in the interface
+    clusters = get_cluster_names(links)
+    no_outgoing_edges = set(clusters)
+    no_incoming_edges = set(clusters)
+    for a, b in links:
+        no_outgoing_edges.discard(a)
+        no_incoming_edges.discard(b)
+    no_outgoing_edges.discard(team_1_main)
+    no_outgoing_edges.discard(team_2_main)
+    no_incoming_edges.discard(team_1_main)
+    no_incoming_edges.discard(team_2_main)
+
+    broken_clusters = no_outgoing_edges.union(no_incoming_edges)
+    links = [
+        (a, b)
+        for a, b in links
+        if a not in broken_clusters and b not in broken_clusters
+    ]
+
     # TODO: dedup
     clusters = get_cluster_list(get_cluster_names(links), docs)
     lane_graph = {
@@ -646,7 +667,7 @@ async def extract_layer(
 ) -> dict:
 
     async with parallel_limit:
-        print(layer_path)
+        # print(layer_path)
         layer_filename, pretty_map_name, pretty_layer_name = extract_pretty_names(
             layer_path
         )
@@ -685,7 +706,6 @@ async def extract_layer(
 def path_split_recursive(path: str) -> list[str]:
     parts = []
     head = path
-    tail = ""
 
     while head != "" and head != "/":
         head, tail = os.path.split(head)
@@ -703,6 +723,9 @@ def extract_pretty_names(layer_path: str) -> tuple[str, str, str]:
     layer_filename = path_parts[-1]
     match = re.match(r"(HLP_)?(.*)_([gG]?RAAS|Invasion)_(.*)\.umap", layer_filename)
     hlp_prefix, map_name, gamemode, version = match.group(1, 2, 3, 4)
+
+    # replace GRAAS with RAAS (hawk's request)
+    gamemode = gamemode.replace("GRAAS", "RAAS").replace("gRAAS", "RAAS")
 
     # sometimes the version has _Flooded or _Night as a suffix
     version = version.replace("_", " ")
@@ -770,6 +793,10 @@ async def extract_maps(unpacked_assets_dir: str) -> dict:
         if not any(
             [game_mode_name in layer_path for game_mode_name in supported_gamemodes]
         ):
+            continue
+
+        # ignore HLP night maps (they're the same as the day maps)
+        if "HLP" in layer_path and "Night" in layer_path:
             continue
 
         extraction_runs.append(extract_layer(unpacked_assets_dir, layer_path))

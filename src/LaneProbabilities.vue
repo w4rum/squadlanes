@@ -1,16 +1,28 @@
 <template lang="html">
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
-      <!--      <a-->
-      <!--        title="We think we've fixed our previous problems with the path logic.-->
-
-      <!--The data here should now match the in-game experience.-->
-
-      <!--Please report any inconsistencies on our GitHub repository (link in the help section on the bottom-right)."-->
-      <!--      >-->
       Squad v3.4
-      <!--        <span class="text-warning"> &#9989;</span>-->
-      <!--      </a>-->
+    </div>
+    <div
+      v-if="selection.layer.startsWith('HLP')"
+      class="text-warning text-center small m-1"
+    >
+      <a
+        href="https://steamcommunity.com/sharedfiles/filedetails/2442357787"
+        target="_blank"
+      >
+        Hawk's Layer Pack
+      </a>
+      <a
+        title="Added in cooperation with EyeOfTheHawks.
+These layers might be more unstable and *much* slower than the vanilla layers.
+
+Squad Lanes accurately shows the HLP layers, accounting for HLP's custom logic.
+
+The only thing currently not visualized (for HLP and Vanilla) are capture point probabilities."
+      >
+        <b-icon-question-circle
+      /></a>
     </div>
     <div class="lane-percentages">
       <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">
@@ -22,10 +34,18 @@
 </template>
 <script>
 import Vue from "vue";
+import { BIconQuestionCircle } from "bootstrap-vue";
 
 export default Vue.extend({
+  components: {
+    BIconQuestionCircle,
+  },
   props: {
     lanes: Set,
+    selection: {
+      map: String,
+      layer: String,
+    },
   },
   methods: {
     laneColor(lane) {

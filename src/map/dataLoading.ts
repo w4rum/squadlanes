@@ -5,6 +5,7 @@ import { raasData } from "./raasData";
 import { redraw, resetMap } from "./rendering";
 import { Lane } from "./lane";
 import Vue from "vue";
+import * as cluster from "cluster";
 
 export function changeLayer(mapName: string, layerName: string) {
   // delete all existing map data

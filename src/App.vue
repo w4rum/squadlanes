@@ -1,13 +1,17 @@
 <template lang="html">
   <div>
     <span class="overlay top-center">
-      <lane-percentages :lanes="mapData.lanes"></lane-percentages>
+      <lane-percentages
+        :lanes="mapData.lanes"
+        :selection="selection"
+      ></lane-percentages>
     </span>
     <span class="overlay top-right"
       ><layer-select
         :map-data="mapData"
         :startingMapName="startingMapName"
         :startingLayerName="startingLayerName"
+        :selection="selection"
       ></layer-select
     ></span>
     <span class="overlay bottom-center"><map-legend></map-legend></span>
@@ -17,7 +21,7 @@
 
 <script>
 import Vue from "vue";
-import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import { BootstrapVue, IconsPlugin, BIconQuestionCircle } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap";
 import "bootstrap-vue/dist/bootstrap-vue";
 
@@ -36,6 +40,10 @@ export default Vue.extend({
       mapData,
       startingMapName: "Narva",
       startingLayerName: "RAAS v1",
+      selection: {
+        map: null,
+        layer: null,
+      },
     };
   },
   components: {

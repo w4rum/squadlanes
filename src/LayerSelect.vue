@@ -4,7 +4,7 @@
       id="map-dropdown"
       ref="mapDropdown"
       class="tweaked-dropdown"
-      :text="currMapName"
+      :text="selection.map"
     >
       <b-dropdown-form v-on:submit.prevent="onInputFilterSubmit">
         <b-form-group label="" label-for="map-filter">
@@ -26,7 +26,7 @@
       ref="layerDropdown"
       id="layer-dropdown"
       class="tweaked-dropdown"
-      :text="currLayerName"
+      :text="selection.layer"
     >
       <b-dropdown-item
         v-for="layer in sortedLayerNames()"
@@ -54,6 +54,10 @@ export default Vue.extend({
     mapData: Object,
     startingMapName: String,
     startingLayerName: String,
+    selection: {
+      map: String,
+      layer: String,
+    },
   },
   created() {
     this.mapNames = Object.keys(this.raasData);
@@ -69,8 +73,6 @@ export default Vue.extend({
   data() {
     return {
       filterMapInputValue: "",
-      currMapName: null,
-      currLayerName: null,
       mapNames: null,
       raasData,
     };
@@ -96,7 +98,7 @@ export default Vue.extend({
       }
     };
     document.addEventListener("keyup", this.keyListener);
-    this.changeMapAndLayer(this.currMapName, this.currLayerName);
+    this.changeMapAndLayer(this.selection.map, this.selection.layer);
   },
   beforeDestroy() {
     document.removeEventListener("keyup", this.keylistener);
@@ -106,7 +108,7 @@ export default Vue.extend({
       this.changeMapAndLayer(map, null);
     },
     selectLayer(layer) {
-      this.changeMapAndLayer(this.currMapName, layer);
+      this.changeMapAndLayer(this.selection.map, layer);
     },
     filterMap() {
       this.mapNames = Object.keys(this.raasData).filter((mapName) => {
@@ -145,17 +147,17 @@ export default Vue.extend({
 
       // if no layer was specified (or we just cleared it), go to default layer
       if (!layer) {
-        layer = Object.keys(this.raasData[map])[0];
+        layer = this.sortedLayerNames()[0];
       }
 
-      this.currMapName = map;
-      this.currLayerName = layer;
+      this.selection.map = map;
+      this.selection.layer = layer;
 
       let urlHashParams = new URLSearchParams(location.hash.substr(1));
-      urlHashParams.set("map", this.currMapName);
-      urlHashParams.set("layer", this.currLayerName);
+      urlHashParams.set("map", this.selection.map);
+      urlHashParams.set("layer", this.selection.layer);
       location.hash = urlHashParams.toString();
-      changeLayer(this.currMapName, this.currLayerName);
+      changeLayer(this.selection.map, this.selection.layer);
     },
     selectMapAndLayerFromUrl() {
       let urlHashParams = new URLSearchParams(location.hash.substr(1));
@@ -166,8 +168,7 @@ export default Vue.extend({
     },
     sortedLayerNames() {
       // manual sorting rule: HLP maps below vanilla maps, otherwise alphabetical order
-      let layers = [...Object.keys(this.raasData[this.currMapName])];
-      console.log(layers);
+      let layers = [...Object.keys(this.raasData[this.selection.map])];
       layers = layers.sort((a, b) => {
         let a_is_hlp = a.startsWith("HLP ");
         let b_is_hlp = b.startsWith("HLP ");
@@ -178,7 +179,6 @@ export default Vue.extend({
 
         return a_is_hlp ? +1 : -1;
       });
-      console.log(layers);
       return layers;
     },
   },
