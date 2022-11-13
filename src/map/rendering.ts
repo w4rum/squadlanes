@@ -292,8 +292,9 @@ export function redraw() {
     }
 
     // create new tooltip
+    let displayName = cp.displayName.join(" / ")
     cm.bindTooltip(
-      `<div class="cpTooltipName">${cp.displayName}</div>` +
+      `<div class="cpTooltipName">${displayName}</div>` +
         `<div class="cpTooltipDepth">${rI.centerNumber || "&nbsp"}</div>` +
         `<div class="cpTooltipLanes">${laneTooltip}</div>`,
       {

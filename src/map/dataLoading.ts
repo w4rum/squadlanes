@@ -49,9 +49,19 @@ export function changeLayer(mapName: string, layerName: string) {
 
       // if there is an equal, just use it instead of the current CP, discard current CP
       mapData.capturePoints.forEach((cpOther) => {
-        if (cp.equal(cpOther)) {
-          cp = cpOther;
+        if (!cp.equal(cpOther)) return;
+
+        // if the points have different display names,
+        // merge them anyway but remember the different names
+        if (cpOther.displayName.indexOf(cp.displayName[0]) == -1) {
+          console.warn(
+              `Merging points with same position but different display names: ` +
+              `${cp.name}/${cp.displayName} vs. ${cpOther.name}/${cpOther.displayName}`
+          );
+          cpOther.displayName.push(cp.displayName[0]);
         }
+
+        cp = cpOther;
       });
 
       // add CP to CP-set
