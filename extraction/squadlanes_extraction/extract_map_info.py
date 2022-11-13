@@ -140,9 +140,12 @@ def absolute_location(
     if scene_root == "None":
         return offset
 
+    # remove an unnecessary layer of nesting
+    scene_root = access_one(scene_root)
+
     # 1. rotate the current offset by this object's rotation, if it has a rotation
-    if "RelativeRotation" in access_one(scene_root):
-        rel_rot = access_one(scene_root)["RelativeRotation"]
+    if "RelativeRotation" in scene_root:
+        rel_rot = scene_root["RelativeRotation"]
 
         # note: z axis, roll, and pitch should be zero for clusters etc. and are ignored
 
@@ -155,15 +158,19 @@ def absolute_location(
         rotated_offset = offset
 
     # 2. translate the current offset by this object's translation
-    rel_loc = access_one(scene_root)["RelativeLocation"]
+    rel_loc = scene_root["RelativeLocation"]
     rel_loc = (rel_loc["X"], rel_loc["Y"])
 
-    new_offset = add_tuples(rotated_offset, rel_loc)
+    rel_loc_with_offset = add_tuples(rotated_offset, rel_loc)
 
-    # 3. traverse the tree upwards towards the root
-    parent = access_one(scene_root)["AttachParent"]
+    # 3. if the location is relative, traverse the tree upwards towards the root
+    if not scene_root.get("bAbsoluteLocation", False):
+        parent = scene_root["AttachParent"]
+        abs_loc = absolute_location(parent, rel_loc_with_offset)
+    else:
+        abs_loc = rel_loc_with_offset
 
-    return absolute_location(parent, new_offset)
+    return abs_loc
 
 
 def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:

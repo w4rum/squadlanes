@@ -12630,13 +12630,13 @@ Harju:
             04-CaptureZoneCluster:
             -   display_name: Military Apartments
                 sdk_name: MilitaryApartments
-                x: -153449.1953125
-                y: -170869.1015625
+                x: -73715.4140625
+                y: -83044.0390625
             05-CaptureZoneCluster:
             -   display_name: Hangars
                 sdk_name: Hangars
-                x: -100844.84375
-                y: -227338.1875
+                x: -46870.34375
+                y: -109850.40625
             06-CaptureZoneCluster:
             -   display_name: Castle
                 sdk_name: Castle
