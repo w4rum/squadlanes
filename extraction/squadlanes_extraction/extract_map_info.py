@@ -2,19 +2,14 @@ import asyncio
 import glob
 import math
 import os
-import pathlib
-import random
 import re
-import shutil
-import string
-import struct
 import shlex
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import shutil
+import struct
+import sys
 from typing import Tuple, List, Union, Set, Any
 
 import yaml
-from pwn import log, context, logging, sys
-from pwnlib.log import Progress, Logger
 from tqdm.asyncio import tqdm
 
 from squadlanes_extraction import config
@@ -80,7 +75,10 @@ def to_cluster(cluster_name: str, docs: List[dict]):
             )
         ]
     else:
-        assert cluster_root_dict["ClassName"] == "BP_CaptureZoneCluster_C"
+        assert cluster_root_dict["ClassName"] in [
+            "BP_CaptureZoneCluster_C",
+            "HLP_BP_CaptureZoneClusterLattice_C",
+        ]
 
     cluster = []
     # iterate over all CPs and only take CPs that have this cluster as parent
@@ -195,22 +193,29 @@ def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:
 def get_lane_graph_and_clusters(docs: List[dict]):
     # get lane graph and clusters
     handlers = {
-        "SQRAASLaneInitializer_C": multi_lane_graph,
-        "SQGraphRAASInitializerComponent": single_lane_graph,
-        "SQRAASGridInitializer": hlp_graas,
+        # numbers define priorities
+        # HLP GRAAS also has the multi_lane_graph initializer, so we check for both
+        "SQRAASLaneInitializer_C": (0, multi_lane_graph),
+        "SQGraphRAASInitializerComponent": (0, single_lane_graph),
+        "SQRAASGridInitializer_C": (1, hlp_graas),
+        "HLP_SQRAASLatticeInitializer_C": (1, hlp_lattice),
     }
+    priority = -1
+    handler = None
+    initializer = None
+
     for obj in docs:
         obj = access_one(obj)
         class_name = obj["ClassName"]
 
-        handler = handlers.get(class_name)
-        if handler is None:
-            continue
+        cur_priority, cur_handler = handlers.get(class_name, (-1, None))
+        if cur_priority > priority:
+            priority = cur_priority
+            handler = cur_handler
+            initializer = obj
 
-        lane_graph, clusters = handler(obj, docs)
-        break
-    else:
-        assert False, "no supported RAAS initializer found"
+    assert handler is not None, "no supported RAAS initializer found"
+    lane_graph, clusters = handler(initializer, docs)
 
     # identify main clusters
     mains = []
@@ -248,17 +253,122 @@ def single_lane_graph(initializer_dict: dict, docs: List[dict]):
 
 
 def hlp_graas(initializer_dict: dict, docs: List[dict]):
-    pass
+    # build link list
+    team_1_main = sdk_name(initializer_dict["Team1Main"])
+    team_2_main = sdk_name(initializer_dict["Team2Main"])
+
+    # convert AASGrids to better layered graph structure
+    # ("layered" as in "has multiple layers", not as in "Squad map layer")
+    # (will use "depth" as a synonym for "layer" to avoid confusion)
+    depths: list[list[str]] = []
+    aas_grids: list = index_dict_to_list(initializer_dict["AASGrids"])
+    for grid in aas_grids:
+        cur_layer = []
+        possible_clusters = index_dict_to_list(grid["PossibleClusters"])
+        for cluster in possible_clusters:
+            cur_layer.append(sdk_name(cluster))
+        depths.append(cur_layer)
+
+    links = []
+
+    # link main 1 -> depth 0
+    for cluster in depths[0]:
+        links.append((team_1_main, cluster))
+
+    # link depth i -> depth i+1
+    # in GRAAS, a cluster can either jump
+    # - forwards (depth+1, same cluster index)
+    # - diagonally (depth+1, cluster index -1 or +1)
+    # that means that clusters that are more than 1 step horizontally can't be reached)
+    # TODO: don't ignore probabilities here
+    #       the SQRAASGridInitializer has a "Jump Chance"
+    #       going diagonally has Jump Chance %
+    #       going forward has (1 - Jump Chance) %
+    #       on a diagonal move, which of the neighbours is jumped to is
+    #           50/50 if there are two neighbours
+    #           100 if there is only one neighbour (we're at an edge)
+    #       this means that edge CPs are probably less likely since we're 2/3 likely
+    #       to jump away from an edge
+    for di, cur_depth in enumerate(depths[:-1]):
+        for ci, cluster in enumerate(cur_depth):
+            for ci_delta in [-1, 0, 1]:
+                if ci + ci_delta < 0:
+                    continue
+                if ci + ci_delta >= len(depths[di + 1]):
+                    continue
+
+                links.append((cluster, depths[di + 1][ci + ci_delta]))
+
+    # link depth n -> main 2
+    for cluster in depths[-1]:
+        links.append((cluster, team_2_main))
+
+    clusters = get_cluster_list(get_cluster_names(links), docs)
+    lane_graph = {
+        SINGLE_LANE_NAME: prettify_link_list(links),
+    }
+    return lane_graph, clusters
 
 
 def hlp_lattice(initializer_dict: dict, docs: List[dict]):
-    pass
+    team_1_main = sdk_name(initializer_dict["Team1Main"])
+    team_2_main = sdk_name(initializer_dict["Team2Main"])
+
+    # lattice has the same logic as single_lane_graph
+    # but the links aren't stored in a central list.
+    # instead, each cluster lists its own neighbours
+    links = []
+
+    # link main 1 -> first clusters
+    first_clusters = index_dict_to_list(initializer_dict["FirstClusters"])
+    for cluster in first_clusters:
+        links.append((team_1_main, sdk_name(cluster)))
+
+    # remaining links
+    # look through all clusters and add neighbours
+    for obj in docs:
+        # ignore non-cluster assets
+        class_name = access_one(obj)["ClassName"]
+        if class_name != "HLP_BP_CaptureZoneClusterLattice_C":
+            continue
+
+        cluster = sdk_name(obj)
+
+        next_clusters = access_one(obj)["NextClusters"]
+
+        # if there are no neighbours, we're at the end and need to link to main 2
+        if len(next_clusters) == 0:
+            links.append((cluster, team_2_main))
+            continue
+
+        neighbours = index_dict_to_list(next_clusters)
+        for nb in neighbours:
+            links.append((cluster, sdk_name(nb)))
+
+    # TODO: dedup
+    clusters = get_cluster_list(get_cluster_names(links), docs)
+    lane_graph = {
+        SINGLE_LANE_NAME: prettify_link_list(links),
+    }
+    return lane_graph, clusters
 
 
 def prettify_cluster_name(cluster_name):
     pretty = cluster_name.rpartition(".")[2]
     assert pretty != ""
     return pretty
+
+
+def prettify_link_list(links: list[tuple[str, str]]) -> list[dict[str, str]]:
+    return list(
+        map(
+            lambda l: {
+                "a": prettify_cluster_name(l[0]),
+                "b": prettify_cluster_name(l[1]),
+            },
+            links,
+        )
+    )
 
 
 def get_link_list(
@@ -281,15 +391,8 @@ def get_link_list(
 
         links.append((sdk_name(raw_link["NodeA"]), sdk_name(raw_link["NodeB"])))
 
-    pretty_link_list = list(
-        map(
-            lambda l: {
-                "a": prettify_cluster_name(l[0]),
-                "b": prettify_cluster_name(l[1]),
-            },
-            links,
-        )
-    )
+    pretty_link_list = prettify_link_list(links)
+
     return links, pretty_link_list
 
 
@@ -314,7 +417,7 @@ async def extract_yaml_dump(full_layer_path: str, layer_filename: str) -> list[d
     # extract map information from umap with umodel
     yaml_filename = f"{config.LAYER_DUMP_DIR}/{layer_filename}.yaml"
     if not os.path.isfile(yaml_filename):
-        if context.log_level <= logging.DEBUG:
+        if config.LOG_LEVEL == "DEBUG":
             stderr = sys.stderr
         else:
             stderr = asyncio.subprocess.DEVNULL
@@ -335,7 +438,6 @@ async def extract_yaml_dump(full_layer_path: str, layer_filename: str) -> list[d
         # fix encoding fuckups caused by umlauts (fuck you harju)
         yaml_content = yaml_content.decode("ISO-8859-1").encode("UTF-8")
 
-        log.debug(yaml_content.decode("UTF-8"))
         _, _, yaml_content = yaml_content.partition(b"---")
         with open(yaml_filename, "wb") as f:
             f.write(yaml_content)
@@ -507,7 +609,7 @@ async def extract_minimap_asset(asset_path: str, target_path: str):
         ]
     )
 
-    if context.log_level <= logging.DEBUG:
+    if config.LOG_LEVEL == "DEBUG":
         stderr = sys.stderr
         stdout = sys.stdout
     else:
@@ -544,13 +646,7 @@ async def extract_layer(
 ) -> dict:
 
     async with parallel_limit:
-        # if (
-        #     "BlackCoast" not in layer_path
-        #     and "Chora" not in layer_path
-        #     and "Harju" not in layer_path
-        # ):
-        #     return {}
-
+        print(layer_path)
         layer_filename, pretty_map_name, pretty_layer_name = extract_pretty_names(
             layer_path
         )
@@ -605,11 +701,15 @@ def extract_pretty_names(layer_path: str) -> tuple[str, str, str]:
     path_parts = path_split_recursive(layer_path)
 
     layer_filename = path_parts[-1]
-    match = re.match(r"(HLP_)?(.*)_([^_]*)_([^_]*)\.umap", layer_filename)
+    match = re.match(r"(HLP_)?(.*)_([gG]?RAAS|Invasion)_(.*)\.umap", layer_filename)
     hlp_prefix, map_name, gamemode, version = match.group(1, 2, 3, 4)
+
+    # sometimes the version has _Flooded or _Night as a suffix
+    version = version.replace("_", " ")
 
     # execute hard-coded map renames
     MAP_RENAMES = {
+        "Albasrah": "Al Basrah",
         "Belaya": "Belaya Pass",
         "Kamdesh": "Kamdesh Highlands",
         "Kokan": "Kokan Valley",
@@ -665,14 +765,11 @@ async def extract_maps(unpacked_assets_dir: str) -> dict:
         supported_gamemodes = [
             "RAAS",
             "Invasion",
+            "GRAAS",
         ]
         if not any(
             [game_mode_name in layer_path for game_mode_name in supported_gamemodes]
         ):
-            continue
-
-        # TODO: remove
-        if "Hawks" not in layer_path:
             continue
 
         extraction_runs.append(extract_layer(unpacked_assets_dir, layer_path))
@@ -708,13 +805,13 @@ def extract():
     unpacked_assets_dir = os.path.abspath(config.UNPACKED_ASSETS_DIR)
 
     if not os.path.isdir(unpacked_assets_dir):
-        log.error(
+        print(
             f"Configured UNPACKED_ASSETS_DIR does not exist.\n"
             f"Make sure you run the unpack task first."
         )
+        return
 
     map_data = asyncio.run(extract_maps(unpacked_assets_dir))
 
-    with log.progress("-- Writing RAAS data to file"):
-        with open(f"raas-data-auto.yaml", "w") as f:
-            f.write(yaml.dump(map_data, sort_keys=True, indent=4))
+    with open(f"raas-data-auto.yaml", "w") as f:
+        f.write(yaml.dump(map_data, sort_keys=True, indent=4))

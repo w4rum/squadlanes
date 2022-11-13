@@ -29,7 +29,7 @@
       :text="currLayerName"
     >
       <b-dropdown-item
-        v-for="layer in Object.keys(raasData[currMapName])"
+        v-for="layer in sortedLayerNames()"
         v-on:click="selectLayer(layer)"
       >
         {{ layer }}
@@ -163,6 +163,23 @@ export default Vue.extend({
         urlHashParams.get("map") || this.startingMapName,
         urlHashParams.get("layer") || this.startingLayerName
       );
+    },
+    sortedLayerNames() {
+      // manual sorting rule: HLP maps below vanilla maps, otherwise alphabetical order
+      let layers = [...Object.keys(this.raasData[this.currMapName])];
+      console.log(layers);
+      layers = layers.sort((a, b) => {
+        let a_is_hlp = a.startsWith("HLP ");
+        let b_is_hlp = b.startsWith("HLP ");
+
+        if (a_is_hlp === b_is_hlp) {
+          return a > b;
+        }
+
+        return a_is_hlp ? +1 : -1;
+      });
+      console.log(layers);
+      return layers;
     },
   },
 });

@@ -55,7 +55,7 @@ export function changeLayer(mapName: string, layerName: string) {
         // merge them anyway but remember the different names
         if (cpOther.displayName.indexOf(cp.displayName[0]) == -1) {
           console.warn(
-              `Merging points with same position but different display names: ` +
+            `Merging points with same position but different display names: ` +
               `${cp.name}/${cp.displayName} vs. ${cpOther.name}/${cpOther.displayName}`
           );
           cpOther.displayName.push(cp.displayName[0]);

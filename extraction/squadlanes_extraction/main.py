@@ -1,27 +1,27 @@
-from pwn import log, context
-
 from squadlanes_extraction import (
-    config,
     dump_squad_files,
     extract_map_info,
     generate_map_tiles,
 )
 
-context.log_level = config.LOG_LEVEL
-
 
 def unpack():
-    with log.progress("Unpacking game files"):
-        dump_squad_files.unpack()
+    print(
+        "Unpacking Unreal assets. "
+        "This will take a few minutes (and lots of disk space!)."
+    )
 
-    log.success("Unpacking finished. You can run the extract task now.")
+    dump_squad_files.unpack()
+
+    print("Unpacking finished. You can run the extract task now.")
 
 
 def extract():
-    with log.progress("Extracting RAAS data and full-size maps"):
-        extract_map_info.extract()
+    print("Extracting layer info. This will take a few minutes.")
 
-    log.success(
+    extract_map_info.extract()
+
+    print(
         "Extraction finished. "
         "You can generate map tiles now. "
         "The RAAS data has been saved as raas-data-auto.yaml. "
@@ -31,10 +31,14 @@ def extract():
 
 
 def tiles():
-    with log.progress("Generating map tiles"):
-        generate_map_tiles.tiles()
+    print(
+        "Generating map tiles. "
+        "This will take a few minutes and you won't see any progress for a while."
+    )
 
-    log.success(
+    generate_map_tiles.tiles()
+
+    print(
         "Map tiles generated. "
         "You now have all the assets necessary to run the website."
     )

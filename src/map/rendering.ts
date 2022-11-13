@@ -28,12 +28,18 @@ const CLR_DEF_OTHER = [
   "rgb(47,182,255)",
   "rgb(145,245,220)",
   "rgb(161,250,186)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
 ];
 const CLR_OFF_POINT = "rgb(255,0,0)";
 const CLR_OFF_OTHER = [
   "rgb(255,162,92)",
   "rgb(252,227,108)",
   "rgb(253,246,203)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
 ];
 const CLR_IMPOSSIBLE = "rgb(145,145,145)";
 const CLR_MAIN_BASE = "rgb(0,0,0)";
@@ -292,7 +298,7 @@ export function redraw() {
     }
 
     // create new tooltip
-    let displayName = cp.displayName.join(" / ")
+    let displayName = cp.displayName.join(" / ");
     cm.bindTooltip(
       `<div class="cpTooltipName">${displayName}</div>` +
         `<div class="cpTooltipDepth">${rI.centerNumber || "&nbsp"}</div>` +
