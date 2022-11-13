@@ -1,32 +1,37 @@
 import asyncio
 import os
 import shlex
-import subprocess
 import sys
-from glob import glob
 from pprint import pprint
 
 from pwn import log, logging
 from pwnlib.context import context
+from tqdm.asyncio import tqdm
 
 from squadlanes_extraction import config
 
-VANILLA_SUBDIR = "/SquadGame/Content/Paks"
+VANILLA_PAK_SUBDIR = "SquadGame/Content/Paks"
 
-parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_UNPACKS)
+parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_TASKS)
 
 
-async def _unpack_pak_with_filter(pak_path: str, filters: list[str], name: str) -> None:
+async def _unpack_pak_with_filter(
+    pak_bundle_name: str, pak_path: str, filters: list[str], name: str
+) -> None:
     async with parallel_limit:
-        with log.progress(f"Unpacking: {name}"):
+        with log.progress(f"Unpacking [{pak_bundle_name}]: {name}"):
             for flt in filters:
+                destination_dir = os.path.join(
+                    "Z:/", os.path.abspath(config.UNPACKED_ASSETS_DIR), pak_bundle_name
+                )
+
                 command = [
                     f"wine",
                     config.UNREAL_PAK_PATH,
                     f"Z:/{pak_path}",
                     f"-cryptokeys=Z:/{os.path.abspath(config.CRYPTO_JSON_PATH)}",
                     f"-Extract",
-                    f"Z:/{os.path.abspath(config.UNPACKED_ASSETS_DIR)}",
+                    destination_dir,
                     f"-Filter={flt}",
                 ]
 
@@ -45,56 +50,44 @@ async def _unpack_pak_with_filter(pak_path: str, filters: list[str], name: str) 
                 await process.wait()
 
 
-async def _unpack_relevant_files_in_dir(paks_dir_path: str) -> None:
+async def _unpack_relevant_files_in_dir(pak_bundles: dict[str, str]) -> None:
     unpack_runs = []
 
-    for name in os.listdir(paks_dir_path):
-        path = f"{paks_dir_path}/{name}"
+    for pak_bundle_name, pak_bundle_path in pak_bundles.items():
+        for pak_name in os.listdir(pak_bundle_path):
+            path = f"{pak_bundle_path}/{pak_name}"
 
-        # ignore dirs
-        if not os.path.isfile(path):
-            continue
-        # ignore files that are not PAKs
-        if not path.endswith(".pak"):
-            continue
-        # ignore truncated files
-        if os.stat(path).st_size == 0:
-            continue
+            # ignore dirs
+            if not os.path.isfile(path):
+                continue
+            # ignore files that are not PAKs
+            if not path.endswith(".pak"):
+                continue
+            # ignore truncated files
+            if os.stat(path).st_size == 0:
+                continue
 
-        unpack_runs.append(
-            _unpack_pak_with_filter(
-                path, ["*.umap", "*.uexp", "*.ubulk", "*.uasset"], name
+            unpack_runs.append(
+                _unpack_pak_with_filter(
+                    pak_bundle_name,
+                    path,
+                    ["*.umap", "*.uexp", "*.ubulk", "*.uasset"],
+                    pak_name,
+                )
             )
-        )
 
-    await asyncio.gather(*unpack_runs)
+    await tqdm.gather(*unpack_runs)
 
 
 def unpack():
     os.makedirs(config.UNPACKED_ASSETS_DIR, exist_ok=True)
 
-    asyncio.run(_unpack_relevant_files_in_dir(config.SQUAD_GAME_DIR + VANILLA_SUBDIR))
+    # unpack vanilla assets
+    pak_bundles = {
+        "Vanilla": os.path.join(config.SQUAD_GAME_DIR, VANILLA_PAK_SUBDIR),
+    }
+    # unpack mod assets (paths are assumed to point to the pak dir)
+    for mod_name, mod_pak_dir in config.MODS.items():
+        pak_bundles[mod_name] = mod_pak_dir
 
-    # some assets are extracted into a different directories
-    # e.g., "./Content/" vs. "./SquadGame/Content/"
-    # (not sure why this is inconsistent)
-    # BlackCoast and Harju are also "expansions" and are thus in a different directory
-    with log.progress("Merging directories"):
-        merge_paths = [
-            ("SquadGame", "."),
-            ("Content", "."),
-            ("Plugins/Expansions/BlackCoast/Content/Maps", "Maps/BlackCoast"),
-            ("Plugins/Expansions/Harju/Content/Maps", "Maps/Harju"),
-        ]
-        for src, dst in merge_paths:
-            out_dir = f"{config.UNPACKED_ASSETS_DIR}/{dst}"
-            os.makedirs(out_dir, exist_ok=True)
-            subprocess.call(
-                [
-                    "cp",
-                    "--recursive",
-                    "--link",  # don't copy, hard-link instead
-                    *glob(f"{config.UNPACKED_ASSETS_DIR}/{src}/*"),
-                    out_dir,
-                ],
-            )
+    asyncio.run(_unpack_relevant_files_in_dir(pak_bundles))

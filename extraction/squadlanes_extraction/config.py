@@ -6,6 +6,23 @@
 # e.g. "/mnt/windows-drive/Program Files (x86)/Steam/steamapps/common/Squad"
 SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
 
+# Location of any layer mod packs that should be loaded.
+#
+# Syntax: {
+#    "Mod Name": "Path to .pak files",
+# }
+#
+# Supply the full path to the directory that the .pak files for the "WindowsNoEditor"
+# version are in.
+#
+# This should work without problem for layers that use the same logic as vanilla.
+# It will *not* work for mod packs that come with their own layer choosing logic like
+# Hawk's Layer Pack (HLP)
+# HLP, however, is an exception because we've explicitly added support for that.
+MODS = {
+    "Hawks Layer Pack": "/mnt/win/Program Files (x86)/Steam/steamapps/workshop/content/393380/2442357787/HawksLayerPack/Content/Paks/WindowsNoEditor/",
+}
+
 ################################################################################
 # OPTIONAL SETTINGS - Our defaults should work if you just cloned the repository
 ################################################################################
@@ -14,7 +31,7 @@ SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
 # - increase to make unpacking faster (up to the speed of your storage device) but require more RAM
 # - decrease to use less RAM but unpack slower
 # (16 uses about 3-4 GiB of RAM)
-MAXIMUM_PARALLEL_UNPACKS = 16
+MAXIMUM_PARALLEL_TASKS = 16
 
 # Path to the UnrealPak Windows executable
 UNREAL_PAK_PATH = "./UnrealPakTool/UnrealPak.exe"

@@ -1,21 +1,29 @@
 import asyncio
+import glob
 import math
 import os
+import pathlib
+import random
 import re
+import shutil
+import string
 import struct
 import shlex
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Tuple, List, Union, Set
+from typing import Tuple, List, Union, Set, Any
 
 import yaml
 from pwn import log, context, logging, sys
 from pwnlib.log import Progress, Logger
+from tqdm.asyncio import tqdm
 
 from squadlanes_extraction import config
 
 SINGLE_LANE_NAME = "Center"
 
 GAME_MODES = ["RAAS", "Invasion"]
+
+parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_TASKS)
 
 
 def add_tuples(*tuples: Tuple):
@@ -186,16 +194,23 @@ def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:
 
 def get_lane_graph_and_clusters(docs: List[dict]):
     # get lane graph and clusters
+    handlers = {
+        "SQRAASLaneInitializer_C": multi_lane_graph,
+        "SQGraphRAASInitializerComponent": single_lane_graph,
+        "SQRAASGridInitializer": hlp_graas,
+    }
     for obj in docs:
         obj = access_one(obj)
-        if obj["ClassName"] == "SQRAASLaneInitializer_C":
-            lane_graph, clusters = multi_lane_graph(obj, docs)
-            break
-        if obj["ClassName"] == "SQGraphRAASInitializerComponent":
-            lane_graph, clusters = single_lane_graph(obj, docs)
-            break
+        class_name = obj["ClassName"]
+
+        handler = handlers.get(class_name)
+        if handler is None:
+            continue
+
+        lane_graph, clusters = handler(obj, docs)
+        break
     else:
-        assert False, "no RAAS initializer found"
+        assert False, "no supported RAAS initializer found"
 
     # identify main clusters
     mains = []
@@ -215,8 +230,6 @@ def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
     cluster_names = set()
     for lane in index_dict_to_list(initializer_dict["AASLanes"]):
         lane: dict
-        # TODO: fix CENTRAL
-        # TODO: Lashkar CAF RAAS v1 has single lane '01'
         lane_name = lane["LaneName"].title()
         link_list, pretty_link_list = get_link_list(lane["AASLaneLinks"])
         cluster_names |= get_cluster_names(link_list)
@@ -232,6 +245,14 @@ def single_lane_graph(initializer_dict: dict, docs: List[dict]):
         SINGLE_LANE_NAME: pretty_link_list,
     }
     return lane_graph, clusters
+
+
+def hlp_graas(initializer_dict: dict, docs: List[dict]):
+    pass
+
+
+def hlp_lattice(initializer_dict: dict, docs: List[dict]):
+    pass
 
 
 def prettify_cluster_name(cluster_name):
@@ -289,15 +310,9 @@ def get_cluster_list(cluster_names: Set[str], docs: List[dict]):
     return clusters
 
 
-async def extract_layer(
-    layer: str,
-    game_mode: str,
-    pretty_map_name: str,
-    gameplay_layer_dir: str,
-    map_dir: str,
-) -> dict:
+async def extract_yaml_dump(full_layer_path: str, layer_filename: str) -> list[dict]:
     # extract map information from umap with umodel
-    yaml_filename = f"{config.LAYER_DUMP_DIR}/{layer}.yaml"
+    yaml_filename = f"{config.LAYER_DUMP_DIR}/{layer_filename}.yaml"
     if not os.path.isfile(yaml_filename):
         if context.log_level <= logging.DEBUG:
             stderr = sys.stderr
@@ -307,7 +322,7 @@ async def extract_layer(
             shlex.join(
                 [
                     config.UMODEL_PATH,
-                    f"{gameplay_layer_dir}/{layer}.umap",
+                    full_layer_path,
                     "-game=ue4.24",
                     "-dump",
                 ]
@@ -330,8 +345,12 @@ async def extract_layer(
     with open(yaml_filename, "r") as f:
         docs = list(yaml.safe_load_all(f))
 
-    # build lane graph from map info
-    lane_graph, clusters, mains = get_lane_graph_and_clusters(docs)
+    return docs
+
+
+async def extract_minimap_bounds(
+    docs: list[dict],
+) -> tuple[tuple[float, float], tuple[float, float]]:
 
     # get map bounds from map info by looking at the two MapTexture objects
     bounds = []
@@ -348,17 +367,19 @@ async def extract_layer(
     # (e.g., north-east and south-west)
     assert len(bounds) == 2
 
-    # get minimap filename from import table
-    # note that some CAF maps use the minimap from vanilla maps, so they
-    # don't have a minimap file themself
-    minimap_name = None
-    table_dump_filename = f"{config.LAYER_DUMP_DIR}/{layer}.tabledump.txt"
+    return tuple(bounds)
+
+
+async def extract_table_dump(full_layer_path: str, layer_filename: str) -> str:
+    table_dump_filename = f"{config.LAYER_DUMP_DIR}/{layer_filename}.tabledump.txt"
+
+    # create table dump using umodel
     if not os.path.isfile(table_dump_filename):
         table_dump_process = await asyncio.create_subprocess_shell(
             shlex.join(
                 [
                     config.UMODEL_PATH,
-                    f"{gameplay_layer_dir}/{layer}.umap",
+                    full_layer_path,
                     "-game=ue4.24",
                     "-list",
                 ]
@@ -373,182 +394,305 @@ async def extract_layer(
     with open(table_dump_filename, "rb") as f:
         table_dump = f.read().decode("ISO-8859-1")  # again, fucky umlaut encoding
 
-    # extract minimap image (.tga) with umodel
+    return table_dump
+
+
+def convert_minimap_partial_path(
+    minimap_partial_path: str, unpacked_assets_dir: str
+) -> str:
+    # This part is a bit tricky.
+    # The minimap_partial_path is actually not a valid path.
+    #
+    # First of all, it starts with a seemingly arbitrary name identifying the bundle
+    # its in.
+    # For vanilla core assets, this is "Game".
+    # For Black Coast, it is "BlackCoast", and for Harju, it is "Harju".
+    # HLP uses the vanilla minimaps, so it simply follows the above rules.
+    #
+    # Examples:
+    # /Game/Maps/Chora/Minimap/Chora_Minimap.uasset
+    # /BlackCoast/Maps/Minimap/Black_Coast_Minimap.uasset
+    # /Harju/Maps/Minimap/Harju_Minimap.uasset
+    #
+    # None of these match actual directories.
+    #
+    # In order to find the correct path, we strip out the first part of the part.
+    # Afterwards, we try to find a file that has the partial path as a suffix.
+
+    partial_parts = path_split_recursive(minimap_partial_path)
+
+    # remove the leading "/" and the first directory part
+    partial_parts = partial_parts[2:]
+
+    # go through all unpacked assets ending with .uasset
+    minimap_full_path = None
+    assets_list = glob.glob("**/*.uasset", root_dir=unpacked_assets_dir, recursive=True)
+    for asset_path in assets_list:
+        full_parts = path_split_recursive(asset_path)
+
+        # turn the paths around and check if all parts match
+        # (discarding the extra parts from the full path)
+        matched_parts = zip(reversed(full_parts), reversed(partial_parts))
+        if all([a == b for a, b in matched_parts]):
+            minimap_full_path = os.path.join(unpacked_assets_dir, asset_path)
+            break
+
+    assert (
+        minimap_full_path is not None
+    ), f"can't find minimap asset: {minimap_partial_path}"
+
+    return minimap_full_path
+
+
+async def extract_minimap(
+    unpacked_assets_dir: str,
+    layer_filename: str,
+    table_dump: str,
+) -> str:
+    minimap_name = None
+
+    # go through the table dump to find the correct asset
     for name in table_dump.splitlines():
-        match = re.match(f"[0-9]+ = .*/Maps/(.*/?(Minimap|Masks)/(.*inimap.*))", name)
+
+        # ignore all lines that don't match what we expect the minimap path to look like
+        match = re.match(f"[0-9]+ = (.*(/Minimap|/Masks)/(.*inimap.*))", name)
         if match is None:
             continue
 
-        minimap_path_in_package, minimap_name = match.group(1, 3)
+        minimap_partial_path, minimap_name = match.group(1, 3)
+        minimap_partial_path += ".uasset"
 
-        # expansions have a slightly different directory structure
-        expansion_dirs = ["BlackCoast", "Harju"]
-        for ed in expansion_dirs:
-            if ed in layer:
-                minimap_path_in_package = f"{ed}/{minimap_path_in_package}"
-                break
-
-        # skip if minimap already exists
-        os.makedirs(config.FULLSIZE_MAP_DIR, exist_ok=True)
-        if os.path.isfile(f"{config.FULLSIZE_MAP_DIR}/{minimap_path_in_package}.tga"):
-            break
-        umodel_cmd = shlex.join(
-            [
-                config.UMODEL_PATH,
-                f"-export",
-                f"{map_dir}/{minimap_path_in_package}.uasset",
-                f"-game=ue4.24",
-                f"-out={config.LAYER_DUMP_DIR}",
-            ]
+        # the path in the table dump isn't a valid path; need to convert
+        minimap_full_path = convert_minimap_partial_path(
+            minimap_partial_path, unpacked_assets_dir
         )
 
-        if context.log_level <= logging.DEBUG:
-            stderr = sys.stderr
-            stdout = sys.stdout
-        else:
-            stderr = asyncio.subprocess.DEVNULL
-            stdout = asyncio.subprocess.DEVNULL
-
-        map_extract_process = await asyncio.subprocess.create_subprocess_shell(
-            umodel_cmd,
-            stdout=stdout,
-            stderr=stderr,
-        )
-        assert await map_extract_process.wait() == 0, "map extract failed"
+        # extract that asset
+        target_path = f"{config.FULLSIZE_MAP_DIR}/{minimap_name}.tga"
+        await extract_minimap_asset(minimap_full_path, target_path)
 
         # ignore maps smaller than 1 MiB
         # (might be a thumbnail)
-        if (
-            os.stat(f"{config.LAYER_DUMP_DIR}/{minimap_name}.tga").st_size
-            < 1 * 1024 * 1024
-        ):
+        if os.stat(target_path).st_size < 1 * 1024 * 1024:
+            os.remove(target_path)
             minimap_name = None
             continue
-        move_process = await asyncio.subprocess.create_subprocess_shell(
-            shlex.join(
-                [
-                    "mv",
-                    f"{config.LAYER_DUMP_DIR}/{minimap_name}.tga",
-                    f"{config.FULLSIZE_MAP_DIR}",
-                ]
-            )
-        )
-        await move_process.wait()
-        break
 
-    # strip out map name from layer name
-    is_caf = layer.startswith("CAF_")  # don't strip out CAF prefix
-    layer_game_mode_index = layer.casefold().index(game_mode.casefold())
-    pretty_layer_name = game_mode + layer[layer_game_mode_index + len(game_mode) :]
-    pretty_layer_name = pretty_layer_name.strip()
-    pretty_layer_name = pretty_layer_name.replace("_", " ")
-    if is_caf:
-        pretty_layer_name = "CAF " + pretty_layer_name
-    assert pretty_layer_name != ""
+        break
 
     assert (
         minimap_name is not None
-    ), f"{pretty_map_name}/{pretty_layer_name} has no minimap"
+    ), f"can't find minimap in table dump for {layer_filename}"
 
-    layer_data = {
-        "background": {
-            "corners": [{"x": p[0], "y": p[1]} for p in bounds],
-            "minimap_filename": minimap_name,
-        },
-        "mains": mains,
-        "clusters": clusters,
-        "lanes": lane_graph,
-    }
-
-    return pretty_layer_name, layer_data
+    return minimap_name
 
 
-async def extract_map(map_dir: str, map_name: str) -> tuple[str, dict]:
-    # Some maps have their Gameplay Layers in a subdirectory called Gameplay_Layers.
-    # For maps that don't have the Gameplay_Layers subdirectory, all the
-    # umap files in the map root directory are gameplay layers.
-    # (I hope this doesn't change at some point.
-    #  Otherwise we'll try to process lighting layer umap files and will probably
-    #  crash at some point.)
-    gameplay_layer_dir = f"{map_dir}/{map_name}"
-    if "Gameplay_Layers" in os.listdir(gameplay_layer_dir):
-        gameplay_layer_dir += "/Gameplay_Layers"
+async def extract_minimap_asset(asset_path: str, target_path: str):
+    # skip if minimap already exists
+    if os.path.isfile(target_path):
+        return
 
-    layers = {}
+    # need to unpack in a temp dir because umodel creates nested directories instead
+    # of just a single file
+    temp_dir = os.path.join(config.FULLSIZE_MAP_DIR, "tmp")
+    os.makedirs(temp_dir, exist_ok=True)
 
-    # get pretty map name
+    umodel_cmd = shlex.join(
+        [
+            config.UMODEL_PATH,
+            f"-export",
+            asset_path,
+            f"-game=ue4.24",
+            f"-out={temp_dir}",
+        ]
+    )
+
+    if context.log_level <= logging.DEBUG:
+        stderr = sys.stderr
+        stdout = sys.stdout
+    else:
+        stderr = asyncio.subprocess.DEVNULL
+        stdout = asyncio.subprocess.DEVNULL
+
+    map_extract_process = await asyncio.subprocess.create_subprocess_shell(
+        umodel_cmd,
+        stdout=stdout,
+        stderr=stderr,
+    )
+    assert await map_extract_process.wait() == 0, "map extract failed"
+
+    # move the extracted image to the top level
+    tga_list = glob.glob("**/*.tga", root_dir=temp_dir, recursive=True)
+
+    # this will probably crash and burn when I parallelize things
+    assert len(tga_list) == 1, "minimap uasset has is more than one file, wtf?"
+
+    tga_path = tga_list[0]
+    tga_filename = os.path.split(tga_path)[1]
+
+    os.rename(
+        os.path.join(temp_dir, tga_path),
+        os.path.join(config.FULLSIZE_MAP_DIR, tga_filename),
+    )
+
+    shutil.rmtree(temp_dir)
+
+
+async def extract_layer(
+    unpacked_assets_dir: str,
+    layer_path: str,
+) -> dict:
+
+    async with parallel_limit:
+        # if (
+        #     "BlackCoast" not in layer_path
+        #     and "Chora" not in layer_path
+        #     and "Harju" not in layer_path
+        # ):
+        #     return {}
+
+        layer_filename, pretty_map_name, pretty_layer_name = extract_pretty_names(
+            layer_path
+        )
+
+        full_layer_path = os.path.join(unpacked_assets_dir, layer_path)
+
+        docs = await extract_yaml_dump(full_layer_path, layer_filename)
+
+        # build lane graph from map info
+        lane_graph, clusters, mains = get_lane_graph_and_clusters(docs)
+
+        bounds = await extract_minimap_bounds(docs)
+
+        table_dump = await extract_table_dump(full_layer_path, layer_filename)
+
+        # get minimap filename from import table
+        minimap_name = await extract_minimap(
+            unpacked_assets_dir, layer_filename, table_dump
+        )
+
+        return {
+            pretty_map_name: {
+                pretty_layer_name: {
+                    "background": {
+                        "corners": [{"x": p[0], "y": p[1]} for p in bounds],
+                        "minimap_filename": minimap_name,
+                    },
+                    "mains": mains,
+                    "clusters": clusters,
+                    "lanes": lane_graph,
+                }
+            }
+        }
+
+
+def path_split_recursive(path: str) -> list[str]:
+    parts = []
+    head = path
+    tail = ""
+
+    while head != "" and head != "/":
+        head, tail = os.path.split(head)
+        parts.insert(0, tail)
+
+    if head == "/":
+        parts.insert(0, head)
+
+    return parts
+
+
+def extract_pretty_names(layer_path: str) -> tuple[str, str, str]:
+    path_parts = path_split_recursive(layer_path)
+
+    layer_filename = path_parts[-1]
+    match = re.match(r"(HLP_)?(.*)_([^_]*)_([^_]*)\.umap", layer_filename)
+    hlp_prefix, map_name, gamemode, version = match.group(1, 2, 3, 4)
+
+    # execute hard-coded map renames
     MAP_RENAMES = {
-        "Al_Basrah_City": "Al Basrah",
-        "BASRAH_CITY": "Al Basrah",
         "Belaya": "Belaya Pass",
-        "Fallujah_City": "Fallujah",
-        "Mestia_Green": "Mestia",
-        "BlackCoast": "Black Coast",
+        "Kamdesh": "Kamdesh Highlands",
+        "Kokan": "Kokan Valley",
+        "Lashkar": "Lashkar Valley",
+        "Logar": "Logar Valley",
+        "Manic": "Manic-5",
+        "Tallil": "Tallil Outskirts",
     }
+    pretty_map_name = MAP_RENAMES.get(map_name, map_name).replace("_", " ")
 
-    pretty_map_name = map_name
-    pretty_map_name = MAP_RENAMES.get(pretty_map_name) or pretty_map_name
-    pretty_map_name = pretty_map_name.replace("_", " ")
-    assert pretty_map_name != ""
+    # turn PascalCase into space-separated title case
+    # ex: GooseBay -> Goose Bay
+    pretty_map_name = re.sub(r"(?<!^)(?=[A-Z])", " ", pretty_map_name).title()
+    # remove double-spaces possibly introduced by above
+    pretty_map_name = pretty_map_name.replace("  ", " ")
 
-    with log.progress(map_name) as progress:
-        for layer in os.listdir(gameplay_layer_dir):
-            # ignore non-umap files
-            if not layer.endswith(".umap"):
-                continue
-            layer = layer.replace(".umap", "")
+    pretty_layer_name = f"{gamemode} {version}"
+    if hlp_prefix is not None:
+        pretty_layer_name = "HLP " + pretty_layer_name
 
-            # only process supported game modes
-            game_mode = None
-            for gm in GAME_MODES:
-                if gm.casefold() in layer.casefold():
-                    game_mode = gm
-                    break
-            if game_mode is None:
-                continue
-
-            progress.status(layer)
-            pretty_layer_name, layer_data = await extract_layer(
-                layer, game_mode, pretty_map_name, gameplay_layer_dir, map_dir
-            )
-
-            layers[pretty_layer_name] = layer_data
-
-    return pretty_map_name, layers
+    return layer_filename, pretty_map_name, pretty_layer_name
 
 
-async def extract_map_dir(map_dir: str):
-    maps = {}
+def dict_update_2_deep(base_dict: dict[Any, dict], update_dict: dict[Any, dict]):
+    for k, v in update_dict.items():
+        if k in base_dict:
+            base_dict[k].update(v)
+        else:
+            base_dict[k] = v
+
+
+async def extract_maps(unpacked_assets_dir: str) -> dict:
+    raas_data = {}
 
     extraction_runs = []
 
-    for map_name in os.listdir(map_dir):
-        # Ignore some unsupported maps
-        if (
-            not os.path.isdir(f"{map_dir}/{map_name}")
-            or "EntryMap" in map_name
-            or "Forest" in map_name
-            or "Jensens_Range" in map_name
-            or "Tutorial" in map_name
-            or "Fallujah" == map_name
-            or "PacificProvingGrounds" == map_name
+    layers_list = glob.glob(
+        "**/Gameplay_Layers/*.umap", root_dir=unpacked_assets_dir, recursive=True
+    )
+
+    for layer_path in layers_list:
+        # Ignore some unsupported maps and irrelevant assets
+        unsupported_maps = [
+            "Jensens_Range",
+            "PacificProvingGrounds",
+            "Dummy",
+            "Sound",
+        ]
+        if any([map_name in layer_path for map_name in unsupported_maps]):
+            continue
+
+        # Ignore all unsupported game modes
+        supported_gamemodes = [
+            "RAAS",
+            "Invasion",
+        ]
+        if not any(
+            [game_mode_name in layer_path for game_mode_name in supported_gamemodes]
         ):
             continue
 
-        extraction_runs.append(extract_map(map_dir, map_name))
+        # TODO: remove
+        if "Hawks" not in layer_path:
+            continue
 
+        extraction_runs.append(extract_layer(unpacked_assets_dir, layer_path))
+
+    # run parallel
     # TODO: this doesn't increase performance at the moment because we're CPU-bound
     #       need to find and optimize the bottleneck (or run multiple processes)
-    #       also need to limit the amount of workers probably
-    if config.EXTRACT_PARALLEL:
-        for pretty_map_name, map_data in await asyncio.gather(*extraction_runs):
-            maps[pretty_map_name] = map_data
-    else:
-        for coro in extraction_runs:
-            pretty_map_name, map_data = await coro
-            maps[pretty_map_name] = map_data
+    #       also, this is currently bugged and seems to freeze, so we force
+    #       sequential operation for now
 
-    return maps
+    # if config.EXTRACT_PARALLEL:
+    #     for pretty_map_name, map_data in await tqdm.gather(*extraction_runs):
+    #         maps[pretty_map_name] = map_data
+    # else:
+
+    for coro in tqdm(extraction_runs):
+        layer_data = await coro
+        dict_update_2_deep(raas_data, layer_data)
+
+    return raas_data
 
 
 def access_one(obj_dict: dict):
@@ -561,15 +705,15 @@ def access_one(obj_dict: dict):
 def extract():
     os.makedirs(config.LAYER_DUMP_DIR, exist_ok=True)
 
-    if not os.path.isdir(config.UNPACKED_ASSETS_DIR):
+    unpacked_assets_dir = os.path.abspath(config.UNPACKED_ASSETS_DIR)
+
+    if not os.path.isdir(unpacked_assets_dir):
         log.error(
             f"Configured UNPACKED_ASSETS_DIR does not exist.\n"
             f"Make sure you run the unpack task first."
         )
 
-    map_dir = config.UNPACKED_ASSETS_DIR + "/Maps"
-    with log.progress(f"-- Extracting Maps from {map_dir}"):
-        map_data = asyncio.run(extract_map_dir(map_dir))
+    map_data = asyncio.run(extract_maps(unpacked_assets_dir))
 
     with log.progress("-- Writing RAAS data to file"):
         with open(f"raas-data-auto.yaml", "w") as f:
