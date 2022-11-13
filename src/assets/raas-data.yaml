@@ -86,6 +86,7 @@ Al Basrah:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-DEFMain
+        logic: Single Lane
         mains:
         - ATKMain
         - DEFMain
@@ -317,6 +318,7 @@ Al Basrah:
                 b: 100-Team2Main
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -405,6 +407,7 @@ Al Basrah:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -505,6 +508,7 @@ Al Basrah:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -589,6 +593,7 @@ Al Basrah:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -678,6 +683,7 @@ Al Basrah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -787,6 +793,7 @@ Al Basrah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -888,6 +895,7 @@ Al Basrah:
                 b: 01-CaptureZoneCluster
             -   a: 01-CaptureZoneCluster
                 b: 00-Team1Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -988,6 +996,7 @@ Al Basrah:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -1209,6 +1218,7 @@ Al Basrah:
                 b: 05W-BP_CaptureZoneCluster
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -1307,6 +1317,7 @@ Anvil:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -1759,6 +1770,7 @@ Anvil:
                 b: 100-Team2Main
             -   a: 07S-BP_CaptureZoneCluster5
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -1871,6 +1883,7 @@ Anvil:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -1987,6 +2000,7 @@ Anvil:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -2243,6 +2257,7 @@ Anvil:
                 b: 04W-BP_CaptureZoneCluster
             -   a: 04W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -2400,6 +2415,7 @@ Anvil:
                 b: 09-BP_CaptureZoneCluster
             -   a: 09-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -2656,6 +2672,7 @@ Anvil:
                 b: 04W-BP_CaptureZoneCluster
             -   a: 04W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -2813,6 +2830,7 @@ Anvil:
                 b: 09-BP_CaptureZoneCluster
             -   a: 09-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -3118,6 +3136,7 @@ Belaya Pass:
                 b: 100-Team2Main
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -3344,6 +3363,7 @@ Belaya Pass:
                 b: HLP_BP_CaptureZoneClusterLattice-05-Cross
             -   a: HLP_BP_CaptureZoneClusterLattice-06-T2
                 b: HLP_BP_CaptureZoneClusterLattice-05-T2
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -3441,6 +3461,7 @@ Belaya Pass:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -3526,6 +3547,7 @@ Belaya Pass:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -3600,6 +3622,7 @@ Belaya Pass:
                 b: 04-CaptureZoneCluster_0
             -   a: 04-CaptureZoneCluster_0
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -3805,6 +3828,7 @@ Belaya Pass:
                 b: 05W-BP_CaptureZoneCluster
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -3890,6 +3914,7 @@ Belaya Pass:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -3983,6 +4008,7 @@ Belaya Pass:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -4124,6 +4150,7 @@ Belaya Pass:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -4265,6 +4292,7 @@ Belaya Pass:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -4642,6 +4670,7 @@ Black Coast:
                 b: Z-Team2Main
             -   a: 07W-CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -4988,6 +5017,7 @@ Black Coast:
                 b: HLP_BP_CaptureZoneClusterLatticePaseka
             -   a: HLP_BP_CaptureZoneClusterLatticeVLFArray
                 b: HLP_BP_CaptureZoneClusterLatticeQuarry
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -5086,6 +5116,7 @@ Black Coast:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main_3
+        logic: Single Lane
         mains:
         - Team1Main_2
         - Team2Main_3
@@ -5195,6 +5226,7 @@ Black Coast:
                 b: 05-CaptureZoneCluster_3
             -   a: 05-CaptureZoneCluster_3
                 b: 100-Team2Main_1
+        logic: Single Lane
         mains:
         - Team1Main_0
         - Team2Main_1
@@ -5284,6 +5316,7 @@ Black Coast:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main_3
+        logic: Single Lane
         mains:
         - Team1Main_2
         - Team2Main_3
@@ -5380,6 +5413,7 @@ Black Coast:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -5890,6 +5924,7 @@ Black Coast:
                 b: G7-CaptureZoneCluster
             -   a: G7-CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -6119,6 +6154,7 @@ Black Coast:
                 b: C6-CaptureZoneCluster_17
             -   a: C6-CaptureZoneCluster_17
                 b: Z-Team2Main_3
+        logic: Multiple Lanes
         mains:
         - Team1Main_2
         - Team2Main_3
@@ -6344,6 +6380,7 @@ Black Coast:
                 b: C6-CaptureZoneCluster_17
             -   a: C6-CaptureZoneCluster_17
                 b: Z-Team2Main_3
+        logic: Multiple Lanes
         mains:
         - Team1Main_2
         - Team2Main_3
@@ -6810,6 +6847,7 @@ Black Coast:
                 b: G7-CaptureZoneCluster
             -   a: G7-CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -6892,6 +6930,7 @@ Chora:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-DefenderMain
+        logic: Single Lane
         mains:
         - AttackerMain
         - DefenderMain
@@ -7196,6 +7235,7 @@ Chora:
                 b: 100-RUSMain
             -   a: 06S-BP_CaptureZoneCluster3
                 b: 100-RUSMain
+        logic: Lane Hopping
         mains:
         - RUSMain
         - USAMain
@@ -7406,6 +7446,7 @@ Chora:
                 b: 100-RUSMain
             -   a: HLP_BP_CaptureZoneClusterLattice_5_2
                 b: 100-RUSMain
+        logic: Single Lane
         mains:
         - RUSMain
         - USAMain
@@ -7490,6 +7531,7 @@ Chora:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -7582,6 +7624,7 @@ Chora:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -7822,6 +7865,7 @@ Chora:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -7903,6 +7947,7 @@ Chora:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -8143,6 +8188,7 @@ Chora:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -8284,6 +8330,7 @@ Chora:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -8366,6 +8413,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -8662,6 +8710,7 @@ Fallujah:
                 b: 100-MEAMain
             -   a: 05S-CaptureZoneCluster2
                 b: 100-MEAMain
+        logic: Lane Hopping
         mains:
         - MEAMain
         - USAMain
@@ -8966,6 +9015,7 @@ Fallujah:
                 b: 100-MEAMain
             -   a: 05S-CaptureZoneCluster2
                 b: 100-MEAMain
+        logic: Lane Hopping
         mains:
         - MEAMain
         - USAMain
@@ -9047,6 +9097,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -9173,6 +9224,7 @@ Fallujah:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -9258,6 +9310,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -9336,6 +9389,7 @@ Fallujah:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -9425,6 +9479,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -9536,6 +9591,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -9649,6 +9705,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -9854,6 +9911,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -9965,6 +10023,7 @@ Fallujah:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -10205,6 +10264,7 @@ Fallujah:
                 b: 06S-CaptureZoneCluster
             -   a: 06S-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -10449,6 +10509,7 @@ Fallujah:
                 b: C6-CaptureZoneCluster
             -   a: C6-CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -10657,6 +10718,7 @@ Fools Road:
                 b: 100-Team2Main
             -   a: 05E-BP_CaptureZoneCluster3
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -10747,6 +10809,7 @@ Fools Road:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -10900,6 +10963,7 @@ Fools Road:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -10989,6 +11053,7 @@ Fools Road:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -11081,6 +11146,7 @@ Fools Road:
                 b: 06-BP_CaptureZoneCluster_0
             -   a: 06-BP_CaptureZoneCluster_0
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -11234,6 +11300,7 @@ Fools Road:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -11311,6 +11378,7 @@ Fools Road:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -11672,6 +11740,7 @@ Goose Bay:
                 b: Z-Team2Main
             -   a: 6E-BP_CaptureZoneCluster8
                 b: Z-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -11972,6 +12041,7 @@ Goose Bay:
                 b: Z-Team2Main
             -   a: 5E-BP_CaptureZoneCluster7
                 b: Z-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -12280,6 +12350,7 @@ Goose Bay:
                 b: Z-Team2Main
             -   a: 5E-BP_CaptureZoneCluster7
                 b: Z-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -12369,6 +12440,7 @@ Goose Bay:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -12454,6 +12526,7 @@ Goose Bay:
                 b: 01-CaptureZoneCluster_0
             -   a: 01-CaptureZoneCluster_0
                 b: 00-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -12529,6 +12602,7 @@ Goose Bay:
                 b: 03-CaptureZoneCluster_0
             -   a: 03-CaptureZoneCluster_0
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -12610,6 +12684,7 @@ Goose Bay:
                 b: 01-CaptureZoneCluster_0
             -   a: 01-CaptureZoneCluster_0
                 b: 00-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -12844,6 +12919,7 @@ Goose Bay:
                 b: C6-BP_CaptureZoneCluster
             -   a: C6-BP_CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -13078,6 +13154,7 @@ Goose Bay:
                 b: C6-BP_CaptureZoneCluster
             -   a: C6-BP_CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -13312,6 +13389,7 @@ Goose Bay:
                 b: C6-BP_CaptureZoneCluster
             -   a: C6-BP_CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -13777,6 +13855,7 @@ Gorodok:
                 b: 100-NorthMain
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-NorthMain
+        logic: Lane Hopping
         mains:
         - NorthMain
         - SMain
@@ -14216,6 +14295,7 @@ Gorodok:
                 b: 100-NorthMain
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-NorthMain
+        logic: Lane Hopping
         mains:
         - NorthMain
         - SMain
@@ -14813,6 +14893,7 @@ Gorodok:
                 b: HLP_BP_CaptureZoneClusterLatticeHilltopBunker
             -   a: HLP_BP_CaptureZoneClusterLatticFruitFarm
                 b: HLP_BP_CaptureZoneClusterLatticeRiverbend
+        logic: Single Lane
         mains:
         - NorthMain
         - SMain
@@ -14897,6 +14978,7 @@ Gorodok:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -14989,6 +15071,7 @@ Gorodok:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -15078,6 +15161,7 @@ Gorodok:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -15377,6 +15461,7 @@ Gorodok:
                 b: 07W-BP_CaptureZoneCluster
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -15529,6 +15614,7 @@ Gorodok:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -15618,6 +15704,7 @@ Gorodok:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -15691,6 +15778,7 @@ Gorodok:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -15794,6 +15882,7 @@ Gorodok:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -16039,6 +16128,7 @@ Gorodok:
                 b: 02C-BP_CaptureZoneCluster
             -   a: 01CE-BP_CaptureZoneCluster
                 b: 02E-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -16338,6 +16428,7 @@ Gorodok:
                 b: 07W-BP_CaptureZoneCluster
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -16637,6 +16728,7 @@ Gorodok:
                 b: 07W-BP_CaptureZoneCluster
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -16789,6 +16881,7 @@ Gorodok:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -17088,6 +17181,7 @@ Gorodok:
                 b: 07W-BP_CaptureZoneCluster
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -17355,6 +17449,7 @@ Gorodok:
                 b: 05C-BP_CaptureZoneCluster_3
             -   a: 04W-BP_CaptureZoneCluster_9
                 b: 05C-BP_CaptureZoneCluster_3
+        logic: Single Lane
         mains:
         - Team1Main_0
         - Team2Main_1
@@ -17829,6 +17924,7 @@ Harju:
                 b: HLP_BP_CaptureZoneClusterLattice_Construction
             -   a: HLP_BP_CaptureZoneClusterLattice_WheatCheckpoint
                 b: HLP_BP_CaptureZoneClusterLattice_Logistics
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -17986,6 +18082,7 @@ Harju:
                 b: 03b-CaptureZoneCluster
             -   a: 03b-CaptureZoneCluster
                 b: 04-CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -18078,6 +18175,7 @@ Harju:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -18167,6 +18265,7 @@ Harju:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main_1
         - Team2Main
@@ -18252,6 +18351,7 @@ Harju:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -18369,6 +18469,7 @@ Harju:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -18457,6 +18558,7 @@ Harju:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -18787,6 +18889,7 @@ Harju:
                 b: C6-CaptureZoneCluster_21
             -   a: C6-CaptureZoneCluster_21
                 b: Z-Team2Main_1
+        logic: Multiple Lanes
         mains:
         - Team1Main_0
         - Team2Main_1
@@ -19117,6 +19220,7 @@ Harju:
                 b: C6-CaptureZoneCluster_21
             -   a: C6-CaptureZoneCluster_21
                 b: Z-Team2Main_1
+        logic: Multiple Lanes
         mains:
         - Team1Main_0
         - Team2Main_1
@@ -19217,6 +19321,7 @@ Harju:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -19546,6 +19651,7 @@ Kamdesh Highlands:
                 b: 100-INSMain
             -   a: 06W-BP_CaptureZoneCluster
                 b: 100-INSMain
+        logic: Lane Hopping
         mains:
         - INSMain
         - MILMain
@@ -19651,6 +19757,7 @@ Kamdesh Highlands:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -19744,6 +19851,7 @@ Kamdesh Highlands:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -19825,6 +19933,7 @@ Kamdesh Highlands:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -19930,6 +20039,7 @@ Kamdesh Highlands:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -20023,6 +20133,7 @@ Kamdesh Highlands:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -20104,6 +20215,7 @@ Kamdesh Highlands:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -20193,6 +20305,7 @@ Kamdesh Highlands:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -20444,6 +20557,7 @@ Kamdesh Highlands:
                 b: 06W-BP_CaptureZoneCluster
             -   a: 06W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - MILMain
         - Team2Main
@@ -20567,6 +20681,7 @@ Kamdesh Highlands:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -20690,6 +20805,7 @@ Kamdesh Highlands:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -20779,6 +20895,7 @@ Kamdesh Highlands:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -21030,6 +21147,7 @@ Kamdesh Highlands:
                 b: 06W-BP_CaptureZoneCluster
             -   a: 06W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - MILMain
         - Team2Main
@@ -21310,6 +21428,7 @@ Kamdesh Highlands:
                 b: C7-BP_CaptureZoneCluster
             -   a: C7-BP_CaptureZoneCluster
                 b: Z100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Main
         - Team2Main
@@ -21419,6 +21538,7 @@ Kamdesh Highlands:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -21904,6 +22024,7 @@ Kohat:
                 b: 100-RUSMain
             -   a: 07W-BP_CaptureZoneCluster6
                 b: 100-RUSMain
+        logic: Lane Hopping
         mains:
         - RUSMain
         - USAMain
@@ -22320,6 +22441,7 @@ Kohat:
                 b: 100-RUSMain
             -   a: 07W-BP_CaptureZoneCluster6
                 b: 100-RUSMain
+        logic: Lane Hopping
         mains:
         - RUSMain
         - USAMain
@@ -22417,6 +22539,7 @@ Kohat:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -22475,6 +22598,7 @@ Kohat:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -22537,6 +22661,7 @@ Kohat:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -22795,6 +22920,7 @@ Kohat:
                 b: 06W-BP_CaptureZoneCluster
             -   a: 06W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -23101,6 +23227,7 @@ Kohat:
                 b: 06Yellow-BP_CaptureZoneCluster
             -   a: 06Yellow-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -23346,6 +23473,7 @@ Kohat:
                 b: 05Yellow-BP_CaptureZoneCluster
             -   a: 05Yellow-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -23468,6 +23596,7 @@ Kohat:
                 b: 08-BP_CaptureZoneCluster
             -   a: 08-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -23712,6 +23841,7 @@ Kohat:
                 b: 02E-BP_CaptureZoneCluster
             -   a: 03C-BP_CaptureZoneCluster
                 b: 04E-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -23939,6 +24069,7 @@ Kohat:
                 b: 04Yellow-BP_CaptureZoneCluster
             -   a: 05Yellow-BP_CaptureZoneCluster
                 b: 06Red-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -24136,6 +24267,7 @@ Kohat:
                 b: 04Blue-BP_CaptureZoneCluster
             -   a: 01Blue-BP_CaptureZoneCluster
                 b: 02Red-BP_CaptureZoneCluster_4
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -24394,6 +24526,7 @@ Kohat:
                 b: 06W-BP_CaptureZoneCluster
             -   a: 06W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -24561,6 +24694,7 @@ Kohat:
                 b: A7-BP_CaptureZoneCluster
             -   a: A7-BP_CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -24659,6 +24793,7 @@ Kokan Valley:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -24756,6 +24891,7 @@ Kokan Valley:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25007,6 +25143,7 @@ Kokan Valley:
                 b: 100-MEAMain
             -   a: 05W-BP_CaptureZoneCluster2
                 b: 100-MEAMain
+        logic: Lane Hopping
         mains:
         - MEAMain
         - USAMain
@@ -25084,6 +25221,7 @@ Kokan Valley:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25180,6 +25318,7 @@ Kokan Valley:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25265,6 +25404,7 @@ Kokan Valley:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25385,6 +25525,7 @@ Kokan Valley:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25505,6 +25646,7 @@ Kokan Valley:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25603,6 +25745,7 @@ Lashkar Valley:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25684,6 +25827,7 @@ Lashkar Valley:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -25987,6 +26131,7 @@ Lashkar Valley:
                 b: 100-Team2Main
             -   a: 007W-HLP_BP_CaptureZoneClusterLattice10
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -26351,6 +26496,7 @@ Lashkar Valley:
                 b: 0010-HLP_BP_CaptureZoneClusterLattice13
             -   a: 009Mid-HLP_BP_CaptureZoneClusterLattice12
                 b: 0010-HLP_BP_CaptureZoneClusterLattice13
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -26508,6 +26654,7 @@ Lashkar Valley:
                 b: 100-Team2Main
             -   a: 05W-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -26665,6 +26812,7 @@ Lashkar Valley:
                 b: 100-Team2Main
             -   a: 05W-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -26826,6 +26974,7 @@ Lashkar Valley:
                 b: 100-Team2Main
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -27105,6 +27254,7 @@ Lashkar Valley:
                 b: 07W-CaptureZoneCluster
             -   a: 07W-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -27384,6 +27534,7 @@ Lashkar Valley:
                 b: 07W-CaptureZoneCluster
             -   a: 07W-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -27663,6 +27814,7 @@ Lashkar Valley:
                 b: 07W-CaptureZoneCluster
             -   a: 07W-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -27916,6 +28068,7 @@ Lashkar Valley:
                 b: C7_BP_CaptureZoneCluster
             -   a: C7_BP_CaptureZoneCluster
                 b: Z100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -28169,6 +28322,7 @@ Lashkar Valley:
                 b: C7_BP_CaptureZoneCluster
             -   a: C7_BP_CaptureZoneCluster
                 b: Z100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -28347,6 +28501,7 @@ Logar Valley:
                 b: 07S-BP_CaptureZoneCluster
             -   a: 07S-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -28503,6 +28658,7 @@ Logar Valley:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -28996,6 +29152,7 @@ Manic-5:
                 b: 100-Team2Main
             -   a: 07S-CaptureZoneCluster4
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -29141,6 +29298,7 @@ Manic-5:
                 b: 01-CaptureZoneCluster
             -   a: 01-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main_0
         - Team2Main
@@ -29230,6 +29388,7 @@ Manic-5:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -29593,6 +29752,7 @@ Manic-5:
                 b: 07-CaptureZoneCluster
             -   a: 07-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -29938,6 +30098,7 @@ Manic-5:
                 b: C5-CaptureZoneCluster
             -   a: C5-CaptureZoneCluster
                 b: Z-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -30301,6 +30462,7 @@ Manic-5:
                 b: 07-CaptureZoneCluster
             -   a: 07-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -30477,6 +30639,7 @@ Manic-5:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -30552,6 +30715,7 @@ Mestia:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -30633,6 +30797,7 @@ Mestia:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -30714,6 +30879,7 @@ Mestia:
                 b: 05-BP_CaptureZoneCluster_1
             -   a: 05-BP_CaptureZoneCluster_1
                 b: 100-MILMain
+        logic: Single Lane
         mains:
         - MILMain
         - USAMain
@@ -30795,6 +30961,7 @@ Mestia:
                 b: 05-BP_CaptureZoneCluster_1
             -   a: 05-BP_CaptureZoneCluster_1
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -30889,6 +31056,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-DEFMain
+        logic: Single Lane
         mains:
         - ATKMain
         - DEFMain
@@ -31281,6 +31449,7 @@ Mutaha:
                 b: 100-MEAMain
             -   a: 05W-BP_CaptureZoneCluster3
                 b: 100-MEAMain
+        logic: Lane Hopping
         mains:
         - MEAMain
         - USAMain
@@ -31661,6 +31830,7 @@ Mutaha:
                 b: 100-MEAMain
             -   a: 05W-BP_CaptureZoneCluster3
                 b: 100-MEAMain
+        logic: Lane Hopping
         mains:
         - MEAMain
         - USAMain
@@ -31766,6 +31936,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -31871,6 +32042,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -31976,6 +32148,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32089,6 +32262,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32250,6 +32424,7 @@ Mutaha:
                 b: 04S-BP_CaptureZoneCluster
             -   a: 02W-BP_CaptureZoneCluster
                 b: 03S-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32343,6 +32518,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32436,6 +32612,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32553,6 +32730,7 @@ Mutaha:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32700,6 +32878,7 @@ Mutaha:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -32861,6 +33040,7 @@ Mutaha:
                 b: 04S-BP_CaptureZoneCluster
             -   a: 02W-BP_CaptureZoneCluster
                 b: 03S-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -33531,6 +33711,7 @@ Narva:
                 b: HLP_BP_CaptureZoneClusterLatticeShippingYard
             -   a: HLP_BP_CaptureZoneClusterLatticeWarehouse
                 b: HLP_BP_CaptureZoneClusterLatticeTuruApts
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -33624,6 +33805,7 @@ Narva:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -33717,6 +33899,7 @@ Narva:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -33811,6 +33994,7 @@ Narva:
                 b: 04-BP_CaptureZoneCluster
             -   a: 04-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -33916,6 +34100,7 @@ Narva:
                 b: 05-BP_CaptureZoneCluster2
             -   a: 05-BP_CaptureZoneCluster2
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -34005,6 +34190,7 @@ Narva:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -34318,6 +34504,7 @@ Narva:
                 b: 05W-BP_CaptureZoneCluster
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -34607,6 +34794,7 @@ Narva:
                 b: 05C-BP_CaptureZoneCluster
             -   a: 03C-BP_CaptureZoneCluster
                 b: 04W-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -34920,6 +35108,7 @@ Narva:
                 b: 05W-BP_CaptureZoneCluster
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -35209,6 +35398,7 @@ Narva:
                 b: 05C-BP_CaptureZoneCluster_3
             -   a: 03C-BP_CaptureZoneCluster_1
                 b: 04W-BP_CaptureZoneCluster_6
+        logic: Single Lane
         mains:
         - Team1Main_0
         - Team2Main_1
@@ -35466,6 +35656,7 @@ Narva:
                 b: 05W-BP_CaptureZoneCluster
             -   a: 05W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -35564,6 +35755,7 @@ Skorpo:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -35982,6 +36174,7 @@ Skorpo:
                 b: 100-Team2Main
             -   a: 07S-CaptureZoneCluster3
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -36400,6 +36593,7 @@ Skorpo:
                 b: 100-Team2Main
             -   a: 07S-CaptureZoneCluster3
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -36484,6 +36678,7 @@ Skorpo:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -36545,6 +36740,7 @@ Skorpo:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -36643,6 +36839,7 @@ Skorpo:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -36740,6 +36937,7 @@ Skorpo:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -36933,6 +37131,7 @@ Skorpo:
                 b: 07-CaptureZoneCluster
             -   a: 07-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -37185,6 +37384,7 @@ Skorpo:
                 b: 05S-CaptureZoneCluster
             -   a: 05S-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -37471,6 +37671,7 @@ Skorpo:
                 b: 06S-CaptureZoneCluster
             -   a: 06S-CaptureZoneCluster
                 b: 100-MILMain
+        logic: Multiple Lanes
         mains:
         - MILMain
         - USAMain
@@ -37642,6 +37843,7 @@ Skorpo:
                 b: 05S-CaptureZoneCluster
             -   a: 05S-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -37808,6 +38010,7 @@ Skorpo:
                 b: 08-CaptureZoneCluster
             -   a: 08-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -38200,6 +38403,7 @@ Sumari:
                 b: 100-Team2Main
             -   a: 09S-BP_CaptureZoneCluster8
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -38312,6 +38516,7 @@ Sumari:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38424,6 +38629,7 @@ Sumari:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38536,6 +38742,7 @@ Sumari:
                 b: 06-BP_CaptureZoneCluster
             -   a: 06-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38626,6 +38833,7 @@ Tallil Outskirts:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38696,6 +38904,7 @@ Tallil Outskirts:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38765,6 +38974,7 @@ Tallil Outskirts:
                 b: 05-CaptureZoneCluster
             -   a: 05-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38835,6 +39045,7 @@ Tallil Outskirts:
                 b: 04-CaptureZoneCluster
             -   a: 04-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -38935,6 +39146,7 @@ Tallil Outskirts:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -39051,6 +39263,7 @@ Tallil Outskirts:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -39138,6 +39351,7 @@ Tallil Outskirts:
                 b: 07-CaptureZoneCluster
             -   a: 07-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -39238,6 +39452,7 @@ Tallil Outskirts:
                 b: 06-Batha
             -   a: 06-Batha
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -39338,6 +39553,7 @@ Tallil Outskirts:
                 b: 06-CaptureZoneCluster
             -   a: 06-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -39438,6 +39654,7 @@ Tallil Outskirts:
                 b: 06-Batha
             -   a: 06-Batha
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -39573,6 +39790,7 @@ Tallil Outskirts:
                 b: 05B-CaptureZoneCluster
             -   a: 05B-CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -39695,6 +39913,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -40187,6 +40406,7 @@ Yehorivka:
                 b: 100-Team2Main
             -   a: 07E-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -40671,6 +40891,7 @@ Yehorivka:
                 b: 100-Team2Main
             -   a: 07W-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Lane Hopping
         mains:
         - Team1Main
         - Team2Main
@@ -41109,6 +41330,7 @@ Yehorivka:
                 b: Cluster_OverpassShortcut
             -   a: Cluster_Yev
                 b: Cluster_EasternInsertion
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -41413,6 +41635,7 @@ Yehorivka:
                 b: 07-HLP_BP_CaptureZoneClusterLattice-IvanPere
             -   a: 07-HLP_BP_CaptureZoneClusterLattice-IvanPere
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -41490,6 +41713,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -41567,6 +41791,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -41672,6 +41897,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -41936,6 +42162,7 @@ Yehorivka:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -42029,6 +42256,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -42293,6 +42521,7 @@ Yehorivka:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -42386,6 +42615,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -42467,6 +42697,7 @@ Yehorivka:
                 b: 05-BP_CaptureZoneCluster
             -   a: 05-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main
@@ -42712,6 +42943,7 @@ Yehorivka:
                 b: 05W-BP_CaptureZoneCluster_6
             -   a: 05C+E-BP_CaptureZoneCluster
                 b: 06W-BP_CaptureZoneCluster_11
+        logic: Single Lane
         mains:
         - Team1Main_1
         - Team2Main
@@ -42957,6 +43189,7 @@ Yehorivka:
                 b: 05W-BP_CaptureZoneCluster_6
             -   a: 05C+E-BP_CaptureZoneCluster_0
                 b: 06W-BP_CaptureZoneCluster_11
+        logic: Single Lane
         mains:
         - Team1Main_1
         - Team2Main_0
@@ -43202,6 +43435,7 @@ Yehorivka:
                 b: 05W-BP_CaptureZoneCluster_6
             -   a: 05C+E-BP_CaptureZoneCluster_0
                 b: 06W-BP_CaptureZoneCluster_11
+        logic: Single Lane
         mains:
         - Team1Main_1
         - Team2Main_0
@@ -43458,6 +43692,7 @@ Yehorivka:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -43677,6 +43912,7 @@ Yehorivka:
                 b: 07-BP_CaptureZoneCluster
             -   a: 07-BP_CaptureZoneCluster
                 b: 100-Team2Main
+        logic: Multiple Lanes
         mains:
         - Team1Main
         - Team2Main
@@ -43922,6 +44158,7 @@ Yehorivka:
                 b: 05W-BP_CaptureZoneCluster_7
             -   a: 05C+E-BP_CaptureZoneCluster_12
                 b: 06W-BP_CaptureZoneCluster_13
+        logic: Single Lane
         mains:
         - Team1Main_0
         - Team2Main
@@ -44138,6 +44375,7 @@ Yehorivka:
                 b: 05A-BP_CaptureZoneCluster
             -   a: 05B-BP_CaptureZoneCluster2
                 b: 04A-BP_CaptureZoneCluster
+        logic: Single Lane
         mains:
         - Team1Main
         - Team2Main

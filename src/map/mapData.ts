@@ -10,6 +10,7 @@ class MapData {
   public mains: Set<CapturePoint> = new Set();
   public ownMain: CapturePoint | null = null;
   public lanes: Set<Lane> = new Set();
+  public logic: String = "";
 
   public enemyMain(): CapturePoint | null {
     if (this.mains.size !== 2) return null;

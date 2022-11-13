@@ -2,7 +2,7 @@
   <div>
     <span class="overlay top-center">
       <lane-percentages
-        :lanes="mapData.lanes"
+        :map-data="mapData"
         :selection="selection"
       ></lane-percentages>
     </span>

@@ -20,6 +20,8 @@ export function changeLayer(mapName: string, layerName: string) {
 
   const layerData = raasData[mapName][layerName];
 
+  mapData.logic = layerData.logic;
+
   // note which clusters appear on which lane, we need this to establish CP->Cluster relationship per-lane
   const clusters_on_lane = new Map();
   for (const laneName in layerData.lanes) {

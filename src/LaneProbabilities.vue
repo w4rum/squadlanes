@@ -24,8 +24,11 @@ The only thing currently not visualized (for HLP and Vanilla) are capture point 
         <b-icon-question-circle
       /></a>
     </div>
+    <div class="text-muted text-center small m-1">
+        Logic: {{ mapData.logic }}
+    </div>
     <div class="lane-percentages">
-      <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">
+      <div class="lane" :style="laneColor(lane)" v-for="lane in mapData.lanes">
         <label>{{ lane.name }}</label>
         <span>{{ Math.floor(lane.probability * 100) }}%</span>
       </div>
@@ -41,7 +44,7 @@ export default Vue.extend({
     BIconQuestionCircle,
   },
   props: {
-    lanes: Set,
+    mapData: Object,
     selection: {
       map: String,
       layer: String,

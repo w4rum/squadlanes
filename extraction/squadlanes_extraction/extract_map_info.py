@@ -195,24 +195,28 @@ def get_lane_graph_and_clusters(docs: List[dict]):
     handlers = {
         # numbers define priorities
         # HLP GRAAS also has the multi_lane_graph initializer, so we check for both
-        "SQRAASLaneInitializer_C": (0, multi_lane_graph),
-        "SQGraphRAASInitializerComponent": (0, single_lane_graph),
-        "SQRAASGridInitializer_C": (1, hlp_graas),
-        "HLP_SQRAASLatticeInitializer_C": (1, hlp_lattice),
+        "SQRAASLaneInitializer_C": (0, multi_lane_graph, "Multiple Lanes"),
+        "SQGraphRAASInitializerComponent": (0, single_lane_graph, "Single Lane"),
+        "SQRAASGridInitializer_C": (1, hlp_graas, "Lane Hopping"),
+        "HLP_SQRAASLatticeInitializer_C": (1, hlp_lattice, "Single Lane"),
     }
     priority = -1
     handler = None
     initializer = None
+    logic_name = None
 
     for obj in docs:
         obj = access_one(obj)
         class_name = obj["ClassName"]
 
-        cur_priority, cur_handler = handlers.get(class_name, (-1, None))
+        cur_priority, cur_handler, cur_logic_name = handlers.get(
+            class_name, (-1, None, None)
+        )
         if cur_priority > priority:
             priority = cur_priority
             handler = cur_handler
             initializer = obj
+            logic_name = cur_logic_name
 
     assert handler is not None, "no supported RAAS initializer found"
     lane_graph, clusters = handler(initializer, docs)
@@ -227,7 +231,7 @@ def get_lane_graph_and_clusters(docs: List[dict]):
 
     mains.sort()
 
-    return lane_graph, clusters, mains
+    return lane_graph, clusters, mains, logic_name
 
 
 def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
@@ -677,7 +681,7 @@ async def extract_layer(
         docs = await extract_yaml_dump(full_layer_path, layer_filename)
 
         # build lane graph from map info
-        lane_graph, clusters, mains = get_lane_graph_and_clusters(docs)
+        lane_graph, clusters, mains, logic = get_lane_graph_and_clusters(docs)
 
         bounds = await extract_minimap_bounds(docs)
 
@@ -695,6 +699,7 @@ async def extract_layer(
                         "corners": [{"x": p[0], "y": p[1]} for p in bounds],
                         "minimap_filename": minimap_name,
                     },
+                    "logic": logic,
                     "mains": mains,
                     "clusters": clusters,
                     "lanes": lane_graph,
