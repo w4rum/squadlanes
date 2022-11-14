@@ -190,37 +190,7 @@ def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:
     return rotated_x, rotated_y
 
 
-def get_lane_graph_and_clusters(docs: List[dict]):
-    # get lane graph and clusters
-    handlers = {
-        # numbers define priorities
-        # HLP GRAAS also has the multi_lane_graph initializer, so we check for both
-        "SQRAASLaneInitializer_C": (0, multi_lane_graph, "Multiple Lanes"),
-        "SQGraphRAASInitializerComponent": (0, single_lane_graph, "Single Lane"),
-        "SQRAASGridInitializer_C": (1, hlp_graas, "Lane Hopping"),
-        "HLP_SQRAASLatticeInitializer_C": (1, hlp_lattice, "Single Lane"),
-    }
-    priority = -1
-    handler = None
-    initializer = None
-    logic_name = None
-
-    for obj in docs:
-        obj = access_one(obj)
-        class_name = obj["ClassName"]
-
-        cur_priority, cur_handler, cur_logic_name = handlers.get(
-            class_name, (-1, None, None)
-        )
-        if cur_priority > priority:
-            priority = cur_priority
-            handler = cur_handler
-            initializer = obj
-            logic_name = cur_logic_name
-
-    assert handler is not None, "no supported RAAS initializer found"
-    lane_graph, clusters = handler(initializer, docs)
-
+def get_main_cps(docs: dict) -> list[str]:
     # identify main clusters
     mains = []
     for obj in docs:
@@ -230,12 +200,98 @@ def get_lane_graph_and_clusters(docs: List[dict]):
     assert len(mains) == 2, f"found {len(mains)} main bases"
 
     mains.sort()
+    return mains
+
+
+def get_lane_graph_and_clusters(docs: List[dict]):
+    # get lane graph and clusters
+    handlers = {
+        # numbers define priorities
+        # HLP GRAAS also has the multi_lane_graph initializer, so we check for both
+        "SQRAASLaneInitializer_C": (0, multi_lane_graph),
+        "SQGraphRAASInitializerComponent": (0, single_lane_graph),
+        "SQRAASGridInitializer_C": (1, hlp_graas),
+        "HLP_SQRAASLatticeInitializer_C": (1, hlp_lattice),
+    }
+    priority = -1
+    handler = None
+    initializer = None
+
+    for obj in docs:
+        obj = access_one(obj)
+        class_name = obj["ClassName"]
+
+        cur_priority, cur_handler = handlers.get(class_name, (-1, None))
+        if cur_priority > priority:
+            priority = cur_priority
+            handler = cur_handler
+            initializer = obj
+
+    assert handler is not None, "no supported RAAS initializer found"
+    lane_graph, clusters, logic_name = handler(initializer, docs)
+
+    mains = get_main_cps(docs)
 
     return lane_graph, clusters, mains, logic_name
 
 
+def is_single_path(link_list: dict, docs: dict) -> bool:
+    # Traverse the link list once to distinguish between a lane with a single path
+    # or a branching lane.
+    # Note that the path traversal logic is the same (directed source-sink graph).
+
+    # there is only one path is every node (except mains) has
+    # in-degree 1 and out-degree 1
+
+    # check that every node only appear once on the
+    # a-side and once on the b-side of a link
+
+    cluster_names = get_cluster_names(link_list)
+    main_clusters = get_main_clusters(link_list, docs)
+
+    missing_out_link = set(cluster_names)
+    missing_in_link = set(cluster_names)
+
+    single_lane = True
+    for a, b in link_list:
+        if a not in missing_out_link or b not in missing_in_link:
+            single_lane = False
+        missing_out_link.discard(a)
+        missing_in_link.discard(b)
+
+    # make sure one of the mains has 1-out-0-in and vice versa
+    if main_clusters[0] in missing_in_link:
+        source_main = main_clusters[0]
+        dest_main = main_clusters[1]
+    else:
+        dest_main = main_clusters[0]
+        source_main = main_clusters[1]
+
+    if not (
+        source_main in missing_in_link
+        and source_main not in missing_out_link
+        and dest_main not in missing_in_link
+        and dest_main in missing_out_link
+    ):
+        single_lane = False
+
+    for main_cl in main_clusters:
+        missing_out_link.discard(main_cl)
+        missing_in_link.discard(main_cl)
+
+    # if there are still nodes left in missing_out_link and missing_in_link, then they
+    # are disconnected from the mains
+    # => warn but don't count
+    if len(missing_in_link) > 0 or len(missing_out_link) > 0:
+        print(f"Warning: Isolated clusters found:")
+        print(missing_out_link.union(missing_in_link))
+
+    return single_lane
+
+
 def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
     lane_graph = {}
+    lane_link_lists = {}
     cluster_names = set()
     for lane in index_dict_to_list(initializer_dict["AASLanes"]):
         lane: dict
@@ -243,17 +299,45 @@ def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
         link_list, pretty_link_list = get_link_list(lane["AASLaneLinks"])
         cluster_names |= get_cluster_names(link_list)
         lane_graph[lane_name] = pretty_link_list
+        lane_link_lists[lane_name] = link_list
+
+    # if there is only one lane, and it's a path, then display "Single Lane" as logic
+    if len(lane_link_lists) == 1 and is_single_path(
+        list(lane_link_lists.values())[0], docs
+    ):
+        logic = "Single Lane"
+    else:
+        logic = "Multiple Lanes"
+
     clusters = get_cluster_list(cluster_names, docs)
-    return lane_graph, clusters
+    return lane_graph, clusters, logic
+
+
+def get_main_clusters(link_list: dict, docs: dict) -> list[str]:
+    cluster_names = get_cluster_names(link_list)
+    clusters = {name: to_cluster(name, docs) for name in cluster_names}
+
+    main_cps = get_main_cps(docs)
+    main_clusters = []
+
+    for cluster_name, cluster in clusters.items():
+        for cp in cluster:
+            if cp["sdk_name"] in main_cps:
+                main_clusters.append(cluster_name)
+
+    return main_clusters
 
 
 def single_lane_graph(initializer_dict: dict, docs: List[dict]):
     link_list, pretty_link_list = get_link_list(initializer_dict["DesignOutgoingLinks"])
+
+    logic = "Single Lane" if is_single_path(link_list, docs) else "No Lanes"
+
     clusters = get_cluster_list(get_cluster_names(link_list), docs)
     lane_graph = {
         SINGLE_LANE_NAME: pretty_link_list,
     }
-    return lane_graph, clusters
+    return lane_graph, clusters, logic
 
 
 def hlp_graas(initializer_dict: dict, docs: List[dict]):
@@ -311,7 +395,7 @@ def hlp_graas(initializer_dict: dict, docs: List[dict]):
     lane_graph = {
         SINGLE_LANE_NAME: prettify_link_list(links),
     }
-    return lane_graph, clusters
+    return lane_graph, clusters, "Lane Hopping"
 
 
 def hlp_lattice(initializer_dict: dict, docs: List[dict]):
@@ -375,7 +459,7 @@ def hlp_lattice(initializer_dict: dict, docs: List[dict]):
     lane_graph = {
         SINGLE_LANE_NAME: prettify_link_list(links),
     }
-    return lane_graph, clusters
+    return lane_graph, clusters, "No Lanes"
 
 
 def prettify_cluster_name(cluster_name):
