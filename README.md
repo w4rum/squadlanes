@@ -1,4 +1,4 @@
-# [Squad Lanes](https://squadlanes.com)
+# [Squadlanes](https://squadlanes.com)
 ##### Interactive Squad Maps to help with RAAS capture point prediction
 
 Capture Points and RAAS lanes are automatically extracted from Squad maps.
@@ -10,7 +10,7 @@ That helps us get an overview.
 See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to work with our official deployment at [squadlanes.com](https://squadlanes.com).
 
 ## Deployment
-In order to run your own instance of Squad Lanes, you need to
+In order to run your own instance of Squadlanes, you need to
 1. Extract the map images and layer data with our Python extraction scripts
 2. Package the static files with ParcelJS
 3. Deploy the static files to a web server, e.g., nginx

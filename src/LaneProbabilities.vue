@@ -15,9 +15,10 @@
       </a>
       <a
         title="Added in cooperation with EyeOfTheHawks.
-These layers might be more unstable and *much* slower than the vanilla layers.
+These layers might be more unstable and will process *much* slower than the vanilla layers.
+(We'll fix the performance issues sometime in the future. Maybe.)
 
-Squad Lanes accurately shows the HLP layers, accounting for HLP's custom logic.
+Squadlanes accurately shows the HLP layers, accounting for HLP's custom logic.
 
 The only thing currently not visualized (for HLP and Vanilla) are capture point probabilities."
       >
