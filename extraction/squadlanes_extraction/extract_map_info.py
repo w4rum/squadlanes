@@ -86,9 +86,12 @@ def to_cluster(cluster_name: str, docs: List[dict]):
         obj = access_one(obj_dict)
         if obj["ClassName"] not in ["BP_CaptureZone_C", "BP_CaptureZoneInvasion_C"]:
             continue
-        direct_parent_name = access_one(
-            access_one(obj["DefaultSceneRoot"])["AttachParent"]
-        )["OuterName"]
+        scene_root = access_one(obj["DefaultSceneRoot"])
+        parent = scene_root["AttachParent"]
+        if parent == "None":
+            continue
+
+        direct_parent_name = access_one(parent)["OuterName"]
         if direct_parent_name != cluster_name:
             continue
         cluster.append(to_capture_point(obj, obj["ClassName"], cp_sdk_name(obj_dict)))
@@ -755,7 +758,9 @@ async def extract_layer(
 ) -> dict:
 
     async with parallel_limit:
-        # print(layer_path)
+        if config.LOG_LEVEL == "debug":
+            print(layer_path)
+
         layer_filename, pretty_map_name, pretty_layer_name = extract_pretty_names(
             layer_path
         )

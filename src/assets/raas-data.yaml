@@ -3319,6 +3319,8 @@ Belaya Pass:
                 b: HLP_BP_CaptureZoneClusterLattice-01-T2
             -   a: HLP_BP_CaptureZoneClusterLattice-03-T1
                 b: HLP_BP_CaptureZoneClusterLattice-04-T1
+            -   a: HLP_BP_CaptureZoneClusterLattice-03-T1
+                b: HLP_BP_CaptureZoneClusterLattice-04-Cross
             -   a: HLP_BP_CaptureZoneClusterLattice-03-T2
                 b: HLP_BP_CaptureZoneClusterLattice-02-T2
             -   a: HLP_BP_CaptureZoneClusterLattice-04-Cross
@@ -4919,6 +4921,8 @@ Black Coast:
                 b: HLP_BP_CaptureZoneClusterLatticeFortifiedFarm
             -   a: HLP_BP_CaptureZoneClusterLatticeLukerOil
                 b: HLP_BP_CaptureZoneClusterLatticeKalinovka
+            -   a: HLP_BP_CaptureZoneClusterLatticeLukerOil
+                b: HLP_BP_CaptureZoneClusterLatticePenDocks
             -   a: HLP_BP_CaptureZoneClusterLatticeMonastery
                 b: HLP_BP_CaptureZoneClusterLatticeChernikov
             -   a: HLP_BP_CaptureZoneClusterLatticeMonastery
@@ -4933,10 +4937,14 @@ Black Coast:
                 b: HLP_BP_CaptureZoneClusterLatticeOldTrainyard
             -   a: HLP_BP_CaptureZoneClusterLatticeOldTrainSwitches
                 b: HLP_BP_CaptureZoneClusterLatticeLukerOil
+            -   a: HLP_BP_CaptureZoneClusterLatticeOldTrainSwitches
+                b: HLP_BP_CaptureZoneClusterLatticeSablya
             -   a: HLP_BP_CaptureZoneClusterLatticeOldTrainyard
                 b: HLP_BP_CaptureZoneClusterLatticeLukerOil
             -   a: HLP_BP_CaptureZoneClusterLatticeOldTrainyard
                 b: HLP_BP_CaptureZoneClusterLatticeFortifiedFarm
+            -   a: HLP_BP_CaptureZoneClusterLatticeOldTrainyard
+                b: HLP_BP_CaptureZoneClusterLatticeSablya
             -   a: HLP_BP_CaptureZoneClusterLatticePaseka
                 b: HLP_BP_CaptureZoneClusterLatticeTorpedoFactory
             -   a: HLP_BP_CaptureZoneClusterLatticePaseka
@@ -4981,6 +4989,8 @@ Black Coast:
                 b: HLP_BP_CaptureZoneClusterLatticeKalinovka
             -   a: HLP_BP_CaptureZoneClusterLatticeSablya
                 b: HLP_BP_CaptureZoneClusterLatticeLukerOil
+            -   a: HLP_BP_CaptureZoneClusterLatticeSablya
+                b: HLP_BP_CaptureZoneClusterLatticePenDocks
             -   a: HLP_BP_CaptureZoneClusterLatticeSubPen
                 b: HLP_BP_CaptureZoneClusterLatticePenDocks
             -   a: HLP_BP_CaptureZoneClusterLatticeSubPen
@@ -11413,7 +11423,7 @@ Goose Bay:
                 x: -119867.5234375
                 y: -62222.51171875
             1W-BP_CaptureZoneCluster2:
-            -   display_name: Sheshatshiu
+            -   display_name: Sheshatshiu West
                 sdk_name: Sheshatshiu3
                 x: -42068.203125
                 y: -127696.3671875
@@ -11445,11 +11455,11 @@ Goose Bay:
                 x: -187457.703125
                 y: 31066.25
             2W-BP_CaptureZoneCluster3:
-            -   display_name: Sheshatshiu
+            -   display_name: Train Bridge
                 sdk_name: Overpass
                 x: 31429.515625
                 y: -140759.078125
-            -   display_name: Sheshatshiu
+            -   display_name: Sheshatshiu East
                 sdk_name: Sheshatshiu2
                 x: -6299.671875
                 y: -129362.5
@@ -11813,7 +11823,7 @@ Goose Bay:
                 x: -40381.390625
                 y: 79329.578125
             2E-BP_CaptureZoneCluster4:
-            -   display_name: Sheshatshiu
+            -   display_name: Sheshatshiu West
                 sdk_name: Sheshatshiu3
                 x: -42068.203125
                 y: -127696.3671875
@@ -11853,11 +11863,11 @@ Goose Bay:
                 x: -13605.3359375
                 y: 80438.421875
             3E-BP_CaptureZoneCluster5:
-            -   display_name: Sheshatshiu
+            -   display_name: Train Bridge
                 sdk_name: Overpass
                 x: 31429.515625
                 y: -140759.078125
-            -   display_name: Sheshatshiu
+            -   display_name: Sheshatshiu East
                 sdk_name: Sheshatshiu2
                 x: -6299.671875
                 y: -129362.5
@@ -12206,7 +12216,7 @@ Goose Bay:
                 x: 78725.015625
                 y: 54633.453125
             4E-BP_CaptureZoneCluster6:
-            -   display_name: Sheshatshiu
+            -   display_name: Sheshatshiu West
                 sdk_name: Sheshatshiu3
                 x: -42068.203125
                 y: -127696.3671875
@@ -12238,7 +12248,7 @@ Goose Bay:
                 sdk_name: Churchill4_12
                 x: 33101.515625
                 y: -88630.3515625
-            -   display_name: Sheshatshiu
+            -   display_name: Sheshatshiu East
                 sdk_name: Sheshatshiu2
                 x: -6299.671875
                 y: -129362.5
@@ -17824,6 +17834,8 @@ Harju:
                 b: HLP_BP_CaptureZoneClusterLattice_Warehouse
             -   a: HLP_BP_CaptureZoneClusterLattice_Logistics
                 b: HLP_BP_CaptureZoneClusterLattice_Construction
+            -   a: HLP_BP_CaptureZoneClusterLattice_Logistics
+                b: HLP_BP_CaptureZoneClusterLattice_Peninsula
             -   a: HLP_BP_CaptureZoneClusterLattice_Lumberyard
                 b: HLP_BP_CaptureZoneClusterLattice_Estuary
             -   a: HLP_BP_CaptureZoneClusterLattice_Lumberyard
@@ -17890,6 +17902,10 @@ Harju:
                 b: HLP_BP_CaptureZoneClusterLattice_Construction
             -   a: HLP_BP_CaptureZoneClusterLattice_Powerplant
                 b: HLP_BP_CaptureZoneClusterLattice_Construction
+            -   a: HLP_BP_CaptureZoneClusterLattice_Powerplant
+                b: HLP_BP_CaptureZoneClusterLattice_Factory
+            -   a: HLP_BP_CaptureZoneClusterLattice_Powerplant
+                b: HLP_BP_CaptureZoneClusterLattice_Warehouse
             -   a: HLP_BP_CaptureZoneClusterLattice_Truckstop
                 b: HLP_BP_CaptureZoneClusterLattice_Estuary
             -   a: HLP_BP_CaptureZoneClusterLattice_Truckstop
@@ -18687,6 +18703,10 @@ Harju:
                 sdk_name: Checkpoint_16
                 x: -49645.7109375
                 y: -57015.23046875
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 18901.15625
+                y: -53259.203125
             -   display_name: "Mets\xE4kyl\xE4"
                 sdk_name: "Mets\xE4kyl\xE4"
                 x: -2753.638671875
@@ -18744,10 +18764,6 @@ Harju:
                 sdk_name: "J\xE4rvikyl\xE4"
                 x: 86537.484375
                 y: 20991.5390625
-            -   display_name: Logistics Hub
-                sdk_name: LogisticsHub
-                x: 18901.15625
-                y: -53259.203125
             C1-CaptureZoneCluster_16:
             -   display_name: Lighthouse
                 sdk_name: Lighthouse_19
@@ -19018,6 +19034,10 @@ Harju:
                 sdk_name: Checkpoint_16
                 x: -49645.7109375
                 y: -57015.23046875
+            -   display_name: Logistics Hub
+                sdk_name: LogisticsHub
+                x: 18901.15625
+                y: -53259.203125
             -   display_name: "Mets\xE4kyl\xE4"
                 sdk_name: "Mets\xE4kyl\xE4"
                 x: -2753.638671875
@@ -19075,10 +19095,6 @@ Harju:
                 sdk_name: "J\xE4rvikyl\xE4"
                 x: 86537.484375
                 y: 20991.5390625
-            -   display_name: Logistics Hub
-                sdk_name: LogisticsHub
-                x: 18901.15625
-                y: -53259.203125
             C1-CaptureZoneCluster_16:
             -   display_name: Lighthouse
                 sdk_name: Lighthouse_19
@@ -19271,8 +19287,8 @@ Harju:
                 y: -30881.359375
             -   display_name: Trucking Depot
                 sdk_name: TruckingDepot
-                x: -129668.3125
-                y: -61200.79296875
+                x: -129767.3125
+                y: -60687.79296875
             -   display_name: Waste Treatment
                 sdk_name: WasteTreatment
                 x: -143994.8125
@@ -33272,6 +33288,11 @@ Narva:
                 sdk_name: QuarryIndustry
                 x: -8374.5048828125
                 y: 75667.4296875
+            HLP_BP_CaptureZoneClusterLatticeRadioFarmland:
+            -   display_name: Radio Farmland
+                sdk_name: RadioFarmland
+                x: -75382.28125
+                y: -84678.9921875
             HLP_BP_CaptureZoneClusterLatticeRadioStation:
             -   display_name: Radio Station
                 sdk_name: RadioStation
@@ -33615,12 +33636,16 @@ Narva:
                 b: HLP_BP_CaptureZoneClusterLatticeOrchard
             -   a: HLP_BP_CaptureZoneClusterLatticeQuarryIndustry
                 b: 100-Team2Main
+            -   a: HLP_BP_CaptureZoneClusterLatticeRadioFarmland
+                b: HLP_BP_CaptureZoneClusterLatticeAirfield
+            -   a: HLP_BP_CaptureZoneClusterLatticeRadioFarmland
+                b: HLP_BP_CaptureZoneClusterLatticeCommunityCollege
             -   a: HLP_BP_CaptureZoneClusterLatticeRadioStation
                 b: HLP_BP_CaptureZoneClusterLatticeRiverside
             -   a: HLP_BP_CaptureZoneClusterLatticeRadioStation
                 b: HLP_BP_CaptureZoneClusterLatticeAirfield
             -   a: HLP_BP_CaptureZoneClusterLatticeRadioStation
-                b: HLP_BP_CaptureZoneClusterLatticeRadioStation
+                b: HLP_BP_CaptureZoneClusterLatticeRadioFarmland
             -   a: HLP_BP_CaptureZoneClusterLatticeRingRoad
                 b: HLP_BP_CaptureZoneClusterLatticeFuelStorage
             -   a: HLP_BP_CaptureZoneClusterLatticeRingRoad
@@ -33641,8 +33666,6 @@ Narva:
                 b: HLP_BP_CaptureZoneClusterLatticeOruVillage
             -   a: HLP_BP_CaptureZoneClusterLatticeShantyMarina
                 b: HLP_BP_CaptureZoneClusterLatticeFuelStorage
-            -   a: HLP_BP_CaptureZoneClusterLatticeShippingYard
-                b: HLP_BP_CaptureZoneClusterLatticeKandaCourt
             -   a: HLP_BP_CaptureZoneClusterLatticeShippingYard
                 b: HLP_BP_CaptureZoneClusterLatticeOrchard
             -   a: HLP_BP_CaptureZoneClusterLatticeShippingYard
@@ -35698,7 +35721,7 @@ Skorpo:
                 x: 133648.90625
                 y: 18160.64453125
             03-CaptureZoneCluster:
-            -   display_name: Ammo Dump (Resupply CP)
+            -   display_name: Ammo Dump
                 sdk_name: AmmoDump
                 x: 10256.5625
                 y: 53702.140625
@@ -41411,10 +41434,6 @@ Yehorivka:
                 sdk_name: EastMogilyovo
                 x: -53452.1875
                 y: 14282.375
-            -   display_name: Route Yankee
-                sdk_name: RouteYankee
-                x: -109876.375
-                y: -42908.65625
             -   display_name: West Mogilyovo
                 sdk_name: WestMogilyovo
                 x: -87812.5625
@@ -41429,14 +41448,14 @@ Yehorivka:
                 x: 50081.11328125
                 y: 59231.19140625
             04-HLP_BP_CaptureZoneClusterLattice-Kropy:
-            -   display_name: Highway Village
-                sdk_name: HighwayVillage
-                x: -111165.484375
-                y: -40987.875
             -   display_name: Kropy
                 sdk_name: Kropy
                 x: -86407.921875
                 y: -88267.0
+            -   display_name: Route Yankee
+                sdk_name: RouteYankee
+                x: -109876.375
+                y: -42908.65625
             04-HLP_BP_CaptureZoneClusterLattice-RouteZulu:
             -   display_name: Route Zulu
                 sdk_name: RouteZulu
@@ -41456,6 +41475,10 @@ Yehorivka:
                 x: 195483.640625
                 y: 183734.40625
             04-HLP_BP_CaptureZoneClusterLattice-Zenos:
+            -   display_name: Bog Camp
+                sdk_name: BogCamp
+                x: 48789.51953125
+                y: -23557.0546875
             -   display_name: Novo Ridgeline
                 sdk_name: NovoRidgeline
                 x: 24963.46484375
@@ -41589,6 +41612,8 @@ Yehorivka:
                 b: 04-HLP_BP_CaptureZoneClusterLattice-RouteZulu
             -   a: 03-HLP_BP_CaptureZoneClusterLattice-Mogi
                 b: 04-HLP_BP_CaptureZoneClusterLattice-Zenos
+            -   a: 03-HLP_BP_CaptureZoneClusterLattice-Mogi
+                b: 05-HLP_BP_CaptureZoneClusterLattice-Pet
             -   a: 03-HLP_BP_CaptureZoneClusterLattice-Novo
                 b: 03-HLP_BP_CaptureZoneClusterLattice-Mogi
             -   a: 03-HLP_BP_CaptureZoneClusterLattice-Novo
