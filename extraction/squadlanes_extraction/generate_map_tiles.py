@@ -20,7 +20,9 @@ def tiles():
         )
         return
 
-    with ThreadPoolExecutor() as executor:
+    # limit workers. each worker is going to spawn 16 processes anyway
+    # todo: use MAX_PARALLEL_TASKS / 16 * 2
+    with ThreadPoolExecutor(max_workers=2) as executor:
         futures = []
 
         for name in os.listdir(config.FULLSIZE_MAP_DIR):
