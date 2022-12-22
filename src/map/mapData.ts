@@ -2,6 +2,7 @@ import { CapturePoint } from "./capturePoint";
 import { Cluster } from "./cluster";
 import { Lane } from "./lane";
 import { Queue } from "queue-typescript";
+import * as cluster from "cluster";
 
 class MapData {
   public capturePoints: Set<CapturePoint> = new Set();
@@ -9,12 +10,33 @@ class MapData {
   public mains: Set<CapturePoint> = new Set();
   public ownMain: CapturePoint | null = null;
   public lanes: Set<Lane> = new Set();
+  public logic: String = "";
 
   public enemyMain(): CapturePoint | null {
     if (this.mains.size !== 2) return null;
 
     const mains = Array.from(this.mains);
     return this.ownMain === mains[0] ? mains[1] : mains[0];
+  }
+
+  public refreshGraphDirection() {
+    // the two mains form a source-sink graph
+    // (= one main has only outgoing edges,
+    // the other main has only incoming edges)
+    // to make calculations easier, we make sure that our ownMain is always the
+    // source by flipping the edges if necessary
+    if (this.ownMain === null) return;
+
+    const mainCluster = Array.from(this.ownMain.clusters)[0];
+
+    if (mainCluster.edges.size > 0) return; // already correct
+
+    // flip all edges
+    this.clusters.forEach((c) => {
+      const tmp = c.edges;
+      c.edges = c.reverseEdges;
+      c.reverseEdges = tmp;
+    });
   }
 
   public refreshLaneProbabilities() {

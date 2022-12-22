@@ -1,4 +1,4 @@
-# [Squad Lanes](https://squadlanes.com)
+# [Squadlanes](https://squadlanes.com)
 ##### Interactive Squad Maps to help with RAAS capture point prediction
 
 Capture Points and RAAS lanes are automatically extracted from Squad maps.
@@ -38,7 +38,7 @@ The project contains one container for the extraction process and one container 
 4. Access the frontend on http://localhost:1234
 
 ## Deployment
-In order to run your own instance of Squad Lanes, you need to
+In order to run your own instance of Squadlanes, you need to
 1. Extract the map images and layer data with our Python extraction scripts
 2. Package the static files with ParcelJS
 3. Deploy the static files to a web server, e.g., nginx
@@ -162,9 +162,10 @@ Just be warned, it's probably a lot of work to get into it.
   [MIT](https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/gh-pages/LICENSE)
   license.
 - This project relies on Konstantin Nosov's
-  [UEViewer](https://github.com/gildor2/UEViewer) which is currently not covered by a
-  license.
+  [UEViewer](https://github.com/gildor2/UEViewer).
   We use [our own fork](https://github.com/w4rum/UEViewer) that we have modified
-  slightly to better fit our use case.
+  slightly to better fit our use case. 
+  Code released under the [MIT](https://github.com/gildor2/UEViewer/blob/master/LICENSE.txt) license.
 - The original contributions found in this repository are released under AGPLv3
   (see LICENSE).
+- The favicons in `src/assets/favicons` are based on the [Geo alt](https://icons.getbootstrap.com/icons/geo-alt/) icon from [Bootstrap Icons](https://icons.getbootstrap.com/) v1.9.1 licensed under the [MIT License](https://github.com/twbs/icons/blob/main/LICENSE.md).

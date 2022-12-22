@@ -1,27 +1,35 @@
 <template lang="html">
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
-      <a
-        title="We've implemented a new not-yet-perfect prediction logic that
-should support all kinds of layers OWI might throw at us.
-Unfortunately, it's a bit too permissive on the new layers right now.
-You might, e.g., see a 15-point path on Gorodok RAAS v11 that most
-likely is not actually possible in-game.
-
-We're working on identifying the correct restrictions to accurately map
-the in-game experience.
-
-For now, though, we've released the new logic anyways because the old logic
-completely broke down on the new layers.
-
-Old layers should not be affected and work just fine."
-      >
-        Squad v2.16
-        <span class="text-warning"> &#x26a0;</span></a
-      >
+      Squad v4.0
     </div>
-    <div class="lane-percentages">
-      <div class="lane" :style="laneColor(lane)" v-for="lane in lanes">
+    <div
+      v-if="selection.layer.startsWith('HLP')"
+      class="text-warning text-center small m-1"
+    >
+      <a
+        href="https://steamcommunity.com/sharedfiles/filedetails/2442357787"
+        target="_blank"
+      >
+        Hawk's Layer Pack
+      </a>
+      <a
+        title="Added in cooperation with EyeOfTheHawks.
+These layers might be more unstable and will process *much* slower than the vanilla layers.
+(We'll fix the performance issues sometime in the future. Maybe.)
+
+Squadlanes accurately shows the HLP layers, accounting for HLP's custom logic.
+
+The only thing currently not visualized (for HLP and Vanilla) are capture point probabilities."
+      >
+        <b-icon-question-circle
+      /></a>
+    </div>
+    <div class="text-muted text-center small m-1">
+        Logic: {{ mapData.logic }}
+    </div>
+    <div v-if="mapData.logic === 'Multiple Lanes'" class="lane-percentages">
+      <div class="lane" :style="laneColor(lane)" v-for="lane in mapData.lanes">
         <label>{{ lane.name }}</label>
         <span>{{ Math.floor(lane.probability * 100) }}%</span>
       </div>
@@ -30,10 +38,18 @@ Old layers should not be affected and work just fine."
 </template>
 <script>
 import Vue from "vue";
+import { BIconQuestionCircle } from "bootstrap-vue";
 
 export default Vue.extend({
+  components: {
+    BIconQuestionCircle,
+  },
   props: {
-    lanes: Set,
+    mapData: Object,
+    selection: {
+      map: String,
+      layer: String,
+    },
   },
   methods: {
     laneColor(lane) {

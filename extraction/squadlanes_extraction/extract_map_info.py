@@ -1,19 +1,24 @@
+import asyncio
+import glob
 import math
 import os
 import re
+import shlex
+import shutil
 import struct
-import subprocess
-from typing import Tuple, List, Union, Set
+import sys
+from typing import Tuple, List, Union, Set, Any
 
 import yaml
-from pwn import log, context, logging, sys
-from pwnlib.log import Progress
+from tqdm.asyncio import tqdm
 
 from squadlanes_extraction import config
 
 SINGLE_LANE_NAME = "Center"
 
 GAME_MODES = ["RAAS", "Invasion"]
+
+parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_TASKS)
 
 
 def add_tuples(*tuples: Tuple):
@@ -70,7 +75,10 @@ def to_cluster(cluster_name: str, docs: List[dict]):
             )
         ]
     else:
-        assert cluster_root_dict["ClassName"] == "BP_CaptureZoneCluster_C"
+        assert cluster_root_dict["ClassName"] in [
+            "BP_CaptureZoneCluster_C",
+            "HLP_BP_CaptureZoneClusterLattice_C",
+        ]
 
     cluster = []
     # iterate over all CPs and only take CPs that have this cluster as parent
@@ -78,12 +86,18 @@ def to_cluster(cluster_name: str, docs: List[dict]):
         obj = access_one(obj_dict)
         if obj["ClassName"] not in ["BP_CaptureZone_C", "BP_CaptureZoneInvasion_C"]:
             continue
-        direct_parent_name = access_one(
-            access_one(obj["DefaultSceneRoot"])["AttachParent"]
-        )["OuterName"]
+        scene_root = access_one(obj["DefaultSceneRoot"])
+        parent = scene_root["AttachParent"]
+        if parent == "None":
+            continue
+
+        direct_parent_name = access_one(parent)["OuterName"]
         if direct_parent_name != cluster_name:
             continue
         cluster.append(to_capture_point(obj, obj["ClassName"], cp_sdk_name(obj_dict)))
+
+    # sort capture points by SDK name to avoid large git diffs when UEViewer changes arbitrary order
+    cluster.sort(key=lambda cp: cp["sdk_name"])
 
     return cluster
 
@@ -135,27 +149,37 @@ def absolute_location(
     if scene_root == "None":
         return offset
 
-    # 1. rotate the current offset by this object's rotation
-    rel_rot = access_one(scene_root)["RelativeRotation"]
+    # remove an unnecessary layer of nesting
+    scene_root = access_one(scene_root)
 
-    # note: z axis, roll, and pitch should be zero for clusters etc. and are ignored
+    # 1. rotate the current offset by this object's rotation, if it has a rotation
+    if "RelativeRotation" in scene_root:
+        rel_rot = scene_root["RelativeRotation"]
 
-    # for some reason, UEViewer treats the rotation as ints, when they're actually floats
-    # see https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FRotator/
-    yaw_degrees: float = struct.unpack("<f", struct.pack("<i", rel_rot["Yaw"]))[0]
+        # note: z axis, roll, and pitch should be zero for clusters etc. and are ignored
 
-    rotated_offset = rotate(offset, yaw_degrees)
+        # for some reason, UEViewer treats the rotation as ints, when they're actually floats
+        # see https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FRotator/
+        yaw_degrees: float = struct.unpack("<f", struct.pack("<i", rel_rot["Yaw"]))[0]
+
+        rotated_offset = rotate(offset, yaw_degrees)
+    else:
+        rotated_offset = offset
 
     # 2. translate the current offset by this object's translation
-    rel_loc = access_one(scene_root)["RelativeLocation"]
+    rel_loc = scene_root["RelativeLocation"]
     rel_loc = (rel_loc["X"], rel_loc["Y"])
 
-    new_offset = add_tuples(rotated_offset, rel_loc)
+    rel_loc_with_offset = add_tuples(rotated_offset, rel_loc)
 
-    # 3. traverse the tree upwards towards the root
-    parent = access_one(scene_root)["AttachParent"]
+    # 3. if the location is relative, traverse the tree upwards towards the root
+    if not scene_root.get("bAbsoluteLocation", False):
+        parent = scene_root["AttachParent"]
+        abs_loc = absolute_location(parent, rel_loc_with_offset)
+    else:
+        abs_loc = rel_loc_with_offset
 
-    return absolute_location(parent, new_offset)
+    return abs_loc
 
 
 def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:
@@ -169,19 +193,7 @@ def rotate(loc: tuple[float, float], yaw_degrees: float) -> tuple[float, float]:
     return rotated_x, rotated_y
 
 
-def get_lane_graph_and_clusters(docs: List[dict]):
-    # get lane graph and clusters
-    for obj in docs:
-        obj = access_one(obj)
-        if obj["ClassName"] == "SQRAASLaneInitializer_C":
-            lane_graph, clusters = multi_lane_graph(obj, docs)
-            break
-        if obj["ClassName"] == "SQGraphRAASInitializerComponent":
-            lane_graph, clusters = single_lane_graph(obj, docs)
-            break
-    else:
-        assert False, "no RAAS initializer found"
-
+def get_main_cps(docs: dict) -> list[str]:
     # identify main clusters
     mains = []
     for obj in docs:
@@ -190,37 +202,285 @@ def get_lane_graph_and_clusters(docs: List[dict]):
         mains.append(cp_sdk_name(obj))
     assert len(mains) == 2, f"found {len(mains)} main bases"
 
-    return lane_graph, clusters, mains
+    mains.sort()
+    return mains
+
+
+def get_lane_graph_and_clusters(docs: List[dict]):
+    # get lane graph and clusters
+    handlers = {
+        # numbers define priorities
+        # HLP GRAAS also has the multi_lane_graph initializer, so we check for both
+        "SQRAASLaneInitializer_C": (0, multi_lane_graph),
+        "SQGraphRAASInitializerComponent": (0, single_lane_graph),
+        "SQRAASGridInitializer_C": (1, hlp_graas),
+        "HLP_SQRAASLatticeInitializer_C": (1, hlp_lattice),
+    }
+    priority = -1
+    handler = None
+    initializer = None
+
+    for obj in docs:
+        obj = access_one(obj)
+        class_name = obj["ClassName"]
+
+        cur_priority, cur_handler = handlers.get(class_name, (-1, None))
+        if cur_priority > priority:
+            priority = cur_priority
+            handler = cur_handler
+            initializer = obj
+
+    assert handler is not None, "no supported RAAS initializer found"
+    lane_graph, clusters, logic_name = handler(initializer, docs)
+
+    mains = get_main_cps(docs)
+
+    return lane_graph, clusters, mains, logic_name
+
+
+def is_single_path(link_list: dict, docs: dict) -> bool:
+    # Traverse the link list once to distinguish between a lane with a single path
+    # or a branching lane.
+    # Note that the path traversal logic is the same (directed source-sink graph).
+
+    # there is only one path is every node (except mains) has
+    # in-degree 1 and out-degree 1
+
+    # check that every node only appear once on the
+    # a-side and once on the b-side of a link
+
+    cluster_names = get_cluster_names(link_list)
+    main_clusters = get_main_clusters(link_list, docs)
+
+    missing_out_link = set(cluster_names)
+    missing_in_link = set(cluster_names)
+
+    single_lane = True
+    for a, b in link_list:
+        if a not in missing_out_link or b not in missing_in_link:
+            single_lane = False
+        missing_out_link.discard(a)
+        missing_in_link.discard(b)
+
+    # make sure one of the mains has 1-out-0-in and vice versa
+    if main_clusters[0] in missing_in_link:
+        source_main = main_clusters[0]
+        dest_main = main_clusters[1]
+    else:
+        dest_main = main_clusters[0]
+        source_main = main_clusters[1]
+
+    if not (
+        source_main in missing_in_link
+        and source_main not in missing_out_link
+        and dest_main not in missing_in_link
+        and dest_main in missing_out_link
+    ):
+        single_lane = False
+
+    for main_cl in main_clusters:
+        missing_out_link.discard(main_cl)
+        missing_in_link.discard(main_cl)
+
+    # if there are still nodes left in missing_out_link and missing_in_link, then they
+    # are disconnected from the mains
+    # => warn but don't count
+    if len(missing_in_link) > 0 or len(missing_out_link) > 0:
+        print(f"Warning: Isolated clusters found:")
+        print(missing_out_link.union(missing_in_link))
+
+    return single_lane
 
 
 def multi_lane_graph(initializer_dict: dict, docs: List[dict]):
     lane_graph = {}
+    lane_link_lists = {}
     cluster_names = set()
     for lane in index_dict_to_list(initializer_dict["AASLanes"]):
         lane: dict
-        # TODO: fix CENTRAL
-        # TODO: Lashkar CAF RAAS v1 has single lane '01'
         lane_name = lane["LaneName"].title()
         link_list, pretty_link_list = get_link_list(lane["AASLaneLinks"])
         cluster_names |= get_cluster_names(link_list)
         lane_graph[lane_name] = pretty_link_list
+        lane_link_lists[lane_name] = link_list
+
+    # if there is only one lane, and it's a path, then display "Single Lane" as logic
+    if len(lane_link_lists) == 1 and is_single_path(
+        list(lane_link_lists.values())[0], docs
+    ):
+        logic = "Single Lane"
+    else:
+        logic = "Multiple Lanes"
+
     clusters = get_cluster_list(cluster_names, docs)
-    return lane_graph, clusters
+    return lane_graph, clusters, logic
+
+
+def get_main_clusters(link_list: dict, docs: dict) -> list[str]:
+    cluster_names = get_cluster_names(link_list)
+    clusters = {name: to_cluster(name, docs) for name in cluster_names}
+
+    main_cps = get_main_cps(docs)
+    main_clusters = []
+
+    for cluster_name, cluster in clusters.items():
+        for cp in cluster:
+            if cp["sdk_name"] in main_cps:
+                main_clusters.append(cluster_name)
+
+    return main_clusters
 
 
 def single_lane_graph(initializer_dict: dict, docs: List[dict]):
     link_list, pretty_link_list = get_link_list(initializer_dict["DesignOutgoingLinks"])
+
+    logic = "Single Lane" if is_single_path(link_list, docs) else "No Lanes"
+
     clusters = get_cluster_list(get_cluster_names(link_list), docs)
     lane_graph = {
         SINGLE_LANE_NAME: pretty_link_list,
     }
-    return lane_graph, clusters
+    return lane_graph, clusters, logic
+
+
+def hlp_graas(initializer_dict: dict, docs: List[dict]):
+    # build link list
+    team_1_main = sdk_name(initializer_dict["Team1Main"])
+    team_2_main = sdk_name(initializer_dict["Team2Main"])
+
+    # convert AASGrids to better layered graph structure
+    # ("layered" as in "has multiple layers", not as in "Squad map layer")
+    # (will use "depth" as a synonym for "layer" to avoid confusion)
+    depths: list[list[str]] = []
+    aas_grids: list = index_dict_to_list(initializer_dict["AASGrids"])
+    for grid in aas_grids:
+        cur_layer = []
+        possible_clusters = index_dict_to_list(grid["PossibleClusters"])
+        for cluster in possible_clusters:
+            cur_layer.append(sdk_name(cluster))
+        depths.append(cur_layer)
+
+    links = []
+
+    # link main 1 -> depth 0
+    for cluster in depths[0]:
+        links.append((team_1_main, cluster))
+
+    # link depth i -> depth i+1
+    # in GRAAS, a cluster can either jump
+    # - forwards (depth+1, same cluster index)
+    # - diagonally (depth+1, cluster index -1 or +1)
+    # that means that clusters that are more than 1 step horizontally can't be reached)
+    # TODO: don't ignore probabilities here
+    #       the SQRAASGridInitializer has a "Jump Chance"
+    #       going diagonally has Jump Chance %
+    #       going forward has (1 - Jump Chance) %
+    #       on a diagonal move, which of the neighbours is jumped to is
+    #           50/50 if there are two neighbours
+    #           100 if there is only one neighbour (we're at an edge)
+    #       this means that edge CPs are probably less likely since we're 2/3 likely
+    #       to jump away from an edge
+    for di, cur_depth in enumerate(depths[:-1]):
+        for ci, cluster in enumerate(cur_depth):
+            for ci_delta in [-1, 0, 1]:
+                if ci + ci_delta < 0:
+                    continue
+                if ci + ci_delta >= len(depths[di + 1]):
+                    continue
+
+                links.append((cluster, depths[di + 1][ci + ci_delta]))
+
+    # link depth n -> main 2
+    for cluster in depths[-1]:
+        links.append((cluster, team_2_main))
+
+    clusters = get_cluster_list(get_cluster_names(links), docs)
+    lane_graph = {
+        SINGLE_LANE_NAME: prettify_link_list(links),
+    }
+    return lane_graph, clusters, "Lane Hopping"
+
+
+def hlp_lattice(initializer_dict: dict, docs: List[dict]):
+    team_1_main = sdk_name(initializer_dict["Team1Main"])
+    team_2_main = sdk_name(initializer_dict["Team2Main"])
+
+    # lattice has the same logic as single_lane_graph
+    # but the links aren't stored in a central list.
+    # instead, each cluster lists its own neighbours
+    links = []
+
+    # link main 1 -> first clusters
+    first_clusters = index_dict_to_list(initializer_dict["FirstClusters"])
+    for cluster in first_clusters:
+        links.append((team_1_main, sdk_name(cluster)))
+
+    # remaining links
+    # look through all clusters and add neighbours
+    for obj in docs:
+        # ignore non-cluster assets
+        class_name = access_one(obj)["ClassName"]
+        if class_name != "HLP_BP_CaptureZoneClusterLattice_C":
+            continue
+
+        cluster = sdk_name(obj)
+
+        next_clusters = access_one(obj)["NextClusters"]
+
+        # if there are no neighbours, we're at the end and need to link to main 2
+        if len(next_clusters) == 0:
+            links.append((cluster, team_2_main))
+            continue
+
+        neighbours = index_dict_to_list(next_clusters)
+        for nb in neighbours:
+            links.append((cluster, sdk_name(nb)))
+
+    # there might be some unreachable clusters due to errors by hawk
+    # Squad won't care about them, but we want to explicitly remove them
+    # to avoid fuckups in the interface
+    clusters = get_cluster_names(links)
+    no_outgoing_edges = set(clusters)
+    no_incoming_edges = set(clusters)
+    for a, b in links:
+        no_outgoing_edges.discard(a)
+        no_incoming_edges.discard(b)
+    no_outgoing_edges.discard(team_1_main)
+    no_outgoing_edges.discard(team_2_main)
+    no_incoming_edges.discard(team_1_main)
+    no_incoming_edges.discard(team_2_main)
+
+    broken_clusters = no_outgoing_edges.union(no_incoming_edges)
+    links = [
+        (a, b)
+        for a, b in links
+        if a not in broken_clusters and b not in broken_clusters
+    ]
+
+    # TODO: dedup
+    clusters = get_cluster_list(get_cluster_names(links), docs)
+    lane_graph = {
+        SINGLE_LANE_NAME: prettify_link_list(links),
+    }
+    return lane_graph, clusters, "No Lanes"
 
 
 def prettify_cluster_name(cluster_name):
     pretty = cluster_name.rpartition(".")[2]
     assert pretty != ""
     return pretty
+
+
+def prettify_link_list(links: list[tuple[str, str]]) -> list[dict[str, str]]:
+    return list(
+        map(
+            lambda l: {
+                "a": prettify_cluster_name(l[0]),
+                "b": prettify_cluster_name(l[1]),
+            },
+            links,
+        )
+    )
 
 
 def get_link_list(
@@ -243,15 +503,8 @@ def get_link_list(
 
         links.append((sdk_name(raw_link["NodeA"]), sdk_name(raw_link["NodeB"])))
 
-    pretty_link_list = list(
-        map(
-            lambda l: {
-                "a": prettify_cluster_name(l[0]),
-                "b": prettify_cluster_name(l[1]),
-            },
-            links,
-        )
-    )
+    pretty_link_list = prettify_link_list(links)
+
     return links, pretty_link_list
 
 
@@ -272,211 +525,392 @@ def get_cluster_list(cluster_names: Set[str], docs: List[dict]):
     return clusters
 
 
-def extract_map(map_dir: str, progress: Progress):
-    maps = {}
-    for map_name in os.listdir(map_dir):
-        # Ignore some unsupported maps
-        if (
-            not os.path.isdir(f"{map_dir}/{map_name}")
-            or "EntryMap" in map_name
-            or "Forest" in map_name
-            or "Jensens_Range" in map_name
-            or "Tutorial" in map_name
-            or "Fallujah" == map_name
+async def extract_yaml_dump(full_layer_path: str, layer_filename: str) -> list[dict]:
+    # extract map information from umap with umodel
+    yaml_filename = f"{config.LAYER_DUMP_DIR}/{layer_filename}.yaml"
+    if not os.path.isfile(yaml_filename):
+        if config.LOG_LEVEL == "DEBUG":
+            stderr = sys.stderr
+        else:
+            stderr = asyncio.subprocess.DEVNULL
+        layer_extract_process = await asyncio.create_subprocess_shell(
+            shlex.join(
+                [
+                    config.UMODEL_PATH,
+                    full_layer_path,
+                    "-game=ue4.24",
+                    "-dump",
+                ]
+            ),
+            stdout=asyncio.subprocess.PIPE,
+            stderr=stderr,
+        )
+        yaml_content, _ = await layer_extract_process.communicate()
+
+        # fix encoding fuckups caused by umlauts (fuck you harju)
+        yaml_content = yaml_content.decode("ISO-8859-1").encode("UTF-8")
+
+        _, _, yaml_content = yaml_content.partition(b"---")
+        with open(yaml_filename, "wb") as f:
+            f.write(yaml_content)
+        # help the GC a little
+        del yaml_content
+
+    with open(yaml_filename, "r") as f:
+        docs = list(yaml.safe_load_all(f))
+
+    return docs
+
+
+async def extract_minimap_bounds(
+    docs: list[dict],
+) -> tuple[tuple[float, float], tuple[float, float]]:
+
+    # get map bounds from map info by looking at the two MapTexture objects
+    bounds = []
+    for obj in docs:
+        sdk_name = list(obj.keys())[0]
+        _, _, sdk_name = sdk_name.rpartition(".")
+        # ignore everything that's not the MapTexture object
+        if not sdk_name.startswith("MapTexture"):
+            continue
+        x, y = absolute_location(access_one(obj)["RootComponent"])
+        bounds.append((x, y))
+
+    # we should have exactly two bounding coordinates
+    # (e.g., north-east and south-west)
+    assert len(bounds) == 2
+
+    return tuple(bounds)
+
+
+async def extract_table_dump(full_layer_path: str, layer_filename: str) -> str:
+    table_dump_filename = f"{config.LAYER_DUMP_DIR}/{layer_filename}.tabledump.txt"
+
+    # create table dump using umodel
+    if not os.path.isfile(table_dump_filename):
+        table_dump_process = await asyncio.create_subprocess_shell(
+            shlex.join(
+                [
+                    config.UMODEL_PATH,
+                    full_layer_path,
+                    "-game=ue4.24",
+                    "-list",
+                ]
+            ),
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.DEVNULL,
+        )
+        table_dump, _ = await table_dump_process.communicate()
+        with open(table_dump_filename, "wb") as f:
+            f.write(table_dump)
+
+    with open(table_dump_filename, "rb") as f:
+        table_dump = f.read().decode("ISO-8859-1")  # again, fucky umlaut encoding
+
+    return table_dump
+
+
+def convert_minimap_partial_path(
+    minimap_partial_path: str, unpacked_assets_dir: str
+) -> str:
+    # This part is a bit tricky.
+    # The minimap_partial_path is actually not a valid path.
+    #
+    # First of all, it starts with a seemingly arbitrary name identifying the bundle
+    # its in.
+    # For vanilla core assets, this is "Game".
+    # For Black Coast, it is "BlackCoast", and for Harju, it is "Harju".
+    # HLP uses the vanilla minimaps, so it simply follows the above rules.
+    #
+    # Examples:
+    # /Game/Maps/Chora/Minimap/Chora_Minimap.uasset
+    # /BlackCoast/Maps/Minimap/Black_Coast_Minimap.uasset
+    # /Harju/Maps/Minimap/Harju_Minimap.uasset
+    #
+    # None of these match actual directories.
+    #
+    # In order to find the correct path, we strip out the first part of the part.
+    # Afterwards, we try to find a file that has the partial path as a suffix.
+
+    partial_parts = path_split_recursive(minimap_partial_path)
+
+    # remove the leading "/" and the first directory part
+    partial_parts = partial_parts[2:]
+
+    # go through all unpacked assets ending with .uasset
+    minimap_full_path = None
+    assets_list = glob.glob("**/*.uasset", root_dir=unpacked_assets_dir, recursive=True)
+    for asset_path in assets_list:
+        full_parts = path_split_recursive(asset_path)
+
+        # turn the paths around and check if all parts match
+        # (discarding the extra parts from the full path)
+        matched_parts = zip(reversed(full_parts), reversed(partial_parts))
+        if all([a == b for a, b in matched_parts]):
+            minimap_full_path = os.path.join(unpacked_assets_dir, asset_path)
+            break
+
+    assert (
+        minimap_full_path is not None
+    ), f"can't find minimap asset: {minimap_partial_path}"
+
+    return minimap_full_path
+
+
+async def extract_minimap(
+    unpacked_assets_dir: str,
+    layer_filename: str,
+    table_dump: str,
+) -> str:
+    minimap_name = None
+
+    # go through the table dump to find the correct asset
+    for name in table_dump.splitlines():
+
+        # ignore all lines that don't match what we expect the minimap path to look like
+        match = re.match(f"[0-9]+ = (.*(/Minimap|/Masks)/(.*inimap.*))", name)
+        if match is None:
+            continue
+
+        minimap_partial_path, minimap_name = match.group(1, 3)
+        minimap_partial_path += ".uasset"
+
+        # the path in the table dump isn't a valid path; need to convert
+        minimap_full_path = convert_minimap_partial_path(
+            minimap_partial_path, unpacked_assets_dir
+        )
+
+        # extract that asset
+        target_path = f"{config.FULLSIZE_MAP_DIR}/{minimap_name}.tga"
+        await extract_minimap_asset(minimap_full_path, target_path)
+
+        # ignore maps smaller than 1 MiB
+        # (might be a thumbnail)
+        if os.stat(target_path).st_size < 1 * 1024 * 1024:
+            os.remove(target_path)
+            minimap_name = None
+            continue
+
+        break
+
+    assert (
+        minimap_name is not None
+    ), f"can't find minimap in table dump for {layer_filename}"
+
+    return minimap_name
+
+
+async def extract_minimap_asset(asset_path: str, target_path: str):
+    # skip if minimap already exists
+    if os.path.isfile(target_path):
+        return
+
+    # need to unpack in a temp dir because umodel creates nested directories instead
+    # of just a single file
+    temp_dir = os.path.join(config.FULLSIZE_MAP_DIR, "tmp")
+    os.makedirs(temp_dir, exist_ok=True)
+
+    umodel_cmd = shlex.join(
+        [
+            config.UMODEL_PATH,
+            f"-export",
+            asset_path,
+            f"-game=ue4.24",
+            f"-out={temp_dir}",
+        ]
+    )
+
+    if config.LOG_LEVEL == "DEBUG":
+        stderr = sys.stderr
+        stdout = sys.stdout
+    else:
+        stderr = asyncio.subprocess.DEVNULL
+        stdout = asyncio.subprocess.DEVNULL
+
+    map_extract_process = await asyncio.subprocess.create_subprocess_shell(
+        umodel_cmd,
+        stdout=stdout,
+        stderr=stderr,
+    )
+    assert await map_extract_process.wait() == 0, "map extract failed"
+
+    # move the extracted image to the top level
+    tga_list = glob.glob("**/*.tga", root_dir=temp_dir, recursive=True)
+
+    # this will probably crash and burn when I parallelize things
+    assert len(tga_list) == 1, "minimap uasset has is more than one file, wtf?"
+
+    tga_path = tga_list[0]
+    tga_filename = os.path.split(tga_path)[1]
+
+    os.rename(
+        os.path.join(temp_dir, tga_path),
+        os.path.join(config.FULLSIZE_MAP_DIR, tga_filename),
+    )
+
+    shutil.rmtree(temp_dir)
+
+
+async def extract_layer(
+    unpacked_assets_dir: str,
+    layer_path: str,
+) -> dict:
+
+    async with parallel_limit:
+        if config.LOG_LEVEL == "debug":
+            print(layer_path)
+
+        layer_filename, pretty_map_name, pretty_layer_name = extract_pretty_names(
+            layer_path
+        )
+
+        full_layer_path = os.path.join(unpacked_assets_dir, layer_path)
+
+        docs = await extract_yaml_dump(full_layer_path, layer_filename)
+
+        # build lane graph from map info
+        lane_graph, clusters, mains, logic = get_lane_graph_and_clusters(docs)
+
+        bounds = await extract_minimap_bounds(docs)
+
+        table_dump = await extract_table_dump(full_layer_path, layer_filename)
+
+        # get minimap filename from import table
+        minimap_name = await extract_minimap(
+            unpacked_assets_dir, layer_filename, table_dump
+        )
+
+        return {
+            pretty_map_name: {
+                pretty_layer_name: {
+                    "background": {
+                        "corners": [{"x": p[0], "y": p[1]} for p in bounds],
+                        "minimap_filename": minimap_name,
+                    },
+                    "logic": logic,
+                    "mains": mains,
+                    "clusters": clusters,
+                    "lanes": lane_graph,
+                }
+            }
+        }
+
+
+def path_split_recursive(path: str) -> list[str]:
+    parts = []
+    head = path
+
+    while head != "" and head != "/":
+        head, tail = os.path.split(head)
+        parts.insert(0, tail)
+
+    if head == "/":
+        parts.insert(0, head)
+
+    return parts
+
+
+def extract_pretty_names(layer_path: str) -> tuple[str, str, str]:
+    path_parts = path_split_recursive(layer_path)
+
+    layer_filename = path_parts[-1]
+    match = re.match(r"(HLP_)?(.*)_([gG]?RAAS|Invasion)_(.*)\.umap", layer_filename)
+    hlp_prefix, map_name, gamemode, version = match.group(1, 2, 3, 4)
+
+    # replace GRAAS with RAAS (hawk's request)
+    gamemode = gamemode.replace("GRAAS", "RAAS").replace("gRAAS", "RAAS")
+
+    # sometimes the version has _Flooded or _Night as a suffix
+    version = version.replace("_", " ")
+
+    # execute hard-coded map renames
+    MAP_RENAMES = {
+        "Albasrah": "Al Basrah",
+        "Belaya": "Belaya Pass",
+        "Kamdesh": "Kamdesh Highlands",
+        "Kokan": "Kokan Valley",
+        "Lashkar": "Lashkar Valley",
+        "Logar": "Logar Valley",
+        "Manic": "Manic-5",
+        "Tallil": "Tallil Outskirts",
+    }
+    pretty_map_name = MAP_RENAMES.get(map_name, map_name).replace("_", " ")
+
+    # turn PascalCase into space-separated title case
+    # ex: GooseBay -> Goose Bay
+    pretty_map_name = re.sub(r"(?<!^)(?=[A-Z])", " ", pretty_map_name).title()
+    # remove double-spaces possibly introduced by above
+    pretty_map_name = pretty_map_name.replace("  ", " ")
+
+    pretty_layer_name = f"{gamemode} {version}"
+    if hlp_prefix is not None:
+        pretty_layer_name = "HLP " + pretty_layer_name
+
+    return layer_filename, pretty_map_name, pretty_layer_name
+
+
+def dict_update_2_deep(base_dict: dict[Any, dict], update_dict: dict[Any, dict]):
+    for k, v in update_dict.items():
+        if k in base_dict:
+            base_dict[k].update(v)
+        else:
+            base_dict[k] = v
+
+
+async def extract_maps(unpacked_assets_dir: str) -> dict:
+    raas_data = {}
+
+    extraction_runs = []
+
+    layers_list = glob.glob(
+        "**/Gameplay_Layers/*.umap", root_dir=unpacked_assets_dir, recursive=True
+    )
+
+    for layer_path in layers_list:
+        # Ignore some unsupported maps and irrelevant assets
+        unsupported_maps = [
+            "Jensens_Range",
+            "PacificProvingGrounds",
+            "Dummy",
+            "Sound",
+        ]
+        if any([map_name in layer_path for map_name in unsupported_maps]):
+            continue
+
+        # Ignore all unsupported game modes
+        supported_gamemodes = [
+            "RAAS",
+            "Invasion",
+            "GRAAS",
+        ]
+        if not any(
+            [game_mode_name in layer_path for game_mode_name in supported_gamemodes]
         ):
             continue
 
-        progress.status(map_name)
+        # ignore HLP night maps (they're the same as the day maps)
+        if "HLP" in layer_path and "Night" in layer_path:
+            continue
 
-        # Some maps have their Gameplay Layers in a subdirectory called Gameplay_Layers.
-        # For maps that don't have the Gameplay_Layers subdirectory, all the
-        # umap files in the map root directory are gameplay layers.
-        # (I hope this doesn't change at some point.
-        #  Otherwise we'll try to process lighting layer umap files and will probably
-        #  crash at some point.)
-        gameplay_layer_dir = f"{map_dir}/{map_name}"
-        if "Gameplay_Layers" in os.listdir(gameplay_layer_dir):
-            gameplay_layer_dir += "/Gameplay_Layers"
+        extraction_runs.append(extract_layer(unpacked_assets_dir, layer_path))
 
-        for layer in os.listdir(gameplay_layer_dir):
-            # ignore non-umap files
-            if not layer.endswith(".umap"):
-                continue
-            layer = layer.replace(".umap", "")
+    # run parallel
+    # TODO: this doesn't increase performance at the moment because we're CPU-bound
+    #       need to find and optimize the bottleneck (or run multiple processes)
+    #       also, this is currently bugged and seems to freeze, so we force
+    #       sequential operation for now
 
-            # only process supported game modes
-            game_mode = None
-            for gm in GAME_MODES:
-                if gm.casefold() in layer.casefold():
-                    game_mode = gm
-                    break
-            if game_mode is None:
-                continue
+    # if config.EXTRACT_PARALLEL:
+    #     for pretty_map_name, map_data in await tqdm.gather(*extraction_runs):
+    #         maps[pretty_map_name] = map_data
+    # else:
 
-            progress.status(f"{map_name} - {layer}")
+    for coro in tqdm(extraction_runs):
+        layer_data = await coro
+        dict_update_2_deep(raas_data, layer_data)
 
-            # extract map information from umap with umodel
-            yaml_filename = f"{config.LAYER_DUMP_DIR}/{layer}.yaml"
-            if not os.path.isfile(yaml_filename):
-                if context.log_level <= logging.DEBUG:
-                    stderr = sys.stderr
-                else:
-                    stderr = subprocess.DEVNULL
-                yaml_content = subprocess.check_output(
-                    [
-                        config.UMODEL_PATH,
-                        f"{gameplay_layer_dir}/{layer}.umap",
-                        "-game=ue4.24",
-                        "-dump",
-                    ],
-                    stderr=stderr,
-                )
-                log.debug(yaml_content.decode("UTF-8"))
-                _, _, yaml_content = yaml_content.partition(b"---")
-                with open(yaml_filename, "wb") as f:
-                    f.write(yaml_content)
-                # help the GC a little
-                del yaml_content
-
-            with open(yaml_filename, "r") as f:
-                docs = list(yaml.safe_load_all(f))
-
-            # build lane graph from map info
-            lane_graph, clusters, mains = get_lane_graph_and_clusters(docs)
-
-            # get map bounds from map info by looking at the two MapTexture objects
-            bounds = []
-            for obj in docs:
-                sdk_name = list(obj.keys())[0]
-                _, _, sdk_name = sdk_name.rpartition(".")
-                # ignore everything that's not the MapTexture object
-                if not sdk_name.startswith("MapTexture"):
-                    continue
-                x, y = absolute_location(access_one(obj)["RootComponent"])
-                bounds.append((x, y))
-
-            # we should have exactly two bounding coordinates
-            # (e.g., north-east and south-west)
-            assert len(bounds) == 2
-
-            # get minimap filename from import table
-            # note that some CAF maps use the minimap from vanilla maps, so they
-            # don't have a minimap file themself
-            minimap_name = None
-            table_dump_filename = f"{config.LAYER_DUMP_DIR}/{layer}.tabledump.txt"
-            if not os.path.isfile(table_dump_filename):
-                table_dump = subprocess.check_output(
-                    [
-                        config.UMODEL_PATH,
-                        f"{gameplay_layer_dir}/{layer}.umap",
-                        "-game=ue4.24",
-                        "-list",
-                    ],
-                    stderr=subprocess.DEVNULL,
-                )
-                with open(table_dump_filename, "wb") as f:
-                    f.write(table_dump)
-
-            with open(table_dump_filename, "r") as f:
-                table_dump = f.read()
-
-            # extract minimap image (.tga) with umodel
-            for name in table_dump.splitlines():
-                match = re.match(
-                    f"[0-9]+ = .*/Maps/(.*/(Minimap|Masks)/(.*inimap.*))", name
-                )
-                if match is None:
-                    continue
-                minimap_path_in_package, minimap_name = match.group(1, 3)
-
-                # skip if minimap already exists
-                os.makedirs(config.FULLSIZE_MAP_DIR, exist_ok=True)
-                if os.path.isfile(
-                    f"{config.FULLSIZE_MAP_DIR}/{minimap_path_in_package}.tga"
-                ):
-                    break
-                umodel_cmd = [
-                    config.UMODEL_PATH,
-                    f"-export",
-                    f"{map_dir}/{minimap_path_in_package}.uasset",
-                    f"-game=ue4.24",
-                    f"-out={config.LAYER_DUMP_DIR}",
-                ]
-                assert (
-                    subprocess.call(
-                        umodel_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-                    )
-                    == 0
-                ), "map extract failed"
-
-                # ignore maps smaller than 1 MiB
-                # (might be a thumbnail)
-                if (
-                    os.stat(f"{config.LAYER_DUMP_DIR}/{minimap_name}.tga").st_size
-                    < 1 * 1024 * 1024
-                ):
-                    minimap_name = None
-                    continue
-                subprocess.call(
-                    [
-                        "mv",
-                        f"{config.LAYER_DUMP_DIR}/{minimap_name}.tga",
-                        f"{config.FULLSIZE_MAP_DIR}",
-                    ]
-                )
-                break
-
-            MAP_RENAMES = {
-                "Al_Basrah_City": "Al Basrah",
-                "BASRAH_CITY": "Al Basrah",
-                "Belaya": "Belaya Pass",
-                "Fallujah_City": "Fallujah",
-                "Mestia_Green": "Mestia",
-            }
-
-            pretty_map_name = map_name
-            pretty_map_name = MAP_RENAMES.get(pretty_map_name) or pretty_map_name
-            pretty_map_name = pretty_map_name.replace("_", " ")
-
-            # strip out map name from layer name
-            is_caf = layer.startswith("CAF_")  # don't strip out CAF prefix
-            layer_game_mode_index = layer.casefold().index(game_mode.casefold())
-            pretty_layer_name = (
-                game_mode + layer[layer_game_mode_index + len(game_mode) :]
-            )
-            pretty_layer_name = pretty_layer_name.strip()
-            pretty_layer_name = pretty_layer_name.replace("_", " ")
-            if is_caf:
-                pretty_layer_name = "CAF " + pretty_layer_name
-            assert pretty_map_name != ""
-            assert pretty_layer_name != ""
-
-            assert (
-                minimap_name is not None
-            ), f"{pretty_map_name}/{pretty_layer_name} has no minimap"
-
-            layer_data = {
-                "background": {
-                    "corners": [{"x": p[0], "y": p[1]} for p in bounds],
-                    "minimap_filename": minimap_name,
-                    "heightmap_filename": f"height-map-{pretty_map_name.rpartition(' ')[0].lower()}C1",
-                    "heightmap_transform": {
-                        "shift_x": 0,
-                        "shift_y": 0,
-                        "scale_x": 1.0,
-                        "scale_y": 1.0,
-                    },
-                },
-                "mains": mains,
-                "clusters": clusters,
-                "lanes": lane_graph,
-            }
-
-            if pretty_map_name not in maps:
-                maps[pretty_map_name] = {}
-            maps[pretty_map_name][pretty_layer_name] = layer_data
-
-    return maps
+    return raas_data
 
 
 def access_one(obj_dict: dict):
@@ -489,16 +923,16 @@ def access_one(obj_dict: dict):
 def extract():
     os.makedirs(config.LAYER_DUMP_DIR, exist_ok=True)
 
-    if not os.path.isdir(config.UNPACKED_ASSETS_DIR):
-        log.error(
+    unpacked_assets_dir = os.path.abspath(config.UNPACKED_ASSETS_DIR)
+
+    if not os.path.isdir(unpacked_assets_dir):
+        print(
             f"Configured UNPACKED_ASSETS_DIR does not exist.\n"
             f"Make sure you run the unpack task first."
         )
+        return
 
-    map_dir = config.UNPACKED_ASSETS_DIR + "/Maps"
-    with log.progress("-- Extracting Map") as progress:
-        map_data = extract_map(map_dir, progress)
+    map_data = asyncio.run(extract_maps(unpacked_assets_dir))
 
-    with log.progress("-- Writing RAAS data to file"):
-        with open(f"raas-data-auto.yaml", "w") as f:
-            f.write(yaml.dump(map_data, sort_keys=True, indent=4))
+    with open(f"raas-data-auto.yaml", "w") as f:
+        f.write(yaml.dump(map_data, sort_keys=True, indent=4))

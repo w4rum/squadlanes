@@ -110,7 +110,7 @@ function getPossibleDepthsFromHere(
 
   const targetCluster = confirmedPath[confirmedPath.length - 1];
 
-  cluster.edges.get(lane)!.forEach((nbCluster) => {
+  cluster.reverseEdges.get(lane)!.forEach((nbCluster) => {
     // ignore clusters that we've already traversed
     if (path.indexOf(nbCluster) !== -1) return;
 
@@ -118,6 +118,7 @@ function getPossibleDepthsFromHere(
     // then we are a possible end of the path
     if (nbCluster === targetCluster) {
       possiblePaths.push(path);
+      return;
     }
 
     // ignore confirmed clusters that don't contain the target CP

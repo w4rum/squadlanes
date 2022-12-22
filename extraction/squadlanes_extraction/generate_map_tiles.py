@@ -1,11 +1,11 @@
+import concurrent.futures
 import os
 import subprocess
 import sys
 from concurrent.futures.thread import ThreadPoolExecutor
 from pprint import pprint
 
-from pwn import logging, log
-from pwnlib.context import context
+from tqdm import tqdm
 
 from squadlanes_extraction import config
 
@@ -14,12 +14,17 @@ def tiles():
     os.makedirs(config.TILE_MAP_DIR, exist_ok=True)
 
     if not os.path.isdir(config.FULLSIZE_MAP_DIR):
-        log.error(
+        print(
             f"Configured FULLSIZE_MAP_DIR does not exist.\n"
             f"Make sure you run the extract task first."
         )
+        return
 
-    with ThreadPoolExecutor() as executor:
+    # limit workers. each worker is going to spawn 16 processes anyway
+    # todo: use MAX_PARALLEL_TASKS / 16 * 2
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futures = []
+
         for name in os.listdir(config.FULLSIZE_MAP_DIR):
             # ignore non-tga files
             if not name.endswith(".tga"):
@@ -49,7 +54,7 @@ def tiles():
                 f"{name}",
             ]
 
-            if context.log_level <= logging.DEBUG:
+            if config.LOG_LEVEL == "DEBUG":
                 pprint(command)
                 sys.stdout.flush()
                 stdout = sys.stdout
@@ -58,9 +63,12 @@ def tiles():
                 stdout = subprocess.DEVNULL
                 stderr = subprocess.DEVNULL
 
-            executor.submit(extract_minimap, name, command, stdout, stderr)
+            futures.append(executor.submit(extract_minimap, command, stdout, stderr))
+
+        with tqdm(total=len(futures)) as pbar:
+            for _ in concurrent.futures.as_completed(futures):
+                pbar.update(1)
 
 
-def extract_minimap(name: str, command: str, stdout, stderr):
-    with log.progress(f"-- Generating tiles for {name}"):
-        subprocess.call(command, stdout=stdout, stderr=stderr)
+def extract_minimap(command: str, stdout, stderr):
+    subprocess.call(command, stdout=stdout, stderr=stderr)

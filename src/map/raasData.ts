@@ -4,6 +4,8 @@ export type LayerData = {
     minimap_filename: string;
   };
 
+  logic: String,
+
   clusters: {
     [clusterName: string]: {
       display_name: string;

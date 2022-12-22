@@ -5,6 +5,7 @@ import { raasData } from "./raasData";
 import { redraw, resetMap } from "./rendering";
 import { Lane } from "./lane";
 import Vue from "vue";
+import * as cluster from "cluster";
 
 export function changeLayer(mapName: string, layerName: string) {
   // delete all existing map data
@@ -18,6 +19,8 @@ export function changeLayer(mapName: string, layerName: string) {
   const clustersByName: Map<string, Cluster> = new Map();
 
   const layerData = raasData[mapName][layerName];
+
+  mapData.logic = layerData.logic;
 
   // note which clusters appear on which lane, we need this to establish CP->Cluster relationship per-lane
   const clusters_on_lane = new Map();
@@ -49,9 +52,19 @@ export function changeLayer(mapName: string, layerName: string) {
 
       // if there is an equal, just use it instead of the current CP, discard current CP
       mapData.capturePoints.forEach((cpOther) => {
-        if (cp.equal(cpOther)) {
-          cp = cpOther;
+        if (!cp.equal(cpOther)) return;
+
+        // if the points have different display names,
+        // merge them anyway but remember the different names
+        if (cpOther.displayName.indexOf(cp.displayName[0]) == -1) {
+          console.warn(
+            `Merging points with same position but different display names: ` +
+              `${cp.name}/${cp.displayName} vs. ${cpOther.name}/${cpOther.displayName}`
+          );
+          cpOther.displayName.push(cp.displayName[0]);
         }
+
+        cp = cpOther;
       });
 
       // add CP to CP-set
@@ -69,9 +82,8 @@ export function changeLayer(mapName: string, layerName: string) {
       const clusterA = clustersByName.get(link.a)!;
       const clusterB = clustersByName.get(link.b)!;
 
-      // add undirected edge
+      // add directed edge
       clusterA.addEdgeTo(clusterB, lane);
-      clusterB.addEdgeTo(clusterA, lane);
     });
   });
 

@@ -28,12 +28,18 @@ const CLR_DEF_OTHER = [
   "rgb(47,182,255)",
   "rgb(145,245,220)",
   "rgb(161,250,186)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
 ];
 const CLR_OFF_POINT = "rgb(255,0,0)";
 const CLR_OFF_OTHER = [
   "rgb(255,162,92)",
   "rgb(252,227,108)",
   "rgb(253,246,203)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
+  "rgb(255, 255, 255)",
 ];
 const CLR_IMPOSSIBLE = "rgb(145,145,145)";
 const CLR_MAIN_BASE = "rgb(0,0,0)";
@@ -271,7 +277,8 @@ export function redraw() {
     }
 
     // delete old tooltip
-    cm.closeTooltip().unbindTooltip();
+    cm.closeTooltip();
+    cm.unbindTooltip();
 
     // concat lane labels
     let laneTooltip = Array.from(rI.laneLabels)
@@ -291,8 +298,9 @@ export function redraw() {
     }
 
     // create new tooltip
+    let displayName = cp.displayName.join(" / ");
     cm.bindTooltip(
-      `<div class="cpTooltipName">${cp.displayName}</div>` +
+      `<div class="cpTooltipName">${displayName}</div>` +
         `<div class="cpTooltipDepth">${rI.centerNumber || "&nbsp"}</div>` +
         `<div class="cpTooltipLanes">${laneTooltip}</div>`,
       {
@@ -377,7 +385,7 @@ function determineCPPossibilities() {
    * We can't make any simplifying assumptions here like
    * "always go towards enemy main" because paths *can* go backwards as long
    * as the enemy main remains reachable without passing the same cluster twice.
-   * Essentially, we have to treat the map as a generic undirected graph.
+   * Essentially, we have to treat the map as a generic directed graph.
    * The most interesting example of this is Yeho RAAS v12 (Squad v2.16).
    *
    * Note:
@@ -422,10 +430,6 @@ function determineCPPossibilities() {
 
       possibleDepthsMap.forEach((possibleDepths, cluster) => {
         possibleDepths.forEach((depth) => {
-          // assume that paths with more than 8 flags (excluding the target main) are not possible
-          // TODO: research this more
-          if (depth.path_length > 8) return;
-
           const { color, priority } = getColorAndPriorityForLaneDepth(
             depth.path_length,
             depth.depth,
@@ -504,6 +508,7 @@ function onClick(cm: CircleMarker, cp: CapturePoint) {
   // if a main base was clicked, switch main base and reset
   if (mapData.mains.has(cp)) {
     mapData.ownMain = cp;
+    mapData.refreshGraphDirection();
     mapData.resetConfirmationLine();
     mapData.refreshLaneLengthsAndClusterDistances();
     mapData.refreshLaneProbabilities();
