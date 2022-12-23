@@ -14,6 +14,9 @@ from tqdm.asyncio import tqdm
 
 from squadlanes_extraction import config
 
+if sys.platform == 'win32':
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+
 SINGLE_LANE_NAME = "Center"
 
 GAME_MODES = ["RAAS", "Invasion"]
@@ -932,7 +935,7 @@ def extract():
         )
         return
 
-    map_data = asyncio.run(extract_maps(unpacked_assets_dir))
+    map_data = asyncio.run(extract_maps(unpacked_assets_dir), debug=True)
 
     with open(f"raas-data-auto.yaml", "w") as f:
         f.write(yaml.dump(map_data, sort_keys=True, indent=4))
