@@ -1,4 +1,4 @@
-FROM python:3.9-bullseye
+FROM python:3.10-bullseye
 
 # Set wine architecture to x64
 ENV WINEARCH=win64
