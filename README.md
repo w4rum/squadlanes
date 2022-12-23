@@ -18,7 +18,7 @@ The project contains one container for the extraction process and one container 
 1. Adjust the path to your local squad folder in the `docker-compose.yml`
    ```shell
    volumes:
-      - "PATH/TO/SQUAD:/opt/squadgame" # <-- Only change the path left of the column!
+      - "PATH/TO/SQUAD:/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad" # <-- Only change the path left of the column!
    ```
 2. Start the container with
    ```shell
