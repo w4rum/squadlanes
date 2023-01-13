@@ -4,7 +4,7 @@
 
 # Location of the steam-distributed Squad installation
 # e.g. "/mnt/windows-drive/Program Files (x86)/Steam/steamapps/common/Squad"
-SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
+SQUAD_GAME_DIR = "/opt/squadgame"
 
 # Location of any layer mod packs that should be loaded.
 #
@@ -20,7 +20,7 @@ SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
 # Hawk's Layer Pack (HLP)
 # HLP, however, is an exception because we've explicitly added support for that.
 MODS = {
-    "Hawks Layer Pack": "/mnt/win/Program Files (x86)/Steam/steamapps/workshop/content/393380/2442357787/HawksLayerPack/Content/Paks/WindowsNoEditor/",
+    "Hawks Layer Pack": "/opt/HLP/Content/Paks/WindowsNoEditor/",
 }
 
 ################################################################################
@@ -57,7 +57,7 @@ TILE_MAP_DIR = "../dist/map-tiles"
 
 # Verbosity of the logging
 #  Recommended values: info, debug
-LOG_LEVEL = "info"
+LOG_LEVEL = "debug"
 # LOG_LEVEL = "debug"
 
 # set to False to extract in series (slower but makes debugging easier)

@@ -4,11 +4,11 @@ services:
   extraction:
     container_name: squadlanes
     build:
-      context: .
-      dockerfile: docker/Dockerfile-extraction
-    tty: true
+      context: extraction
+      dockerfile: Dockerfile-extraction
     volumes:
-      - "PATH/TO/SQUAD:/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
+      - "/PATH/TO/SQUAD:/opt/squadgame"
+      - "/PATH/TO/HLP:/opt/HLP"
       - "./:/opt/squadlanes"
       
   web:
