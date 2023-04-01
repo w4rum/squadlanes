@@ -18,7 +18,11 @@ SINGLE_LANE_NAME = "Center"
 
 GAME_MODES = ["RAAS", "Invasion"]
 
-parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_TASKS)
+# todo: fix parallelism
+#       at the moment, this does not improve performance
+#       and simply makes debugging harder
+# parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_TASKS)
+parallel_limit = asyncio.Semaphore(1)
 
 
 def add_tuples(*tuples: Tuple):
@@ -36,19 +40,16 @@ def index_dict_to_list(list_dict: dict):
     Takes a list in dict-form (indices = keys) and transform it into a proper list, obeying the
     included indices.
 
+    If there are holes in the dict, then the items will be compacted.
+
     Example:
     { "0": "A", "1": "B", "2": "C" } => ["A", "B", "C"]
-    """
-    highest_index = -1
-    for key in list_dict.keys():
-        key = int(key)
-        if highest_index < key:
-            highest_index = key
 
-    l = []
-    for i in range(highest_index + 1):
-        l.append(list_dict[i])
-    return l
+    { "0": "A", "2": "C" } => ["A", "C"]
+    """
+    items = list(list_dict.items())
+    items.sort(key=lambda it: it[0])
+    return [it[1] for it in items]
 
 
 def to_cluster(cluster_name: str, docs: List[dict]):
@@ -565,7 +566,6 @@ async def extract_yaml_dump(full_layer_path: str, layer_filename: str) -> list[d
 async def extract_minimap_bounds(
     docs: list[dict],
 ) -> tuple[tuple[float, float], tuple[float, float]]:
-
     # get map bounds from map info by looking at the two MapTexture objects
     bounds = []
     for obj in docs:
@@ -667,7 +667,6 @@ async def extract_minimap(
 
     # go through the table dump to find the correct asset
     for name in table_dump.splitlines():
-
         # ignore all lines that don't match what we expect the minimap path to look like
         match = re.match(f"[0-9]+ = (.*(/Minimap|/Masks)/(.*inimap.*))", name)
         if match is None:
@@ -756,7 +755,6 @@ async def extract_layer(
     unpacked_assets_dir: str,
     layer_path: str,
 ) -> dict:
-
     async with parallel_limit:
         if config.LOG_LEVEL == "debug":
             print(layer_path)
@@ -936,3 +934,7 @@ def extract():
 
     with open(f"raas-data-auto.yaml", "w") as f:
         f.write(yaml.dump(map_data, sort_keys=True, indent=4))
+
+
+if __name__ == "__main__":
+    extract()
