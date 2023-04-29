@@ -8,10 +8,7 @@ from tqdm.asyncio import tqdm
 
 from squadlanes_extraction import config
 
-VANILLA_PAK_SUBDIR = "SquadGame/Content/Paks"
-
 parallel_limit = asyncio.Semaphore(config.MAXIMUM_PARALLEL_TASKS)
-
 
 async def _unpack_pak_with_filter(
     pak_bundle_name: str,
@@ -20,33 +17,53 @@ async def _unpack_pak_with_filter(
 ) -> None:
     async with parallel_limit:
         for flt in filters:
-            destination_dir = os.path.join(
-                "Z:/", os.path.abspath(config.UNPACKED_ASSETS_DIR), pak_bundle_name
-            )
+            if sys.platform == 'win32':
+                asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+                destination_dir = os.path.join(
+                    os.path.abspath(config.UNPACKED_ASSETS_DIR), pak_bundle_name
+                )
 
-            command = [
-                f"wine",
-                config.UNREAL_PAK_PATH,
-                f"Z:/{pak_path}",
-                f"-cryptokeys=Z:/{os.path.abspath(config.CRYPTO_JSON_PATH)}",
-                f"-Extract",
-                destination_dir,
-                f"-Filter={flt}",
-            ]
+                command = [
+                    os.path.abspath(config.UNREAL_PAK_PATH).replace('\\', '/'),
+                    f"{pak_path}",
+                    "-cryptokeys=" + os.path.abspath(config.CRYPTO_JSON_PATH).replace('\\', '/'),
+                    f"-Extract",
+                    "" + destination_dir.replace('\\', '/'),
+                    f"-Filter={flt}",
+                ]
 
-            if config.LOG_LEVEL == "DEBUG":
-                pprint(command)
-                sys.stdout.flush()
-                stdout = asyncio.subprocess.PIPE
-                stderr = asyncio.subprocess.PIPE
+                process = await asyncio.subprocess.create_subprocess_shell(
+                    shlex.join(command).replace("'", '"')
+                )
+                await process.wait()
             else:
-                stdout = asyncio.subprocess.DEVNULL
-                stderr = asyncio.subprocess.DEVNULL
+                destination_dir = os.path.join(
+                    "Z:/", os.path.abspath(config.UNPACKED_ASSETS_DIR), pak_bundle_name
+                )
 
-            process = await asyncio.subprocess.create_subprocess_shell(
-                shlex.join(command), stdout=stdout, stderr=stderr
-            )
-            await process.wait()
+                command = [
+                    f"wine",
+                    config.UNREAL_PAK_PATH,
+                    f"Z:/{pak_path}",
+                    f"-cryptokeys=Z:/{os.path.abspath(config.CRYPTO_JSON_PATH)}",
+                    f"-Extract",
+                    destination_dir,
+                    f"-Filter={flt}",
+                ]
+
+                if config.LOG_LEVEL == "DEBUG":
+                    pprint(command)
+                    sys.stdout.flush()
+                    stdout = asyncio.subprocess.PIPE
+                    stderr = asyncio.subprocess.PIPE
+                else:
+                    stdout = asyncio.subprocess.DEVNULL
+                    stderr = asyncio.subprocess.DEVNULL
+
+                process = await asyncio.subprocess.create_subprocess_shell(
+                    shlex.join(command), stdout=stdout, stderr=stderr
+                )
+                await process.wait()
 
 
 async def _unpack_relevant_files_in_dir(pak_bundles: dict[str, str]) -> None:
@@ -82,7 +99,7 @@ def unpack():
 
     # unpack vanilla assets
     pak_bundles = {
-        "Vanilla": os.path.join(config.SQUAD_GAME_DIR, VANILLA_PAK_SUBDIR),
+        "Vanilla": config.SQUAD_GAME_DIR,
     }
     # unpack mod assets (paths are assumed to point to the pak dir)
     for mod_name, mod_pak_dir in config.MODS.items():
