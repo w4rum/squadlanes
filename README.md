@@ -88,7 +88,7 @@ If you want to deploy this locally to change the front-end files and test around
 If you want to deploy this to a production server, follow the "Production" instructions.
 
 #### Development
-1. Run `npm run start`.
+1. Run `yarn run start`.
 2. ParcelJS will now package the static files.
    This should only take a couple of seconds.
 3. The development server can now be reached at `http://localhost:1234/`.
@@ -97,7 +97,7 @@ If you want to deploy this to a production server, follow the "Production" instr
    logic.
    
 #### Production
-1. Run `npm run build`.
+1. Run `yarn run build`.
 2. ParcelJS will now package the static files.
    This can take a couple of minutes on your first run.
 3. The packaged static files are now in `dist/`.
