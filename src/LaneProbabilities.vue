@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
-      Squad v4.3.1
+      Squad v4.5
     </div>
     <div
       v-if="selection.layer.startsWith('HLP')"

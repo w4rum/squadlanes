@@ -20,7 +20,7 @@ SQUAD_GAME_DIR = "/mnt/win/Program Files (x86)/Steam/steamapps/common/Squad"
 # Hawk's Layer Pack (HLP)
 # HLP, however, is an exception because we've explicitly added support for that.
 MODS = {
-    "Hawks Layer Pack": "/mnt/win/Program Files (x86)/Steam/steamapps/workshop/content/393380/2442357787/HawksLayerPack/Content/Paks/WindowsNoEditor/",
+    #"Hawks Layer Pack": "/mnt/win/Program Files (x86)/Steam/steamapps/workshop/content/393380/2442357787/HawksLayerPack/Content/Paks/WindowsNoEditor/",
 }
 
 ################################################################################
