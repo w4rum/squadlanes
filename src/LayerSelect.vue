@@ -209,7 +209,7 @@ export default Vue.extend({
 }
 
 .dropdown-menu {
-  max-height: 100vh;
+  max-height: 75vh;
   overflow-y: auto;
 }
 </style>
