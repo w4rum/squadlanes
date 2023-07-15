@@ -1,7 +1,7 @@
 {
     "title": "Squadlanes",
     "name": "squadlanes",
-    "version": "2.5.2",
+    "version": "2.5.3",
     "scripts": {
         "start": "node_modules/.bin/parcel src/index.html",
         "build": "node_modules/.bin/parcel build src/index.html",
@@ -15,7 +15,7 @@
     "bugs": {
         "url": "https://github.com/w4rum/squadlanes/issues"
     },
-    "license": "AGPLv3",
+    "license": "AGPL-3.0-only",
     "author": "Tim | w4rum",
     "contributors": [
         "Tim | w4rum",
@@ -48,9 +48,9 @@
         "rxjs": "^5.5.12",
         "sass": "^1.32.11",
         "typescript": "^4.7.2",
-        "vue": "^2.6.12",
+        "vue": "2.6.12",
         "vue-hot-reload-api": "^2.3.4",
-        "vue-template-compiler": "^2.6.12",
+        "vue-template-compiler": "2.6.12",
         "yaml": "^1.10.2",
         "yaml-js": "^0.2.3"
     }

@@ -1,29 +1,7 @@
 <template lang="html">
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
-      Squad v4.5
-    </div>
-    <div
-      v-if="selection.layer.startsWith('HLP')"
-      class="text-warning text-center small m-1"
-    >
-      <a
-        href="https://steamcommunity.com/sharedfiles/filedetails/2442357787"
-        target="_blank"
-      >
-        Hawk's Layer Pack
-      </a>
-      <a
-        title="Added in cooperation with EyeOfTheHawks.
-These layers might be more unstable and will process *much* slower than the vanilla layers.
-(We'll fix the performance issues sometime in the future. Maybe.)
-
-Squadlanes accurately shows the HLP layers, accounting for HLP's custom logic.
-
-The only thing currently not visualized (for HLP and Vanilla) are capture point probabilities."
-      >
-        <b-icon-question-circle
-      /></a>
+      Squad v5.0
     </div>
     <div class="text-muted text-center small m-1">
         Logic: {{ mapData.logic }}
