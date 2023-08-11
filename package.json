@@ -1,7 +1,7 @@
 {
     "title": "Squadlanes",
     "name": "squadlanes",
-    "version": "2.5.4",
+    "version": "2.5.5",
     "scripts": {
         "start": "node_modules/.bin/parcel src/index.html",
         "build": "node_modules/.bin/parcel build src/index.html",
