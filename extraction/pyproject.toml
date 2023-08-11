@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "squadlanes-extraction"
-version = "2.5.4"
+version = "2.5.5"
 description = "Datamining scripts used to extract map images and lane information from Squad game files"
 authors = ["Tim Schmidt <tim.schmidt@khorne.faith>"]
 license = "AGPLv3"
