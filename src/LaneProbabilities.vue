@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="card bg-dark">
     <div class="text-white text-center small m-1">
-      Squad v5.1.1
+      Squad v6.0
     </div>
     <div class="text-muted text-center small m-1">
         Logic: {{ mapData.logic }}

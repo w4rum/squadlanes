@@ -31347,8 +31347,8 @@ Narva:
             100-Team2Main:
             -   display_name: Team2 Main
                 sdk_name: Team2Main
-                x: 127197.40625
-                y: 34703.69140625
+                x: 126747.40625
+                y: 32053.69140625
         lanes:
             Center:
             -   a: 02C-BP_CaptureZoneCluster
