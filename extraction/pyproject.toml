@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "squadlanes-extraction"
-version = "2.5.6"
+version = "2.5.7"
 description = "Datamining scripts used to extract map images and lane information from Squad game files"
 authors = ["Tim Schmidt <tim.schmidt@khorne.faith>"]
 license = "AGPLv3"
@@ -16,7 +16,7 @@ PyYAML = "^5.4.1"
 tqdm = "^4.64.1"
 
 [tool.poetry.dev-dependencies]
-black = {version = "^20.8b1", extras = ["d"]}
+black = { version = "^20.8b1", extras = ["d"] }
 mypy = "^1.3.0"
 
 [build-system]
