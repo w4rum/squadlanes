@@ -1,4 +1,4 @@
-# [Squadlanes](https://squadlanes.com)
+# [Squadlanes](https://squadlanes.khorne.faith)
 ##### Interactive Squad Maps to help with RAAS capture point prediction
 
 Capture Points and RAAS lanes are automatically extracted from Squad maps.
@@ -7,7 +7,7 @@ If you spot any specific errors, please open an issue!
 That helps us get an overview.
 
 ## Usage
-See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to work with our official deployment at [squadlanes.com](https://squadlanes.com).
+See [Captain's video](https://youtu.be/OFGYkDxdRYE?t=498) to find out how to work with our official deployment at [squadlanes.khorne.faith](https://squadlanes.khorne.faith).
 
 ## Deployment
 In order to run your own instance of Squadlanes, you need to
